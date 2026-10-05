@@ -712,3 +712,58 @@ Nilainya ada di satu tempat: prop `titleAccent` pada `CruiseHero` di `components
 Satuan `em` berarti kelipatan dari ukuran heading utama (`titleFontSize`, maksimum 76px di desktop), jadi baris itu otomatis mengecil bersama heading di layar sempit. Diukur di browser: pada `0.62em` hasilnya 47px dengan lebar 891px di 1440px, dan tetap satu baris di 1600, 1440, 1280, serta 1100px.
 
 Ruang yang tersisa sebelum membungkus di 1440px adalah sekitar 1.072px, jadi batas praktisnya kira-kira **`0.74em`**. Di atas itu barisnya akan pecah jadi dua di desktop.
+
+## Feature — Search bar di hero homepage (Level 1) — 5 Oktober 2026
+
+**Status: SELESAI dibangun di branch `feature/hero-search` (5 Oktober 2026) — menunggu keputusan pemilik situs untuk digabung ke `master`.**
+
+Catatan implementasi: agar bar tidak tertutup info bar di layar pendek, `Hero.tsx` ikut disesuaikan — tinggi minimum hero 720 → 780px dan ukuran judul sekarang ikut tinggi layar (`min(8vw, 13.5vh)`). Di layar tinggi tampilannya tidak berubah.
+
+### Apa & untuk siapa
+Permintaan dari Tony: pengunjung bisa langsung memilih jenis pengalaman dari hero homepage, tanpa menjelajah menu dulu. Menu navigasi **tidak berubah**.
+
+Ini **Level 1**: search bar hanya **mengarahkan** pengunjung ke halaman yang tepat. Ia tidak membawa tanggal dan tidak mengecek ketersediaan kursi. Tanggal dan jumlah tamu tetap dipilih di widget booking Rezdy di halaman tujuan (seperti sekarang).
+
+**Keputusan (5 Oktober 2026):** kolom Date dan Guests **dibuang dari Level 1**. Widget Rezdy belum tentu bisa menerima tanggal dari luar, dan kolom yang tidak berpengaruh apa-apa akan menyesatkan pengunjung. Date dan Guests masuk ke **Level 2**, bersama pengecekan ketersediaan lewat Rezdy API.
+
+### Tampilan
+Satu bar horizontal bergaya kaca (navy transparan + garis emas tipis, sama dengan badge di hero), diletakkan di hero **di antara tombol "Whale Watching / Private Charter" dan info bar bawah**. Dua tombol yang sudah ada tetap dipertahankan.
+
+| Kolom | Isi |
+|---|---|
+| **Type** | `Cruise` atau `Private Charter` |
+| **Experience** | Berubah mengikuti Type (lihat di bawah) |
+| **Search** | Tombol emas |
+
+- Type = Cruise -> Experience berisi `EXPERIENCE_PRODUCTS` dari `lib/products.ts`. Cruise makan siang/malam otomatis ikut tersembunyi selama `DINING_CRUISES_AVAILABLE = false`, jadi tidak ada daftar kedua yang perlu dirawat.
+- Type = Private Charter -> Experience berisi `CHARTER_PRODUCTS` yang sesuai: Private, Corporate, Wedding. Catering & Menus tidak dimasukkan (bukan charter). Buffet dinner/lunch ikut tersembunyi lewat flag yang sama.
+- Mobile: kolom ditumpuk vertikal, tombol Search selebar layar. Mendukung mode terang & gelap.
+
+### Perilaku saat Search ditekan
+- Pilihan **Experience** dipetakan ke `href` produk di `lib/products.ts`, lalu pengunjung diarahkan ke halaman itu.
+- Cruise -> halaman cruise, langsung scroll ke widget booking (`#book`).
+- Private Charter -> halaman charter masing-masing (`/private-yacht-charter`, `/corporate-yacht-charter`, `/wedding-yacht-charter`).
+- Experience belum dipilih -> pesan error kecil di bawah kolom itu (tidak diam saja).
+
+### Berkas
+| Berkas | Perubahan |
+|---|---|
+| `components/HeroSearch.tsx` | **Baru** - komponen search bar (satu komponen, satu berkas) |
+| `components/Hero.tsx` | Menyisipkan `<HeroSearch />` |
+| `app/globals.css` | Gaya responsif mobile (mengikuti pola `hero-infobar` yang ada) |
+
+`Inquiry.tsx` dan halaman cruise **tidak disentuh**. Tidak ada folder top-level baru, tabel Supabase baru, route API baru, atau paket npm baru.
+
+### Di luar cakupan (sengaja tidak dikerjakan)
+- Kolom Date & Guests, dan cek ketersediaan kursi real-time (Level 2).
+- Perubahan menu navigasi.
+- Halaman hasil pencarian.
+
+### Selesai berarti
+- `npm run build` lolos tanpa error TypeScript.
+- Di browser, tanpa error console: (a) Cruise -> halaman benar + scroll ke `#book`; (b) Private Charter -> halaman charter yang benar; (c) validasi Experience kosong tampil; (d) tampilan mobile rapi; (e) mode terang & gelap sama-sama terbaca.
+- Hero, info bar, dan dua tombol lama tetap berfungsi.
+
+### Pertanyaan terbuka untuk Tony
+1. Posisi bar di hero (di bawah dua tombol) sudah sesuai, atau mau menggantikan tombol itu?
+2. Tony tadi menyebut "the dates". Apakah oke kalau tanggal ditunda ke Level 2?

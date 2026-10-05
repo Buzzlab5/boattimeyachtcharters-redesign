@@ -6,6 +6,7 @@ import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { Button, Icon } from './Shared';
 import { useTheme } from './ThemeProvider';
+import HeroSearch from './HeroSearch';
 
 gsap.registerPlugin(ScrollTrigger, useGSAP);
 
@@ -70,6 +71,7 @@ export default function Hero() {
   const line3Ref = useRef<HTMLSpanElement>(null);
   const subtitleRef = useRef<HTMLParagraphElement>(null);
   const btnsRef = useRef<HTMLDivElement>(null);
+  const searchRef = useRef<HTMLDivElement>(null);
   const badgeRef = useRef<HTMLDivElement>(null);
   const scrollCueRef = useRef<HTMLDivElement>(null);
   const scrollLineRef = useRef<HTMLDivElement>(null);
@@ -114,6 +116,11 @@ export default function Hero() {
           '-=0.45',
         )
         .from(
+          searchRef.current,
+          { y: 18, opacity: 0, duration: 0.7, ease: 'power2.out' },
+          '-=0.35',
+        )
+        .from(
           badgeRef.current,
           { x: 30, opacity: 0, duration: 0.7, ease: 'power2.out' },
           '-=0.6',
@@ -156,6 +163,7 @@ export default function Hero() {
           line3Ref.current,
           subtitleRef.current,
           btnsRef.current,
+          searchRef.current,
         ],
         {
           yPercent: -18,
@@ -176,7 +184,7 @@ export default function Hero() {
     <section
       ref={sectionRef}
       className="relative overflow-hidden flex"
-      style={{ height: '100vh', minHeight: 720, background: 'var(--navy)' }}
+      style={{ height: '100vh', minHeight: 780, background: 'var(--navy)' }}
     >
       {/* Background image */}
       <div
@@ -262,7 +270,7 @@ export default function Hero() {
           style={{
             fontFamily: 'var(--font-display)',
             fontWeight: 300,
-            fontSize: 'clamp(56px, 8vw, 120px)',
+            fontSize: 'clamp(56px, min(8vw, 13.5vh), 120px)',
             lineHeight: 0.96,
             letterSpacing: '-0.02em',
             color: 'var(--cream)',
@@ -326,6 +334,11 @@ export default function Hero() {
           <Button variant="ghost" href="/private-yacht-charter">
             Private Charter
           </Button>
+        </div>
+
+        {/* Search bar */}
+        <div ref={searchRef}>
+          <HeroSearch />
         </div>
       </div>
 
