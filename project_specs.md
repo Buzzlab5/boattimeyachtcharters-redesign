@@ -809,3 +809,5 @@ Atas permintaan pemilik situs, search bar dipindah dari bawah tombol hero ke **p
 - Tablet (≤1024px): lebar 380px dan turun ke 142px supaya tidak menabrak judul.
 - Mobile (≤768px): pojok kanan atas bertabrakan dengan header dan judul, jadi di HP bar menempel di bagian bawah hero (di atas tombol "Ask Kai"), saran membuka ke atas.
 - Berkas: `Hero.tsx` (memindahkan satu pembungkus), `globals.css`. `HeroSearch.tsx` tidak berubah.
+
+**Penyelarasan (5 Oktober 2026):** hero terasa tidak simetris karena bar melayang di tinggi sembarang. Sekarang di desktop garis tengah bar **sama persis dengan garis tengah eyebrow** ("SUPERYACHT CHARTERS ...") di kiri, dan tepi kanannya **lurus dengan badge rating** (gutter 48px). Rumusnya memakai `max(124px, 50vh - 300px)`, sama dengan titik mulai konten hero, jadi tetap sejajar di semua tinggi layar (diukur di 720, 768, 900, dan 1080px). Titik mulai konten hero dinaikkan dari 100px ke 124px supaya bar tidak menyentuh pita header krem di mode terang. Bar dibuat lebih ramping (400px lebar, ±53px tinggi). Placeholder di mode terang diperbaiki (sebelumnya gelap di atas kaca gelap).

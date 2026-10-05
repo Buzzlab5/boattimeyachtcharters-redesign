@@ -252,7 +252,7 @@ export default function Hero() {
           paddingBottom: 80,
           maxWidth: 1200,
           alignSelf: 'flex-start',
-          marginTop: 'max(100px, calc(50vh - 300px))',
+          marginTop: 'max(124px, calc(50vh - 300px))',
         }}
       >
         {/* Eyebrow */}

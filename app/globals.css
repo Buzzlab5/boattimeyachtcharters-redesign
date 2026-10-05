@@ -4768,13 +4768,18 @@
    HERO SEARCH BAR (components/HeroSearch.tsx)
    Always sits on the dark hero photo, so it is dark glass in both themes.
    ============================================================ */
-/* Top-right of the hero on desktop; bottom of the hero on mobile (see below). */
+/* Top-right of the hero on desktop; bottom of the hero on mobile (see below).
+   On desktop the bar is vertically centred on the eyebrow line
+   ("SUPERYACHT CHARTERS ..."): the hero content starts at
+   max(124px, 50vh - 300px) (see Hero.tsx), the eyebrow is ~15px tall and the
+   bar is ~53px tall, hence the - 19px. The 124px floor keeps the bar clear of
+   the solid header band in light mode. Right edge matches the hero's 48px gutter. */
 .hero-search-wrap {
   position: absolute;
-  top: 118px;
+  top: calc(max(124px, 50vh - 300px) - 19px);
   right: 48px;
   z-index: 20;
-  width: min(420px, calc(100% - 96px));
+  width: min(400px, calc(100% - 96px));
 }
 
 .hero-search__bar {
@@ -4794,14 +4799,14 @@
 .hero-search__icon {
   align-self: center;
   flex-shrink: 0;
-  margin-left: 24px;
+  margin-left: 18px;
   color: var(--gold);
 }
 
 .hero-search__input {
   flex: 1;
   min-width: 0;
-  padding: 20px 16px;
+  padding: 14px 14px;
   background: transparent;
   border: 0;
   outline: none;
@@ -4810,13 +4815,14 @@
   letter-spacing: 0.02em;
   color: var(--cream);
 }
+/* Hard-coded cream: var(--cream) turns dark in light mode, but the bar is always dark glass. */
 .hero-search__input::placeholder {
-  color: var(--cream);
+  color: #f5f0e8;
   opacity: 0.55;
 }
 
 .hero-search__submit {
-  padding: 0 26px;
+  padding: 0 22px;
   background: var(--gold);
   color: #0a1628;
   border: 0;
@@ -4911,7 +4917,8 @@
 
 @media (max-width: 1024px) {
   .hero-search-wrap {
-    top: 142px; /* clears the eyebrow line, which is wider than the bar's left edge here */
+    /* 30px below the hero content start: clears the eyebrow line, which is wider than the bar's left edge here */
+    top: calc(max(124px, 50vh - 300px) + 30px);
     width: 380px;
   }
   .hero-search__input {
