@@ -183,7 +183,7 @@ export default function Hero() {
     <section
       ref={sectionRef}
       className="relative overflow-hidden flex"
-      style={{ height: '100vh', minHeight: 780, background: 'var(--navy)' }}
+      style={{ height: '100vh', minHeight: 720, background: 'var(--navy)' }}
     >
       {/* Background image */}
       <div
@@ -252,7 +252,7 @@ export default function Hero() {
           paddingBottom: 80,
           maxWidth: 1200,
           alignSelf: 'flex-start',
-          marginTop: 'max(124px, calc(50vh - 300px))',
+          marginTop: 'max(100px, calc(50vh - 300px))',
         }}
       >
         {/* Eyebrow */}
@@ -269,7 +269,7 @@ export default function Hero() {
           style={{
             fontFamily: 'var(--font-display)',
             fontWeight: 300,
-            fontSize: 'clamp(56px, min(8vw, 13.5vh), 120px)',
+            fontSize: 'clamp(56px, 8vw, 120px)',
             lineHeight: 0.96,
             letterSpacing: '-0.02em',
             color: 'var(--cream)',

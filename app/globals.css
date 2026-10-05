@@ -4771,12 +4771,12 @@
 /* Top-right of the hero on desktop; bottom of the hero on mobile (see below).
    On desktop the bar is vertically centred on the eyebrow line
    ("SUPERYACHT CHARTERS ..."): the hero content starts at
-   max(124px, 50vh - 300px) (see Hero.tsx), the eyebrow is ~15px tall and the
-   bar is ~53px tall, hence the - 19px. The 124px floor keeps the bar clear of
-   the solid header band in light mode. Right edge matches the hero's 48px gutter. */
+   max(100px, 50vh - 300px) (see Hero.tsx), the eyebrow is ~15px tall and the
+   bar is ~53px tall, hence the - 19px. Right edge matches the hero's 48px gutter.
+   (Light mode: see the override below.) */
 .hero-search-wrap {
   position: absolute;
-  top: calc(max(124px, 50vh - 300px) - 19px);
+  top: calc(max(100px, 50vh - 300px) - 19px);
   right: 48px;
   z-index: 20;
   width: min(400px, calc(100% - 96px));
@@ -4904,6 +4904,11 @@
 
 /* Light mode turns every <section> descendant dark (see "Broad fix" above), but
    the bar is dark glass on the photo in both themes, so restore cream/gold/navy. */
+/* Light mode has a solid cream header band (87px tall) that would cover the top of
+   the bar when it sits on the eyebrow line, so keep the bar 8px below it. */
+[data-theme='light'] .hero-search-wrap {
+  top: max(95px, calc(max(100px, 50vh - 300px) - 19px));
+}
 [data-theme='light'] .hero-search-wrap,
 [data-theme='light'] .hero-search-wrap * {
   color: #f5f0e8 !important;
@@ -4918,7 +4923,7 @@
 @media (max-width: 1024px) {
   .hero-search-wrap {
     /* 30px below the hero content start: clears the eyebrow line, which is wider than the bar's left edge here */
-    top: calc(max(124px, 50vh - 300px) + 30px);
+    top: calc(max(100px, 50vh - 300px) + 30px);
     width: 380px;
   }
   .hero-search__input {
