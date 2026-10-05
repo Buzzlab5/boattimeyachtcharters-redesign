@@ -4768,9 +4768,13 @@
    HERO SEARCH BAR (components/HeroSearch.tsx)
    Always sits on the dark hero photo, so it is dark glass in both themes.
    ============================================================ */
-.hero-search {
-  margin-top: 36px;
-  max-width: 680px;
+/* Top-right of the hero on desktop; bottom of the hero on mobile (see below). */
+.hero-search-wrap {
+  position: absolute;
+  top: 118px;
+  right: 48px;
+  z-index: 20;
+  width: min(420px, calc(100% - 96px));
 }
 
 .hero-search__bar {
@@ -4797,7 +4801,7 @@
 .hero-search__input {
   flex: 1;
   min-width: 0;
-  padding: 24px 20px;
+  padding: 20px 16px;
   background: transparent;
   border: 0;
   outline: none;
@@ -4812,7 +4816,7 @@
 }
 
 .hero-search__submit {
-  padding: 0 40px;
+  padding: 0 26px;
   background: var(--gold);
   color: #0a1628;
   border: 0;
@@ -4832,13 +4836,12 @@
   outline-offset: -4px;
 }
 
-/* Suggestions open upward: the hero info bar sits just below the search bar
-   and would cover a downward menu. */
+/* Suggestions open downward on desktop (open upward on mobile, see below). */
 .hero-search__menu {
   position: absolute;
   left: -1px;
   right: -1px;
-  bottom: calc(100% + 8px);
+  top: calc(100% + 8px);
   max-height: min(340px, 50vh);
   overflow-y: auto;
   margin: 0;
@@ -4846,14 +4849,14 @@
   list-style: none;
   background: rgba(10, 22, 40, 0.97);
   border: 1px solid rgba(201, 168, 76, 0.35);
-  box-shadow: 0 -16px 40px rgba(0, 0, 0, 0.4);
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.4);
   z-index: 30;
   animation: hero-search-menu-in 0.18s ease-out;
 }
 @keyframes hero-search-menu-in {
   from {
     opacity: 0;
-    transform: translateY(6px);
+    transform: translateY(-6px);
   }
 }
 
@@ -4893,19 +4896,44 @@
   opacity: 0.7;
 }
 
-/* Light mode forces cream text on everything inside .hero-content (see
-   "Homepage hero" above). The bar stays dark glass, so restore its accents. */
-[data-theme='light'] .hero-content .hero-search__icon {
+/* Light mode turns every <section> descendant dark (see "Broad fix" above), but
+   the bar is dark glass on the photo in both themes, so restore cream/gold/navy. */
+[data-theme='light'] .hero-search-wrap,
+[data-theme='light'] .hero-search-wrap * {
+  color: #f5f0e8 !important;
+}
+[data-theme='light'] .hero-search-wrap .hero-search__icon {
   color: var(--gold) !important;
 }
-[data-theme='light'] .hero-content .hero-search__submit {
+[data-theme='light'] .hero-search-wrap .hero-search__submit {
   color: #0a1628 !important;
 }
 
+@media (max-width: 1024px) {
+  .hero-search-wrap {
+    top: 142px; /* clears the eyebrow line, which is wider than the bar's left edge here */
+    width: 380px;
+  }
+  .hero-search__input {
+    font-size: 14px;
+  }
+  .hero-search__submit {
+    padding: 0 20px;
+  }
+}
+
 @media (max-width: 768px) {
-  .hero-search {
-    margin-top: 28px;
-    max-width: 100%;
+  .hero-search-wrap {
+    top: auto;
+    left: 24px;
+    right: 24px;
+    bottom: 96px; /* clears the floating "Ask Kai" button */
+    width: auto;
+  }
+  .hero-search__menu {
+    top: auto;
+    bottom: calc(100% + 8px);
+    box-shadow: 0 -16px 40px rgba(0, 0, 0, 0.4);
   }
   .hero-search__icon {
     margin-left: 18px;

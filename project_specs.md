@@ -800,3 +800,12 @@ Peta kata kunci disimpan di `HeroSearch.tsx` supaya `lib/products.ts` (dipakai m
 **Selesai berarti**: `npm run build` lolos; di browser tanpa error console: mengetik menyaring daftar, klik/Enter/panah berfungsi, "tidak ada hasil" tampil, mobile & mode terang rapi.
 
 **Pertanyaan terbuka**: apakah pencarian hanya untuk cruise & charter, atau juga artikel blog? (Usulan: hanya cruise & charter dulu.)
+
+### Revisi 2 — posisi di pojok kanan atas (5 Oktober 2026)
+
+Atas permintaan pemilik situs, search bar dipindah dari bawah tombol hero ke **pojok kanan atas hero** (di bawah header, rata kanan, lebar ±420px). Isi dan perilaku pencarian tidak berubah.
+
+- Desktop: `position: absolute; top: 118px; right: 48px`. Daftar saran sekarang membuka **ke bawah** (ruang di bawahnya lega).
+- Tablet (≤1024px): lebar 380px dan turun ke 142px supaya tidak menabrak judul.
+- Mobile (≤768px): pojok kanan atas bertabrakan dengan header dan judul, jadi di HP bar menempel di bagian bawah hero (di atas tombol "Ask Kai"), saran membuka ke atas.
+- Berkas: `Hero.tsx` (memindahkan satu pembungkus), `globals.css`. `HeroSearch.tsx` tidak berubah.

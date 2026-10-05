@@ -163,7 +163,6 @@ export default function Hero() {
           line3Ref.current,
           subtitleRef.current,
           btnsRef.current,
-          searchRef.current,
         ],
         {
           yPercent: -18,
@@ -335,11 +334,11 @@ export default function Hero() {
             Private Charter
           </Button>
         </div>
+      </div>
 
-        {/* Search bar */}
-        <div ref={searchRef}>
-          <HeroSearch />
-        </div>
+      {/* Search bar — top right (bottom of the hero on mobile) */}
+      <div ref={searchRef} className="hero-search-wrap">
+        <HeroSearch />
       </div>
 
       {/* Info bar — pinned to bottom */}
