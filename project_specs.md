@@ -767,3 +767,36 @@ Satu bar horizontal bergaya kaca (navy transparan + garis emas tipis, sama denga
 ### Pertanyaan terbuka untuk Tony
 1. Posisi bar di hero (di bawah dua tombol) sudah sesuai, atau mau menggantikan tombol itu?
 2. Tony tadi menyebut "the dates". Apakah oke kalau tanggal ditunda ke Level 2?
+
+### Revisi — search bar yang bisa diketik (5 Oktober 2026)
+
+**Status: DISETUJUI (5 Oktober 2026) — pencarian hanya untuk products (cruise, charter, catering), tanpa artikel blog.**
+
+Versi dua-dropdown (commit `dfc2351` di branch `feature/hero-search`) dinilai kurang cocok: yang dimaksud Tony kemungkinan kolom pencarian yang bisa **diketik**. Revisi ini **mengganti** dua dropdown dengan satu kolom ketik, di posisi yang sama. Versi dropdown tetap aman di riwayat git.
+
+**Tampilan**
+- Satu bar kaca gelap (gaya sama dengan sekarang): ikon kaca pembesar, kolom ketik, tombol Search emas.
+- Placeholder: *Search cruises & charters* (singkat, supaya tidak terpotong di HP).
+
+**Perilaku**
+- Fokus ke kolom → muncul daftar semua pilihan. Mengetik → daftar tersaring langsung (tanpa menunggu server).
+- Pencocokan memakai nama produk, sub-judul, dan kata kunci umum (mis. "whale", "sunset", "wedding", "corporate", "menu", "heli").
+- Pilih dengan klik, atau panah atas/bawah + Enter. Esc menutup daftar.
+- Enter tanpa memilih → membuka hasil teratas. Tidak ada hasil → pesan "No matches — try "whale" or "wedding"."
+- Tujuan sama seperti sebelumnya: cruise → halaman + `#book`; charter/catering → halaman masing-masing.
+- Daftar sumber: `PRODUCTS` di `lib/products.ts` (cruise + charter + Catering & Menus). Cruise makan siang/malam tetap otomatis tersembunyi lewat flag yang ada.
+
+**Berkas**
+| Berkas | Perubahan |
+|---|---|
+| `components/HeroSearch.tsx` | Ditulis ulang: kolom ketik + daftar saran (satu komponen) |
+| `app/globals.css` | Gaya blok `.hero-search` disesuaikan |
+| `components/Hero.tsx` | Tidak berubah lagi |
+
+Peta kata kunci disimpan di `HeroSearch.tsx` supaya `lib/products.ts` (dipakai menu nav dan CMS berita) tidak disentuh.
+
+**Di luar cakupan**: mencari artikel blog/FAQ, tanggal & ketersediaan (Level 2), perubahan menu navigasi.
+
+**Selesai berarti**: `npm run build` lolos; di browser tanpa error console: mengetik menyaring daftar, klik/Enter/panah berfungsi, "tidak ada hasil" tampil, mobile & mode terang rapi.
+
+**Pertanyaan terbuka**: apakah pencarian hanya untuk cruise & charter, atau juga artikel blog? (Usulan: hanya cruise & charter dulu.)

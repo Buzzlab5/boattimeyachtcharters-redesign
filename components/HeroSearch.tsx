@@ -1,177 +1,195 @@
 'use client';
 
-import { useEffect, useRef, useState, type FormEvent } from 'react';
+import {
+  useEffect,
+  useId,
+  useMemo,
+  useRef,
+  useState,
+  type ChangeEvent,
+  type FormEvent,
+  type KeyboardEvent,
+} from 'react';
 import { useRouter } from 'next/navigation';
-import { EXPERIENCE_PRODUCTS, CHARTER_PRODUCTS } from '@/lib/products';
+import { EXPERIENCE_PRODUCTS, PRODUCTS, type Product } from '@/lib/products';
 
-type SearchType = 'cruise' | 'charter';
+// Extra words people are likely to type. Kept here (not in lib/products.ts) so
+// the nav menus and the news CMS that read that file stay untouched. A product
+// with no entry is still found by its name and sub-title.
+const KEYWORDS: Record<string, string> = {
+  'whale-watching': 'whale whales humpback watching migration',
+  'twilight-drift': 'sunset twilight broadwater evening drift',
+  'chefs-table-lunch': 'lunch chef dining food',
+  'twilight-dining': 'dinner chef dining food',
+  'riverfire-2026': 'riverfire brisbane fireworks river',
+  'nye-2026': 'new year nye eve fireworks celebration',
+  'valentines-day': 'valentine valentines romantic romance love couple',
+  helitours: 'heli helicopter sky',
+  'private-charter': 'private yacht charter hire boat',
+  'corporate-charter': 'corporate team event business client',
+  'wedding-charter': 'wedding marry marriage bride',
+  'buffet-dinner-lunch': 'buffet dinner lunch food',
+  catering: 'catering menu menus food package packages',
+};
 
-interface Option {
-  value: string;
-  label: string;
-  sub?: string;
+// Only products that have a booking widget on their page.
+const BOOKABLE_IDS = new Set(EXPERIENCE_PRODUCTS.map((p) => p.id));
+
+const normalise = (s: string) => s.toLowerCase().replace(/['’]/g, '');
+
+// Every typed word must appear somewhere; name matches rank above keyword matches.
+function search(query: string): Product[] {
+  const tokens = normalise(query).split(/\s+/).filter(Boolean);
+  if (tokens.length === 0) return PRODUCTS;
+
+  const scored: { product: Product; score: number }[] = [];
+  for (const product of PRODUCTS) {
+    const name = normalise(product.label);
+    const rest = normalise(`${product.sub} ${KEYWORDS[product.id] ?? ''}`);
+    let score = 0;
+    for (const token of tokens) {
+      if (name.includes(token)) score += 2;
+      else if (rest.includes(token)) score += 1;
+      else {
+        score = 0;
+        break;
+      }
+    }
+    if (score > 0) scored.push({ product, score });
+  }
+  return scored.sort((a, b) => b.score - a.score).map((x) => x.product);
 }
 
-const TYPE_OPTIONS: Option[] = [
-  { value: 'cruise', label: 'Cruise', sub: 'Whale watching, sunset & events' },
-  { value: 'charter', label: 'Private Charter', sub: 'Private, corporate & wedding' },
-];
-
-// Only the charter products that are real "charter types" (not Catering & Menus).
-const CHARTER_IDS = ['private-charter', 'corporate-charter', 'wedding-charter'];
-const CHARTER_OPTIONS = CHARTER_PRODUCTS.filter((p) => CHARTER_IDS.includes(p.id));
-
-// Custom dropdown (instead of a native <select>) so the menu matches the dark
-// hero in both light and dark mode. It opens upward because the hero info bar
-// sits just below the search bar and would cover a downward menu.
-function Dropdown({
-  label,
-  placeholder,
-  value,
-  options,
-  onChange,
-  hasError,
-}: {
-  label: string;
-  placeholder: string;
-  value: string;
-  options: Option[];
-  onChange: (value: string) => void;
-  hasError?: boolean;
-}) {
+export default function HeroSearch() {
+  const router = useRouter();
+  const listId = useId();
+  const rootRef = useRef<HTMLFormElement>(null);
+  const [query, setQuery] = useState('');
   const [open, setOpen] = useState(false);
-  const rootRef = useRef<HTMLDivElement>(null);
+  const [active, setActive] = useState(0);
+  // True once the visitor has moved through the list with the arrow keys, so an
+  // empty search + Enter opens the list instead of jumping to the first product.
+  const [arrowed, setArrowed] = useState(false);
+
+  const results = useMemo(() => search(query), [query]);
 
   useEffect(() => {
     if (!open) return;
     const onPointerDown = (e: MouseEvent) => {
       if (!rootRef.current?.contains(e.target as Node)) setOpen(false);
     };
-    const onKeyDown = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') setOpen(false);
-    };
     document.addEventListener('mousedown', onPointerDown);
-    document.addEventListener('keydown', onKeyDown);
-    return () => {
-      document.removeEventListener('mousedown', onPointerDown);
-      document.removeEventListener('keydown', onKeyDown);
-    };
+    return () => document.removeEventListener('mousedown', onPointerDown);
   }, [open]);
 
-  const selected = options.find((o) => o.value === value);
+  useEffect(() => {
+    if (!open) return;
+    document
+      .getElementById(`${listId}-${active}`)
+      ?.scrollIntoView({ block: 'nearest' });
+  }, [active, open, listId]);
+
+  function go(product: Product) {
+    // Cruises jump straight to the booking widget; charters just open their page.
+    router.push(BOOKABLE_IDS.has(product.id) ? `${product.href}#book` : product.href);
+  }
+
+  function handleChange(e: ChangeEvent<HTMLInputElement>) {
+    setQuery(e.target.value);
+    setActive(0);
+    setArrowed(false);
+    setOpen(true);
+  }
+
+  function handleKeyDown(e: KeyboardEvent<HTMLInputElement>) {
+    if (e.key === 'Escape') {
+      setOpen(false);
+    } else if (e.key === 'ArrowDown' || e.key === 'ArrowUp') {
+      e.preventDefault();
+      if (!open) {
+        setOpen(true);
+        return;
+      }
+      if (results.length === 0) return;
+      setArrowed(true);
+      const step = e.key === 'ArrowDown' ? 1 : -1;
+      setActive((i) => (i + step + results.length) % results.length);
+    }
+  }
+
+  function handleSubmit(e: FormEvent) {
+    e.preventDefault();
+    const product = results[active];
+    if ((!query.trim() && !arrowed) || !product) {
+      setOpen(true);
+      return;
+    }
+    go(product);
+  }
 
   return (
-    <div ref={rootRef} className="hero-search__cell">
-      <button
-        type="button"
-        className={`hero-search__trigger${hasError ? ' is-error' : ''}`}
-        aria-haspopup="listbox"
-        aria-expanded={open}
-        onClick={() => setOpen((o) => !o)}
-      >
-        <span className="hero-search__label">{label}</span>
-        <span className={`hero-search__value${selected ? '' : ' is-placeholder'}`}>
-          {selected ? selected.label : placeholder}
-        </span>
+    <form ref={rootRef} className="hero-search" onSubmit={handleSubmit} role="search" noValidate>
+      <div className="hero-search__bar">
         <svg
-          className={`hero-search__chevron${open ? ' is-open' : ''}`}
-          width="12"
-          height="12"
+          className="hero-search__icon"
+          width="16"
+          height="16"
           viewBox="0 0 24 24"
           fill="none"
           stroke="currentColor"
           strokeWidth="1.5"
           aria-hidden="true"
         >
-          <polyline points="6 9 12 15 18 9" />
+          <circle cx="11" cy="11" r="7" />
+          <line x1="20" y1="20" x2="16.2" y2="16.2" />
         </svg>
-      </button>
 
-      {open && (
-        <ul className="hero-search__menu" role="listbox" aria-label={label}>
-          {options.map((o) => (
-            <li key={o.value} role="presentation">
-              <button
-                type="button"
-                role="option"
-                aria-selected={o.value === value}
-                className={`hero-search__option${o.value === value ? ' is-selected' : ''}`}
-                onClick={() => {
-                  onChange(o.value);
-                  setOpen(false);
-                }}
-              >
-                <span className="hero-search__option-label">{o.label}</span>
-                {o.sub && <span className="hero-search__option-sub">{o.sub}</span>}
-              </button>
-            </li>
-          ))}
-        </ul>
-      )}
-    </div>
-  );
-}
-
-export default function HeroSearch() {
-  const router = useRouter();
-  const [type, setType] = useState<SearchType>('cruise');
-  const [experience, setExperience] = useState('');
-  const [showError, setShowError] = useState(false);
-
-  const products = type === 'cruise' ? EXPERIENCE_PRODUCTS : CHARTER_OPTIONS;
-  const experienceOptions: Option[] = products.map((p) => ({
-    value: p.id,
-    label: p.label,
-    sub: p.sub,
-  }));
-
-  function changeType(value: string) {
-    setType(value as SearchType);
-    setExperience('');
-    setShowError(false);
-  }
-
-  function handleSubmit(e: FormEvent) {
-    e.preventDefault();
-    const product = products.find((p) => p.id === experience);
-    if (!product) {
-      setShowError(true);
-      return;
-    }
-    // Cruises jump straight to the booking widget; charters open their page.
-    router.push(type === 'cruise' ? `${product.href}#book` : product.href);
-  }
-
-  return (
-    <form className="hero-search" onSubmit={handleSubmit} noValidate>
-      <div className="hero-search__bar">
-        <Dropdown
-          label="I'm looking for"
-          placeholder="Select"
-          value={type}
-          options={TYPE_OPTIONS}
-          onChange={changeType}
+        <input
+          type="text"
+          className="hero-search__input"
+          placeholder="Search cruises & charters"
+          aria-label="Search cruises and charters"
+          role="combobox"
+          aria-expanded={open}
+          aria-controls={listId}
+          aria-autocomplete="list"
+          aria-activedescendant={open && results[active] ? `${listId}-${active}` : undefined}
+          autoComplete="off"
+          value={query}
+          onChange={handleChange}
+          onFocus={() => setOpen(true)}
+          onKeyDown={handleKeyDown}
         />
-        <Dropdown
-          label="Experience"
-          placeholder="Choose an experience"
-          value={experience}
-          options={experienceOptions}
-          onChange={(v) => {
-            setExperience(v);
-            setShowError(false);
-          }}
-          hasError={showError}
-        />
+
         <button type="submit" className="hero-search__submit">
           Search
         </button>
+
+        {open && (
+          <ul id={listId} className="hero-search__menu" role="listbox" aria-label="Results">
+            {results.length === 0 ? (
+              <li className="hero-search__empty" role="presentation">
+                No matches — try &ldquo;whale&rdquo; or &ldquo;wedding&rdquo;.
+              </li>
+            ) : (
+              results.map((p, i) => (
+                <li
+                  key={p.id}
+                  id={`${listId}-${i}`}
+                  role="option"
+                  aria-selected={i === active}
+                  className={`hero-search__option${i === active ? ' is-active' : ''}`}
+                  onMouseEnter={() => setActive(i)}
+                  onClick={() => go(p)}
+                >
+                  <span className="hero-search__option-label">{p.label}</span>
+                  <span className="hero-search__option-sub">{p.sub}</span>
+                </li>
+              ))
+            )}
+          </ul>
+        )}
       </div>
-      {showError && (
-        <p className="hero-search__error" role="alert">
-          Please choose an experience to continue.
-        </p>
-      )}
     </form>
   );
 }
