@@ -64,7 +64,7 @@ export default function TickerBar() {
         transition: 'transform 0.4s cubic-bezier(0.2,0.6,0.2,1)',
         display: 'flex',
         alignItems: 'center',
-        justifyContent: 'space-between',
+        justifyContent: 'center',
         padding: '0 48px',
         height: 52,
         gap: 24,
@@ -80,7 +80,7 @@ export default function TickerBar() {
                 fontSize: 9,
                 letterSpacing: '0.22em',
                 textTransform: 'uppercase',
-                color: 'rgba(245,240,232,0.45)',
+                color: 'rgba(245,240,232,0.7)',
               }}
             >
               {item.label}
@@ -99,29 +99,6 @@ export default function TickerBar() {
           </div>
         ))}
       </div>
-
-      {/* Tickets CTA */}
-      <a
-        href="/cruise-tickets-luxury-whale-watching#book"
-        style={{
-          flexShrink: 0,
-          fontFamily: 'var(--font-body)',
-          fontSize: 9,
-          letterSpacing: '0.26em',
-          textTransform: 'uppercase',
-          fontWeight: 600,
-          color: '#0A1628',
-          background: '#C9A84C',
-          padding: '10px 24px',
-          textDecoration: 'none',
-          transition: 'background 0.2s',
-          whiteSpace: 'nowrap',
-        }}
-        onMouseEnter={(e) => ((e.currentTarget as HTMLElement).style.background = '#E8C97A')}
-        onMouseLeave={(e) => ((e.currentTarget as HTMLElement).style.background = '#C9A84C')}
-      >
-        Tickets
-      </a>
     </div>
   );
 }

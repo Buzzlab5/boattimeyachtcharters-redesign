@@ -704,6 +704,7 @@ export default function LunchPage() {
                 }}
               />
               <div
+                className="on-photo"
                 style={{
                   position: "absolute",
                   bottom: 0,

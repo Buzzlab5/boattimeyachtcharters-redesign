@@ -271,11 +271,17 @@ export default function Inquiry() {
                 icon: 'clock' as const,
                 val: '08:00 — 20:00 daily',
               },
-              { key: 'Direct', icon: 'phone' as const, val: '+61 477 667 644' },
+              {
+                key: 'Direct',
+                icon: 'phone' as const,
+                val: '+61 477 667 644',
+                href: 'tel:+61477667644',
+              },
               {
                 key: 'Email',
                 icon: 'mail' as const,
                 val: 'info@boattimeyachtcharters.com.au',
+                href: 'mailto:info@boattimeyachtcharters.com.au',
               },
             ].map((d) => (
               <div
@@ -300,15 +306,31 @@ export default function Inquiry() {
                   {d.key}
                 </span>
                 <Icon name={d.icon} size={14} color="var(--gold)" />
-                <span
-                  style={{
-                    color: 'var(--text-muted)',
-                    wordBreak: 'break-all',
-                    overflowWrap: 'anywhere',
-                  }}
-                >
-                  {d.val}
-                </span>
+                {'href' in d ? (
+                  <a
+                    href={d.href}
+                    style={{
+                      color: 'var(--text-muted)',
+                      wordBreak: 'break-all',
+                      overflowWrap: 'anywhere',
+                      transition: 'color 0.2s',
+                    }}
+                    onMouseEnter={(e) => (e.currentTarget.style.color = 'var(--gold)')}
+                    onMouseLeave={(e) => (e.currentTarget.style.color = 'var(--text-muted)')}
+                  >
+                    {d.val}
+                  </a>
+                ) : (
+                  <span
+                    style={{
+                      color: 'var(--text-muted)',
+                      wordBreak: 'break-all',
+                      overflowWrap: 'anywhere',
+                    }}
+                  >
+                    {d.val}
+                  </span>
+                )}
               </div>
             ))}
           </div>

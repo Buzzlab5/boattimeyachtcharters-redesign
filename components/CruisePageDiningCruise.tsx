@@ -701,6 +701,7 @@ export default function DiningCruisePage() {
                 }}
               />
               <div
+                className="on-photo"
                 style={{
                   position: 'absolute',
                   bottom: 0,

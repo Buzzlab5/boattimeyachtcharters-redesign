@@ -706,6 +706,7 @@ export default function BuffetPage() {
                 }}
               />
               <div
+                className="on-photo"
                 style={{
                   position: 'absolute',
                   bottom: 0,

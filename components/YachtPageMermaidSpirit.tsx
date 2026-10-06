@@ -64,12 +64,12 @@ function SpecBar() {
               display: 'flex', flexDirection: 'column', gap: 8,
             }}
           >
-            <div style={{ fontFamily: 'var(--font-body)', fontSize: 11, letterSpacing: '0.22em', textTransform: 'uppercase', color: 'var(--navy)', opacity: 0.65, fontWeight: 600 }}>
+            <div style={{ fontFamily: 'var(--font-body)', fontSize: 11, letterSpacing: '0.22em', textTransform: 'uppercase', color: '#0a1628', opacity: 0.9, fontWeight: 600 }}>
               {s.label}
             </div>
-            <div style={{ fontFamily: 'var(--font-display)', fontWeight: 300, fontSize: 'clamp(44px, 5vw, 64px)', color: 'var(--navy)', lineHeight: 1, letterSpacing: '-0.02em', display: 'flex', alignItems: 'baseline', gap: 6 }}>
+            <div style={{ fontFamily: 'var(--font-display)', fontWeight: 300, fontSize: 'clamp(44px, 5vw, 64px)', color: '#0a1628', lineHeight: 1, letterSpacing: '-0.02em', display: 'flex', alignItems: 'baseline', gap: 6 }}>
               {s.value}
-              <span style={{ fontStyle: 'italic', fontSize: '0.45em', opacity: 0.7 }}>{s.suffix}</span>
+              <span style={{ fontStyle: 'italic', fontSize: '0.45em', opacity: 0.9 }}>{s.suffix}</span>
             </div>
           </div>
         ))}

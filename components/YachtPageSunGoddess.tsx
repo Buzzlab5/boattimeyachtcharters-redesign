@@ -82,8 +82,8 @@ function SpecBar() {
                 fontSize: 11,
                 letterSpacing: '0.22em',
                 textTransform: 'uppercase',
-                color: 'var(--navy)',
-                opacity: 0.65,
+                color: '#0a1628',
+                opacity: 0.9,
                 fontWeight: 600,
               }}
             >
@@ -94,7 +94,7 @@ function SpecBar() {
                 fontFamily: 'var(--font-display)',
                 fontWeight: 300,
                 fontSize: 'clamp(44px, 5vw, 64px)',
-                color: 'var(--navy)',
+                color: '#0a1628',
                 lineHeight: 1,
                 letterSpacing: '-0.02em',
                 display: 'flex',
@@ -107,7 +107,7 @@ function SpecBar() {
                 style={{
                   fontStyle: 'italic',
                   fontSize: '0.45em',
-                  opacity: 0.7,
+                  opacity: 0.9,
                 }}
               >
                 {s.suffix}

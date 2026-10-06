@@ -4,7 +4,7 @@ import { useRef, useEffect, useState } from 'react';
 import { useGSAP } from '@gsap/react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { Button, Icon } from './Shared';
+import { Icon } from './Shared';
 import { useTheme } from './ThemeProvider';
 import HeroSearch from './HeroSearch';
 
@@ -70,8 +70,7 @@ export default function Hero() {
   const line2Ref = useRef<HTMLSpanElement>(null);
   const line3Ref = useRef<HTMLSpanElement>(null);
   const subtitleRef = useRef<HTMLParagraphElement>(null);
-  const btnsRef = useRef<HTMLDivElement>(null);
-  const searchRef = useRef<HTMLDivElement>(null);
+  const bottomRowRef = useRef<HTMLDivElement>(null);
   const badgeRef = useRef<HTMLDivElement>(null);
   const scrollCueRef = useRef<HTMLDivElement>(null);
   const scrollLineRef = useRef<HTMLDivElement>(null);
@@ -111,14 +110,9 @@ export default function Hero() {
           '-=0.5',
         )
         .from(
-          btnsRef.current,
+          bottomRowRef.current,
           { y: 18, opacity: 0, duration: 0.7, ease: 'power2.out' },
           '-=0.45',
-        )
-        .from(
-          searchRef.current,
-          { y: 18, opacity: 0, duration: 0.7, ease: 'power2.out' },
-          '-=0.35',
         )
         .from(
           badgeRef.current,
@@ -162,7 +156,7 @@ export default function Hero() {
           line2Ref.current,
           line3Ref.current,
           subtitleRef.current,
-          btnsRef.current,
+          bottomRowRef.current,
         ],
         {
           yPercent: -18,
@@ -316,29 +310,73 @@ export default function Hero() {
             color: 'rgba(245,240,232,0.82)',
             maxWidth: 500,
             lineHeight: 1.75,
-            margin: '0 0 44px',
+            margin: '0 0 32px',
           }}
         >
           Yacht Hire, Luxury Sunset and Whale Watching Cruises Gold Coast
         </p>
 
-        {/* Buttons */}
-        <div ref={btnsRef} className="flex gap-4 flex-wrap">
-          <Button
-            variant="primary"
-            href="/cruise-tickets-luxury-whale-watching"
+        {/* Reviews badge with the search bar beside it (same height) */}
+        <div ref={bottomRowRef} className="hero-bottom-row">
+          <div
+            className="hero-stats-badge hidden md:flex"
+            style={{
+              border: '1px solid rgba(201,168,76,0.3)',
+              background: 'rgba(10,22,40,0.65)',
+              backdropFilter: 'blur(8px)',
+              padding: '0 24px',
+              alignItems: 'center',
+              gap: 18,
+              whiteSpace: 'nowrap',
+            }}
           >
-            Whale Watching
-          </Button>
-          <Button variant="ghost" href="/private-yacht-charter">
-            Private Charter
-          </Button>
-        </div>
-      </div>
+            <div
+              style={{
+                fontFamily: 'var(--font-display)',
+                fontSize: 28,
+                fontWeight: 500,
+                // lining figures: the default old-style ones sit low in the box
+                fontFeatureSettings: '"lnum" 1',
+                lineHeight: 1,
+                color: '#F5F0E8',
+              }}
+            >
+              3,910+
+            </div>
+            <div
+              aria-hidden="true"
+              style={{ width: 1, alignSelf: 'stretch', margin: '12px 0', background: 'rgba(201,168,76,0.35)' }}
+            />
+            <div style={{ display: 'flex', flexDirection: 'column', gap: 5 }}>
+              <div
+                style={{
+                  color: 'var(--gold)',
+                  fontSize: 11,
+                  letterSpacing: 3,
+                  lineHeight: 1,
+                }}
+              >
+                ★★★★★
+              </div>
+              <div
+                style={{
+                  fontFamily: 'var(--font-body)',
+                  fontSize: 9,
+                  letterSpacing: '0.2em',
+                  textTransform: 'uppercase',
+                  color: 'rgba(245,240,232,0.6)',
+                  lineHeight: 1,
+                }}
+              >
+                5-Star Reviews
+              </div>
+            </div>
+          </div>
 
-      {/* Search bar — top right (bottom of the hero on mobile) */}
-      <div ref={searchRef} className="hero-search-wrap">
-        <HeroSearch />
+          <div className="hero-search-wrap">
+            <HeroSearch />
+          </div>
+        </div>
       </div>
 
       {/* Info bar — pinned to bottom */}
@@ -367,52 +405,6 @@ export default function Hero() {
         </div>
       </div>
 
-      {/* Bottom-right stats badge */}
-      <div
-        className="hero-stats-badge absolute z-10 hidden md:block"
-        style={{
-          bottom: 96,
-          right: 48,
-          border: '1px solid rgba(201,168,76,0.3)',
-          background: 'rgba(10,22,40,0.65)',
-          backdropFilter: 'blur(8px)',
-          padding: '20px 28px',
-          textAlign: 'center',
-        }}
-      >
-        <div
-          style={{
-            color: 'var(--gold)',
-            fontSize: 15,
-            letterSpacing: 3,
-            marginBottom: 4,
-          }}
-        >
-          ★★★★★
-        </div>
-        <div
-          style={{
-            fontFamily: 'var(--font-display)',
-            fontSize: 24,
-            fontWeight: 600,
-            color: '#F5F0E8',
-          }}
-        >
-          3,910+
-        </div>
-        <div
-          style={{
-            fontFamily: 'var(--font-body)',
-            fontSize: 9,
-            letterSpacing: '0.2em',
-            textTransform: 'uppercase',
-            color: 'rgba(245,240,232,0.55)',
-            marginTop: 2,
-          }}
-        >
-          5-Star Reviews
-        </div>
-      </div>
     </section>
   );
 }

@@ -1,6 +1,6 @@
 'use client';
 
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useGSAP } from '@gsap/react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
@@ -336,6 +336,19 @@ function CategoryFilter({
   onSelect: (cat: string) => void;
 }) {
   const scrollRef = useRef<HTMLDivElement>(null);
+  // Stick exactly under the site header. Its height changes (taller at the top of the
+  // page, shorter once scrolled), so a fixed `top` left a gap or tucked the bar under it.
+  const [stickyTop, setStickyTop] = useState(0);
+
+  useEffect(() => {
+    const header = document.querySelector('.site-header');
+    if (!header) return;
+    const update = () => setStickyTop(header.getBoundingClientRect().height);
+    update();
+    const observer = new ResizeObserver(update);
+    observer.observe(header);
+    return () => observer.disconnect();
+  }, []);
 
   function scrollByAmount(amount: number) {
     scrollRef.current?.scrollBy({ left: amount, behavior: 'smooth' });
@@ -348,7 +361,7 @@ function CategoryFilter({
         borderTop: '1px solid var(--border-subtle)',
         borderBottom: '1px solid var(--border-subtle)',
         position: 'sticky',
-        top: 72,
+        top: stickyTop,
         zIndex: 30,
       }}
     >

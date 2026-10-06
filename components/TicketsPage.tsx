@@ -51,6 +51,7 @@ export default function TicketsPage() {
     <>
       <Nav />
 
+      <main>
       {/* Hero */}
       <section
         ref={heroRef}
@@ -138,6 +139,7 @@ export default function TicketsPage() {
       </section>
 
       <GoldRope />
+      </main>
 
       <Footer />
     </>

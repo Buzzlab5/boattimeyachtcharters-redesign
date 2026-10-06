@@ -255,7 +255,7 @@ function SocialProofStrip() {
             <div
               style={{
                 fontFamily: 'var(--font-body)', fontSize: 11, letterSpacing: '0.22em',
-                textTransform: 'uppercase', color: 'var(--navy)', opacity: 0.65, fontWeight: 600,
+                textTransform: 'uppercase', color: '#0a1628', opacity: 0.9, fontWeight: 600,
               }}
             >
               {s.label}
@@ -263,13 +263,13 @@ function SocialProofStrip() {
             <div
               style={{
                 fontFamily: 'var(--font-display)', fontWeight: 300,
-                fontSize: 'clamp(40px, 5vw, 60px)', color: 'var(--navy)',
+                fontSize: 'clamp(40px, 5vw, 60px)', color: '#0a1628',
                 lineHeight: 1, letterSpacing: '-0.02em',
               }}
             >
               {s.value}
               {s.suffix && (
-                <span style={{ fontStyle: 'italic', fontSize: '0.5em', opacity: 0.7, marginLeft: 4 }}>
+                <span style={{ fontStyle: 'italic', fontSize: '0.5em', opacity: 0.9, marginLeft: 4 }}>
                   {s.suffix}
                 </span>
               )}
@@ -277,7 +277,7 @@ function SocialProofStrip() {
             <div
               style={{
                 fontFamily: 'var(--font-body)', fontSize: 11,
-                color: 'var(--navy)', opacity: 0.55, letterSpacing: '0.05em',
+                color: '#0a1628', opacity: 0.85, letterSpacing: '0.05em',
               }}
             >
               {s.sub}

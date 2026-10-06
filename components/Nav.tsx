@@ -146,11 +146,6 @@ export default function Nav() {
 
         {/* Right side */}
         <div className="site-header__right">
-          <a href="tel:+61477667644" className="site-header__phone">
-            <span className="nav-phone-dot" />
-            +61 477 667 644
-          </a>
-
           <button
             onClick={toggle}
             className="theme-toggle-btn"
@@ -177,19 +172,6 @@ export default function Nav() {
 
           <a href="/tickets" className="site-header__tickets">
             <span>Tickets</span>
-          </a>
-
-          <a href="/#inquiry" className="site-header__reserve" onClick={(e) => handleHashNav(e, '/#inquiry')}>
-            <span>Reserve</span>
-            <svg width="11" height="11" viewBox="0 0 12 12" fill="none" aria-hidden="true">
-              <path
-                d="M2 6h8M6 2l4 4-4 4"
-                stroke="currentColor"
-                strokeWidth="1.2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              />
-            </svg>
           </a>
 
           <button

@@ -1903,7 +1903,7 @@ export function CharterGallery({ folder }: { folder: string }) {
                 fontSize: 9,
                 letterSpacing: '0.24em',
                 textTransform: 'uppercase',
-                color: 'rgba(201,168,76,0.5)',
+                color: 'var(--gold-ink)',
                 userSelect: 'none',
               }}
             >

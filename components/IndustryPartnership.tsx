@@ -197,7 +197,7 @@ export default function IndustryPartnership() {
         {/* ── Hero ── */}
         <section
           ref={heroRef}
-          className="relative overflow-hidden"
+          className="relative overflow-hidden on-photo"
           style={{ minHeight: '100vh', background: 'var(--navy)', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}
         >
           <div ref={bgRef} className="absolute inset-0 will-change-transform">

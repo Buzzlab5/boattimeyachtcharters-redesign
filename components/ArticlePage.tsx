@@ -177,7 +177,7 @@ function ArticleHero({ post }: { post: Post }) {
     !!post.updated_at && new Date(post.updated_at).getTime() > new Date(publishedOn).getTime() + 60_000;
 
   return (
-    <section ref={heroRef} className="relative overflow-hidden flex items-end" style={{ minHeight: '65vh', background: 'var(--navy)' }}>
+    <section ref={heroRef} className="relative overflow-hidden flex items-end on-photo" style={{ minHeight: '65vh', background: 'var(--navy)' }}>
       <div ref={bgRef} className="absolute inset-0 will-change-transform" style={{ backgroundImage: `url(${post.image_url || FALLBACK_IMG})`, backgroundSize: 'cover', backgroundPosition: 'center' }} />
       <div className="absolute inset-0" style={{ background: 'linear-gradient(to top, rgba(10,22,40,0.97) 0%, rgba(10,22,40,0.6) 45%, rgba(10,22,40,0.15) 100%)' }} />
       <div ref={textRef} style={{ position: 'relative', zIndex: 2, padding: '0 48px 72px', maxWidth: 900 }}>

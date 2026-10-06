@@ -8,6 +8,7 @@
   [data-theme='dark'] {
     --gold: #c9a84c;
     --gold-light: #e8c97a;
+    --gold-ink: #c9a84c; /* gold as text; the light theme overrides this with a darker one */
     --navy: #0a1628;
     --navy-mid: #0f2040;
     --ocean: #1a3a5c;
@@ -31,12 +32,15 @@
   [data-theme='light'] {
     --gold: #b8943e;
     --gold-light: #c9a84c;
+    /* Gold as TEXT on the cream background. --gold itself (fills, borders, text on
+       photos) is too pale there: 2.6:1. This one is 4.5:1+ on every light surface. */
+    --gold-ink: #7f6215;
     --navy: #f7f3ec;
     --navy-mid: #ede8dc;
     --ocean: #d8d0c4;
     --cream: #0a1628;
     --white: #fdfcf9;
-    --text-muted: rgba(10, 22, 40, 0.55);
+    --text-muted: rgba(10, 22, 40, 0.7);
     --border-subtle: rgba(10, 22, 40, 0.1);
     --border-hover: rgba(10, 22, 40, 0.25);
     --glass-bg: rgba(247, 243, 236, 0.97);
@@ -505,11 +509,6 @@
   overflow: hidden;
 }
 
-/* TickerBar reserve button — always dark navy text on gold, both modes */
-.ticker-bar-wrap a {
-  color: #0a1628 !important;
-}
-
 /* ============================================================
    THEME TOGGLE BUTTON
    White in dark mode (visible on transparent/dark nav).
@@ -678,7 +677,7 @@
 
 /* ── Restore italic gold accent <em> ───────────────────────── */
 [data-theme='light'] em {
-  color: var(--gold) !important;
+  color: var(--gold-ink) !important;
 }
 
 /* ── Restore inline-styled gold elements ───────────────────── */
@@ -687,11 +686,11 @@
    so these read "background:var(--gold)"; the spaced spelling used to be
    here matched nothing, which left gold buttons printing gold on gold. */
 [data-theme='light'] [style*='var(--gold)']:not([style*='background:var(--gold)']) {
-  color: var(--gold) !important;
+  color: var(--gold-ink) !important;
 }
 [data-theme='light']
   [style*='var(--gold-light)']:not([style*='background:var(--gold-light)']) {
-  color: var(--gold) !important;
+  color: var(--gold-ink) !important;
 }
 /* Elements with gold backgrounds must keep dark navy text */
 [data-theme='light'] [style*='background:var(--gold)'] {
@@ -734,7 +733,7 @@
 }
 [data-theme='light'] .light-adapt-section [style*='var(--gold)'],
 [data-theme='light'] .light-adapt-section [style*='var(--gold-light)'] {
-  color: var(--gold) !important;
+  color: var(--gold-ink) !important;
 }
 
 /* ── Buttons ────────────────────────────────────────────────── */
@@ -747,11 +746,11 @@
 }
 [data-theme='light'] .btn-ghost:hover {
   border-color: var(--gold) !important;
-  color: var(--gold) !important;
+  color: var(--gold-ink) !important;
 }
 [data-theme='light'] .btn-outline {
   border-color: var(--gold) !important;
-  color: var(--gold) !important;
+  color: var(--gold-ink) !important;
 }
 /* Ghost button on dark photo overlay — must stay cream despite general ghost rule above */
 [data-theme='light'] .cruise-hero-content .btn-ghost {
@@ -3439,7 +3438,7 @@
 /* ── Nav drawer sits above the sticky header ────────────────── */
 /* z-index already set to 200 on .mobile-drawer */
 
-/* ── TickerBar — 2×2 grid on mobile, all 4 stats visible ────── */
+/* ── TickerBar — 2×2 grid on mobile, all 4 stats visible, centred ────── */
 @media (max-width: 768px) {
   /* Outer bar: auto height, vertical centre alignment */
   .ticker-bar-wrap {
@@ -3458,11 +3457,13 @@
     min-width: 0 !important;
     overflow: visible !important;
     align-items: start !important;
+    justify-items: center !important;
   }
   /* Each stat: stack label above value */
   .ticker-item {
     flex-direction: column !important;
-    align-items: flex-start !important;
+    align-items: center !important;
+    text-align: center !important;
     gap: 2px !important;
     min-width: 0 !important;
   }
@@ -3473,12 +3474,6 @@
     text-overflow: ellipsis !important;
     white-space: nowrap !important;
     display: block !important;
-  }
-  /* Reserve button — keep it centred beside the 2×2 grid */
-  .ticker-bar-wrap > a {
-    align-self: center !important;
-    padding: 14px 18px !important;
-    font-size: 8px !important;
   }
 }
 
@@ -3967,8 +3962,8 @@
 [data-theme='light'] .article-body { color: rgba(10,22,40,0.82); }
 [data-theme='light'] .article-body h2,
 [data-theme='light'] .article-body h3 { color: #0a1628; }
-[data-theme='light'] .article-body blockquote:not(.instagram-media) { color: rgba(10,22,40,0.55); border-left-color: var(--gold); }
-[data-theme='light'] .article-body a { color: var(--gold); }
+[data-theme='light'] .article-body blockquote:not(.instagram-media) { color: rgba(10,22,40,0.7); border-left-color: var(--gold); }
+[data-theme='light'] .article-body a { color: var(--gold-ink); }
 [data-theme='light'] .article-body strong { color: #0a1628; }
 .article-body p { margin: 0 0 1.1em; }
 .article-body h2 { font-family: var(--font-display); font-size: clamp(20px, 2.5vw, 26px); font-weight: 400; font-style: italic; color: var(--cream); margin: 2em 0 0.5em; line-height: 1.2; }
@@ -4768,18 +4763,21 @@
    HERO SEARCH BAR (components/HeroSearch.tsx)
    Always sits on the dark hero photo, so it is dark glass in both themes.
    ============================================================ */
-/* Top-right of the hero on desktop; bottom of the hero on mobile (see below).
-   On desktop the bar is vertically centred on the eyebrow line
-   ("SUPERYACHT CHARTERS ..."): the hero content starts at
-   max(100px, 50vh - 300px) (see Hero.tsx), the eyebrow is ~15px tall and the
-   bar is ~53px tall, hence the - 19px. Right edge matches the hero's 48px gutter.
-   (Light mode: see the override below.) */
-.hero-search-wrap {
-  position: absolute;
-  top: calc(max(100px, 50vh - 300px) - 19px);
-  right: 48px;
+/* Under the hero subtitle: the reviews badge and the search bar (Hero.tsx) sit side by
+   side in one row. `align-items: stretch` makes the badge exactly as tall as the bar. */
+.hero-bottom-row {
+  position: relative;
+  max-width: 100%;
   z-index: 20;
-  width: min(400px, calc(100% - 96px));
+  display: flex;
+  align-items: stretch;
+  gap: 16px;
+}
+.hero-search-wrap {
+  position: relative;
+  width: 480px;
+  flex: 0 1 auto;
+  min-width: 0;
 }
 
 .hero-search__bar {
@@ -4842,12 +4840,12 @@
   outline-offset: -4px;
 }
 
-/* Suggestions open downward on desktop (open upward on mobile, see below). */
+/* Suggestions open upward: the bar sits at the bottom of the hero, above the info bar. */
 .hero-search__menu {
   position: absolute;
   left: -1px;
   right: -1px;
-  top: calc(100% + 8px);
+  bottom: calc(100% + 8px);
   max-height: min(340px, 50vh);
   overflow-y: auto;
   margin: 0;
@@ -4855,14 +4853,14 @@
   list-style: none;
   background: rgba(10, 22, 40, 0.97);
   border: 1px solid rgba(201, 168, 76, 0.35);
-  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.4);
+  box-shadow: 0 -16px 40px rgba(0, 0, 0, 0.4);
   z-index: 30;
   animation: hero-search-menu-in 0.18s ease-out;
 }
 @keyframes hero-search-menu-in {
   from {
     opacity: 0;
-    transform: translateY(-6px);
+    transform: translateY(6px);
   }
 }
 
@@ -4904,11 +4902,6 @@
 
 /* Light mode turns every <section> descendant dark (see "Broad fix" above), but
    the bar is dark glass on the photo in both themes, so restore cream/gold/navy. */
-/* Light mode has a solid cream header band (87px tall) that would cover the top of
-   the bar when it sits on the eyebrow line, so keep the bar 8px below it. */
-[data-theme='light'] .hero-search-wrap {
-  top: max(95px, calc(max(100px, 50vh - 300px) - 19px));
-}
 [data-theme='light'] .hero-search-wrap,
 [data-theme='light'] .hero-search-wrap * {
   color: #f5f0e8 !important;
@@ -4921,11 +4914,6 @@
 }
 
 @media (max-width: 1024px) {
-  .hero-search-wrap {
-    /* 30px below the hero content start: clears the eyebrow line, which is wider than the bar's left edge here */
-    top: calc(max(100px, 50vh - 300px) + 30px);
-    width: 380px;
-  }
   .hero-search__input {
     font-size: 14px;
   }
@@ -4936,16 +4924,8 @@
 
 @media (max-width: 768px) {
   .hero-search-wrap {
-    top: auto;
-    left: 24px;
-    right: 24px;
-    bottom: 96px; /* clears the floating "Ask Kai" button */
     width: auto;
-  }
-  .hero-search__menu {
-    top: auto;
-    bottom: calc(100% + 8px);
-    box-shadow: 0 -16px 40px rgba(0, 0, 0, 0.4);
+    flex: 1 1 auto;
   }
   .hero-search__icon {
     margin-left: 18px;
@@ -4963,4 +4943,74 @@
     padding-left: 18px;
     padding-right: 18px;
   }
+}
+
+/* ============================================================
+   LIGHT MODE — readability pass (contrast audit)
+   Gold on a dark photo / navy surface keeps the bright --gold; gold on a light surface
+   uses --gold-ink (set in the light theme tokens). The generic "restore gold" rules
+   above now print --gold-ink, so these containers — which paint their own dark
+   background — must win it back. Kept at the end so it beats them on order.
+   ============================================================ */
+[data-theme='light']
+  :is(
+    .hero-content,
+    .hero-stats-badge,
+    .hero-search-wrap,
+    .hero-infobar,
+    .cruise-hero-content,
+    .cta-band-content,
+    .cruise-card-inner,
+    .photo-overlay-card,
+    .vessel-carousel-overlay,
+    .skysea-stickybar,
+    .yacht-visual
+  )
+  :is([style*='var(--gold)'], [style*='var(--gold-light)'], em):not([style*='background:var(--gold)']) {
+  color: var(--gold-light) !important;
+}
+
+/* Text on a gold band: always full dark navy. The generic light-mode text colour is
+   75% navy, which on gold is only 4.3:1. */
+[data-theme='light'] [style*='background:var(--gold)'] * {
+  color: #0a1628 !important;
+}
+
+/* CtaBand tagline is a hard-coded 45% gold: unreadable on cream. */
+[data-theme='light'] .kinetic-caption span {
+  color: var(--gold-ink) !important;
+}
+
+/* Placeholders fall back to the browser's default grey (~2.2:1 on cream/white). The
+   hero search keeps its own cream-on-glass placeholder. */
+[data-theme='light'] :is(input, textarea):not(.hero-search__input)::placeholder {
+  color: rgba(10, 22, 40, 0.64);
+  opacity: 1;
+}
+
+/* Final CTA: the photo sits at 28% over the page colour. Over navy that is a dark, quiet
+   backdrop; over cream it is a bright one that the dark text cannot be read against. */
+[data-theme='light'] .final-cta-bg {
+  opacity: 0.1;
+}
+
+/* ── .on-photo — a block whose text sits on a dark photo/overlay in BOTH themes ─────
+   The generic light-mode rules turn every <section> text navy, which is unreadable on
+   the photo. Put .on-photo on such a section or caption: text stays cream, gold stays bright. */
+[data-theme='light'] .on-photo,
+[data-theme='light'] .on-photo * {
+  color: #f5f0e8 !important;
+}
+[data-theme='light'] .on-photo :is([style*='var(--gold)'], [style*='var(--gold-light)'], em, .section-eyebrow):not([style*='background:var(--gold)']) {
+  color: var(--gold-light) !important;
+}
+[data-theme='light'] .on-photo .section-eyebrow::before {
+  background: var(--gold) !important;
+}
+[data-theme='light'] .on-photo :is(.btn-primary, [style*='background:var(--gold)'], [style*='background:var(--gold)'] *) {
+  color: #0a1628 !important;
+}
+[data-theme='light'] .on-photo .btn-ghost {
+  color: #f5f0e8 !important;
+  border-color: rgba(245, 240, 232, 0.4) !important;
 }

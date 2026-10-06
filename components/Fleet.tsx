@@ -585,7 +585,7 @@ function YachtShowcase({
             fontWeight: 600,
             border: '1px solid rgba(201,168,76,0.4)',
             padding: '7px 14px',
-            background: 'rgba(10,22,40,0.6)',
+            background: 'rgba(10,22,40,0.82)',
           }}
         >
           {y.badge}
