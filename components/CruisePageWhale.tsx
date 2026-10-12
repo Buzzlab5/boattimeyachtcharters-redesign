@@ -505,8 +505,7 @@ export default function WhalePage() {
         {/* 1 ── HERO */}
         <CruiseHero
           eyebrow="Cruise Tickets · Whale Watching"
-          title="Gold Coast Whale Escape"
-          titleAccent="Luxury Whale Watching Cruise"
+          title="Luxury Whale Watching"
           image="/luxury-whale.jpg"
           stats={[
             { label: "Duration", value: "2.5 hours" },

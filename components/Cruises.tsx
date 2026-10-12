@@ -29,9 +29,8 @@ interface CruiseData {
 const CRUISES: CruiseData[] = [
   {
     cat: 'Whale Season',
-    title: 'Gold Coast Whale Escape',
-    em: 'Luxury Whale Watching Cruise',
-    breakTitle: true,
+    title: 'Luxury',
+    em: 'Whale Watching',
     body: null,
     dur: '2.5 hrs',
     vessel: 'Sun Goddess',
@@ -44,8 +43,8 @@ const CRUISES: CruiseData[] = [
   },
   {
     cat: 'Sunset',
-    title: 'Twilight Drift',
-    em: 'Broadwater Sunset Tour & Scenic Cruise',
+    title: 'Luxury Scenic Sunset Cruise',
+    em: 'Superyacht Sunset on the Broadwater',
     breakTitle: true,
     body: null,
     dur: '2 hrs',

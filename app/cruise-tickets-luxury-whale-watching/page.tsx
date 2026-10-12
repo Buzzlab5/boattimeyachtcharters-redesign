@@ -11,7 +11,7 @@ export const metadata: Metadata = {
   description:
     'Board the Sun Goddess superyacht for an extraordinary encounter with humpback whales. Morning & afternoon sessions May–November, Gold Coast.',
   openGraph: {
-    title: 'Gold Coast Whale Escape — Luxury Whale Watching Cruise | Boattime Yacht Charters',
+    title: 'Luxury Whale Watching | Boattime Yacht Charters',
     description:
       'Board the Sun Goddess superyacht for an extraordinary encounter with humpback whales. Morning & afternoon sessions May–November, Gold Coast.',
     images: [{ url: '/humpbacks.jpg', width: 1200, height: 630, alt: 'Whale Watching Gold Coast — Boattime Yacht Charters' }],
@@ -29,7 +29,7 @@ export default function Page() {
       <JsonLd
         schemas={[
           boatTripSchema({
-            name: 'Gold Coast Whale Escape — Luxury Whale Watching Cruise',
+            name: 'Luxury Whale Watching',
             description:
               'A 2.5-hour luxury humpback whale watching cruise aboard the Sun Goddess superyacht, departing Marine Stadium Jetty & Pontoon, Main Beach. Morning and afternoon sessions, May to November.',
             path: PATH,
@@ -37,7 +37,7 @@ export default function Page() {
             duration: 'PT2H30M',
             offer: { price: '79.50', description: 'Adult ticket, from' },
           }),
-          breadcrumbSchema([{ name: 'Whale Watching Cruise', path: PATH }]),
+          breadcrumbSchema([{ name: 'Luxury Whale Watching', path: PATH }]),
         ]}
       />
       <WhalePage />

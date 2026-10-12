@@ -7,7 +7,7 @@ import { SUNSET_FAQS } from '@/lib/cruise-faqs';
 const PATH = '/luxury-broadwater-cruise';
 
 export const metadata: Metadata = {
-  title: 'Sunset Cruise Gold Coast — Twilight Drift',
+  title: 'Luxury Scenic Sunset Cruise — Superyacht Sunset on the Broadwater',
   description:
     'Special offer: 2 tickets for $129. A magical 2-hour sunset journey through the Gold Coast Broadwater aboard Sun Goddess. Fri–Sun.',
   alternates: { canonical: `https://www.boattimeyachtcharters.com${PATH}` },
@@ -19,7 +19,7 @@ export default function Page() {
       <JsonLd
         schemas={[
           boatTripSchema({
-            name: 'Twilight Drift — Broadwater Sunset Cruise',
+            name: 'Luxury Scenic Sunset Cruise — Superyacht Sunset on the Broadwater',
             description:
               'A 2-hour sunset scenic cruise through the Gold Coast Broadwater aboard the Sun Goddess superyacht, running Friday to Sunday.',
             path: PATH,
@@ -32,7 +32,7 @@ export default function Page() {
             },
           }),
           faqSchema(SUNSET_FAQS),
-          breadcrumbSchema([{ name: 'Sunset Cruise Gold Coast', path: PATH }]),
+          breadcrumbSchema([{ name: 'Luxury Scenic Sunset Cruise', path: PATH }]),
         ]}
       />
       <BroadwaterPage />

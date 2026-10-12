@@ -45,7 +45,7 @@ export default function DiningUnavailableNotice() {
         This dining cruise is taking a short break and will be back soon. In the
         meantime, join us for a{' '}
         <a href="/luxury-broadwater-cruise" style={{ color: 'var(--gold-light)', textDecoration: 'underline', textUnderlineOffset: 3 }}>
-          Broadwater sunset cruise
+          Luxury Scenic Sunset Cruise
         </a>{' '}
         or{' '}
         <a href="/private-yacht-charter" style={{ color: 'var(--gold-light)', textDecoration: 'underline', textUnderlineOffset: 3 }}>

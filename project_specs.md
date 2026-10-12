@@ -652,6 +652,8 @@ Twilight Drift — Broadwater Sunset Tour & Scenic Cruise    ← italic emas, sa
 
 Klien ingin "Twilight Drift / Broadwater Sunset Tour & Scenic Cruise" dipertahankan, sementara kata kunci pencarian perlu berada di depan. Dua-duanya dipenuhi tanpa kompromi.
 
+> **Update 2026-10-12 — produk diganti nama:** "Twilight Drift — Broadwater Sunset Tour & Scenic Cruise" kini **"Luxury Scenic Sunset Cruise — Superyacht Sunset on the Broadwater"**, dan "Gold Coast Whale Escape — Luxury Whale Watching Cruise" kini **"Luxury Whale Watching"**. Teks di bagian ini adalah catatan riwayat dengan nama lama; nama aktif ada di kode (`lib/products.ts`, halaman produk, kartu homepage, schema, metadata).
+
 Agar itu mungkin, tipe prop `titleAccent` pada `CruiseHero` diubah dari `string` menjadi `React.ReactNode` sehingga sebuah halaman bisa mengirim pemenggalan baris sendiri. `string` tetap valid sebagai `ReactNode`, jadi **enam halaman lain yang memakai `titleAccent` tidak tersentuh** — sudah diverifikasi masing-masing masih punya tepat satu H1 dengan isi aslinya.
 
 Atas permintaan pemilik situs, nama produk dijadikan **satu baris**. Karena panjangnya 54 karakter, baris itu diberi ukuran relatif terhadap heading — sekarang `fontSize: '0.62em'` (diperbesar dari `0.5em` atas permintaan pemilik situs) (memanfaatkan `titleAccent` yang kini `ReactNode`), dan `titleFontSize` disetel ke `clamp(40px, 5.4vw, 76px)`.

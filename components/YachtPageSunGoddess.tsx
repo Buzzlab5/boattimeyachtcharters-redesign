@@ -346,12 +346,12 @@ function OnBoard() {
 
 const CHARTERS = [
   {
-    label: 'Sunset Cruise',
+    label: 'Luxury Scenic Sunset Cruise',
     img: '/twilight-drift.jpeg',
     href: '/luxury-broadwater-cruise',
   },
   {
-    label: 'Whale Watching',
+    label: 'Luxury Whale Watching',
     img: '/humpbacks.jpg',
     href: '/cruise-tickets-luxury-whale-watching',
   },
@@ -803,12 +803,12 @@ export default function SunGoddessPage() {
               note: 'Licensed for ceremonies, with the foredeck as your aisle.',
             },
             {
-              label: 'Whale Watching',
+              label: 'Luxury Whale Watching',
               href: '/cruise-tickets-luxury-whale-watching',
               note: 'Humpback season aboard Sun Goddess, May to November.',
             },
             {
-              label: 'Sunset Cruise',
+              label: 'Luxury Scenic Sunset Cruise',
               href: '/luxury-broadwater-cruise',
               note: 'Two hours across the Broadwater at golden hour, Friday to Sunday.',
             },

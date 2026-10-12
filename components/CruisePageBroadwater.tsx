@@ -269,7 +269,7 @@ export default function BroadwaterPage() {
             /* One line. Sized down relative to the heading so the whole
                product name fits without wrapping on a desktop width. */
             <span style={{ fontSize: '0.62em' }}>
-              Twilight Drift &mdash; Broadwater Sunset Tour &amp; Scenic Cruise
+              Luxury Scenic Sunset Cruise &mdash; Superyacht Sunset on the Broadwater
             </span>
           }
           titleFontSize="clamp(40px, 5.4vw, 76px)"

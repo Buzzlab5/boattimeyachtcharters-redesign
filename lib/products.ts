@@ -20,8 +20,8 @@ const isShown = (p: Product) => DINING_CRUISES_AVAILABLE || !p.dining;
 // the news CMS both read from these lists, so they can never drift apart.
 
 const ALL_EXPERIENCE_PRODUCTS: Product[] = [
-  { id: 'whale-watching',    label: 'Gold Coast Whale Escape',                    sub: 'Luxury Whale Watching',   href: '/cruise-tickets-luxury-whale-watching' },
-  { id: 'twilight-drift',    label: 'Twilight Drift',                             sub: 'Broadwater Sunset Tour',  href: '/luxury-broadwater-cruise' },
+  { id: 'whale-watching',    label: 'Luxury Whale Watching',                       sub: 'Gold Coast Cruise',       href: '/cruise-tickets-luxury-whale-watching' },
+  { id: 'twilight-drift',    label: 'Luxury Scenic Sunset Cruise',                 sub: 'Superyacht Sunset',       href: '/luxury-broadwater-cruise' },
   { id: 'chefs-table-lunch', label: "Chef's Table – Flavours of Australia",        sub: 'Lunch Cruise',            href: '/relaxed-lunch-cruise-flavours-of-australia-aboard-the-mermaid-spirit', dining: true },
   { id: 'twilight-dining',   label: "Chef's Table Dinner – Flavours of Australia", sub: 'Dinner Cruise',           href: '/sunset-twilight-buffet-flavours-of-australia-aboard-the-mermaid-spirit', dining: true },
   { id: 'riverfire-2026',    label: 'Riverfire 2026',                             sub: 'Brisbane Event',          href: '/riverfire-2026' },

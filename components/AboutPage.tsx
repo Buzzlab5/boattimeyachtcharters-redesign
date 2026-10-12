@@ -466,12 +466,12 @@ function OurSuperyachts() {
 function ServicesGrid() {
   const SERVICES = [
     {
-      label: 'Whale Watching',
+      label: 'Luxury Whale Watching',
       desc: 'June – November · 2.5 hrs · Daily departures',
       href: '/cruise-tickets-luxury-whale-watching',
     },
     {
-      label: 'Broadwater Sunset Cruise',
+      label: 'Luxury Scenic Sunset Cruise',
       desc: 'Year-round · 2.5 hrs · Couples & families',
       href: '/luxury-broadwater-cruise',
     },
