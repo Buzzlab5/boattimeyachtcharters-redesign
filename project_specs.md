@@ -815,3 +815,30 @@ Atas permintaan pemilik situs, search bar dipindah dari bawah tombol hero ke **p
 **Penyelarasan (5 Oktober 2026):** hero terasa tidak simetris karena bar melayang di tinggi sembarang. Sekarang di desktop garis tengah bar **sama persis dengan garis tengah eyebrow** ("SUPERYACHT CHARTERS ...") di kiri, dan tepi kanannya **lurus dengan badge rating** (gutter 48px). Rumusnya memakai `max(124px, 50vh - 300px)`, sama dengan titik mulai konten hero, jadi tetap sejajar di semua tinggi layar (diukur di 720, 768, 900, dan 1080px). Titik mulai konten hero dinaikkan dari 100px ke 124px supaya bar tidak menyentuh pita header krem di mode terang. Bar dibuat lebih ramping (400px lebar, ±53px tinggi). Placeholder di mode terang diperbaiki (sebelumnya gelap di atas kaca gelap).
 
 **Koreksi ukuran hero (5 Oktober 2026):** perubahan `Hero.tsx` sebelumnya (tinggi minimum 780px, judul `min(8vw, 13.5vh)`, titik mulai konten 124px) dibuat saat bar masih berada di bawah tombol. Setelah bar dipindah ke kanan atas, perubahan itu tidak diperlukan dan membuat hero lokal berbeda dari production. Semuanya **dikembalikan ke nilai asli** (min-height 720, judul `clamp(56px, 8vw, 120px)`, titik mulai `max(100px, 50vh - 300px)`). Satu-satunya perubahan yang tersisa di `Hero.tsx` adalah penambahan bar pencarian. Di mode terang, bar diturunkan ke 95px agar tidak tertutup pita header krem.
+
+## Feature — GA4 di semua halaman + tag Google Ads di halaman sunset — 13 Oktober 2026
+
+**Permintaan bos:** "Deploy the GA4 patch (GA4 on every page, Google Ads tag on the sunset page)". Tujuan: mengukur booking sunset di Google dan punya laporan GA4.
+
+**Hasil pengecekan sebelum dikerjakan:** GA4 belum ada di kode sama sekali (`layout.tsx` hanya berisi Meta Pixel). Tag Google Ads `AW-18035686182` baru dipasang di homepage, `/riverfire-2026`, `/cruise-tickets-luxury-whale-watching`, dan 3 artikel whale watching. Halaman sunset belum punya.
+
+**Data yang dipakai:**
+- GA4 Measurement ID: `G-LZVGRY36X5` (stream "MonsterInsights – https://boattimeyachtcharters.com", properti Boattime Yacht Charters).
+- Google Ads ID: `AW-18035686182` (sudah ada di `components/GoogleAdsTag.tsx`).
+
+**Rencana (3 perubahan kecil):**
+1. **Komponen baru `components/GoogleAnalytics.tsx`** — memuat `gtag.js` satu kali dan menjalankan `gtag('config', 'G-LZVGRY36X5')`. Dipasang di `app/layout.tsx` (di samping Meta Pixel), sehingga aktif di setiap halaman.
+2. **`components/GoogleAdsTag.tsx` disesuaikan** — tidak lagi memuat ulang `gtag.js` (sudah dimuat oleh GA4); hanya menjalankan `gtag('config', 'AW-18035686182')`. Ini mencegah script dimuat dua kali dan data ganda di halaman yang memakai kedua tag.
+3. **Halaman sunset** (`app/sunset-twilight-buffet-flavours-of-australia-aboard-the-mermaid-spirit/page.tsx`) — tambah `<GoogleAdsTag />`.
+
+**Di luar cakupan:** event conversion booking (butuh *conversion label* dari akun Google Ads — belum ada), banner consent/cookie, mengubah halaman lain yang sudah punya tag Ads.
+
+**Tidak ada perubahan:** database, API, Supabase, environment variable.
+
+**"Selesai" berarti:**
+- `npm run build` lolos tanpa error.
+- Di browser, setiap halaman (contoh: homepage, halaman kapal, halaman sunset) mengirim request ke `googletagmanager.com/gtag/js?id=G-LZVGRY36X5`.
+- Halaman sunset juga memuat konfigurasi `AW-18035686182`; `gtag.js` hanya dimuat satu kali di halaman yang punya kedua tag.
+- Tidak ada error di console; tampilan halaman tidak berubah.
+- Setelah deploy, GA4 → Reports → Realtime menampilkan kunjungan.
+- Catatan: kalau situs lama (plugin MonsterInsights) masih hidup di domain yang sama, data bisa terhitung dua kali — perlu dicek oleh tim.

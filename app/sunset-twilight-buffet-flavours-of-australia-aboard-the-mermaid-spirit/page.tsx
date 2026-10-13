@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import BuffetPage from '@/components/CruisePageBuffet';
 import JsonLd from '@/components/JsonLd';
+import GoogleAdsTag from '@/components/GoogleAdsTag';
 import { boatTripSchema, breadcrumbSchema } from '@/lib/schema';
 
 const PATH =
@@ -30,6 +31,7 @@ export default function Page() {
           breadcrumbSchema([{ name: 'Sunset Twilight Buffet Cruise', path: PATH }]),
         ]}
       />
+      <GoogleAdsTag />
       <BuffetPage />
     </>
   );

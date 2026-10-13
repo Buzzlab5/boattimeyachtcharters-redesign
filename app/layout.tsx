@@ -4,6 +4,7 @@ import Script from 'next/script';
 import './globals.css';
 import { ThemeProvider } from '@/components/ThemeProvider';
 import KaiWidget from '@/components/kai/KaiWidget';
+import GoogleAnalytics from '@/components/GoogleAnalytics';
 import JsonLd from '@/components/JsonLd';
 import { organizationSchema, websiteSchema } from '@/lib/schema';
 
@@ -86,6 +87,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           {children}
           <KaiWidget />
         </ThemeProvider>
+
+        {/* GA4 */}
+        <GoogleAnalytics />
 
         {/* Meta Pixel */}
         <Script id="meta-pixel" strategy="afterInteractive">
