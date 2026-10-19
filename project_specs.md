@@ -842,3 +842,34 @@ Atas permintaan pemilik situs, search bar dipindah dari bawah tombol hero ke **p
 - Tidak ada error di console; tampilan halaman tidak berubah.
 - Setelah deploy, GA4 → Reports → Realtime menampilkan kunjungan.
 - Catatan: kalau situs lama (plugin MonsterInsights) masih hidup di domain yang sama, data bisa terhitung dua kali — perlu dicek oleh tim.
+
+## Feature — Tracking konversi enquiry Google Ads — 19 Oktober 2026
+
+**Permintaan bos (Tony):** Google Ads menunjukkan 0 konversi untuk kedua kampanye — enquiry dari iklan tidak terlacak.
+
+**Hasil pengecekan:**
+- Akun Google Ads Boattime: `424-143-7039`. Tag website: `AW-18035686182` (sama dengan yang sudah ada di kode).
+- Tag sudah aktif di homepage, halaman whale, Riverfire, dan halaman sunset (sudah live setelah patch GA4 13 Okt). **Belum ada** di halaman charter (`/private-yacht-charter`, `/corporate-yacht-charter`, `/wedding-yacht-charter`) — padahal iklan sekarang mengarah ke sana.
+- Tag hanya mencatat kunjungan. **Tidak ada event konversi** di kode. Form enquiry (`components/Inquiry.tsx`) tidak mengirim apa pun ke Google setelah berhasil terkirim.
+- Semua tombol enquiry di halaman charter mengarah ke `/#inquiry` (form di homepage), jadi satu form = satu titik konversi untuk semua halaman.
+- GA4 `G-LZVGRY36X5` punya link ke ID Google Ads kedua, `AW-795190437`, yang bukan akun Boattime. Ini pengaturan di GA4 Admin, bukan kode — perlu diidentifikasi/dihapus oleh Tony atau pemilik GA4.
+
+**Rencana (3 perubahan kecil):**
+1. **`components/Inquiry.tsx`** — saat `/api/inquiry` mengembalikan sukses (`res.ok`), kirim dua event: `gtag('event', 'conversion', { send_to: 'AW-18035686182/hcZSCM6erJccEKb2iphD' })` untuk Google Ads, dan `gtag('event', 'generate_lead')` untuk GA4. Tidak dikirim kalau gagal. Dibungkus pengecekan `typeof window.gtag === 'function'` supaya tidak error kalau tag diblokir (ad blocker).
+2. **Helper kecil `lib/gtag.ts`** — satu fungsi `trackEnquiryConversion()` yang menyimpan conversion label di satu tempat, supaya mudah diganti.
+3. **Pasang `<GoogleAdsTag />`** di halaman charter: private, corporate, wedding (+ `yacht-charter-menus` bila dipakai iklan). Supaya klik iklan (gclid) tercatat sejak pengunjung mendarat, lalu konversi di homepage terhitung ke iklan yang benar.
+
+**Dibutuhkan sebelum bisa selesai:**
+- ~~Conversion label~~ — **sudah didapat** dari konversi "Submit lead form" (Google Ads): `AW-18035686182/hcZSCM6erJccEKb2iphD`, dengan `value: 1.0`, `currency: 'AUD'` (sesuai snippet Google). Event dikirim dari handler sukses form, bukan saat page load. Konversi ini terakhir tercatat 27 Apr 2026 (status *Misconfigured* karena tidak ada sinyal 7 hari terakhir) — diharapkan pulih setelah event dipasang.
+- Konfirmasi halaman charter mana saja yang dipakai iklan.
+
+**Di luar cakupan:** konversi booking di Rezdy (iframe, harus diatur dari sisi Rezdy), klik telepon/email, banner consent, mengubah akun/link di GA4 Admin, tag di halaman kampanye lain (NYE, Valentines, Broadwater, Heli).
+
+**Tidak ada perubahan:** database, API route, Supabase, environment variable.
+
+**"Selesai" berarti:**
+- `npm run build` lolos tanpa error.
+- Di browser: kirim enquiry tes di homepage → tab Network menampilkan request ke `googleadservices.com/pagead/conversion/18035686182` (Ads) dan event `generate_lead` (GA4); tidak ada event kalau pengiriman gagal.
+- Halaman charter memuat konfigurasi `AW-18035686182`; `gtag.js` tetap dimuat satu kali.
+- Tidak ada error di console; tampilan tidak berubah.
+- Setelah deploy: Google Ads → Conversions menampilkan status *Recording conversions* (bisa butuh beberapa jam), dan GA4 Realtime menampilkan `generate_lead`.

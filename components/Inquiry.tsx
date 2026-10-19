@@ -6,6 +6,7 @@ import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { Eyebrow, ItalicEm, Button, Icon } from './Shared';
 import { useTheme } from './ThemeProvider';
+import { trackEnquiryConversion } from '@/lib/gtag';
 
 gsap.registerPlugin(ScrollTrigger, useGSAP);
 
@@ -480,6 +481,7 @@ export default function Inquiry() {
                     body: JSON.stringify(form),
                   });
                   if (res.ok) {
+                    trackEnquiryConversion();
                     setStatus('sent');
                     setForm(initialForm);
                   } else {

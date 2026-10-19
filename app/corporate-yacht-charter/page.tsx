@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import CharterPageCorporate from '@/components/CharterPageCorporate';
+import GoogleAdsTag from '@/components/GoogleAdsTag';
 import JsonLd from '@/components/JsonLd';
 import { serviceSchema, breadcrumbSchema } from '@/lib/schema';
 
@@ -28,6 +29,7 @@ export default function Page() {
           breadcrumbSchema([{ name: 'Corporate Yacht Charter', path: PATH }]),
         ]}
       />
+      <GoogleAdsTag />
       <CharterPageCorporate />
     </>
   );
