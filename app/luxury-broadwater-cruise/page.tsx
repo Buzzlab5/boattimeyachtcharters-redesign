@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import BroadwaterPage from '@/components/CruisePageBroadwater';
+import GoogleAdsTag from '@/components/GoogleAdsTag';
 import JsonLd from '@/components/JsonLd';
 import { boatTripSchema, breadcrumbSchema, faqSchema } from '@/lib/schema';
 import { SUNSET_FAQS } from '@/lib/cruise-faqs';
@@ -35,6 +36,7 @@ export default function Page() {
           breadcrumbSchema([{ name: 'Luxury Scenic Sunset Cruise', path: PATH }]),
         ]}
       />
+      <GoogleAdsTag />
       <BroadwaterPage />
     </>
   );
