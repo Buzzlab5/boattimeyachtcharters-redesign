@@ -2,7 +2,8 @@ import type { Metadata } from 'next';
 import WhalePage from '@/components/CruisePageWhale';
 import GoogleAdsTag from '@/components/GoogleAdsTag';
 import JsonLd from '@/components/JsonLd';
-import { boatTripSchema, breadcrumbSchema } from '@/lib/schema';
+import { boatTripSchema, breadcrumbSchema, faqSchema } from '@/lib/schema';
+import { WHALE_FAQS } from '@/lib/faqs';
 
 const PATH = '/cruise-tickets-luxury-whale-watching';
 
@@ -41,6 +42,7 @@ export default function Page() {
               description: 'Per person: child aged 3 to 13 $69, adult $89. Infant under 3 free. Two people together $159, family of four $259.',
             },
           }),
+          faqSchema(WHALE_FAQS),
           breadcrumbSchema([{ name: 'Luxury Whale Watching', path: PATH }]),
         ]}
       />

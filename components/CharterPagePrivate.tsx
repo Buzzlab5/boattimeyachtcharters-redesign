@@ -9,6 +9,7 @@ import {
   CharterSplitSection,
   type AccordionSection,
 } from './CharterSections';
+import { PRIVATE_FAQS } from '@/lib/faqs';
 
 // ── Shared accordion content (Yacht Layout, Dining, Inclusions, etc.) ─────────
 
@@ -234,36 +235,7 @@ const AVAILABILITY = (
 
 const PRIVATE_FAQ = (
   <div>
-    {[
-      {
-        q: 'Where do your boats depart from?',
-        a: 'Our boats depart from Marine Stadium Jetty & Pontoon, Main Beach, Gold Coast — about 10 minutes from Surfers Paradise and 15 minutes from Broadbeach.',
-      },
-      {
-        q: 'Where can I park?',
-        a: 'There is plentiful free parking at Marine Stadium Jetty & Pontoon, Main Beach which you are permitted to use. Please check signage at time of parking and if parking overnight consider street parking to avoid towing.',
-      },
-      {
-        q: 'What about other transport options?',
-        a: 'There are lots of ways to get to the boat! The most popular (and cost effective/convenient) is often via Maxi Taxis.',
-      },
-      {
-        q: 'Can you help with catering/drinks?',
-        a: 'Yes, we also offer catering and drinks service for your convenience. Please request our full catering list as advance bookings are required. We offer a range of catering options from grazing boards, to canapes and private chefs.',
-      },
-      {
-        q: 'Do you have Eskies on board?',
-        a: 'Yes we have Fridges & Eskies and we also provide ice.',
-      },
-      {
-        q: 'Where can we go on our charter?',
-        a: 'We mainly operate in the calm, protected waters of the Gold Coast Broadwater. In a 3 hour charter during the day our guests usually love a swim stop at Wavebreak Island. In the evening we will generally sail north to watch the sunset and return to the southern part of the Broadwater to enjoy the city lights after dark.',
-      },
-      {
-        q: 'Will I get seasick?',
-        a: 'We mainly operate in the calm, protected waters of the Gold Coast Broadwater. If we go offshore (into the open ocean) there is a possibility of large waves.',
-      },
-    ].map(({ q, a }) => (
+    {PRIVATE_FAQS.map(({ q, a }) => (
       <div key={q} style={{ marginBottom: 16 }}>
         <p style={{ color: 'var(--cream)', fontWeight: 600, marginBottom: 6 }}>
           {q}
