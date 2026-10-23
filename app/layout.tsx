@@ -29,7 +29,7 @@ export const metadata: Metadata = {
     template: '%s | Boattime',
   },
   description:
-    'Our fleet includes two impressive yachts, Sun Goddess and the Mermaid Spirit, which are available for yacht hire and event boat hire for any occasion. Gold Coast\'s most-reviewed superyacht charter company.',
+    'Sun Goddess and Mermaid Spirit: two Gold Coast superyachts for private charter, corporate events, weddings and scenic cruises from Main Beach.',
   metadataBase: new URL('https://www.boattimeyachtcharters.com'),
   openGraph: {
     type: 'website',
@@ -38,13 +38,13 @@ export const metadata: Metadata = {
     siteName: 'Boattime Yacht Charters',
     title: 'Boattime Yacht Charters | Gold Coast Superyacht Hire',
     description:
-      'Our fleet includes two impressive yachts, Sun Goddess and the Mermaid Spirit, which are available for yacht hire and event boat hire for any occasion.',
+      'Sun Goddess and Mermaid Spirit: two Gold Coast superyachts for private charter, corporate events, weddings and scenic cruises from Main Beach.',
     images: [
       {
         url: '/sun-goddess-main-upscale.png',
         width: 1200,
         height: 630,
-        alt: 'Sun Goddess superyacht — Boattime Yacht Charters Gold Coast',
+        alt: 'Sun Goddess superyacht, Boattime Yacht Charters, Gold Coast',
       },
     ],
   },
@@ -52,7 +52,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: 'Boattime Yacht Charters | Gold Coast Superyacht Hire',
     description:
-      'Sun Goddess & Mermaid Spirit — Gold Coast\'s most-reviewed superyacht charter company.',
+      'Sun Goddess and Mermaid Spirit: two Gold Coast superyachts for charter and scenic cruises.',
     images: ['/sun-goddess-main-upscale.png'],
   },
   // NOTE: no `alternates.canonical` here on purpose. Next.js inherits metadata

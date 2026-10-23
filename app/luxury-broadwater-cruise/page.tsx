@@ -8,9 +8,9 @@ import { SUNSET_FAQS } from '@/lib/cruise-faqs';
 const PATH = '/luxury-broadwater-cruise';
 
 export const metadata: Metadata = {
-  title: 'Luxury Scenic Sunset Cruise — Superyacht Sunset on the Broadwater',
+  title: 'Gold Coast Sunset Cruise on a Superyacht',
   description:
-    'Special offer: 2 tickets for $129. A magical 2-hour sunset journey through the Gold Coast Broadwater aboard Sun Goddess. Fri–Sun.',
+    'Sunset on the Broadwater aboard Sun Goddess, 150 minutes from Main Beach. Saturdays and Sundays at 5pm. Adults $79, two for $149, children $55.',
   alternates: { canonical: `https://www.boattimeyachtcharters.com${PATH}` },
 };
 
@@ -20,16 +20,16 @@ export default function Page() {
       <JsonLd
         schemas={[
           boatTripSchema({
-            name: 'Luxury Scenic Sunset Cruise — Superyacht Sunset on the Broadwater',
+            name: 'Luxury Scenic Sunset Cruise: Superyacht Sunset on the Broadwater',
             description:
-              'A 2-hour sunset scenic cruise through the Gold Coast Broadwater aboard the Sun Goddess superyacht, running Friday to Sunday.',
+              'A 150-minute sunset scenic cruise through the Gold Coast Broadwater aboard the Sun Goddess superyacht, departing Marine Stadium Jetty & Pontoon, Main Beach. Saturdays and Sundays at 5:00 PM.',
             path: PATH,
             image: '/twilight-drift.jpeg',
-            duration: 'PT2H',
+            duration: 'PT2H30M',
             offer: {
-              price: '59',
-              highPrice: '229',
-              description: 'Child $59 · 1 adult $79 · 2 adults $129 · 4 adults $229',
+              price: '55',
+              highPrice: '79',
+              description: 'Per person: child aged 3 to 13 $55, adult $79. Infant under 3 $11. Two adults together $149.',
             },
           }),
           faqSchema(SUNSET_FAQS),
