@@ -12,11 +12,11 @@
 export const SUNSET_FAQS = [
   {
     q: 'What time does the Gold Coast sunset cruise depart?',
-    a: 'Boarding opens at 4:30 PM, the Sun Goddess departs at 5:00 PM and returns at 7:00 PM. The cruise runs Fridays, Saturdays and Sundays only.',
+    a: 'Boarding opens from 4:30 PM and the Sun Goddess returns at 7:00 PM. Your booking confirmation carries the boarding time for your sailing. The cruise runs Saturdays and Sundays, plus Friday 20 November.',
   },
   {
     q: 'How long is the sunset cruise?',
-    a: 'Two hours on the water, from a 5:00 PM departure to a 7:00 PM return.',
+    a: 'The cruise runs for 150 minutes, returning at 7:00 PM.',
   },
   {
     q: 'Where does the sunset cruise depart from?',
@@ -24,7 +24,7 @@ export const SUNSET_FAQS = [
   },
   {
     q: 'How much is a Gold Coast sunset cruise?',
-    a: 'One adult is $79. Two adults are $129, which works out at $64.50 per person, and four adults are $229, or $57.25 per person. Children aged 3 to 13 are $59.',
+    a: 'One adult is $79. Two adults together are $149, which works out at $74.50 per person. Children aged 3 to 13 are $55 and infants under 3 are $11.',
   },
   {
     q: 'What is included in the sunset cruise?',
@@ -39,7 +39,7 @@ export const SUNSET_FAQS = [
     a: 'Marine life such as dolphins, turtles and dugongs is often about as the yacht navigates the Seaway.',
   },
   {
-    q: 'Can I cancel my sunset cruise booking?',
-    a: 'Yes. Booking is instantly confirmed, and you can cancel up to 24 hours before departure for a full refund.',
+    q: 'Is my sunset cruise booking confirmed straight away?',
+    a: 'Yes, booking is instantly confirmed. For cancellations and changes, see the terms on your booking confirmation.',
   },
 ];

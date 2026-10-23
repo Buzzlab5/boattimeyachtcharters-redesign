@@ -148,8 +148,8 @@ const ITINERARY = [
         }}
       >
         <p style={{ marginBottom: 12 }}>
-          Boarding at 4:30 PM &middot; Departure 5:00 PM &middot; Returning at
-          7:00 PM
+          Boarding from 4:30 PM &middot; Returning at 7:00 PM &middot; 150
+          minutes on the water
         </p>
         <p style={{ marginBottom: 12 }}>
           Return trip from Marine Stadium Jetty & Pontoon, Main Beach, Gold Coast set the beautiful Main
@@ -277,7 +277,7 @@ export default function BroadwaterPage() {
           stats={[
             { label: 'Duration', value: '2.5 hours' },
             { label: 'From', value: '$74.50 pp' },
-            { label: 'Departs', value: '5:00 PM' },
+            { label: 'Boarding', value: 'from 4:30 PM' },
             { label: 'Days', value: 'Sat & Sun' },
           ]}
           bookingUrl="#book"
