@@ -89,8 +89,8 @@ const FEATURES = [
         <polyline points="12 6 12 12 16 14" />
       </svg>
     ),
-    title: "Two Sessions Daily",
-    desc: "Morning (9:00 AM) and afternoon (12:00 PM) sessions run every day of the week from May through November — choose what suits your schedule.",
+    title: "Morning and Afternoon Sessions",
+    desc: "Morning sessions depart at 9:00 AM and afternoon sessions at 12:00 PM through the southern humpback migration. The booking calendar shows the dates currently open.",
   },
   {
     icon: (
@@ -257,7 +257,8 @@ const ITINERARY = [
           Boarding 11:30 AM &middot; Departs 12:00 PM &middot; Returns 2:30 PM
         </p>
         <p style={{ marginTop: 12, color: "rgba(245,240,232,0.5)" }}>
-          Both sessions operate 7 days a week, May through November.
+          Sailing dates vary through the season. The booking calendar shows
+          what is open.
         </p>
       </div>
     ),
@@ -400,12 +401,12 @@ const ITINERARY = [
           anniversaries, or anyone who has everything.
         </p>
         <p style={{ marginBottom: 12 }}>
-          Vouchers can be purchased from $74.50 (one adult ticket). To redeem,
+          Gift vouchers are $69. To redeem,
           simply enter your voucher code during checkout at our booking portal.
         </p>
         <p>
-          Vouchers are valid for any session during whale season (May –
-          November) and can be gifted via email instantly.
+          Vouchers are valid for any session open for booking
+          and can be gifted via email instantly.
         </p>
       </div>
     ),
@@ -432,7 +433,7 @@ const ITINERARY = [
           "Croissant with jam — pairs with your complimentary espresso",
           "Corona bucket with lime — for the afternoon session in the sun",
           "Whale watching guidebooks and keepsake gifts available in the on board gift shop",
-          "Gift vouchers from $74.50 — never expire, redeemable online",
+          "Gift vouchers $69 — never expire, redeemable online",
         ].map((item, i) => (
           <li
             key={i}
@@ -647,7 +648,7 @@ export default function WhalePage() {
                 Afternoon Session · Departs 12:00 PM
               </div>
               <div className="whale-infobar-cell whale-infobar-cell--wide">
-                7 Days a Week · May – November
+                Check the booking calendar for dates
               </div>
             </div>
           </div>
@@ -1186,7 +1187,7 @@ export default function WhalePage() {
                   value: "Marine Stadium Jetty & Pontoon, Main Beach, Gold Coast",
                 },
                 { label: "Sessions Per Day", value: "2 — Morning & Afternoon" },
-                { label: "Days Per Week", value: "7 Days — May to November" },
+                { label: "Sailing Dates", value: "See the booking calendar" },
                 { label: "Duration", value: "2.5 Hours Per Session" },
                 {
                   label: "Primary Vessel",

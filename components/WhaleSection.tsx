@@ -124,7 +124,7 @@ export default function WhaleSection() {
             >
               Book Whale Watching
             </Button>
-            <span className="whale-price">from $74.50 / adult</span>
+            <span className="whale-price">from $79.50 / adult</span>
           </div>
         </div>
 
