@@ -9,7 +9,7 @@ const PATH = '/wedding-yacht-charter';
 export const metadata: Metadata = {
   title: 'Yacht Wedding Gold Coast',
   description:
-    "Say 'I Do' on a Boattime luxury yacht. The idyllic Gold Coast venue for wedding ceremonies and receptions — up to 150 guests, world-class catering, and breathtaking Broadwater views.",
+    "Wedding ceremonies and receptions aboard a Gold Coast superyacht, for up to 150 guests, with catering and bar packages on the Broadwater.",
   alternates: { canonical: `https://www.boattimeyachtcharters.com${PATH}` },
 };
 

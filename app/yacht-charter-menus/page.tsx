@@ -8,7 +8,7 @@ const PATH = '/yacht-charter-menus';
 export const metadata: Metadata = {
   title: 'Luxury Catering & Menus Gold Coast',
   description:
-    'Award-winning catering for your Gold Coast yacht charter. Grazing boards, canapés, gourmet BBQ, buffets, fine dining, and custom drinks packages from our culinary partners.',
+    'Catering for a Gold Coast yacht charter: grazing boards, canapes, gourmet BBQ, buffets, fine dining and custom drinks packages.',
   alternates: { canonical: `https://www.boattimeyachtcharters.com${PATH}` },
 };
 

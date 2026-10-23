@@ -7,7 +7,7 @@ const PATH =
   '/relaxed-lunch-cruise-flavours-of-australia-aboard-the-mermaid-spirit';
 
 export const metadata: Metadata = {
-  title: "Gold Coast Lunch Cruise — Chef's Table",
+  title: "Gold Coast Lunch Cruise: Chef's Table",
   description:
     'A leisurely 2-hour lunch cruise with Executive Chef Brendan Ward. Australian cuisine, 360° Broadwater views, family-friendly. From $99.',
   alternates: { canonical: `https://www.boattimeyachtcharters.com${PATH}` },

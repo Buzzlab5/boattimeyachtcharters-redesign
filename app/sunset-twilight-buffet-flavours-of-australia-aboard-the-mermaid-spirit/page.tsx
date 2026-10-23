@@ -8,7 +8,7 @@ const PATH =
   '/sunset-twilight-buffet-flavours-of-australia-aboard-the-mermaid-spirit';
 
 export const metadata: Metadata = {
-  title: "Gold Coast Dinner Cruise — Chef's Table",
+  title: "Gold Coast Dinner Cruise: Chef's Table",
   description:
     'A 2.5-hour sunset buffet dinner with Executive Chef Brendan Ward. Australian cuisine, golden-hour Broadwater views. Family-friendly. From $99.',
   alternates: { canonical: `https://www.boattimeyachtcharters.com${PATH}` },

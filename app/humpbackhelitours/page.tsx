@@ -8,7 +8,7 @@ const PATH = '/humpbackhelitours';
 export const metadata: Metadata = {
   title: 'Scenic Helicopter Flights Gold Coast',
   description:
-    'See the Gold Coast like never before. Scenic helicopter flights with Gold Coast Helitours — from a five-minute harbour lap to a 45-minute grand tour of the coast and hinterland. Proudly presented by Boattime Yacht Charters.',
+    'Scenic helicopter flights over the Gold Coast with Gold Coast Helitours, from a five-minute harbour lap to a 45-minute coast and hinterland tour.',
   alternates: { canonical: `https://www.boattimeyachtcharters.com${PATH}` },
 };
 

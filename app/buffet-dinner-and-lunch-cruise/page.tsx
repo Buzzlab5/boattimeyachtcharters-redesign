@@ -8,7 +8,7 @@ const PATH = '/buffet-dinner-and-lunch-cruise';
 export const metadata: Metadata = {
   title: 'Gold Coast Buffet Dinner & Lunch Cruise',
   description:
-    'Choose your session — a golden-hour Buffet Dinner Cruise or a relaxed Flavours of Australia Lunch Cruise (commencing 3 October) aboard the Mermaid Spirit. Adults from $99.',
+    'A golden-hour Buffet Dinner Cruise or a relaxed Flavours of Australia Lunch Cruise aboard Mermaid Spirit on the Gold Coast. Adults from $99.',
   alternates: { canonical: `https://www.boattimeyachtcharters.com${PATH}` },
 };
 

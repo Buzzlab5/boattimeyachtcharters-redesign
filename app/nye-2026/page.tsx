@@ -6,7 +6,7 @@ import { boatTripSchema, breadcrumbSchema } from '@/lib/schema';
 const PATH = '/nye-2026';
 
 export const metadata: Metadata = {
-  title: "NYE 2026 Cruise — Gold Coast Broadwater",
+  title: "NYE 2026 Cruise: Gold Coast Broadwater",
   description:
     "Welcome 2026 aboard the Mermaid Spirit tri-deck catamaran. Champagne, gourmet canapés, fireworks. 31 December 2025 · 18+ · $169 pp.",
   alternates: { canonical: `https://www.boattimeyachtcharters.com${PATH}` },
