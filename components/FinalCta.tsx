@@ -82,7 +82,7 @@ export default function FinalCta() {
               </svg>
             </div>
             <div className="contact-label">Email</div>
-            <a href="mailto:info@boattime.com.au" className="contact-value">info@boattime.com.au</a>
+            <a href="mailto:info@boattimeyachtcharters.com.au" className="contact-value">info@boattimeyachtcharters.com.au</a>
           </div>
 
           <div className="contact-item">
