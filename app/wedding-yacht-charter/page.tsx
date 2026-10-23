@@ -2,7 +2,8 @@ import type { Metadata } from 'next';
 import CharterPageWedding from '@/components/CharterPageWedding';
 import GoogleAdsTag from '@/components/GoogleAdsTag';
 import JsonLd from '@/components/JsonLd';
-import { serviceSchema, breadcrumbSchema } from '@/lib/schema';
+import { serviceSchema, breadcrumbSchema, faqSchema } from '@/lib/schema';
+import { WEDDING_FAQS } from '@/lib/faqs';
 
 const PATH = '/wedding-yacht-charter';
 
@@ -26,6 +27,7 @@ export default function Page() {
             image: '/wedding-charter.webp',
             serviceType: 'Wedding venue yacht charter',
           }),
+          faqSchema(WEDDING_FAQS),
           breadcrumbSchema([{ name: 'Wedding Yacht Charter', path: PATH }]),
         ]}
       />

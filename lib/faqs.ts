@@ -67,3 +67,97 @@ export const CORPORATE_FAQS = [
     a: 'We welcome guests with limited mobility. We recommend contacting us before booking so we can assess specific requirements.',
   },
 ];
+
+/**
+ * The FAQ questions shown on the wedding charter page.
+ * Same plain-module reason as FAQS above: the page is a client component,
+ * so the server route imports this to build the FAQPage JSON-LD.
+ */
+export const WEDDING_FAQS = [
+    {
+      q: 'How many guests can we have?',
+      a: 'The Sun Goddess accommodates up to 135 guests for a day charter. The Mermaid Spirit hosts up to 150 guests. Both vessels offer distinct experiences — get in touch and we can help you choose.',
+    },
+    {
+      q: 'Where do we depart?',
+      a: 'Marine Stadium Jetty & Pontoon, Main Beach, Gold Coast — approximately 10 minutes from Surfers Paradise and 15 minutes from Broadbeach. Free parking is available.',
+    },
+    {
+      q: 'Can we have a ceremony on board?',
+      a: "Yes. We can host your ceremony on the foredeck with the Broadwater as your backdrop. We recommend coordinating with a registered marriage celebrant — we're happy to recommend partners if needed.",
+    },
+    {
+      q: 'What catering options are available?',
+      a: 'From canapés and platters to private chef fine dining — we work with our culinary partners to craft menus suited to your occasion. Grazing boards, buffets, and multi-course seated dinners are all available.',
+    },
+    {
+      q: 'Can we arrange flowers and styling?',
+      a: "Yes. Floral arrangements, table styling, and custom décor can all be coordinated through our event team. Let us know your vision and we'll connect you with the right suppliers.",
+    },
+    {
+      q: 'What if it rains?',
+      a: 'Both vessels have covered deck areas and interior spaces that keep your event running regardless of the weather. We will always have a contingency plan in place.',
+    },
+];
+
+
+/**
+ * The FAQ questions shown on the private charter page.
+ * Same plain-module reason as FAQS above: the page is a client component,
+ * so the server route imports this to build the FAQPage JSON-LD.
+ */
+export const PRIVATE_FAQS = [
+    {
+      q: 'Where do your boats depart from?',
+      a: 'Our boats depart from Marine Stadium Jetty & Pontoon, Main Beach, Gold Coast — about 10 minutes from Surfers Paradise and 15 minutes from Broadbeach.',
+    },
+    {
+      q: 'Where can I park?',
+      a: 'There is plentiful free parking at Marine Stadium Jetty & Pontoon, Main Beach which you are permitted to use. Please check signage at time of parking and if parking overnight consider street parking to avoid towing.',
+    },
+    {
+      q: 'What about other transport options?',
+      a: 'There are lots of ways to get to the boat! The most popular (and cost effective/convenient) is often via Maxi Taxis.',
+    },
+    {
+      q: 'Can you help with catering/drinks?',
+      a: 'Yes, we also offer catering and drinks service for your convenience. Please request our full catering list as advance bookings are required. We offer a range of catering options from grazing boards, to canapes and private chefs.',
+    },
+    {
+      q: 'Do you have Eskies on board?',
+      a: 'Yes we have Fridges & Eskies and we also provide ice.',
+    },
+    {
+      q: 'Where can we go on our charter?',
+      a: 'We mainly operate in the calm, protected waters of the Gold Coast Broadwater. In a 3 hour charter during the day our guests usually love a swim stop at Wavebreak Island. In the evening we will generally sail north to watch the sunset and return to the southern part of the Broadwater to enjoy the city lights after dark.',
+    },
+    {
+      q: 'Will I get seasick?',
+      a: 'We mainly operate in the calm, protected waters of the Gold Coast Broadwater. If we go offshore (into the open ocean) there is a possibility of large waves.',
+    },
+];
+
+
+/**
+ * The FAQ questions shown on the whale watching page.
+ * Same plain-module reason as FAQS above: the page is a client component,
+ * so the server route imports this to build the FAQPage JSON-LD.
+ */
+export const WHALE_FAQS = [
+    {
+      q: "Will I get seasick?",
+      a: "If you are prone to seasickness, we recommend taking a motion sickness tablet at least 30 minutes prior to departure. Sun Goddess is a large, stable superyacht — one of the fastest and most stable whale watching vessels on the Gold Coast.",
+    },
+    {
+      q: "Are children welcome?",
+      a: "Absolutely — all ages are welcome aboard. Life jackets and full safety briefings are provided. Our marine biologist makes the commentary fun and engaging for kids too.",
+    },
+    {
+      q: "What if it rains?",
+      a: "All cruises operate in all weather unless conditions are unsafe. Sun Goddess has covered viewing areas on every deck, plus a warm galley with complimentary hot chocolate and coffee.",
+    },
+    {
+      q: "How close do we get to the whales?",
+      a: "We follow all marine park regulations and maintain a respectful distance — but humpbacks are naturally curious and often approach the vessel. Our marine biologist will explain their behaviour in real time.",
+    },
+];

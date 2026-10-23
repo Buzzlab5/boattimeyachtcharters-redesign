@@ -2,7 +2,8 @@ import type { Metadata } from 'next';
 import CharterPagePrivate from '@/components/CharterPagePrivate';
 import GoogleAdsTag from '@/components/GoogleAdsTag';
 import JsonLd from '@/components/JsonLd';
-import { serviceSchema, breadcrumbSchema } from '@/lib/schema';
+import { serviceSchema, breadcrumbSchema, faqSchema } from '@/lib/schema';
+import { PRIVATE_FAQS } from '@/lib/faqs';
 
 const PATH = '/private-yacht-charter';
 
@@ -26,6 +27,7 @@ export default function Page() {
             image: '/private-charter.jpeg',
             serviceType: 'Private yacht charter',
           }),
+          faqSchema(PRIVATE_FAQS),
           breadcrumbSchema([{ name: 'Private Yacht Charter', path: PATH }]),
         ]}
       />

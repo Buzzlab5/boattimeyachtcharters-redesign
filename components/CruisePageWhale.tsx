@@ -12,6 +12,7 @@ import {
   CruiseExperience,
 } from "./CruiseSections";
 import type { ReactNode } from "react";
+import { WHALE_FAQS } from '@/lib/faqs';
 
 // ── Data ──────────────────────────────────────────────────────────────────────
 
@@ -342,24 +343,7 @@ const ITINERARY = [
           lineHeight: 1.85,
         }}
       >
-        {[
-          {
-            q: "Will I get seasick?",
-            a: "If you are prone to seasickness, we recommend taking a motion sickness tablet at least 30 minutes prior to departure. Sun Goddess is a large, stable superyacht — one of the fastest and most stable whale watching vessels on the Gold Coast.",
-          },
-          {
-            q: "Are children welcome?",
-            a: "Absolutely — all ages are welcome aboard. Life jackets and full safety briefings are provided. Our marine biologist makes the commentary fun and engaging for kids too.",
-          },
-          {
-            q: "What if it rains?",
-            a: "All cruises operate in all weather unless conditions are unsafe. Sun Goddess has covered viewing areas on every deck, plus a warm galley with complimentary hot chocolate and coffee.",
-          },
-          {
-            q: "How close do we get to the whales?",
-            a: "We follow all marine park regulations and maintain a respectful distance — but humpbacks are naturally curious and often approach the vessel. Our marine biologist will explain their behaviour in real time.",
-          },
-        ].map((faq, i, arr) => (
+        {WHALE_FAQS.map((faq, i, arr) => (
           <div
             key={i}
             style={{

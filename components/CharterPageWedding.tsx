@@ -9,6 +9,7 @@ import {
   CharterSplitSection,
   type AccordionSection,
 } from './CharterSections';
+import { WEDDING_FAQS } from '@/lib/faqs';
 
 // ── Accordion content (no Yacht Layout Features — it's in the left column) ────
 
@@ -219,32 +220,7 @@ const WEDDING_FAQ = (
   <div
     style={{ fontSize: 13, color: 'rgba(245,240,232,0.65)', lineHeight: 1.8 }}
   >
-    {[
-      {
-        q: 'How many guests can we have?',
-        a: 'The Sun Goddess accommodates up to 135 guests for a day charter. The Mermaid Spirit hosts up to 150 guests. Both vessels offer distinct experiences — get in touch and we can help you choose.',
-      },
-      {
-        q: 'Where do we depart?',
-        a: 'Marine Stadium Jetty & Pontoon, Main Beach, Gold Coast — approximately 10 minutes from Surfers Paradise and 15 minutes from Broadbeach. Free parking is available.',
-      },
-      {
-        q: 'Can we have a ceremony on board?',
-        a: "Yes. We can host your ceremony on the foredeck with the Broadwater as your backdrop. We recommend coordinating with a registered marriage celebrant — we're happy to recommend partners if needed.",
-      },
-      {
-        q: 'What catering options are available?',
-        a: 'From canapés and platters to private chef fine dining — we work with our culinary partners to craft menus suited to your occasion. Grazing boards, buffets, and multi-course seated dinners are all available.',
-      },
-      {
-        q: 'Can we arrange flowers and styling?',
-        a: "Yes. Floral arrangements, table styling, and custom décor can all be coordinated through our event team. Let us know your vision and we'll connect you with the right suppliers.",
-      },
-      {
-        q: 'What if it rains?',
-        a: 'Both vessels have covered deck areas and interior spaces that keep your event running regardless of the weather. We will always have a contingency plan in place.',
-      },
-    ].map(({ q, a }) => (
+    {WEDDING_FAQS.map(({ q, a }) => (
       <div key={q} style={{ marginBottom: 16 }}>
         <p style={{ color: 'var(--cream)', fontWeight: 600, marginBottom: 6 }}>
           {q}
