@@ -42,6 +42,11 @@ const OLD_SITE_REDIRECTS: { source: string; destination: string }[] = [
   { source: '/about-us', destination: '/about' },
 
   // ── Charter & service pages ──────────────────────────────────────────────
+  // `/yacht-charter/gold-coast` is not a guess: Google was observed serving it
+  // on page one for "private yacht charter gold coast" on 23 Oct 2026, and it
+  // returns 404, so every click from that result lands on nothing.
+  { source: '/yacht-charter/gold-coast', destination: '/private-yacht-charter' },
+  { source: '/yacht-charter', destination: '/private-yacht-charter' },
   { source: '/private-charter', destination: '/private-yacht-charter' },
   { source: '/luxury-sailing', destination: '/private-yacht-charter' },
   { source: '/bachelor-party', destination: '/private-yacht-charter' },
