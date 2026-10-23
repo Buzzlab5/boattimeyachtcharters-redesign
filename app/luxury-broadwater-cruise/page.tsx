@@ -8,7 +8,7 @@ import { SUNSET_FAQS } from '@/lib/cruise-faqs';
 const PATH = '/luxury-broadwater-cruise';
 
 export const metadata: Metadata = {
-  title: 'Gold Coast Sunset Cruise on a Superyacht',
+  title: 'Gold Coast Sunset Cruise on the Broadwater',
   description:
     'Sunset on the Broadwater aboard Sun Goddess, 150 minutes from Main Beach. Saturdays and Sundays at 5pm. Adults $79, two for $149, children $55.',
   alternates: { canonical: `https://www.boattimeyachtcharters.com${PATH}` },
