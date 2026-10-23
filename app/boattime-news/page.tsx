@@ -23,7 +23,9 @@ const blogSchema = {
   inLanguage: 'en-AU',
 };
 
-export const dynamic = 'force-dynamic';
+// The index lists published articles, so it caches on the same terms as the
+// articles themselves. See the note in [slug]/page.tsx for the measurement.
+export const revalidate = 60;
 
 export default async function Page() {
   console.log('[boattime-news] fetching published posts');
