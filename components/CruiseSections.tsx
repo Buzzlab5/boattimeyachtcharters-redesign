@@ -1060,7 +1060,7 @@ export function CruiseGuaranteeBanner() {
             fontWeight: 500,
           }}
         >
-          Whale Sighting Guarantee · May – November
+          Whale Sighting Guarantee
         </p>
       </div>
     </section>

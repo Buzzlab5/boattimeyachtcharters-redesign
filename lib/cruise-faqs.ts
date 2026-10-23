@@ -12,11 +12,11 @@
 export const SUNSET_FAQS = [
   {
     q: 'What time does the Gold Coast sunset cruise depart?',
-    a: 'Boarding opens from 4:30 PM and the Sun Goddess returns at 7:00 PM. Your booking confirmation carries the boarding time for your sailing. The cruise runs Saturdays and Sundays, plus Friday 20 November.',
+    a: 'Boarding opens at 4:30 PM, the Sun Goddess departs at 5:00 PM and returns at 7:30 PM. The cruise runs Saturdays and Sundays, plus Friday 20 November.',
   },
   {
     q: 'How long is the sunset cruise?',
-    a: 'The cruise runs for 150 minutes, returning at 7:00 PM.',
+    a: '150 minutes on the water, from a 5:00 PM departure to a 7:30 PM return.',
   },
   {
     q: 'Where does the sunset cruise depart from?',

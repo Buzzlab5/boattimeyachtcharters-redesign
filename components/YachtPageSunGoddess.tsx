@@ -805,7 +805,7 @@ export default function SunGoddessPage() {
             {
               label: 'Luxury Whale Watching',
               href: '/cruise-tickets-luxury-whale-watching',
-              note: 'Humpback season aboard Sun Goddess, May to November.',
+              note: 'Humpback season aboard Sun Goddess.',
             },
             {
               label: 'Luxury Scenic Sunset Cruise',
