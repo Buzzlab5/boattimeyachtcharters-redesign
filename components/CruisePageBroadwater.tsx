@@ -156,11 +156,11 @@ const ITINERARY = [
           Beach Spit.
         </p>
         <p style={{ marginBottom: 12 }}>
-          360 degree views — Epic Sunset over the Broadwater and Gold Coast
+          360 degree views: epic sunset over the Broadwater and Gold Coast
           Skyline.
         </p>
         <p style={{ color: 'rgba(245,240,232,0.5)' }}>
-          Operational Fridays, Saturdays and Sundays only.
+          Saturdays and Sundays, plus Friday 20 November.
         </p>
       </div>
     ),
@@ -178,9 +178,9 @@ const ITINERARY = [
       >
         {[
           { label: '1 Adult', price: '$79', note: 'per person' },
-          { label: '2 Adults', price: '$129', note: '$64.50 per person' },
-          { label: '4 Adults', price: '$229', note: '$57.25 per person' },
-          { label: 'Child (3–13)', price: '$59', note: 'per child' },
+          { label: '2 Adults', price: '$149', note: '$74.50 per person' },
+          { label: 'Child (3 to 13)', price: '$55', note: 'per child' },
+          { label: 'Infant (under 3)', price: '$11', note: 'per infant' },
         ].map((p, i, arr) => (
           <div
             key={i}
@@ -243,7 +243,7 @@ const ITINERARY = [
           Vouchers can be purchased from $79 (one adult ticket). To redeem,
           simply enter your voucher code during checkout at our booking portal.
         </p>
-        <p>Valid for Fridays, Saturdays and Sundays year-round.</p>
+        <p>Valid for any sunset session with seats available.</p>
       </div>
     ),
   },
@@ -269,16 +269,16 @@ export default function BroadwaterPage() {
             /* One line. Sized down relative to the heading so the whole
                product name fits without wrapping on a desktop width. */
             <span style={{ fontSize: '0.62em' }}>
-              Luxury Scenic Sunset Cruise &mdash; Superyacht Sunset on the Broadwater
+              Luxury Scenic Sunset Cruise: Superyacht Sunset on the Broadwater
             </span>
           }
           titleFontSize="clamp(40px, 5.4vw, 76px)"
           image="/dinner-lunch-buffet/sunset-buffet1.jpg"
           stats={[
-            { label: 'Duration', value: '2 hours' },
-            { label: 'From', value: '$64.50 pp' },
+            { label: 'Duration', value: '2.5 hours' },
+            { label: 'From', value: '$74.50 pp' },
             { label: 'Departs', value: '5:00 PM' },
-            { label: 'Days', value: 'Fri Sat Sun' },
+            { label: 'Days', value: 'Sat & Sun' },
           ]}
           bookingUrl="#book"
         />
@@ -320,7 +320,7 @@ export default function BroadwaterPage() {
               }}
             >
               Join us for a delightful sunset tour, where you&apos;ll embark on
-              a magical 2-hour cruise from 5 PM to 7 PM. Experience the tranquil
+              a 150-minute cruise. Experience the tranquil
               beauty of the Gold Coast&apos;s waterways while indulging in a
               delicious cheese platter and sipping on a complimentary sparkling
               or beer on arrival.
@@ -653,8 +653,8 @@ export default function BroadwaterPage() {
                   margin: '0 auto',
                 }}
               >
-                Fridays, Saturdays, and Sundays at 5:00 PM. Instant
-                confirmation — cancel up to 24 hours before for a full refund.
+                Saturdays and Sundays, plus Friday 20 November. Instant
+                confirmation.
               </p>
               <div
                 style={{
