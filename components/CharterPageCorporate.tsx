@@ -2,6 +2,7 @@
 
 import Nav from './Nav';
 import Footer from './Footer';
+import { CORPORATE_FAQS } from '@/lib/faqs';
 import {
   CharterHero,
   CharterInfoBox,
@@ -253,32 +254,7 @@ const CORPORATE_FAQ = (
   <div
     style={{ fontSize: 13, color: 'rgba(245,240,232,0.65)', lineHeight: 1.8 }}
   >
-    {[
-      {
-        q: 'Where do your boats depart from?',
-        a: 'Our boats depart from Marine Stadium Jetty & Pontoon, Main Beach, Gold Coast — approximately 10 minutes from Surfers Paradise and 15 minutes from Broadbeach. Free parking is available.',
-      },
-      {
-        q: 'Can we customise the catering and drinks?',
-        a: 'Absolutely. From grazing boards and canapés to private chef fine dining — we work with our culinary partners to build a menu around your event. Bar packages are fully customisable.',
-      },
-      {
-        q: 'Is AV equipment available for presentations?',
-        a: 'Yes. Both vessels have flat-screen TVs and premium audio throughout. Let us know your AV requirements at the time of enquiry.',
-      },
-      {
-        q: 'What transport options are there for large groups?',
-        a: 'Maxi taxis are the most popular and cost-effective option. The pontoon also has ample free parking.',
-      },
-      {
-        q: 'Can we add corporate branding or custom signage?',
-        a: 'Yes — corporate branding, custom menus, and event theming can all be arranged. Contact us with your requirements and we will accommodate where possible.',
-      },
-      {
-        q: 'Are accessibility requirements catered for?',
-        a: 'We welcome guests with limited mobility. We recommend contacting us before booking so we can assess specific requirements.',
-      },
-    ].map(({ q, a }) => (
+    {CORPORATE_FAQS.map(({ q, a }) => (
       <div key={q} style={{ marginBottom: 16 }}>
         <p style={{ color: 'var(--cream)', fontWeight: 600, marginBottom: 6 }}>
           {q}
@@ -289,12 +265,64 @@ const CORPORATE_FAQ = (
   </div>
 );
 
+const END_OF_YEAR = (
+  <div
+    style={{ fontSize: 13, color: 'rgba(245,240,232,0.65)', lineHeight: 1.8 }}
+  >
+    <p style={{ marginBottom: 16 }}>
+      Two ways to put a team on the water before the end of the year, depending
+      on the size of the group and whether you want the whole vessel.
+    </p>
+    <p style={{ marginBottom: 8 }}>
+      <strong style={{ color: 'var(--cream)' }}>
+        The whole vessel, by quote
+      </strong>
+    </p>
+    <p style={{ marginBottom: 16 }}>
+      Sun Goddess takes up to 135 guests and Mermaid Spirit up to 150, which
+      covers a group from about 20 up to 150. Catering, bar packages, AV and
+      branding are all arranged around the event. December dates go first, so
+      the enquiry form is the place to start.
+    </p>
+    <p style={{ marginBottom: 8 }}>
+      <strong style={{ color: 'var(--cream)' }}>
+        Seats on the Sunset Cruise, booked seat by seat
+      </strong>
+    </p>
+    <p style={{ marginBottom: 16 }}>
+      For a group of 20 to 60 with no budget for a whole vessel, the Luxury
+      Scenic Sunset Cruise runs every Saturday and Sunday through December with
+      100 seats a sailing, at $79 an adult. Eight December sailings: the 5th,
+      6th, 12th, 13th, 19th, 20th, 26th and 27th. No sailing on 24, 25 or 31
+      December.
+    </p>
+    <a
+      href="/#inquiry"
+      style={{
+        fontFamily: 'var(--font-body)',
+        fontSize: 10,
+        letterSpacing: '0.2em',
+        textTransform: 'uppercase',
+        fontWeight: 700,
+        color: '#0A1628',
+        background: '#C9A84C',
+        padding: '11px 22px',
+        textDecoration: 'none',
+        display: 'inline-block',
+      }}
+    >
+      Enquire about a date
+    </a>
+  </div>
+);
+
 const ACCORDION: AccordionSection[] = [
   { title: 'Yacht Layout Features', content: VESSEL_LAYOUT },
   { title: 'Dining and Bars', content: DINING_BARS },
   { title: 'Inclusions', content: INCLUSIONS },
   { title: 'Extras', content: EXTRAS },
   { title: 'Landings & Destinations', content: DESTINATIONS },
+  { title: 'Christmas and End of Year Events', content: END_OF_YEAR },
   { title: 'Availability & Booking Enquiry', content: AVAILABILITY },
   { title: 'FAQ', content: CORPORATE_FAQ },
 ];
@@ -346,7 +374,7 @@ const LEFT_PACKAGES = (
     </p>
     <p style={pStyle}>
       With a selection of Canap&eacute;s, Cocktails, and Champagne on the menu
-      &ndash; come aboard with up to 130 guests and be entertained on a 3-hour
+      &ndash; come aboard with up to 135 guests and be entertained on a 3-hour
       Luxury Cruise sure to stand out as unforgettable.
     </p>
 
