@@ -5,7 +5,25 @@ import ArticlePage from '@/components/ArticlePage';
 import GoogleAdsTag from '@/components/GoogleAdsTag';
 import { breadcrumbSchema } from '@/lib/schema';
 
-export const dynamic = 'force-dynamic';
+/**
+ * Articles are cached at the edge and revalidated, not rendered per request.
+ *
+ * With `dynamic = 'force-dynamic'` every article answered every request with a
+ * live Supabase query and shipped `cache-control: no-store`, so the edge cache
+ * missed every time. Measured against the live site on 23 October 2026, three
+ * runs per URL, median of each:
+ *
+ *   static prerendered pages   159 ms to first byte, x-vercel-cache: HIT
+ *   articles                  1108 ms to first byte, x-vercel-cache: MISS
+ *                             slowest 1566 ms
+ *
+ * Seven times slower, on 39 of the 59 URLs in the sitemap.
+ *
+ * `revalidate = 60` keeps the CMS feeling live, since an edit appears within a
+ * minute, while turning almost every request into a cache hit. Raise it if a
+ * minute is tighter than the editors need.
+ */
+export const revalidate = 60;
 
 const BASE_URL = 'https://www.boattimeyachtcharters.com';
 const FALLBACK_OG = `${BASE_URL}/sun-goddess-main-upscale.png`;
@@ -19,6 +37,26 @@ const GOOGLE_ADS_SLUGS = [
 
 interface Props {
   params: Promise<{ slug: string }>;
+}
+
+/**
+ * Prerender every published article at build time.
+ *
+ * If the build cannot reach Supabase this returns an empty list rather than
+ * failing the build: `dynamicParams` is true by default, so those pages render
+ * on first request and are cached from then on.
+ */
+export async function generateStaticParams() {
+  try {
+    const supabase = createPublicClient();
+    const { data } = await supabase
+      .from('posts')
+      .select('slug')
+      .eq('published', true);
+    return (data ?? []).map((p: { slug: string }) => ({ slug: p.slug }));
+  } catch {
+    return [];
+  }
 }
 
 // ── Metadata ──────────────────────────────────────────────────────────────────
