@@ -24,6 +24,8 @@ at `clients/boattime/seo/rankings-2026-10-23.md`.
 |---|---|---|
 | `christmas-end-of-year-boat-parties-gold-coast` | "christmas party boat gold coast" and its variants | Nothing from this site appeared in the top 30. The competing results are venue directories that list by capacity, which is exactly what this buyer searches. Eight December sunset sailings were holding 787 unsold seats when Rezdy was read on 23 October |
 | `what-happens-on-a-gold-coast-sunset-cruise` | The three questions Google's own "People also ask" box returned for "gold coast sunset cruise" | This site is already on page one at about position four for that term. The job is to defend it and to be the source an AI answer quotes, not to chase it |
+| `gold-coast-yacht-wedding-planning-guide` | "gold coast yacht wedding" and its variants | `/wedding-yacht-charter` receives **zero** in-body links from any of the 39 published articles, because not one of them is about weddings. The October citation pass found that answer held by Easy Weddings and Bridebook, with Boat Time named in September and not in October |
+| `how-much-does-it-cost-to-charter-a-yacht-on-the-gold-coast` | "How much does it cost to hire a yacht on the Gold Coast", which Google itself returned in the "People also ask" box for "private yacht charter gold coast" | Verified demand, and the page currently holding that answer is a competitor's guide. Charter has no published rate, so the article answers the mechanism rather than inventing a figure |
 
 ## Every figure in these drafts
 
