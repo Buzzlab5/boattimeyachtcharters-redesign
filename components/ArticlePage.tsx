@@ -246,10 +246,19 @@ function ArticleBody({ post, relatedPosts }: { post: Post; relatedPosts: Related
     });
   }, { scope: contentRef });
 
-  // A hand-picked set in the CMS always wins. When none was picked, derive one
-  // from the article itself rather than render an empty sidebar: see
-  // fallbackProductIds in lib/products.ts for why.
-  const picked = post.related_products ?? [];
+  // A hand-picked set in the CMS always wins, but only the ids that still
+  // resolve to a shown product count as a pick.
+  //
+  // Three products are hidden while DINING_CRUISES_AVAILABLE is false, and the
+  // dining articles are exactly the ones whose hand-picked set is made of
+  // those three. A non-empty array of hidden ids used to pass the length test
+  // and then filter to nothing, so those articles rendered an empty rail: the
+  // same fault #10 set out to fix, on the articles least able to afford it,
+  // since their own product is not on sale. Caught by the live verification in
+  // the Asri record rather than by review.
+  const picked = (post.related_products ?? []).filter(id =>
+    PRODUCTS.some(p => p.id === id),
+  );
   const productIds = picked.length > 0 ? picked : fallbackProductIds(post);
 
   return (
