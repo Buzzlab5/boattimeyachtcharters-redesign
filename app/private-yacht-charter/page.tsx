@@ -9,7 +9,7 @@ const PATH = '/private-yacht-charter';
 export const metadata: Metadata = {
   title: 'Private Yacht Charter Gold Coast',
   description:
-    'Experience the best private yacht charter in Gold Coast. Intimate gatherings or large events — tailored luxury experiences on the Broadwater. Up to 150 guests.',
+    'Private yacht charter on the Gold Coast Broadwater for up to 150 guests. Birthdays, celebrations and corporate events, catering and bar included.',
   alternates: { canonical: `https://www.boattimeyachtcharters.com${PATH}` },
 };
 

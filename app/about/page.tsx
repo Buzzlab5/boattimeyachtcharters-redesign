@@ -8,7 +8,7 @@ const PATH = '/about';
 export const metadata: Metadata = {
   title: 'About Boattime Yacht Charters · Gold Coast',
   description:
-    "Meet the team behind Gold Coast's most trusted yacht charter company. Two world-class vessels, 12+ years operating, 5.0 stars on Facebook and 4.7 on Google.",
+    'Meet the team behind Boattime Yacht Charters. Two superyachts on the Gold Coast Broadwater, operating since 2014, for charter and scenic cruises.',
   alternates: { canonical: `${BASE_URL}${PATH}` },
 };
 

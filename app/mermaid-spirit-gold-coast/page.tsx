@@ -7,14 +7,14 @@ import { MERMAID_SPIRIT as V } from '@/lib/vessels';
 const PATH = `/${V.slug}`;
 
 export const metadata: Metadata = {
-  title: 'Mermaid Spirit — 100ft Catamaran Gold Coast',
+  title: 'Mermaid Spirit: 100ft Catamaran Gold Coast',
   description:
-    "Charter Mermaid Spirit, a 100ft tri-deck catamaran for up to 150 guests. Three full decks, chef's kitchen, stinger pool, jet skis and scuba gear on the Gold Coast Broadwater and Brisbane River.",
+    "Charter Mermaid Spirit, a 100ft tri-deck catamaran for up to 150 guests on the Gold Coast Broadwater. Three decks, chef's kitchen, stinger pool.",
   alternates: { canonical: `${BASE_URL}${PATH}` },
   openGraph: {
     type: 'website',
     url: `${BASE_URL}${PATH}`,
-    title: 'Mermaid Spirit — 100ft Catamaran Gold Coast',
+    title: 'Mermaid Spirit: 100ft Catamaran Gold Coast',
     description:
       "A 100ft tri-deck catamaran for up to 150 guests. Three decks, chef's kitchen, stinger pool and jet skis.",
     images: [{ url: V.heroImage, width: 1200, height: 630, alt: V.heroAlt }],

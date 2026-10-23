@@ -7,14 +7,14 @@ import { SUN_GODDESS as V } from '@/lib/vessels';
 const PATH = `/${V.slug}`;
 
 export const metadata: Metadata = {
-  title: 'Sun Goddess — 114ft Gold Coast Superyacht',
+  title: 'Sun Goddess: 114ft Gold Coast Superyacht',
   description:
-    'Charter Sun Goddess, the 114ft flagship superyacht of the Boattime fleet. Up to 135 guests, two licensed bars, dual-level galley and watersports, departing Marine Stadium Jetty & Pontoon, Main Beach.',
+    'Charter Sun Goddess, a 114ft superyacht for up to 135 guests, departing Marine Stadium Jetty & Pontoon, Main Beach. Two licensed bars, two decks.',
   alternates: { canonical: `${BASE_URL}${PATH}` },
   openGraph: {
     type: 'website',
     url: `${BASE_URL}${PATH}`,
-    title: 'Sun Goddess — 114ft Gold Coast Superyacht',
+    title: 'Sun Goddess: 114ft Gold Coast Superyacht',
     description:
       'The 114ft flagship of the Boattime fleet. Up to 135 guests, two licensed bars and two entertainment decks on the Gold Coast Broadwater.',
     images: [{ url: V.heroImage, width: 1200, height: 630, alt: V.heroAlt }],
