@@ -31,3 +31,39 @@ export const FAQS = [
     a: 'Our charters are currently not wheelchair accessible. Boarding requires a step up from the marina pontoon, and space onboard can be limited depending on the vessel and guest needs. \nIn some cases, exceptions may be possible if we are notified at least 1 week before departure. This allows our team to review the requirements, arrange adequate crew support, and confirm whether the charter can be accommodated safely. \nFor safety reasons, electric wheelchairs are not permitted onboard.',
   },
 ];
+
+/**
+ * The FAQ questions shown on the corporate charter page. Same plain-module
+ * reason as FAQS above: the page is a client component, so the server route
+ * imports this to build the FAQPage JSON-LD.
+ */
+export const CORPORATE_FAQS = [
+  {
+    q: 'How many people can we have on board?',
+    a: 'Sun Goddess carries up to 135 guests on a day charter and Mermaid Spirit up to 150, so a whole-vessel charter suits groups from about 20 up to 150. For a group of 20 to 60 with no budget for a whole vessel, the ticketed Luxury Scenic Sunset Cruise has 100 seats on every Saturday and Sunday sailing and can be booked seat by seat.',
+  },
+  {
+    q: 'Where do your boats depart from?',
+    a: 'Our boats depart from Marine Stadium Jetty & Pontoon, Main Beach, Gold Coast, approximately 10 minutes from Surfers Paradise and 15 minutes from Broadbeach. Free parking is available.',
+  },
+  {
+    q: 'Can we customise the catering and drinks?',
+    a: 'Absolutely. From grazing boards and canapes to private chef fine dining, we work with our culinary partners to build a menu around your event. Bar packages are fully customisable.',
+  },
+  {
+    q: 'Is AV equipment available for presentations?',
+    a: 'Yes. Both vessels have flat-screen TVs and premium audio throughout. Let us know your AV requirements at the time of enquiry.',
+  },
+  {
+    q: 'What transport options are there for large groups?',
+    a: 'Maxi taxis are the most popular and cost-effective option. The pontoon also has ample free parking.',
+  },
+  {
+    q: 'Can we add corporate branding or custom signage?',
+    a: 'Yes. Corporate branding, custom menus, and event theming can all be arranged. Contact us with your requirements and we will accommodate where possible.',
+  },
+  {
+    q: 'Are accessibility requirements catered for?',
+    a: 'We welcome guests with limited mobility. We recommend contacting us before booking so we can assess specific requirements.',
+  },
+];

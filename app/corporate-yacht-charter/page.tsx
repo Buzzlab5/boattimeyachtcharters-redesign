@@ -2,14 +2,15 @@ import type { Metadata } from 'next';
 import CharterPageCorporate from '@/components/CharterPageCorporate';
 import GoogleAdsTag from '@/components/GoogleAdsTag';
 import JsonLd from '@/components/JsonLd';
-import { serviceSchema, breadcrumbSchema } from '@/lib/schema';
+import { serviceSchema, breadcrumbSchema, faqSchema } from '@/lib/schema';
+import { CORPORATE_FAQS } from '@/lib/faqs';
 
 const PATH = '/corporate-yacht-charter';
 
 export const metadata: Metadata = {
   title: 'Corporate Yacht Charter Gold Coast',
   description:
-    'Premium corporate yacht charters on the Gold Coast. Team building, client entertainment, award ceremonies, product launches and networking events aboard Sun Goddess or Mermaid Spirit.',
+    'Corporate and Christmas party yacht charters on the Gold Coast for 20 to 150 guests. Team events, client entertainment and end of year functions.',
   alternates: { canonical: `https://www.boattimeyachtcharters.com${PATH}` },
 };
 
@@ -21,11 +22,12 @@ export default function Page() {
           serviceSchema({
             name: 'Corporate Yacht Charter Gold Coast',
             description:
-              'Corporate yacht charters on the Gold Coast for team building, client entertainment, award ceremonies, product launches and networking events aboard the Sun Goddess or Mermaid Spirit.',
+              'Corporate and end of year yacht charters on the Gold Coast for team building, client entertainment, award ceremonies, product launches, networking events and Christmas functions, aboard the Sun Goddess for up to 135 guests or the Mermaid Spirit for up to 150.',
             path: PATH,
             image: '/corporate-charter.webp',
             serviceType: 'Corporate event yacht charter',
           }),
+          faqSchema(CORPORATE_FAQS),
           breadcrumbSchema([{ name: 'Corporate Yacht Charter', path: PATH }]),
         ]}
       />
