@@ -8,6 +8,7 @@ import Nav from './Nav';
 import Footer from './Footer';
 import { Icon } from './Shared';
 import { PRODUCTS, fallbackProductIds } from '@/lib/products';
+import { VESSEL_LINKS } from '@/lib/vessels';
 
 gsap.registerPlugin(ScrollTrigger, useGSAP);
 
@@ -75,6 +76,41 @@ function ProductSidebar({ productIds }: { productIds: string[] }) {
           </div>
         </>
       )}
+      {/* The fleet. Always shown: both vessel pages received zero in-body
+          links from any of the 39 published articles, and Google answers both
+          vessel-name queries with the homepage rather than the vessel page.
+          See VESSEL_LINKS in lib/vessels.ts. */}
+      <div
+        style={{
+          fontFamily: 'var(--font-body)',
+          fontSize: 8,
+          letterSpacing: '0.36em',
+          textTransform: 'uppercase',
+          color: 'var(--gold)',
+          marginTop: items.length > 0 ? 36 : 0,
+          marginBottom: 20,
+          paddingBottom: 12,
+          borderBottom: '1px solid var(--border-subtle)',
+        }}
+      >
+        The Fleet
+      </div>
+      <div style={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
+        {VESSEL_LINKS.map(vessel => (
+          <a
+            key={vessel.id}
+            href={vessel.href}
+            style={{ textDecoration: 'none', display: 'block', padding: '16px 0', borderBottom: '1px solid var(--border-subtle)' }}
+          >
+            <div style={{ fontFamily: 'var(--font-body)', fontSize: 8, letterSpacing: '0.22em', textTransform: 'uppercase', color: 'var(--gold)', marginBottom: 6 }}>
+              {vessel.sub}
+            </div>
+            <div style={{ fontFamily: 'var(--font-display)', fontSize: 16, fontStyle: 'italic', fontWeight: 300, color: 'var(--cream)', lineHeight: 1.3 }}>
+              {vessel.label}
+            </div>
+          </a>
+        ))}
+      </div>
     </aside>
   );
 }
