@@ -173,6 +173,11 @@ export function boatTripSchema(trip: TripInput) {
       '@type': 'BoatTerminal',
       name: 'Marine Stadium Jetty & Pontoon, Main Beach',
       address: ADDRESS,
+      // Coordinates as well as an address, because the berth is the fact most
+      // often got wrong about this business: answers and third-party listings
+      // keep placing it at Mariners Cove or in Surfers Paradise. These match
+      // the Rezdy product record exactly.
+      geo: GEO,
     },
     // No aggregateRating: Google only accepts review snippets on certain types
     // (Product, LocalBusiness, Event…). On a BoatTrip it is flagged as
