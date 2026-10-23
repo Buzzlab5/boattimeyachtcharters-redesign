@@ -23,6 +23,30 @@ const montserrat = Montserrat({
   display: 'swap',
 });
 
+/**
+ * Search engine site verification, read from the environment.
+ *
+ * Search Console has never been connected for this property, which is why
+ * nobody can answer what this site ranks for, how many of its URLs are
+ * indexed, or which of them error. Verification is the first step and it needs
+ * a token from whoever owns the Google account.
+ *
+ * This is staged so that step is not also a code change: set
+ * GOOGLE_SITE_VERIFICATION in the Vercel project and the tag ships on the next
+ * deploy. BING_SITE_VERIFICATION does the same for Bing Webmaster Tools, which
+ * is free and reports its own index coverage.
+ *
+ * Unset variables emit nothing, so this is inert until someone sets one.
+ */
+const verification = {
+  ...(process.env.GOOGLE_SITE_VERIFICATION
+    ? { google: process.env.GOOGLE_SITE_VERIFICATION }
+    : {}),
+  ...(process.env.BING_SITE_VERIFICATION
+    ? { other: { 'msvalidate.01': process.env.BING_SITE_VERIFICATION } }
+    : {}),
+};
+
 export const metadata: Metadata = {
   title: {
     default: 'Boattime Yacht Charters | Gold Coast Superyacht Hire',
@@ -55,6 +79,7 @@ export const metadata: Metadata = {
       'Sun Goddess and Mermaid Spirit: two Gold Coast superyachts for charter and scenic cruises.',
     images: ['/sun-goddess-main-upscale.png'],
   },
+  ...(Object.keys(verification).length > 0 ? { verification } : {}),
   // NOTE: no `alternates.canonical` here on purpose. Next.js inherits metadata
   // into child pages, so a canonical set at the root would tell Google every
   // sub-page is a duplicate of the homepage. Each page declares its own.
