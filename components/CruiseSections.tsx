@@ -5,6 +5,7 @@ import { useGSAP } from '@gsap/react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { Eyebrow, ItalicEm, Button } from './Shared';
+import { heroBackground } from '@/lib/img';
 
 gsap.registerPlugin(ScrollTrigger, useGSAP);
 
@@ -109,7 +110,7 @@ export function CruiseHero({
         ref={bgRef}
         className="absolute inset-0 will-change-transform"
         style={{
-          backgroundImage: `url(${image})`,
+          backgroundImage: heroBackground(image),
           backgroundSize: 'cover',
           backgroundPosition: 'center',
         }}
