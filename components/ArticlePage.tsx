@@ -7,7 +7,7 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import Nav from './Nav';
 import Footer from './Footer';
 import { Icon } from './Shared';
-import { PRODUCTS } from '@/lib/products';
+import { PRODUCTS, fallbackProductIds } from '@/lib/products';
 
 gsap.registerPlugin(ScrollTrigger, useGSAP);
 
@@ -27,6 +27,7 @@ interface Post {
   reading_time?: number;
   author?: string;
   related_products?: string[];
+  tags?: string[];
 }
 
 interface RelatedPost {
@@ -245,7 +246,11 @@ function ArticleBody({ post, relatedPosts }: { post: Post; relatedPosts: Related
     });
   }, { scope: contentRef });
 
-  const productIds = post.related_products ?? [];
+  // A hand-picked set in the CMS always wins. When none was picked, derive one
+  // from the article itself rather than render an empty sidebar: see
+  // fallbackProductIds in lib/products.ts for why.
+  const picked = post.related_products ?? [];
+  const productIds = picked.length > 0 ? picked : fallbackProductIds(post);
 
   return (
     <div style={{ background: 'var(--navy)' }}>
