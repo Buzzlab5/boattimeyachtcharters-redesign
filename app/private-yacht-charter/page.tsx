@@ -8,7 +8,7 @@ import { PRIVATE_FAQS } from '@/lib/faqs';
 const PATH = '/private-yacht-charter';
 
 export const metadata: Metadata = {
-  title: 'Private Yacht Charter Gold Coast',
+  title: 'Private and Superyacht Charter Gold Coast',
   description:
     'Private yacht charter on the Gold Coast Broadwater for up to 150 guests. Birthdays, celebrations and corporate events, catering and bar included.',
   alternates: { canonical: `https://www.boattimeyachtcharters.com${PATH}` },

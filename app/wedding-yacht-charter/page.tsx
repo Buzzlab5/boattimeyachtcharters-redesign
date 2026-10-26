@@ -8,7 +8,7 @@ import { WEDDING_FAQS } from '@/lib/faqs';
 const PATH = '/wedding-yacht-charter';
 
 export const metadata: Metadata = {
-  title: 'Yacht Wedding Gold Coast',
+  title: 'Wedding Yacht Charter Gold Coast',
   description:
     "Wedding ceremonies and receptions aboard a Gold Coast superyacht, for up to 150 guests, with catering and bar packages on the Broadwater.",
   alternates: { canonical: `https://www.boattimeyachtcharters.com${PATH}` },

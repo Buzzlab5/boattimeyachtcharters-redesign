@@ -344,7 +344,7 @@ export default function CharterPageWedding() {
           eyebrow="Boattime YC Luxury"
           headline={
             <>
-              Yacht Wedding
+              Wedding Yacht Charter
               <br />
               Gold Coast
             </>
@@ -358,7 +358,7 @@ export default function CharterPageWedding() {
 
         {/* 2. Overview box */}
         <CharterInfoBox
-          heading="Yacht Wedding Gold Coast"
+          heading="Wedding Yacht Charter Gold Coast"
           vesselOrder={['sun-goddess', 'mermaid-spirit']}
         >
           <div
@@ -481,7 +481,7 @@ export default function CharterPageWedding() {
 
         {/* 5. Bottom CTA box */}
         <CharterInfoBox
-          heading="Yacht Wedding Gold Coast"
+          heading="Wedding Yacht Charter Gold Coast"
           compact
           vesselOrder={['mermaid-spirit', 'sun-goddess']}
         />
