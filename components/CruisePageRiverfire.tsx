@@ -652,7 +652,7 @@ function VesselCard() {
                   (e.currentTarget as HTMLElement).style.opacity = "1";
                 }}
               >
-                Book Now!
+                Register interest
               </a>
             </div>
           </div>
@@ -931,7 +931,7 @@ export default function RiverPage() {
                   fontWeight: 700,
                 }}
               >
-                COST PER TICKET $249
+                2026 TICKETS WERE $249
               </span>
               <span
                 style={{
@@ -1016,7 +1016,7 @@ export default function RiverPage() {
         {/* ── Event details ── */}
         <EventDetails
           items={[
-            { label: "Date", value: "5th September 2026" },
+            { label: "Date", value: "2026 has sailed: register for next year" },
             {
               label: "Pickup",
               value: "New Farm Recreational Hub, New Farm QLD 4005",
@@ -1065,7 +1065,7 @@ export default function RiverPage() {
                   marginBottom: 16,
                 }}
               >
-                Book Your Tickets
+                Register Your Interest
               </div>
               <h2
                 style={{
@@ -1078,9 +1078,9 @@ export default function RiverPage() {
                   marginBottom: 16,
                 }}
               >
-                Reserve your{" "}
+                Register your{" "}
                 <em style={{ fontStyle: "italic", color: "var(--gold)" }}>
-                  spot
+                  interest
                 </em>
                 .
               </h2>
@@ -1095,25 +1095,54 @@ export default function RiverPage() {
                   fontWeight: 300,
                 }}
               >
-                Saturday, 5 September 2026. Limited tickets — this event sells
-                out every year. Instant confirmation on booking.
+                Riverfire 2026 has sailed. Register your interest and we will
+                come back to you with next year’s date and pricing when the
+                fireworks programme is announced.
               </p>
             </div>
+            {/* The Rezdy widget here pointed at
+                mermaid-spirit-brisbane-riverfire-2026 (product P8TPLS). That
+                product still exists and is not retired, but it has no sessions
+                and the 2026 event has passed, so the widget rendered a checkout
+                that could not take a booking. Restore it when next year's
+                sessions are loaded. */}
             <div
               style={{
                 border: "1px solid rgba(201,168,76,0.15)",
                 background: "rgba(255,255,255,0.02)",
+                padding: "48px 24px",
+                textAlign: "center",
               }}
             >
-              <iframe
-                seamless
-                width="100%"
-                height="1000px"
-                frameBorder="0"
-                className="rezdy"
-                src="https://boattimeyachtcharters.rezdy.com/595142/mermaid-spirit-brisbane-riverfire-2026?iframe=true"
-                style={{ display: "block" }}
-              />
+              <a
+                href="/#inquiry"
+                style={{
+                  fontFamily: "var(--font-body)",
+                  fontSize: 10,
+                  letterSpacing: "0.2em",
+                  textTransform: "uppercase",
+                  fontWeight: 700,
+                  color: "#0A1628",
+                  background: "#C9A84C",
+                  padding: "14px 28px",
+                  textDecoration: "none",
+                  display: "inline-block",
+                }}
+              >
+                Register for next Riverfire
+              </a>
+              <p
+                style={{
+                  fontFamily: "var(--font-body)",
+                  fontSize: 13,
+                  color: "rgba(245,240,232,0.6)",
+                  lineHeight: 1.8,
+                  marginTop: 24,
+                }}
+              >
+                Mermaid Spirit is also available for private charter on the
+                Brisbane River, and our Gold Coast cruises sail year round.
+              </p>
             </div>
           </div>
         </section>
