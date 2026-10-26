@@ -304,7 +304,7 @@ const LEFT_PACKAGES = (
     <h3 style={h3Style}>Package 2 – Evening Cocktails &amp; Canap&eacute;s</h3>
     <p style={pStyle}>
       Departing at 5pm, this Sunset Cruise sets the mood for a night of world
-      class luxury and celebration aboard the Gold Coasts premiere Superyacht.
+      class luxury and celebration aboard Sun Goddess, Boattime&rsquo;s flagship superyacht.
       Touring the northern Islands of the Coast&rsquo;s Broadwater and cruising
       back to the Sun Setting over Surfers Paradise, this is the ideal venue to
       create special memories.

@@ -367,8 +367,8 @@ const LEFT_PACKAGES = (
     </h3>
     <p style={pStyle}>
       Departing at 5pm, this Sunset Cruise sets the mood for a night of
-      world-class luxury and celebration aboard the Gold Coasts premiere
-      Superyacht. Touring the northern Islands of the Coast&rsquo;s Broadwater
+      world-class luxury and celebration aboard Sun Goddess, Boattime&rsquo;s
+      flagship superyacht. Touring the northern Islands of the Coast&rsquo;s Broadwater
       and cruising back to the Sun Setting over Surfers Paradise, this is the
       ideal venue to create special memories.
     </p>
@@ -441,8 +441,8 @@ export default function CharterPageCorporate() {
               team building, client entertainment, conferences, meetings, and
               more. Our yachts, the Sun Goddess and Mermaid Spirit, provide a
               luxurious backdrop for your event, complete with top-notch
-              amenities and professional crew. We provide the premier event
-              venue for Corporate Yacht Charters on the Gold Coast.
+              amenities and professional crew. We provide an event venue on
+              the water for corporate yacht charters on the Gold Coast.
             </p>
             <p style={{ marginBottom: 6 }}>
               <strong style={{ color: 'var(--cream)' }}>Our Offer:</strong>
