@@ -59,7 +59,7 @@ const Hero = ({ onReserve, onCruises }) => (
       <Icon name="star" size={11} color="var(--gold)"/> 4.9 · 3,900+ guest reviews
     </div>
     <div style={heroStyles.content}>
-      <div className="hd1" style={heroStyles.fade}><Eyebrow>Superyacht Charters — Gold Coast &amp; Brisbane</Eyebrow></div>
+      <div className="hd1" style={heroStyles.fade}><Eyebrow>Superyacht Charters &middot; Gold Coast &amp; Brisbane</Eyebrow></div>
       <h1 className="hd2" style={{ ...heroStyles.h1, ...heroStyles.fade }}>
         Luxury <ItalicEm>on the water,</ItalicEm><br/>unforgettable.
       </h1>

@@ -339,7 +339,7 @@ export default function CharterPagePrivate() {
             <>
               Private Yacht Charter
               <br />
-              Gold Coast • Brisbane
+              Gold Coast
             </>
           }
           subtext="Experience the best private yacht charter in Gold Coast with Boattime Yacht Charters. Whether it's an intimate gathering or a large event, we offer tailored luxury experiences that promise an unforgettable time on the water."
@@ -350,7 +350,7 @@ export default function CharterPagePrivate() {
         />
 
         {/* 2. Overview box */}
-        <CharterInfoBox heading="Private Yacht Charters – Gold Coast">
+        <CharterInfoBox heading="Private Yacht Charter Gold Coast">
           <div
             style={{
               fontFamily: 'var(--font-body)',
@@ -429,7 +429,7 @@ export default function CharterPagePrivate() {
         />
 
         {/* 5. Bottom CTA box */}
-        <CharterInfoBox heading="Private Yacht Charters – Gold Coast" compact />
+        <CharterInfoBox heading="Private Yacht Charter Gold Coast" compact />
       </main>
       <Footer />
     </>

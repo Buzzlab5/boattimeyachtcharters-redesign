@@ -649,7 +649,7 @@ export default function NyePage() {
         {/* ── Event details ── */}
         <EventDetails
           items={[
-            { label: 'Date', value: 'December 31, 2025' },
+            { label: 'Date', value: 'Enquire for this year' },
             {
               label: 'Location',
               value: 'Marine Stadium Jetty & Pontoon, Main Beach, Gold Coast',
@@ -727,8 +727,8 @@ export default function NyePage() {
                   fontWeight: 300,
                 }}
               >
-                Tuesday, 31 December 2025. Limited tickets — this event sells
-                out every year. Instant confirmation on booking.
+                Dates and tickets for this year are confirmed on enquiry.
+                Mermaid Spirit is also available as a private charter.
               </p>
             </div>
             <div
@@ -737,15 +737,29 @@ export default function NyePage() {
                 background: 'rgba(255,255,255,0.02)',
               }}
             >
-              <iframe
-                seamless
-                width="100%"
-                height="1000px"
-                frameBorder="0"
-                className="rezdy"
-                src="https://boattimeyachtcharters.rezdy.com/668818/zzz-new-years-eve-2026?iframe=true"
-                style={{ display: 'block' }}
-              />
+              {/* The Rezdy widget here pointed at zzz-new-years-eve-2026.
+                  ZZZ is this account's own marker for a retired product and it
+                  has no sessions, so the widget rendered a checkout that could
+                  not sell anything. Enquiry route until a product is loaded. */}
+              <div style={{ padding: '48px 24px', textAlign: 'center' }}>
+                <a
+                  href="/#inquiry"
+                  style={{
+                    fontFamily: 'var(--font-body)',
+                    fontSize: 10,
+                    letterSpacing: '0.2em',
+                    textTransform: 'uppercase',
+                    fontWeight: 700,
+                    color: '#0A1628',
+                    background: '#C9A84C',
+                    padding: '14px 28px',
+                    textDecoration: 'none',
+                    display: 'inline-block',
+                  }}
+                >
+                  Enquire about New Year&rsquo;s Eve
+                </a>
+              </div>
             </div>
           </div>
         </section>
