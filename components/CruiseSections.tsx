@@ -2196,8 +2196,12 @@ export function CruiseYachts({ vessels }: { vessels: VesselData[] }) {
             {vessel.features.join(' · ')}
           </div>
           <a
-            href="/#fleet"
+            href={vessel.href}
             onClick={(e) => {
+              // The homepage fleet section is an anchor on another route, so it
+              // still needs the stored-scroll handoff. A real page link does
+              // not: let the browser follow it.
+              if (vessel.href !== '/#fleet') return;
               e.preventDefault();
               sessionStorage.setItem('scrollTo', '#fleet');
               window.location.href = '/';
@@ -2216,7 +2220,7 @@ export function CruiseYachts({ vessels }: { vessels: VesselData[] }) {
               cursor: 'pointer',
             }}
           >
-            View More
+            View {vessel.name}
             <svg
               width="11"
               height="11"
