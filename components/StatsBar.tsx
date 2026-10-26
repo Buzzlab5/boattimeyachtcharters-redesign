@@ -32,8 +32,8 @@ const STATS = [
     unit: true,
     decimals: 0,
     comma: false,
-    label: 'Largest vessel',
-    note: 'Sun Goddess — the most spacious superyacht in the category.',
+    label: 'Flagship',
+    note: 'Sun Goddess, our flagship.',
   },
   {
     end: 12,
@@ -189,10 +189,9 @@ export default function StatsBar() {
               maxWidth: 480,
             }}
           >
-            Boattime is the Gold Coast&apos;s most-reviewed superyacht charter
-            company — not by marketing, but by math. Yachts larger than
-            competitors, warmest crew on the water, guests who return year after
-            year.
+            Boattime is a family-run superyacht charter company: two boats on
+            the Broadwater, the warmest crew on the water, and guests who return
+            year after year.
           </p>
           <p
             style={{

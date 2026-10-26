@@ -103,7 +103,7 @@ export const SUN_GODDESS: Vessel = {
     },
     {
       q: 'How big is Sun Goddess?',
-      a: 'She is 34 metres — 114 feet — making her the largest vessel in the Boattime fleet and the most spacious superyacht in her category on the Gold Coast.',
+      a: 'She is 34 metres — 114 feet — making her the largest vessel in the Boattime fleet.',
     },
     {
       q: 'Where does Sun Goddess depart from?',

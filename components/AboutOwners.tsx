@@ -74,19 +74,16 @@ export default function AboutOwners() {
           </h2>
 
           <p className="ao-body">
-            We offer the most spacious luxury yachts in the industry at a price
-            point that is unmatched. Our fleet includes two impressive yachts,
+            Our fleet includes two impressive yachts,
             Sun Goddess and the Mermaid Spirit, which are available for yacht
             hire and event boat hire for any occasion.
           </p>
 
           <p className="ao-body">
-            We take pride in being the best in the industry, offering our
-            customers the perfect combination of luxury, space and
+            We offer our customers the perfect combination of luxury, space and
             affordability. Our yachts are equipped with the latest amenities and
             technologies to ensure that your experience is nothing short of
-            exceptional. We have the most reviews in the industry, which is a
-            testament to the quality of our service. We are committed to
+            exceptional. We are committed to
             providing our customers with an unforgettable experience, no matter
             the occasion.
           </p>

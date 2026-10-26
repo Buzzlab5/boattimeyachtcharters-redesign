@@ -895,3 +895,19 @@ Atas permintaan pemilik situs, search bar dipindah dari bawah tombol hero ke **p
 - Di browser, halaman dengan tag Ads menjalankan `config` dengan `phone_conversion_number` (cek `window.dataLayer`).
 - Mengetuk link telepon atau email mengirim `phone_click` / `email_click` ke GA4 (DebugView atau Realtime) dan `Contact` ke Meta (Pixel Helper).
 - Setelah ada panggilan nyata dari iklan Google, status konversi "Call (+61 477 667 644)" di Google Ads berubah dari "Awaiting conversions".
+
+## Feature: hapus klaim superlatif yang tidak terbukti di halaman tujuan iklan, 26 Oktober 2026
+
+**Permintaan:** iklan baru "luxury for every budget" (Google dan Meta) mendarat di homepage dan halaman charter. Verifier Asri menahan dua iklan karena halaman tujuan sendiri membuat klaim "terbesar" dan "termurah" yang tidak benar atau tidak terbukti. Google membaca halaman tujuan bersama iklan (kebijakan Misrepresentation), dan klaim seperti ini berisiko menurut Australian Consumer Law.
+
+**Hasil pengecekan:** pada 21 Oktober, YOT Club (39,9 m) dan Impulsive milik Crystal Blue (40,2 m) sama-sama disewakan secara komersial di Gold Coast; Sun Goddess 34 m. Jadi "Largest vessel" / "most spacious superyacht in the category" / "Yachts larger than competitors" tidak benar. "Most reviews in the industry", "best in the industry", "price point that is unmatched" dan "premier/premiere" tidak punya sumber.
+
+**Yang dikerjakan (hanya teks, tanpa perubahan tata letak):**
+- `components/StatsBar.tsx`: label statistik "Largest vessel" menjadi "Flagship", catatan menjadi "Sun Goddess, our flagship."; paragraf "most-reviewed ... Yachts larger than competitors" ditulis ulang tanpa klaim perbandingan.
+- `components/AboutOwners.tsx`: hapus kalimat "most spacious ... price point that is unmatched", "best in the industry" dan "most reviews in the industry". Judul "Where luxury meets affordability." tetap.
+- `components/CharterPageCorporate.tsx`, `components/CharterPagePrivate.tsx`: "the Gold Coasts premiere Superyacht" menjadi "Sun Goddess, Boattime's flagship superyacht"; "the premier event venue" menjadi "an event venue on the water".
+- `lib/vessels.ts`: FAQ Sun Goddess tidak lagi menyebut "most spacious superyacht in her category on the Gold Coast" (tetap "the largest vessel in the Boattime fleet", yang benar).
+
+**Di luar cakupan:** judul ulasan "3,910 guests can't be wrong" (angka itu jumlah ulasan, bukan tamu; perlu konfirmasi pemilik), dan teks "premier" di halaman berita dan About.
+
+**Selesai jika:** homepage, /corporate-yacht-charter, /private-yacht-charter dan /sun-goddess-gold-coast tidak lagi memuat "largest vessel", "most spacious", "unmatched", "best in the industry", "most reviews", "larger than competitors" atau "premiere".
