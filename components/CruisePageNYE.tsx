@@ -697,7 +697,7 @@ export default function NyePage() {
                   marginBottom: 16,
                 }}
               >
-                Book Your Tickets
+                Enquire
               </div>
               <h2
                 style={{
@@ -710,9 +710,9 @@ export default function NyePage() {
                   marginBottom: 16,
                 }}
               >
-                Reserve your{' '}
+                Enquire about{' '}
                 <em style={{ fontStyle: 'italic', color: 'var(--gold)' }}>
-                  spot
+                  New Year
                 </em>
                 .
               </h2>

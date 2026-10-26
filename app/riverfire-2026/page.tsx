@@ -7,9 +7,9 @@ import { boatTripSchema, breadcrumbSchema } from '@/lib/schema';
 const PATH = '/riverfire-2026';
 
 export const metadata: Metadata = {
-  title: 'Riverfire 2026 Brisbane Fireworks Cruise',
+  title: 'Riverfire Brisbane Fireworks Cruise',
   description:
-    "Brisbane's iconic Riverfire fireworks from the best seat on the river. Mermaid Spirit · 5 September 2026 · 18+ · $249 pp.",
+    "Brisbane's iconic Riverfire fireworks from the best seat on the river, aboard the Mermaid Spirit tri-deck catamaran. Riverfire 2026 has sailed: register for next year's date.",
   alternates: { canonical: `https://www.boattimeyachtcharters.com${PATH}` },
 };
 
@@ -20,14 +20,17 @@ export default function Page() {
       <JsonLd
         schemas={[
           boatTripSchema({
-            name: 'Riverfire 2026 — Brisbane Fireworks Yacht Cruise',
+            name: 'Riverfire: Brisbane Fireworks Yacht Cruise',
             description:
-              "A Brisbane River cruise aboard the Mermaid Spirit for the Riverfire fireworks on 5 September 2026. 18+.",
+              "A Brisbane River cruise aboard the Mermaid Spirit tri-deck catamaran for the Riverfire fireworks. 18+.",
             path: PATH,
             image: '/Riverfire.jpg',
-            offer: { price: '249', description: 'Per person' },
+            // No offer block. Riverfire 2026 has passed and product P8TPLS has
+            // no sessions, so declaring a price and InStock would advertise a
+            // cruise the checkout cannot sell. Restore it against the live
+            // product when next year's date is loaded.
           }),
-          breadcrumbSchema([{ name: 'Riverfire 2026', path: PATH }]),
+          breadcrumbSchema([{ name: 'Riverfire', path: PATH }]),
         ]}
       />
       <RiverPage />
