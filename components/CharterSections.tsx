@@ -5,6 +5,7 @@ import { useGSAP } from '@gsap/react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { Eyebrow, ItalicEm, Button } from './Shared';
+import { SUN_GODDESS, MERMAID_SPIRIT } from '@/lib/vessels';
 
 gsap.registerPlugin(ScrollTrigger, useGSAP);
 
@@ -494,7 +495,7 @@ export function VesselCards() {
       specs: ['150 day guests', '22 overnight guests', '3 decks'],
       description:
         'A stunning tri-deck catamaran offering three distinct levels of entertainment. Equipped with jet skis, kayaks, scuba gear, a stinger-proof pool, and paddle boards.',
-      href: '/#fleet',
+      href: '/mermaid-spirit-gold-coast',
       img: 'https://images.unsplash.com/photo-1511316695145-4992006ffddb?w=800&q=80',
     },
     {
@@ -503,7 +504,7 @@ export function VesselCards() {
       specs: ['135 day guests', 'Dual bars', 'Watersports deck'],
       description:
         "Gold Coast's premier luxury superyacht. Spacious decks, dual bars, state-of-the-art sound, and fully customisable routes for any occasion.",
-      href: '/#fleet',
+      href: '/sun-goddess-gold-coast',
       img: 'https://images.unsplash.com/photo-1567899378494-47b22a2ae96a?w=800&q=80',
     },
   ];
@@ -628,8 +629,11 @@ export function VesselCards() {
                   {v.description}
                 </p>
                 <a
-                  href="/#fleet"
+                  href={v.href}
                   onClick={(e) => {
+                    // Only the homepage fleet anchor needs the stored-scroll
+                    // handoff. A real page link is followed normally.
+                    if (v.href !== '/#fleet') return;
                     e.preventDefault();
                     sessionStorage.setItem('scrollTo', '#fleet');
                     window.location.href = '/';
@@ -657,7 +661,7 @@ export function VesselCards() {
                     (e.currentTarget as HTMLElement).style.opacity = '1';
                   }}
                 >
-                  View vessel →
+                  View {v.name} →
                 </a>
               </div>
             </div>
@@ -1472,8 +1476,16 @@ export function CharterInfoBox({
 
   const buttons = vesselOrder.map((v) =>
     v === 'sun-goddess'
-      ? { label: 'View The Sun Goddess →', vessel: 'sun-goddess' }
-      : { label: 'View The Mermaid Spirit →', vessel: 'mermaid-spirit' },
+      ? {
+          label: 'View The Sun Goddess →',
+          vessel: 'sun-goddess',
+          href: `/${SUN_GODDESS.slug}`,
+        }
+      : {
+          label: 'View The Mermaid Spirit →',
+          vessel: 'mermaid-spirit',
+          href: `/${MERMAID_SPIRIT.slug}`,
+        },
   );
 
   return (
@@ -1564,12 +1576,7 @@ export function CharterInfoBox({
           {buttons.map((b) => (
             <a
               key={b.vessel}
-              href="/#fleet"
-              onClick={(e) => {
-                e.preventDefault();
-                sessionStorage.setItem('scrollTo', '#fleet');
-                window.location.href = '/';
-              }}
+              href={b.href}
               style={{
                 fontFamily: 'var(--font-body)',
                 fontSize: 10,

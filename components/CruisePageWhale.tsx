@@ -456,7 +456,7 @@ const VESSELS = [
       "Dual-level Galley",
       "Bose Audio",
     ],
-    href: "/#fleet",
+    href: "/sun-goddess-gold-coast",
   },
   {
     image: "/mermaid-spirit-main.jpg",
@@ -472,7 +472,7 @@ const VESSELS = [
       "Chef's Kitchen",
       "Dual Bars",
     ],
-    href: "/#fleet",
+    href: "/mermaid-spirit-gold-coast",
   },
 ];
 
@@ -855,6 +855,24 @@ export default function WhalePage() {
                   </div>
                 ))}
               </div>
+              <Link
+                href="/sun-goddess-gold-coast"
+                style={{
+                  fontFamily: "var(--font-body)",
+                  fontSize: 10,
+                  letterSpacing: "0.2em",
+                  textTransform: "uppercase",
+                  color: "var(--gold)",
+                  textDecoration: "none",
+                  fontWeight: 600,
+                  display: "inline-flex",
+                  alignItems: "center",
+                  gap: 6,
+                  marginTop: 28,
+                }}
+              >
+                Sun Goddess: full specifications &rarr;
+              </Link>
             </div>
           </div>
         </section>

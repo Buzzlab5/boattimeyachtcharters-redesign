@@ -450,7 +450,7 @@ function OurSuperyachts() {
                   onMouseEnter={(e) => { (e.currentTarget as HTMLElement).style.opacity = '0.7'; }}
                   onMouseLeave={(e) => { (e.currentTarget as HTMLElement).style.opacity = '1'; }}
                 >
-                  View vessel →
+                  View {v.name} →
                 </a>
               </div>
             </div>
