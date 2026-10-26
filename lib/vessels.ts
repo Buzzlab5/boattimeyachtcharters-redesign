@@ -213,3 +213,29 @@ export const MERMAID_SPIRIT: Vessel = {
     },
   ],
 };
+
+/**
+ * The two vessels as links, for the article rail.
+ *
+ * Kept here rather than added to PRODUCTS in lib/products.ts, because PRODUCTS
+ * is also the source for the header dropdowns and changing it would change the
+ * navigation. This list is used by the article sidebar only.
+ *
+ * Why it exists: read against Google on 23 October 2026, the queries
+ * "sun goddess gold coast superyacht" and "mermaid spirit gold coast" both
+ * return this site's HOMEPAGE and not the vessel page built for them, while
+ * broker sites (thesuperyachtpeople.com, chapmanyachting.com,
+ * boatcharterservices.com.au, prestigeharbourcruises.com.au) rank above the
+ * operator on the operator's own vessel names.
+ *
+ * Measured the same day: across all 39 published articles there were 45
+ * in-body links to a commercial page, and both vessel pages received ZERO.
+ * They sit at priority 0.9 in the sitemap and the redirect comments in
+ * next.config.ts call them "the business's main named entities", so having no
+ * internal route to them from any of the content is the likeliest reason
+ * Google ranks the homepage instead.
+ */
+export const VESSEL_LINKS = [
+  { id: SUN_GODDESS.slug, label: SUN_GODDESS.name, sub: `${SUN_GODDESS.lengthFt} ft, up to ${SUN_GODDESS.dayGuests} guests`, href: `/${SUN_GODDESS.slug}` },
+  { id: MERMAID_SPIRIT.slug, label: MERMAID_SPIRIT.name, sub: `${MERMAID_SPIRIT.lengthFt} ft, up to ${MERMAID_SPIRIT.dayGuests} guests`, href: `/${MERMAID_SPIRIT.slug}` },
+];
