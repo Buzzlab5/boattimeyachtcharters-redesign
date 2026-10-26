@@ -180,14 +180,14 @@ export default function Hero() {
       style={{ height: '100vh', minHeight: 720, background: 'var(--navy)' }}
     >
       {/* Background image */}
+      {/* The background lives in globals.css as .home-hero-bg so the
+          image-set() can be preceded by a plain url() fallback. A React style
+          object cannot hold two backgroundImage keys. GSAP animates only
+          transform on this element, so moving these three properties out of
+          the inline style changes nothing it touches. */}
       <div
         ref={bgRef}
-        className="absolute inset-0 will-change-transform"
-        style={{
-          backgroundImage: 'url(/new-hero-img.jpg)',
-          backgroundSize: 'cover',
-          backgroundPosition: 'center 40%',
-        }}
+        className="absolute inset-0 will-change-transform home-hero-bg"
       />
 
       {/* Gradient overlay — left to right + bottom fade */}
