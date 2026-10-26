@@ -18,3 +18,14 @@ export function trackEnquiryConversion() {
   });
   gtag('event', 'generate_lead');
 }
+
+/**
+ * Dipanggil saat pengunjung mengetuk link telepon atau email.
+ * GA4: event phone_click / email_click. Meta: event standar Contact.
+ * Aman kalau gtag atau fbq diblokir: tidak melempar error.
+ */
+export function trackContactClick(kind: 'phone' | 'email', location: string) {
+  const w = window as unknown as { gtag?: Gtag; fbq?: Gtag };
+  w.gtag?.('event', kind === 'phone' ? 'phone_click' : 'email_click', { click_location: location });
+  w.fbq?.('track', 'Contact', { content_category: kind });
+}

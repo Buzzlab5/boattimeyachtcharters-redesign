@@ -873,3 +873,25 @@ Atas permintaan pemilik situs, search bar dipindah dari bawah tombol hero ke **p
 - Halaman charter memuat konfigurasi `AW-18035686182`; `gtag.js` tetap dimuat satu kali.
 - Tidak ada error di console; tampilan tidak berubah.
 - Setelah deploy: Google Ads → Conversions menampilkan status *Recording conversions* (bisa butuh beberapa jam), dan GA4 Realtime menampilkan `generate_lead`.
+
+
+## Feature: tracking panggilan telepon (call tracking), 26 Oktober 2026
+
+**Permintaan bos:** "set up call tracking". Tujuan: tahu berapa orang yang menelepon BoatTime dari iklan dan dari situs.
+
+**Hasil pengecekan sebelum dikerjakan:**
+- Panggilan dari tombol telepon di iklan Google (call asset kampanye charter) sudah diukur oleh Google Ads sendiri: tampil 2.669 kali sejak 15 Oktober, 0 panggilan. Tidak perlu kode.
+- Di akun Google Ads sudah ada konversi "Call (+61 477 667 644)" (sumber: Calls from website, panggilan 60 detik ke atas, dibuat 7 April 2026), tetapi *phone snippet*-nya belum pernah dipasang, jadi tidak pernah mencatat apa pun.
+- Tujuh link `tel:` di situs (menu mobile, footer, FinalCta, AboutPage, CharterSections, Inquiry, CampaignSkyToSea) tidak mengirim event apa pun ke GA4 atau Meta.
+
+**Yang dikerjakan:**
+1. **`components/GoogleAdsTag.tsx`**: menambah `gtag('config', 'AW-18035686182/YiLzCJrsspccEKb2iphD', { phone_conversion_number: '+61 477 667 644' })`. Aktif di halaman yang sudah memakai tag Ads (homepage, halaman charter, halaman cruise, artikel). Untuk pengunjung dari iklan Google, nomor di halaman diganti nomor penerusan Google, dan panggilan 60 detik ke atas dihitung sebagai konversi.
+2. **`components/ContactClickTracking.tsx` (baru)**: satu listener di root layout untuk semua link `tel:` dan `mailto:`. Mengirim `phone_click` / `email_click` (parameter `click_location`: nav, footer atau page) ke GA4, dan event standar `Contact` ke Meta Pixel.
+3. **`lib/gtag.ts`**: fungsi `trackContactClick`.
+
+**Di luar cakupan:** menandai `phone_click` sebagai key event di GA4 (dikerjakan di GA4 Admin setelah event pertama masuk), jadwal jam telepon di iklan (menunggu jam kerja dari pemilik), nomor lain `tel:+61755918457` di `CampaignSkyToSea.tsx` (tidak diubah; perlu konfirmasi pemilik).
+
+**Selesai jika:**
+- Di browser, halaman dengan tag Ads menjalankan `config` dengan `phone_conversion_number` (cek `window.dataLayer`).
+- Mengetuk link telepon atau email mengirim `phone_click` / `email_click` ke GA4 (DebugView atau Realtime) dan `Contact` ke Meta (Pixel Helper).
+- Setelah ada panggilan nyata dari iklan Google, status konversi "Call (+61 477 667 644)" di Google Ads berubah dari "Awaiting conversions".
