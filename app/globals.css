@@ -2166,10 +2166,39 @@
   padding: 120px 80px;
 }
 
+/* Homepage hero background. Through the image optimiser: measured on the live
+   deployment this file is 394,186 B raw against 112,564 B at w=1080 and
+   247,882 B at w=1920. GSAP scales it to 1.08 for the Ken Burns move, which the
+   1920 variant carries comfortably. */
+.home-hero-bg {
+  /* Source-level fallback, as above: the build replaces it with a
+     -webkit-image-set pair. */
+  background-image: url('/new-hero-img.jpg');
+  background-image: image-set(
+    url('/_next/image?url=%2Fnew-hero-img.jpg&w=1080&q=75') 1x,
+    url('/_next/image?url=%2Fnew-hero-img.jpg&w=1920&q=75') 2x
+  );
+  background-size: cover;
+  background-position: center 40%;
+}
+
 .whale-bg {
   position: absolute;
   inset: 0;
+  /* The plain url() below is a source-level fallback. Verified in the built
+     CSS: the build's post-processor DROPS it and emits
+     `-webkit-image-set(...)` followed by `image-set(...)` instead, which is
+     wider coverage than the fallback was. Do not delete the url() line on the
+     grounds that it is absent from the output: it is the declaration the
+     prefixing is derived from. */
+  /* Sized for opacity 0.08 rather than for detail: measured on the live
+     optimiser, 640px is 61 KB against this file's 904 KB, and at 8 per cent
+     nothing of the difference is visible. */
   background-image: url('/humpbacks.jpg');
+  background-image: image-set(
+    url('/_next/image?url=%2Fhumpbacks.jpg&w=640&q=75') 1x,
+    url('/_next/image?url=%2Fhumpbacks.jpg&w=1080&q=75') 2x
+  );
   background-size: cover;
   background-position: center 35%;
   opacity: 0.08;
@@ -2850,7 +2879,17 @@
 .final-cta-bg {
   position: absolute;
   inset: 0;
+  /* The plain url() below is a source-level fallback. Verified in the built
+     CSS: the build's post-processor DROPS it and emits
+     `-webkit-image-set(...)` followed by `image-set(...)` instead, which is
+     wider coverage than the fallback was. Do not delete the url() line on the
+     grounds that it is absent from the output: it is the declaration the
+     prefixing is derived from. */
   background-image: url('/EDI_2899.jpg');
+  background-image: image-set(
+    url('/_next/image?url=%2FEDI_2899.jpg&w=1080&q=75') 1x,
+    url('/_next/image?url=%2FEDI_2899.jpg&w=1920&q=75') 2x
+  );
   background-size: cover;
   background-position: center;
   opacity: 0.28;
