@@ -335,7 +335,7 @@ export default function Cruises() {
           padding: '0 48px',
         }}
       >
-        <Eyebrow>Cruise Tickets</Eyebrow>
+        <Eyebrow>Cruise Tickets &middot; Sunset and Whale Watching, Gold Coast</Eyebrow>
         <h2
           style={{
             fontFamily: 'var(--font-display)',

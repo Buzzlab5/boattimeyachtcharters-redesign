@@ -274,7 +274,7 @@ export default function YachtChartersSection() {
           padding: '0 48px',
         }}
       >
-        <Eyebrow>Bespoke Experiences</Eyebrow>
+        <Eyebrow>Private and Corporate Yacht Charter &middot; Gold Coast</Eyebrow>
         <h2
           style={{
             fontFamily: 'var(--font-display)',

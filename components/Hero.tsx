@@ -255,7 +255,7 @@ export default function Hero() {
           className="section-eyebrow"
           style={{ marginBottom: 28 }}
         >
-          Superyacht Charters — Gold Coast &amp; Brisbane
+          Superyacht Charters &middot; Gold Coast &amp; Brisbane
         </div>
 
         {/* Title — masked line-by-line reveal */}
