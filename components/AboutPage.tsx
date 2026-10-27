@@ -4,8 +4,9 @@ import { useRef } from 'react';
 import { useGSAP } from '@gsap/react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import Nav from './Nav';
-import Footer from './Footer';
+import SiteShell from './site/SiteShell';
+import FaqEnquiry from './site/FaqEnquiry';
+import PageHero from './site/PageHero';
 import { Eyebrow, ItalicEm, Button } from './Shared';
 
 gsap.registerPlugin(ScrollTrigger, useGSAP);
@@ -632,16 +633,27 @@ function AboutCTA() {
 export default function AboutPage() {
   return (
     <>
-      <Nav />
-      <main>
-        <AboutHero />
+      <SiteShell>
+        <PageHero
+          image="/sun-goddess-main-upscale.png"
+          imageAlt="Sun Goddess superyacht on the Gold Coast"
+          eyebrow="Gold Coast · Est. 2013"
+          title={<>About <em>Boattime</em></>}
+          lead="Your premier destination for unforgettable maritime experiences on the stunning Gold Coast."
+          stats={[
+            { value: '5.0', label: 'Facebook rating', stars: true },
+            { value: '4.7', label: 'Google rating', stars: true },
+          ]}
+        />
+        <div className="st-zigzag st-legacy">
         <AboutIntro />
         <SocialProofStrip />
         <OurSuperyachts />
         <ServicesGrid />
         <AboutCTA />
-      </main>
-      <Footer />
+      <FaqEnquiry faqs={[]} />
+        </div>
+      </SiteShell>
     </>
   );
 }

@@ -1,8 +1,8 @@
 'use client';
 
 import Script from 'next/script';
-import Nav from './Nav';
-import Footer from './Footer';
+import SiteShell from './site/SiteShell';
+import FaqEnquiry from './site/FaqEnquiry';
 import DiningUnavailableNotice from './DiningUnavailableNotice';
 import { DINING_CRUISES_AVAILABLE } from '@/lib/products';
 import { CruiseHero, CruiseGallery, CruiseItinerary } from './CruiseSections';
@@ -289,8 +289,7 @@ export default function BuffetPage() {
         src="https://boattimeyachtcharters.rezdy.com/pluginJs"
         strategy="lazyOnload"
       />
-      <Nav />
-      <main>
+      <SiteShell>
         {/* 1 ── HERO */}
         <CruiseHero
           notice={DINING_CRUISES_AVAILABLE ? undefined : <DiningUnavailableNotice />}
@@ -307,6 +306,7 @@ export default function BuffetPage() {
           ]}
           bookingUrl="#book"
         />
+        <div className="st-zigzag st-legacy">
 
         {/* 2 ── PROMO BANNER */}
         <section
@@ -838,7 +838,7 @@ export default function BuffetPage() {
 
         {/* 6 ── SOCIAL PROOF BAR */}
         <div
-          className="light-adapt-section cruise-section"
+          className="light-adapt-section cruise-section st-compact"
           style={{
             background: 'var(--navy-mid)',
             padding: '28px 48px',
@@ -1343,8 +1343,9 @@ export default function BuffetPage() {
             </div>
           </div>
         </section>
-      </main>
-      <Footer />
+      <FaqEnquiry faqs={[]} />
+        </div>
+      </SiteShell>
     </>
   );
 }

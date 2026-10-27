@@ -2,12 +2,15 @@ import type { Metadata, Viewport } from 'next';
 import { Cormorant_Garamond, Montserrat } from 'next/font/google';
 import Script from 'next/script';
 import './globals.css';
+import './skin-bluuu.css';
+import '@/components/site/site.css';
 import { ThemeProvider } from '@/components/ThemeProvider';
 import KaiWidget from '@/components/kai/KaiWidget';
 import GoogleAnalytics from '@/components/GoogleAnalytics';
 import ContactClickTracking from '@/components/ContactClickTracking';
 import JsonLd from '@/components/JsonLd';
 import { organizationSchema, websiteSchema } from '@/lib/schema';
+import { bluuuFont } from '@/lib/skin-font';
 
 const cormorant = Cormorant_Garamond({
   subsets: ['latin'],
@@ -67,19 +70,16 @@ export const viewport: Viewport = {
   maximumScale: 5,
 };
 
-// Runs before React hydrates — prevents flash of wrong theme
-const themeScript = `(function(){try{var s=localStorage.getItem('theme');var t=s||'dark';document.documentElement.setAttribute('data-theme',t);}catch(e){}})();`;
-
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html
       lang="en"
-      className={`${cormorant.variable} ${montserrat.variable}`}
+      className={`${cormorant.variable} ${montserrat.variable} ${bluuuFont.variable}`}
+      data-skin="bluuu"
+      data-theme="light"
       suppressHydrationWarning
     >
       <head>
-        {/* eslint-disable-next-line @next/next/no-sync-scripts */}
-        <script dangerouslySetInnerHTML={{ __html: themeScript }} />
         {/* Business + site entities — present on every page */}
         <JsonLd schemas={[organizationSchema(), websiteSchema()]} />
       </head>

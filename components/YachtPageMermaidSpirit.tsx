@@ -4,8 +4,8 @@ import { useRef } from 'react';
 import { useGSAP } from '@gsap/react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import Nav from './Nav';
-import Footer from './Footer';
+import SiteShell from './site/SiteShell';
+import FaqEnquiry from './site/FaqEnquiry';
 import { CruiseHero, CruiseBookingCTA } from './CruiseSections';
 import { Eyebrow, ItalicEm, Button } from './Shared';
 import {
@@ -366,8 +366,7 @@ function PremiumServices() {
 export default function MermaidSpiritPage() {
   return (
     <>
-      <Nav />
-      <main>
+      <SiteShell>
         <CruiseHero
           eyebrow="Our Fleet · Mermaid Spirit"
           title="Mermaid Spirit"
@@ -381,6 +380,7 @@ export default function MermaidSpiritPage() {
           ]}
           bookingUrl={INQUIRY}
         />
+        <div className="st-zigzag st-legacy">
         <SpecBar />
         <VesselOverview />
         <ThreeDecks />
@@ -397,7 +397,7 @@ export default function MermaidSpiritPage() {
           specs={V.specs}
           features={V.features}
         />
-        <VesselFaq vesselName={V.name} faqs={V.faqs} />
+        
         <VesselCrossLinks
           links={[
             {
@@ -430,8 +430,9 @@ export default function MermaidSpiritPage() {
           ]}
         />
         <CruiseBookingCTA bookingUrl={INQUIRY} />
-      </main>
-      <Footer />
+      <FaqEnquiry faqs={V.faqs} />
+        </div>
+      </SiteShell>
     </>
   );
 }

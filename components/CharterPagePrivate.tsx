@@ -1,14 +1,6 @@
 'use client';
 
-import Nav from './Nav';
-import Footer from './Footer';
-import {
-  CharterHero,
-  CharterInfoBox,
-  CharterGallery,
-  CharterSplitSection,
-  type AccordionSection,
-} from './CharterSections';
+import CharterTemplate, { type AccordionSection } from './site/CharterTemplate';
 import { PRIVATE_FAQS } from '@/lib/faqs';
 
 // ── Shared accordion content (Yacht Layout, Dining, Inclusions, etc.) ─────────
@@ -327,31 +319,10 @@ const LEFT_PACKAGES = (
 
 // ── Page ──────────────────────────────────────────────────────────────────────
 
-export default function CharterPagePrivate() {
-  return (
-    <>
-      <Nav />
-      <main>
-        {/* 1. Hero */}
-        <CharterHero
-          eyebrow="Boattime YC Luxury"
-          headline={
-            <>
-              Private Yacht Charter
-              <br />
-              Gold Coast
-            </>
-          }
-          subtext="Experience the best private yacht charter in Gold Coast with Boattime Yacht Charters. Whether it's an intimate gathering or a large event, we offer tailored luxury experiences that promise an unforgettable time on the water."
-          image="/EDI_2899.jpg"
-          ctas={[
-            { label: 'Booking Enquiry', href: '/#inquiry', variant: 'primary' },
-          ]}
-        />
+// ── Page ──────────────────────────────────────────────────────────────────────
 
-        {/* 2. Overview box */}
-        <CharterInfoBox heading="Private Yacht Charter Gold Coast">
-          <div
+const OVERVIEW = (
+<div
             style={{
               fontFamily: 'var(--font-body)',
               fontSize: 14,
@@ -417,21 +388,21 @@ export default function CharterPagePrivate() {
               Book Your Private Yacht Charter Today
             </p>
           </div>
-        </CharterInfoBox>
+);
 
-        {/* 3. Photo gallery */}
-        <CharterGallery folder="private-charter-images" />
-
-        {/* 4. Packages left + Accordion right */}
-        <CharterSplitSection
-          leftContent={LEFT_PACKAGES}
-          accordionSections={ACCORDION}
-        />
-
-        {/* 5. Bottom CTA box */}
-        <CharterInfoBox heading="Private Yacht Charter Gold Coast" compact />
-      </main>
-      <Footer />
-    </>
+export default function CharterPagePrivate() {
+  return (
+    <CharterTemplate
+      kind="Private"
+      heroImage="/EDI_2899.jpg"
+      heroLead="Experience the best private yacht charter in Gold Coast with Boattime Yacht Charters. Whether it's an intimate gathering or a large event, we offer tailored luxury experiences that promise an unforgettable time on the water."
+      overviewTitle="Private Yacht Charter Gold Coast"
+      overview={OVERVIEW}
+      galleryFolder="private-charter-images"
+      packagesTitle={<>Day trips, sunsets and <em>custom charters</em></>}
+      packages={LEFT_PACKAGES}
+      accordion={ACCORDION}
+      faqs={PRIVATE_FAQS}
+    />
   );
 }

@@ -4,8 +4,9 @@ import { useRef, useState } from 'react';
 import { useGSAP } from '@gsap/react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import Nav from './Nav';
-import Footer from './Footer';
+import SiteShell from './site/SiteShell';
+import PageHero from './site/PageHero';
+import FaqEnquiry from './site/FaqEnquiry';
 import { CharterGallery } from './CharterSections';
 
 gsap.registerPlugin(ScrollTrigger, useGSAP);
@@ -433,22 +434,9 @@ function DinnerMenuCard() {
 // ── Main page ─────────────────────────────────────────────────────────────────
 
 export default function ValentinesPage() {
-  const heroRef = useRef<HTMLElement>(null);
   const bgRef   = useRef<HTMLDivElement>(null);
-  const textRef = useRef<HTMLDivElement>(null);
 
-  useGSAP(() => {
-    gsap.fromTo(bgRef.current, { scale: 1.08 }, { scale: 1, duration: 14, ease: 'none' });
-    gsap.from(textRef.current!.querySelectorAll('.hr'), {
-      y: 30, opacity: 0, duration: 0.85, stagger: 0.1, ease: 'power2.out', delay: 0.15,
-    });
-    gsap.to(bgRef.current, {
-      yPercent: 25, ease: 'none',
-      scrollTrigger: {
-        trigger: heroRef.current, start: 'top top', end: 'bottom top', scrub: true,
-      },
-    });
-  }, { scope: heroRef });
+  
 
   const SPECS = [
     'Marine Stadium Jetty & Pontoon, Main Beach, Gold Coast',
@@ -481,130 +469,27 @@ export default function ValentinesPage() {
 
   return (
     <>
-      <Nav />
-      <main>
+      <SiteShell>
 
         {/* ── Hero ── */}
-        <section
-          ref={heroRef}
-          className="relative overflow-hidden"
-          style={{ minHeight: '100vh', background: 'var(--navy)', display: 'flex', alignItems: 'flex-end' }}
-        >
-          <div
-            ref={bgRef}
-            className="absolute inset-0 will-change-transform"
-            style={{
-              backgroundImage: 'url(/sungoddess-page-boat.jpeg)',
-              backgroundSize: 'cover',
-              backgroundPosition: 'center',
-            }}
-          />
-          <div
-            className="absolute inset-0"
-            style={{
-              background:
-                'linear-gradient(to right, rgba(10,22,40,0.92) 0%, rgba(10,22,40,0.55) 55%, rgba(10,22,40,0.18) 100%), linear-gradient(to top, rgba(10,22,40,0.94) 0%, rgba(10,22,40,0.08) 50%)',
-            }}
-          />
-
-          {/* Two-column hero content */}
-          <div
-            ref={textRef}
-            className="relative z-10 w-full cruise-hero-content cruise-page-split"
-            style={{
-              display: 'grid',
-              gridTemplateColumns: '1fr 1fr',
-              gap: 60,
-              padding: '100px 80px 88px',
-              maxWidth: 1400,
-              width: '100%',
-              alignItems: 'center',
-            }}
-          >
-            {/* Left: heading + CTA */}
-            <div>
-              <div className="hr section-eyebrow" style={{ marginBottom: 24 }}>
-                BOATTIME YC LUXURY
-              </div>
-              <h1
-                className="hr"
-                style={{
-                  fontFamily: 'var(--font-display)',
-                  fontWeight: 300,
-                  fontSize: 'clamp(40px, 6vw, 80px)',
-                  lineHeight: 0.95,
-                  letterSpacing: '-0.02em',
-                  color: 'var(--cream)',
-                  marginBottom: 44,
-                }}
-              >
-                Luxury Valentines Cruise
-              </h1>
-              <div className="hr">
-                <a
-                  href="#book"
-                  className="hero-gold-tag"
-                  style={{
-                    display: 'inline-flex',
-                    alignItems: 'center',
-                    gap: 10,
-                    padding: '14px 36px',
-                    textDecoration: 'none',
-                    fontFamily: 'var(--font-body)',
-                    fontSize: 10,
-                    letterSpacing: '0.22em',
-                    textTransform: 'uppercase',
-                    fontWeight: 700,
-                    transition: 'opacity 0.2s',
-                  }}
-                  onMouseEnter={(e) => { (e.currentTarget as HTMLElement).style.opacity = '0.85'; }}
-                  onMouseLeave={(e) => { (e.currentTarget as HTMLElement).style.opacity = '1'; }}
-                >
-                  Enquire &rarr;
-                </a>
-              </div>
-            </div>
-
-            {/* Right: spec checklist */}
-            <div className="hr">
-              <ul style={{ margin: 0, padding: 0, listStyle: 'none' }}>
-                {SPECS.map((spec) => (
-                  <li
-                    key={spec}
-                    style={{
-                      display: 'flex',
-                      alignItems: 'center',
-                      gap: 14,
-                      padding: '10px 0',
-                      borderBottom: '1px solid rgba(201,168,76,0.12)',
-                    }}
-                  >
-                    {/* Gold checkmark */}
-                    <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
-                      <path d="M2 7L5.5 10.5L12 4" stroke="var(--gold)" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-                    </svg>
-                    <span
-                      style={{
-                        fontFamily: 'var(--font-body)',
-                        fontSize: 13,
-                        color: 'rgba(245,240,232,0.85)',
-                        letterSpacing: '0.04em',
-                      }}
-                    >
-                      {spec}
-                    </span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          </div>
-        </section>
-
-        {/* ── Top CTA box ── */}
-        <ValCTABox
-          title="BOARDING 5:30PM ON THE 14TH OF FEBRUARY"
-          bookHref="#book"
+        <PageHero
+          image="/sungoddess-page-boat.jpeg"
+          imageAlt="Sun Goddess superyacht on the Gold Coast"
+          eyebrow="Boattime Yacht Charters"
+          title={<>Luxury Valentines <em>Cruise</em></>}
+          lead="Boarding 5:30pm on the 14th of February"
+          facts={[
+            { label: 'Departs', value: 'Main Beach, Gold Coast' },
+            { label: 'Guests', value: 'Two guests' },
+            { label: 'Season', value: 'Enquire for this year' },
+            { label: 'Duration', value: '2.5 hours' },
+            { label: 'On arrival', value: 'Sparkling or beer' },
+            { label: 'Includes', value: 'Canapés' },
+          ]}
         />
+        <div className="st-zigzag st-legacy">
+
+        
 
         {/* ── Photo gallery ── */}
         <CharterGallery folder="valentines-day-images" />
@@ -685,116 +570,13 @@ export default function ValentinesPage() {
         {/* ── Itinerary accordion ── */}
         <ItineraryAccordion />
 
-        {/* ── Bottom CTA box ── */}
-        <ValCTABox
-          title="DEPARTS 5:30PM ON THE 14TH OF FEBRUARY"
-          bookHref="#book"
-        />
+        
 
-        {/* ── Booking widget ── */}
-        <section
-          id="book"
-          className="cruise-section"
-          style={{
-            background: 'var(--navy-mid, #0d1f38)',
-            borderTop: '1px solid rgba(201,168,76,0.1)',
-            padding: '80px 48px 100px',
-          }}
-        >
-          <div style={{ maxWidth: 1000, margin: '0 auto' }}>
-            <div style={{ textAlign: 'center', marginBottom: 48 }}>
-              <div style={{ ...GL, marginBottom: 16, display: 'block' }}>Enquire</div>
-              <h2
-                style={{
-                  fontFamily: 'var(--font-display)',
-                  fontWeight: 300,
-                  fontSize: 'clamp(32px, 4.5vw, 56px)',
-                  lineHeight: 1.0,
-                  letterSpacing: '-0.02em',
-                  color: 'var(--cream)',
-                  marginBottom: 16,
-                }}
-              >
-                Enquire about your <em style={{ fontStyle: 'italic', color: 'var(--gold)' }}>evening</em>.
-              </h2>
-              <p
-                style={{
-                  fontFamily: 'var(--font-body)',
-                  fontSize: 14,
-                  color: 'rgba(245,240,232,0.62)',
-                  lineHeight: 1.75,
-                  maxWidth: 520,
-                  margin: '0 auto',
-                  fontWeight: 300,
-                }}
-              >
-                Dates and tickets for this year are confirmed on enquiry. Sun
-                Goddess is also available as a private charter.
-              </p>
-            </div>
+        
 
-            {/* The Rezdy widget here pointed at zzz-luxury-valentines-sunset-cruise
-                (product PM0Q7Y). ZZZ is this account's own marker for a retired
-                product and it has no sessions, so the widget rendered a checkout
-                that could not sell anything. Enquiry route until a product is
-                loaded, with the two dining cruises that ARE bookable offered
-                beside it. */}
-            <div
-              style={{
-                border: '1px solid rgba(201,168,76,0.15)',
-                background: 'rgba(255,255,255,0.02)',
-                padding: '48px 24px',
-                textAlign: 'center',
-              }}
-            >
-              <a
-                href="/#inquiry"
-                style={{
-                  fontFamily: 'var(--font-body)',
-                  fontSize: 10,
-                  letterSpacing: '0.2em',
-                  textTransform: 'uppercase',
-                  fontWeight: 700,
-                  color: '#0A1628',
-                  background: '#C9A84C',
-                  padding: '14px 28px',
-                  textDecoration: 'none',
-                  display: 'inline-block',
-                }}
-              >
-                Enquire about Valentine&rsquo;s Day
-              </a>
-              <p
-                style={{
-                  fontFamily: 'var(--font-body)',
-                  fontSize: 13,
-                  color: 'rgba(245,240,232,0.6)',
-                  lineHeight: 1.8,
-                  marginTop: 24,
-                }}
-              >
-                Booking tonight instead? The{' '}
-                <a
-                  href="/luxury-broadwater-cruise"
-                  style={{ color: 'var(--gold)', textDecoration: 'none' }}
-                >
-                  sunset cruise
-                </a>{' '}
-                and the{' '}
-                <a
-                  href="/sunset-twilight-buffet-flavours-of-australia-aboard-the-mermaid-spirit"
-                  style={{ color: 'var(--gold)', textDecoration: 'none' }}
-                >
-                  twilight dining cruise
-                </a>{' '}
-                both sail regularly.
-              </p>
-            </div>
-          </div>
-        </section>
-
-      </main>
-      <Footer />
+      <FaqEnquiry faqs={[]} formLead="Dates and tickets for this year are confirmed on enquiry. Sun Goddess is also available as a private charter." />
+        </div>
+      </SiteShell>
     </>
   );
 }

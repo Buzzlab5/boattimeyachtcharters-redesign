@@ -54,18 +54,18 @@ function Field({
   options?: string[];
   multiline?: boolean;
 }) {
-  const id = `hp-enq-${name}`;
+  const id = `st-enq-${name}`;
   const common = {
     id,
     value,
     onChange: (e: React.ChangeEvent<HTMLInputElement & HTMLTextAreaElement & HTMLSelectElement>) =>
       onChange(name, e.target.value),
-    className: `hp-field__control${error ? ' hp-field__control--error' : ''}`,
+    className: `st-field__control${error ? ' st-field__control--error' : ''}`,
     'aria-invalid': error || undefined,
   };
 
   return (
-    <div className="hp-field">
+    <div className="st-field">
       <label htmlFor={id}>{label}</label>
       {options ? (
         <select {...common}>
@@ -84,7 +84,7 @@ function Field({
   );
 }
 
-export default function EnquiryForm() {
+export default function EnquiryForm({ lead }: { lead?: string }) {
   const [form, setForm] = useState<FormState>(INITIAL);
   const [status, setStatus] = useState<'idle' | 'sending' | 'sent' | 'error'>('idle');
   const [showErrors, setShowErrors] = useState(false);
@@ -121,24 +121,24 @@ export default function EnquiryForm() {
   }
 
   return (
-    <form className="hp-form" onSubmit={submit} noValidate aria-labelledby="hp-enquiry-title">
-      <div className="hp-eyebrow hp-eyebrow--left">Booking enquiry</div>
-      <h3 id="hp-enquiry-title" className="hp-form__title">
+    <form className="st-form" onSubmit={submit} noValidate aria-labelledby="st-enquiry-title">
+      <div className="st-eyebrow st-eyebrow--left">Booking enquiry</div>
+      <h3 id="st-enquiry-title" className="st-form__title">
         Tell us the <em>occasion</em>
       </h3>
-      <p className="hp-form__lead">
-        Share the date, the guests and the reason, and our concierge replies within the hour.
+      <p className="st-form__lead">
+        {lead ?? 'Share the date, the guests and the reason, and our concierge replies within the hour.'}
       </p>
 
-      <div className="hp-form__row">
+      <div className="st-form__row">
         <Field label="Full name" name="name" value={form.name} onChange={update} placeholder="Eleanor Vance" error={missing('name')} />
         <Field label="Email" name="email" value={form.email} onChange={update} type="email" placeholder="eleanor@vance.co" error={missing('email')} />
       </div>
-      <div className="hp-form__row">
+      <div className="st-form__row">
         <Field label="Phone" name="phone" value={form.phone} onChange={update} type="tel" placeholder="+61" error={missing('phone')} />
         <Field label="Preferred date" name="date" value={form.date} onChange={update} placeholder="Saturday, 3 May" error={missing('date')} />
       </div>
-      <div className="hp-form__row">
+      <div className="st-form__row">
         <Field label="Charter type" name="charter" value={form.charter} onChange={update} options={CHARTERS} />
         <Field label="Guests" name="guests" value={form.guests} onChange={update} placeholder="12" error={missing('guests')} />
       </div>
@@ -146,22 +146,22 @@ export default function EnquiryForm() {
       <Field label="Anything else" name="note" value={form.note} onChange={update} multiline placeholder="A quiet afternoon, champagne on the foredeck." error={missing('note')} />
 
       {showErrors && hasErrors && (
-        <p className="hp-form__msg hp-form__msg--error" role="alert">
+        <p className="st-form__msg st-form__msg--error" role="alert">
           Please fill in all fields before sending.
         </p>
       )}
 
-      <button type="submit" className="hp-btn hp-btn--gold hp-btn--lg hp-form__submit" disabled={status === 'sending'}>
+      <button type="submit" className="st-btn st-btn--primary st-btn--lg st-form__submit" disabled={status === 'sending'}>
         {status === 'sending' ? 'Sending…' : 'Send enquiry'}
       </button>
 
       {status === 'sent' && (
-        <p className="hp-form__msg hp-form__msg--ok" role="status">
+        <p className="st-form__msg st-form__msg--ok" role="status">
           Received. Our concierge replies within the hour.
         </p>
       )}
       {status === 'error' && (
-        <p className="hp-form__msg hp-form__msg--error" role="alert">
+        <p className="st-form__msg st-form__msg--error" role="alert">
           Something went wrong. Please email us directly at info@boattimeyachtcharters.com.au
         </p>
       )}

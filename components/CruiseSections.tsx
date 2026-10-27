@@ -1,5 +1,6 @@
 'use client';
 
+import PageHero from './site/PageHero';
 import { useRef, useState, useEffect, type ReactNode } from 'react';
 import { useGSAP } from '@gsap/react';
 import gsap from 'gsap';
@@ -54,7 +55,6 @@ export function CruiseHero({
   image,
   stats,
   bookingUrl,
-  titleFontSize,
   notice,
 }: {
   eyebrow: string;
@@ -64,139 +64,24 @@ export function CruiseHero({
   stats: StatPill[];
   bookingUrl: string;
   titleFontSize?: string;
-  /** Optional message shown above the eyebrow, e.g. a "currently unavailable" notice. */
+  /** Optional message shown above the buttons, e.g. a "currently unavailable" notice. */
   notice?: React.ReactNode;
 }) {
-  const heroRef = useRef<HTMLElement>(null);
-  const bgRef = useRef<HTMLDivElement>(null);
-  const textRef = useRef<HTMLDivElement>(null);
-
-  useGSAP(
-    () => {
-      gsap.fromTo(
-        bgRef.current,
-        { scale: 1.08 },
-        { scale: 1, duration: 14, ease: 'none' },
-      );
-      gsap.from(textRef.current!.querySelectorAll('.hr'), {
-        y: 30,
-        opacity: 0,
-        duration: 0.85,
-        stagger: 0.1,
-        ease: 'power2.out',
-        delay: 0.15,
-      });
-      gsap.to(bgRef.current, {
-        yPercent: 25,
-        ease: 'none',
-        scrollTrigger: {
-          trigger: heroRef.current,
-          start: 'top top',
-          end: 'bottom top',
-          scrub: true,
-        },
-      });
-    },
-    { scope: heroRef },
-  );
-
   return (
-    <section
-      ref={heroRef}
-      className="relative overflow-hidden flex items-center"
-      style={{ minHeight: '100vh', background: 'var(--navy)' }}
-    >
-      <div
-        ref={bgRef}
-        className="absolute inset-0 will-change-transform"
-        style={{
-          backgroundImage: heroBackground(image),
-          backgroundSize: 'cover',
-          backgroundPosition: 'center',
-        }}
-      />
-      <div
-        className="absolute inset-0"
-        style={{
-          background:
-            'linear-gradient(to right, rgba(10,22,40,0.9) 0%, rgba(10,22,40,0.58) 55%, rgba(10,22,40,0.28) 100%), linear-gradient(to top, rgba(10,22,40,0.92) 0%, rgba(10,22,40,0.08) 50%)',
-        }}
-      />
-      <div
-        ref={textRef}
-        className="relative z-10 w-full cruise-hero-content"
-        style={{
-          paddingLeft: 48,
-          paddingRight: 48,
-          paddingTop: 100,
-          maxWidth: 1200,
-        }}
-      >
-        {notice}
-        <div className="section-eyebrow hr" style={{ marginBottom: 24 }}>
-          {eyebrow}
-        </div>
-        <h1
-          className="hr"
-          style={{
-            fontFamily: 'var(--font-display)',
-            fontWeight: 300,
-            fontSize: titleFontSize ?? 'clamp(48px, 7vw, 96px)',
-            lineHeight: 0.95,
-            letterSpacing: '-0.02em',
-            color: 'var(--cream)',
-            marginBottom: 36,
-          }}
-        >
+    <PageHero
+      image={image}
+      imageAlt={title}
+      eyebrow={eyebrow}
+      title={
+        <>
           {title}
-          {titleAccent && (
-            <>
-              <br />
-              <span style={{ fontStyle: 'italic', color: 'var(--gold-light)' }}>
-                {titleAccent}
-              </span>
-            </>
-          )}
-        </h1>
-        <div
-          className="hr flex flex-wrap cruise-stats-row"
-          style={{ gap: 10, marginBottom: 44 }}
-        >
-          {stats.map((s) => (
-            <div
-              key={s.label}
-              style={{
-                padding: '12px 22px',
-                border: '1px solid rgba(201,168,76,0.38)',
-                background: 'rgba(10,22,40,0.52)',
-                backdropFilter: 'blur(8px)',
-                WebkitBackdropFilter: 'blur(8px)',
-              }}
-            >
-              <div style={{ ...GL, marginBottom: 5 }}>{s.label}</div>
-              <div
-                style={{
-                  fontFamily: 'var(--font-display)',
-                  fontSize: 22,
-                  color: 'var(--cream)',
-                  lineHeight: 1,
-                }}
-              >
-                {s.value}
-              </div>
-            </div>
-          ))}
-        </div>
-        <div className="hr flex gap-4 flex-wrap">
-          <Button variant="primary" href={bookingUrl}>
-            Book Now
-          </Button>
-          <Button variant="ghost" href="#itinerary">
-            View Details
-          </Button>
-        </div>
-      </div>
-    </section>
+          {titleAccent && <span className="st-h1-sub">{titleAccent}</span>}
+        </>
+      }
+      lead={notice}
+      facts={stats}
+      primary={{ label: 'Book now', href: bookingUrl }}
+    />
   );
 }
 

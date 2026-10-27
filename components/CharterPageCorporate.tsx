@@ -1,15 +1,7 @@
 'use client';
 
-import Nav from './Nav';
-import Footer from './Footer';
 import { CORPORATE_FAQS } from '@/lib/faqs';
-import {
-  CharterHero,
-  CharterInfoBox,
-  CharterGallery,
-  CharterSplitSection,
-  type AccordionSection,
-} from './CharterSections';
+import CharterTemplate, { type AccordionSection } from './site/CharterTemplate';
 
 // ── Accordion content ─────────────────────────────────────────────────────────
 
@@ -390,31 +382,10 @@ const LEFT_PACKAGES = (
 
 // ── Page ──────────────────────────────────────────────────────────────────────
 
-export default function CharterPageCorporate() {
-  return (
-    <>
-      <Nav />
-      <main>
-        {/* 1. Hero */}
-        <CharterHero
-          eyebrow="Boattime YC Luxury"
-          headline={
-            <>
-              Corporate Yacht Charter
-              <br />
-              Gold Coast
-            </>
-          }
-          subtext="Welcome to Boattime Yacht Charters, where luxury meets business. Whether you're planning a networking event, team-building retreat, or product launch, we provide a unique and impressive setting that will leave a lasting impact on your guests."
-          image="/corporate-charter-images/06_Mermaid-Insidfe-1-1.webp"
-          ctas={[
-            { label: 'Booking Enquiry', href: '/#inquiry', variant: 'primary' },
-          ]}
-        />
+// ── Page ──────────────────────────────────────────────────────────────────────
 
-        {/* 2. Overview box */}
-        <CharterInfoBox heading="Corporate Yacht Charter Gold Coast">
-          <div
+const OVERVIEW = (
+<div
             style={{
               fontFamily: 'var(--font-body)',
               fontSize: 14,
@@ -495,21 +466,21 @@ export default function CharterPageCorporate() {
               enjoy the luxurious experience.
             </p>
           </div>
-        </CharterInfoBox>
+);
 
-        {/* 3. Photo gallery */}
-        <CharterGallery folder="corporate-charter-images" />
-
-        {/* 4. Packages left + Accordion right */}
-        <CharterSplitSection
-          leftContent={LEFT_PACKAGES}
-          accordionSections={ACCORDION}
-        />
-
-        {/* 5. Bottom CTA box */}
-        <CharterInfoBox heading="Corporate Yacht Charter Gold Coast" compact />
-      </main>
-      <Footer />
-    </>
+export default function CharterPageCorporate() {
+  return (
+    <CharterTemplate
+      kind="Corporate"
+      heroImage="/corporate-charter-images/06_Mermaid-Insidfe-1-1.webp"
+      heroLead="Welcome to Boattime Yacht Charters, where luxury meets business. Whether you're planning a networking event, team-building retreat, or product launch, we provide a unique and impressive setting that will leave a lasting impact on your guests."
+      overviewTitle="Corporate Yacht Charter Gold Coast"
+      overview={OVERVIEW}
+      galleryFolder="corporate-charter-images"
+      packagesTitle={<>Ways to host your <em>team</em></>}
+      packages={LEFT_PACKAGES}
+      accordion={ACCORDION}
+      faqs={CORPORATE_FAQS}
+    />
   );
 }

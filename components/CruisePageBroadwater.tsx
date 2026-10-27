@@ -1,8 +1,8 @@
 'use client';
 
 import Script from 'next/script';
-import Nav from './Nav';
-import Footer from './Footer';
+import SiteShell from './site/SiteShell';
+import FaqEnquiry from './site/FaqEnquiry';
 import { CruiseHero, CruiseYachts, CruiseItinerary } from './CruiseSections';
 import { VesselFaq } from './YachtSections';
 import { SUNSET_FAQS } from '@/lib/cruise-faqs';
@@ -258,8 +258,7 @@ export default function BroadwaterPage() {
         src="https://boattimeyachtcharters.rezdy.com/pluginJs"
         strategy="lazyOnload"
       />
-      <Nav />
-      <main>
+      <SiteShell>
         {/* 1 ── HERO */}
         <CruiseHero
           eyebrow="Cruise Tickets · Sunset Cruise Gold Coast"
@@ -281,6 +280,7 @@ export default function BroadwaterPage() {
           ]}
           bookingUrl="#book"
         />
+        <div className="st-zigzag st-legacy">
 
         {/* 2 ── PROMOTIONAL BANNER */}
         <section
@@ -508,7 +508,7 @@ export default function BroadwaterPage() {
 
         {/* 4 ── SOCIAL PROOF */}
         <div
-          className="light-adapt-section cruise-section"
+          className="light-adapt-section cruise-section st-compact"
           style={{
             background: 'var(--navy-mid)',
             padding: '28px 48px',
@@ -708,8 +708,9 @@ export default function BroadwaterPage() {
             </div>
           </div>
         </section>
-      </main>
-      <Footer />
+      <FaqEnquiry faqs={[]} />
+        </div>
+      </SiteShell>
     </>
   );
 }

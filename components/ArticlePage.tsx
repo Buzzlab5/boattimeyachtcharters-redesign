@@ -4,8 +4,7 @@ import { useRef, useEffect } from 'react';
 import { useGSAP } from '@gsap/react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import Nav from './Nav';
-import Footer from './Footer';
+import SiteShell from './site/SiteShell';
 import { Icon } from './Shared';
 import { PRODUCTS, fallbackProductIds } from '@/lib/products';
 import { VESSEL_LINKS } from '@/lib/vessels';
@@ -339,12 +338,10 @@ function ArticleBody({ post, relatedPosts }: { post: Post; relatedPosts: Related
 export default function ArticlePage({ post, relatedPosts }: { post: Post; relatedPosts: RelatedPost[] }) {
   return (
     <>
-      <Nav />
-      <main>
+      <SiteShell>
         <ArticleHero post={post} />
         <ArticleBody post={post} relatedPosts={relatedPosts} />
-      </main>
-      <Footer />
+      </SiteShell>
     </>
   );
 }

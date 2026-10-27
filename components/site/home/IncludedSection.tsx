@@ -1,5 +1,5 @@
 import type { ReactNode } from 'react';
-import SectionHead from './SectionHead';
+import SectionHead from '../SectionHead';
 
 // DRAFT copy: taken from features already published on the site (vessel
 // specs, FAQ, guest reviews). The team should confirm each one applies to
@@ -15,7 +15,7 @@ const ICON = {
   strokeLinecap: 'round' as const,
   strokeLinejoin: 'round' as const,
   'aria-hidden': true,
-  className: 'hp-inc__icon',
+  className: 'st-inc__icon',
 };
 
 const ITEMS: { title: string; text: string; icon: ReactNode }[] = [
@@ -90,21 +90,21 @@ const ITEMS: { title: string; text: string; icon: ReactNode }[] = [
 
 export default function IncludedSection() {
   return (
-    <div role="region" className="hp-section" aria-labelledby="hp-included">
-      <div className="hp-wrap">
+    <div role="region" className="st-section" aria-labelledby="st-included">
+      <div className="st-wrap">
         <SectionHead
           eyebrow="Included"
           title={
-            <span id="hp-included">
+            <span id="st-included">
               Everything you want is already <em>covered</em>
             </span>
           }
           sub="Everything on board, so you can focus on the day."
         />
-        <div className="hp-grid3">
+        <div className="st-grid3">
           {ITEMS.map((item, i) => (
-            <article key={item.title} className="hp-inc">
-              <span className="hp-inc__num" aria-hidden="true">{String(i + 1).padStart(2, '0')}</span>
+            <article key={item.title} className="st-inc">
+              <span className="st-inc__num" aria-hidden="true">{String(i + 1).padStart(2, '0')}</span>
               {item.icon}
               <div>
                 <h3>{item.title}</h3>

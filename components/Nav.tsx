@@ -1,15 +1,15 @@
 'use client';
 
 import { useState, useEffect, useRef } from 'react';
-import { useTheme } from './ThemeProvider';
 import { EXPERIENCE_PRODUCTS as EXPERIENCE_ITEMS, CHARTER_PRODUCTS as CHARTER_ITEMS } from '@/lib/products';
 
-function handleHashNav(e: React.MouseEvent<HTMLAnchorElement>, href: string, onThisPage = false) {
+function handleHashNav(e: React.MouseEvent<HTMLAnchorElement>, href: string) {
   if (!href.startsWith('/#')) return;
   const hash = href.slice(1);
-  if (onThisPage || window.location.pathname === '/') {
+  const local = document.querySelector(hash);
+  if (local) {
     e.preventDefault();
-    const el = document.querySelector(hash);
+    const el = local;
     if (!el) return;
     const navH = (document.querySelector('.site-header') as HTMLElement)?.offsetHeight ?? 90;
     const top = el.getBoundingClientRect().top + window.scrollY - navH;
@@ -21,12 +21,10 @@ function handleHashNav(e: React.MouseEvent<HTMLAnchorElement>, href: string, onT
   }
 }
 
-// `preview` is used only by /homepage-preview: the section links (Fleet, Whale,
-// FAQ) point at homepage sections that page does not have, so they are left
-// out, the two dropdown labels open their menu instead of jumping to a
-// section, and the enquiry buttons scroll to the form on the same page.
-export default function Nav({ preview = false }: { preview?: boolean } = {}) {
-  const { theme, toggle } = useTheme();
+// The site navbar. The old section links (Fleet, Whale, FAQ) are gone on purpose: they
+// pointed at homepage sections. The two dropdown labels open their menu instead
+// of jumping to a section.
+export default function Nav() {
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
@@ -53,12 +51,8 @@ export default function Nav({ preview = false }: { preview?: boolean } = {}) {
     closeTimer.current = setTimeout(() => setActiveDropdown(null), 120);
   }
 
-  // Props for the "Experiences" / "Yacht Charter" labels. Normally they jump to
-  // a homepage section; in preview mode they only open their dropdown.
-  function ddLabelProps(key: string, hash: string) {
-    if (!preview) {
-      return { href: `/${hash}`, onClick: (e: React.MouseEvent<HTMLAnchorElement>) => handleHashNav(e, `/${hash}`) };
-    }
+  // Props for the "Experiences" / "Yacht Charter" labels: they only open their dropdown.
+  function ddLabelProps(key: string) {
     return {
       role: 'button' as const,
       tabIndex: 0,
@@ -91,16 +85,7 @@ export default function Nav({ preview = false }: { preview?: boolean } = {}) {
 
         {/* Desktop nav */}
         <nav className="site-header__nav">
-          {!preview && (
-            <>
-              <a href="/#fleet" className="site-header__nav-link" onClick={(e) => handleHashNav(e, '/#fleet')}>
-                Fleet
-              </a>
-              <a href="/#whale" className="site-header__nav-link" onClick={(e) => handleHashNav(e, '/#whale')}>
-                Whale
-              </a>
-            </>
-          )}
+          
 
           {/* Experiences dropdown */}
           <div
@@ -110,7 +95,7 @@ export default function Nav({ preview = false }: { preview?: boolean } = {}) {
           >
             <a
               className={`site-header__nav-link site-header__nav-link--dd${activeDropdown === 'experiences' ? ' site-header__nav-link--dd-open' : ''}`}
-              {...ddLabelProps('experiences', '#experiences')}
+              {...ddLabelProps('experiences')}
             >
               Experiences
               <svg width="8" height="5" viewBox="0 0 8 5" fill="none" aria-hidden="true" className="nav-dd-chevron">
@@ -141,7 +126,7 @@ export default function Nav({ preview = false }: { preview?: boolean } = {}) {
           >
             <a
               className={`site-header__nav-link site-header__nav-link--dd${activeDropdown === 'charter' ? ' site-header__nav-link--dd-open' : ''}`}
-              {...ddLabelProps('charter', '#horizons')}
+              {...ddLabelProps('charter')}
             >
               Yacht Charter
               <svg width="8" height="5" viewBox="0 0 8 5" fill="none" aria-hidden="true" className="nav-dd-chevron">
@@ -162,11 +147,7 @@ export default function Nav({ preview = false }: { preview?: boolean } = {}) {
             </div>
           </div>
 
-          {!preview && (
-            <a href="/#faq" className="site-header__nav-link" onClick={(e) => handleHashNav(e, '/#faq')}>
-              FAQ
-            </a>
-          )}
+          
           <a href="/boattime-news" className="site-header__nav-link">
             Blogs
           </a>
@@ -174,30 +155,6 @@ export default function Nav({ preview = false }: { preview?: boolean } = {}) {
 
         {/* Right side */}
         <div className="site-header__right">
-          <button
-            onClick={toggle}
-            className="theme-toggle-btn"
-            aria-label={`Switch to ${theme === 'dark' ? 'light' : 'dark'} mode`}
-          >
-            {theme === 'dark' ? (
-              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-                <circle cx="12" cy="12" r="5" />
-                <line x1="12" y1="1" x2="12" y2="3" />
-                <line x1="12" y1="21" x2="12" y2="23" />
-                <line x1="4.22" y1="4.22" x2="5.64" y2="5.64" />
-                <line x1="18.36" y1="18.36" x2="19.78" y2="19.78" />
-                <line x1="1" y1="12" x2="3" y2="12" />
-                <line x1="21" y1="12" x2="23" y2="12" />
-                <line x1="4.22" y1="19.78" x2="5.64" y2="18.36" />
-                <line x1="18.36" y1="5.64" x2="19.78" y2="4.22" />
-              </svg>
-            ) : (
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-                <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
-              </svg>
-            )}
-          </button>
-
           <a href="/tickets" className="site-header__tickets">
             <span>Tickets</span>
           </a>
@@ -219,21 +176,7 @@ export default function Nav({ preview = false }: { preview?: boolean } = {}) {
         aria-hidden={!mobileOpen}
       >
         <ul className="mobile-drawer__nav">
-          {!preview && (
-            <>
-              <li style={{ '--i': 0 } as React.CSSProperties}>
-                <a href="/#fleet" data-num="01" onClick={(e) => { handleHashNav(e, '/#fleet'); setMobileOpen(false); }}>
-                  <span><em>Fleet</em></span>
-                </a>
-              </li>
-
-              <li style={{ '--i': 1 } as React.CSSProperties}>
-                <a href="/#whale" data-num="02" onClick={(e) => { handleHashNav(e, '/#whale'); setMobileOpen(false); }}>
-                  <span><em>Whale</em></span>
-                </a>
-              </li>
-            </>
-          )}
+          
 
           {/* Experiences accordion */}
           <li style={{ '--i': 2 } as React.CSSProperties} className="mobile-drawer__nav-section">
@@ -292,13 +235,7 @@ export default function Nav({ preview = false }: { preview?: boolean } = {}) {
               <span><em>Blogs</em></span>
             </a>
           </li>
-          {!preview && (
-            <li style={{ '--i': 5 } as React.CSSProperties}>
-              <a href="/#faq" data-num="06" onClick={(e) => { handleHashNav(e, '/#faq'); setMobileOpen(false); }}>
-                <span><em>FAQ</em></span>
-              </a>
-            </li>
-          )}
+          
         </ul>
 
         <div className="mobile-drawer__footer">
@@ -315,13 +252,13 @@ export default function Nav({ preview = false }: { preview?: boolean } = {}) {
             </div>
           </div>
           <div className="mobile-drawer__footer-ctas">
-            <a href="/#inquiry" className="mobile-drawer__cta" onClick={(e) => { handleHashNav(e, '/#inquiry', preview); setMobileOpen(false); }}>
+            <a href="/#inquiry" className="mobile-drawer__cta" onClick={(e) => { handleHashNav(e, '/#inquiry'); setMobileOpen(false); }}>
               Reserve a Cruise →
             </a>
             <a
               href="/#inquiry"
               className="mobile-drawer__cta mobile-drawer__cta--secondary"
-              onClick={(e) => { handleHashNav(e, '/#inquiry', preview); setMobileOpen(false); }}
+              onClick={(e) => { handleHashNav(e, '/#inquiry'); setMobileOpen(false); }}
             >
               Custom Enquiry →
             </a>

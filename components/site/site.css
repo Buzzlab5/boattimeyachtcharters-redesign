@@ -1,0 +1,555 @@
+/* The site kit: layout and component styles shared by every page (components/site/).
+   Colours, fonts and radii are the tokens in app/skin-bluuu.css.
+   Every class starts with .st- (site).
+   bluuu loads only weights 400 and 600, so its 700/900 text renders as 600;
+   the same is used here. */
+
+.st-root {
+  background: var(--st-bg);
+  color: var(--st-text);
+  font-family: var(--bl-font);
+  -webkit-font-smoothing: antialiased;
+}
+:where(.st-root a) { color: inherit; text-decoration: none; } /* zero specificity: any class colour wins */
+
+/* ─── Shared section pieces ─────────────────────────────────────────────── */
+
+.st-section { padding: 112px 24px; background: var(--st-bg); scroll-margin-top: 72px; }
+.st-wrap { max-width: 1120px; margin: 0 auto; }
+
+.st-head { text-align: center; margin-bottom: 56px; }
+.st-eyebrow {
+  font-size: 13px; font-weight: 600; letter-spacing: 2.4px; text-transform: uppercase;
+  color: var(--st-accent); margin-bottom: 16px;
+}
+.st-eyebrow--left { text-align: left; }
+.st-h2 {
+  font-weight: 600; font-size: clamp(30px, 4vw, 40px); line-height: 1.1; letter-spacing: -1px;
+  color: var(--st-text); margin: 0;
+}
+.st-h2--left { text-align: left; }
+.st-h2 em, .st-form__title em { font-style: italic; font-weight: 600; color: var(--st-accent); }
+.st-sub { max-width: 560px; margin: 16px auto 0; font-size: 17px; line-height: 1.6; color: var(--st-muted); }
+
+/* ─── Buttons: pills ────────────────────────────────────────────────────── */
+
+.st-btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 10px;
+  height: 48px; padding: 0 28px; border-radius: var(--bl-radius-pill);
+  font-family: var(--bl-font); font-size: 15px; font-weight: 600; white-space: nowrap; cursor: pointer;
+  color: #fff; background: rgba(255, 255, 255, 0.12); border: 1px solid rgba(255, 255, 255, 0.28);
+  backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+  transition: background 0.3s var(--ease-brand), box-shadow 0.3s, transform 0.3s var(--ease-brand);
+}
+.st-btn:hover { background: rgba(255, 255, 255, 0.2); }
+.st-btn:focus-visible { outline: 2px solid var(--bl-sky-soft); outline-offset: 3px; }
+.st-btn--primary {
+  background: var(--bl-cta); border-color: var(--bl-cta); color: #fff; backdrop-filter: none; -webkit-backdrop-filter: none;
+  box-shadow: 0 0 18px 4px var(--bl-cta-glow);
+}
+.st-btn--primary:hover { background: var(--bl-blue-600); border-color: var(--bl-blue-600); transform: translateY(-1px); box-shadow: 0 0 24px 6px var(--bl-cta-glow); }
+.st-btn--lg { height: 52px; padding: 0 32px; }
+/* The hero buttons share one width (the widest sets it) and stack full-width on a phone */
+.st-hero__actions { margin-top: 36px; display: grid; grid-auto-flow: column; grid-auto-columns: 1fr; gap: 12px; width: max-content; max-width: 100%; margin-left: auto; margin-right: auto; }
+.st-hero__actions .st-btn { width: 100%; }
+
+/* ─── Hero ──────────────────────────────────────────────────────────────── */
+
+.st-hero {
+  position: relative; min-height: 100svh; display: flex; align-items: center; justify-content: center;
+  text-align: center; overflow: hidden; padding: 120px 24px 140px;
+}
+.st-hero--tall { min-height: min(82svh, 820px); padding-bottom: 96px; }
+.st-hero__bg { position: absolute; inset: 0; animation: st-kenburns 16s ease-out both; }
+.st-hero__bg video { position: absolute; inset: 0; }
+.st-hero__bg img, .st-hero__bg video { width: 100%; height: 100%; object-fit: cover; object-position: center 40%; }
+.st-hero__shade {
+  position: absolute; inset: 0;
+  background:
+    radial-gradient(ellipse at center, rgba(7, 15, 31, 0.5) 0%, rgba(7, 15, 31, 0.72) 100%),
+    linear-gradient(to top, rgba(7, 15, 31, 0.9) 0%, rgba(7, 15, 31, 0) 40%),
+    linear-gradient(to bottom, rgba(7, 15, 31, 0.6) 0%, rgba(7, 15, 31, 0) 24%);
+}
+.st-hero__inner { position: relative; z-index: 2; max-width: 1240px; animation: st-rise 1s var(--ease-brand) 0.15s both; }
+.st-pill {
+  display: inline-flex; align-items: center; padding: 8px 16px; margin-bottom: 28px; border-radius: var(--bl-radius-pill);
+  background: rgba(15, 23, 42, 0.55); border: 1px solid rgba(255, 255, 255, 0.16);
+  backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
+  font-size: 11px; font-weight: 600; letter-spacing: 0.8px; text-transform: uppercase; color: #fff;
+}
+.st-hero h1 {
+  margin: 0; font-weight: 600; font-size: clamp(40px, 7vw, 96px); line-height: 0.98; letter-spacing: -3px; color: #fff;
+  text-shadow: 0 2px 30px rgba(7, 15, 31, 0.5);
+}
+.st-hero h1 em { font-style: italic; font-weight: 600; color: var(--bl-sky); }
+.st-hero h1 { text-wrap: balance; overflow-wrap: anywhere; }
+.st-hero__lead { margin: 26px auto 0; max-width: 560px; font-size: 17px; line-height: 1.6; color: rgba(255, 255, 255, 0.75); }
+.st-hero__price { margin: 16px 0 32px; font-size: 15px; color: rgba(255, 255, 255, 0.8); }
+.st-hero__price strong { font-size: 22px; font-weight: 600; color: #fff; margin: 0 4px; }
+
+.st-hero__stats { margin-top: 52px; display: flex; justify-content: center; align-items: center; gap: 36px; }
+.st-stat { text-align: center; }
+.st-stat b { display: block; font-weight: 600; font-size: 32px; line-height: 1; color: #fff; }
+.st-stat .st-stars { display: block; margin: 8px 0 6px; font-size: 11px; letter-spacing: 3px; color: var(--bl-sky-soft); }
+.st-stat small { display: block; font-size: 11px; font-weight: 600; letter-spacing: 1.5px; text-transform: uppercase; color: rgba(255, 255, 255, 0.5); }
+.st-stat-rule { width: 1px; align-self: stretch; background: rgba(255, 255, 255, 0.2); }
+
+.st-hero__cue {
+  position: absolute; bottom: 28px; left: 50%; transform: translateX(-50%); z-index: 2;
+  display: flex; flex-direction: column; align-items: center; gap: 10px;
+  font-size: 11px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; color: rgba(255, 255, 255, 0.5);
+}
+.st-hero__cue i { width: 1px; height: 36px; background: linear-gradient(var(--bl-sky-soft), transparent); animation: st-cue 2s ease-in-out infinite; transform-origin: top; }
+
+@keyframes st-kenburns { from { transform: scale(1.08); } to { transform: scale(1); } }
+@keyframes st-rise { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: none; } }
+@keyframes st-cue { 0%, 100% { transform: scaleY(1); opacity: 0.9; } 50% { transform: scaleY(0.4); opacity: 0.4; } }
+
+/* Duration / price / season chips under a cruise hero */
+.st-facts { margin: 28px 0 32px; padding: 0; display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; }
+.st-facts__item {
+  padding: 10px 20px; border-radius: var(--bl-radius-md); text-align: left;
+  background: rgba(15, 23, 42, 0.55); border: 1px solid rgba(255, 255, 255, 0.14);
+  backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
+}
+.st-facts dt { font-size: 11px; font-weight: 600; letter-spacing: 1.5px; text-transform: uppercase; color: rgba(255, 255, 255, 0.55); }
+.st-facts dd { margin: 4px 0 0; font-size: 17px; font-weight: 600; color: #fff; }
+
+/* ─── Included ──────────────────────────────────────────────────────────── */
+
+.st-grid3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+.st-inc {
+  position: relative; padding: 28px; display: flex; gap: 20px; align-items: flex-start;
+  background: var(--st-card); border: 1px solid var(--st-card-border); border-radius: var(--bl-radius-md); box-shadow: var(--st-card-shadow);
+  transition: transform 0.4s var(--ease-brand), box-shadow 0.4s;
+}
+.st-inc:hover { transform: translateY(-3px); box-shadow: var(--st-card-shadow-hover); }
+.st-inc__num { position: absolute; top: 14px; right: 20px; font-size: 32px; font-weight: 600; letter-spacing: -1px; line-height: 1; color: var(--st-num); }
+.st-inc__icon { flex: none; width: 52px; height: 52px; color: var(--st-accent); }
+.st-inc h3 { margin: 2px 0 8px; font-size: 15px; font-weight: 600; color: var(--st-text); }
+.st-inc p { margin: 0; font-size: 13px; line-height: 1.65; color: var(--st-body); }
+
+/* ─── Photo cards (cruise type + experiences) ───────────────────────────── */
+
+.st-card {
+  position: relative; display: block; overflow: hidden; isolation: isolate;
+  background: var(--bl-navy); border: 1px solid rgba(255, 255, 255, 0.12); border-radius: var(--bl-radius-lg);
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.3);
+  transition: transform 0.5s var(--ease-brand), box-shadow 0.5s;
+}
+.st-card:hover { transform: translateY(-4px); box-shadow: 0 12px 36px rgba(0, 0, 0, 0.4); }
+.st-card img { object-fit: cover; transition: transform 1.2s var(--ease-brand); z-index: -2; }
+.st-card:hover img { transform: scale(1.05); }
+.st-card::after {
+  content: ''; position: absolute; inset: 0; z-index: -1;
+  background: linear-gradient(to top, rgba(7, 15, 31, 0.96) 0%, rgba(7, 15, 31, 0.78) 45%, rgba(7, 15, 31, 0.08) 100%);
+}
+.st-card__body { position: absolute; left: 0; right: 0; bottom: 0; padding: 30px 32px; }
+.st-card__tag {
+  display: inline-block; margin-bottom: 14px; padding: 6px 12px; border-radius: var(--bl-radius-pill);
+  background: rgba(15, 23, 42, 0.75); border: 1px solid rgba(255, 255, 255, 0.12);
+  font-size: 11px; font-weight: 600; letter-spacing: 0.8px; text-transform: uppercase; color: #fff;
+}
+.st-card h3 { margin: 0 0 8px; font-size: 32px; font-weight: 600; line-height: 1.1; letter-spacing: -1px; color: #fff; }
+.st-card p { margin: 0 0 18px; max-width: 460px; font-size: 14px; line-height: 1.6; color: rgba(255, 255, 255, 0.7); }
+.st-card__foot {
+  display: flex; justify-content: space-between; align-items: baseline; gap: 16px; padding-top: 14px;
+  border-top: 1px solid rgba(255, 255, 255, 0.12);
+  font-size: 12px; font-weight: 600; letter-spacing: 1.5px; text-transform: uppercase; color: rgba(255, 255, 255, 0.5);
+}
+.st-card__price { white-space: nowrap; font-size: 22px; font-weight: 600; letter-spacing: 0; text-transform: none; color: #fff; }
+.st-card__price small { margin-left: 4px; font-size: 12px; font-weight: 400; color: rgba(255, 255, 255, 0.55); }
+
+.st-grid2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; }
+.st-grid2 .st-card { height: 460px; }
+.st-exp-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+.st-exp-grid .st-card { height: 520px; }
+.st-exp-grid .st-card h3 { font-size: 28px; }
+
+/* ─── Gallery ───────────────────────────────────────────────────────────── */
+
+.st-gallery {
+  position: relative; display: grid; gap: 6px; height: 520px; overflow: hidden;
+  grid-template-columns: 2fr 1fr 1fr; grid-template-rows: 1fr 1fr;
+  border-radius: var(--bl-radius-lg); box-shadow: 0 8px 32px rgba(15, 23, 42, 0.12);
+}
+.st-gallery figure { position: relative; margin: 0; overflow: hidden; }
+.st-gallery figure:first-child { grid-row: 1 / 3; }
+.st-gallery img { object-fit: cover; transition: transform 1.2s var(--ease-brand); }
+.st-gallery figure:hover img { transform: scale(1.05); }
+.st-gallery__all {
+  position: absolute; right: 16px; bottom: 16px; padding: 10px 18px; border-radius: var(--bl-radius-pill);
+  background: rgba(15, 23, 42, 0.7); border: 1px solid rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
+  font-size: 13px; font-weight: 600; color: #fff; transition: background 0.3s;
+}
+.st-gallery__all:hover { background: rgba(23, 104, 250, 0.9); }
+
+/* ─── Reviews ───────────────────────────────────────────────────────────── */
+
+.st-rate { display: flex; align-items: center; gap: 28px; margin-bottom: 32px; flex-wrap: wrap; }
+.st-rate b { display: block; font-weight: 600; font-size: 56px; line-height: 1; letter-spacing: -1px; color: var(--st-text); }
+.st-rate .st-stars { display: block; margin: 8px 0 6px; font-size: 14px; letter-spacing: 4px; color: var(--st-star); }
+.st-rate small { font-size: 12px; font-weight: 600; letter-spacing: 1.5px; text-transform: uppercase; color: var(--st-muted); }
+.st-review {
+  padding: 24px; display: flex; flex-direction: column; gap: 14px;
+  background: var(--st-card); border: 1px solid var(--st-card-border); border-radius: var(--bl-radius-sm);
+}
+.st-review__who { display: flex; align-items: center; gap: 12px; }
+.st-avatar {
+  width: 38px; height: 38px; border-radius: 50%; display: grid; place-items: center;
+  background: var(--st-avatar-bg); font-size: 16px; font-weight: 600; color: var(--st-accent);
+}
+.st-review__who strong { display: block; font-size: 14px; font-weight: 600; color: var(--st-text); }
+.st-review__who small { font-size: 12px; color: var(--st-muted); }
+.st-review .st-stars { font-size: 12px; letter-spacing: 3px; color: var(--st-star); }
+.st-review p { margin: 0; font-size: 14px; line-height: 1.7; color: var(--st-body); }
+
+/* ─── FAQ + enquiry form ────────────────────────────────────────────────── */
+
+.st-faq-grid { display: grid; grid-template-columns: 1fr 1.05fr; gap: 72px; align-items: start; }
+.st-faq { margin: 32px 0 0; }
+.st-faq details { border-bottom: 1px solid var(--st-line); }
+.st-faq summary {
+  list-style: none; cursor: pointer; display: flex; justify-content: space-between; align-items: center; gap: 24px;
+  padding: 22px 0; font-size: 16px; font-weight: 600; color: var(--st-text); transition: color 0.25s;
+}
+.st-faq summary::-webkit-details-marker { display: none; }
+.st-faq summary:hover { color: var(--st-accent); }
+.st-faq summary i { flex: none; position: relative; width: 12px; height: 12px; }
+.st-faq summary i::before, .st-faq summary i::after { content: ''; position: absolute; background: var(--st-accent); border-radius: 2px; transition: transform 0.3s var(--ease-brand); }
+.st-faq summary i::before { left: 0; right: 0; top: 5px; height: 2px; }
+.st-faq summary i::after { top: 0; bottom: 0; left: 5px; width: 2px; }
+.st-faq details[open] summary i::after { transform: scaleY(0); }
+.st-faq details p { margin: 0 0 24px; max-width: 560px; font-size: 15px; line-height: 1.75; color: var(--st-body); white-space: pre-line; }
+.st-faq__more { display: block; margin: 32px 0 0; background: none; border: 0; cursor: pointer; font-family: var(--bl-font); font-size: 15px; font-weight: 600; color: var(--st-accent); }
+.st-faq__more:hover { text-decoration: underline; text-underline-offset: 4px; }
+
+.st-form-wrap { scroll-margin-top: 110px; }
+.st-form {
+  padding: 40px; background: var(--st-surface); border: 1px solid var(--st-card-border); border-radius: var(--bl-radius-lg);
+  box-shadow: var(--st-card-shadow);
+}
+.st-form__title { margin: 0 0 10px; font-weight: 600; font-size: clamp(28px, 3vw, 34px); line-height: 1.1; letter-spacing: -1px; color: var(--st-text); }
+.st-form__lead { margin: 0 0 28px; font-size: 15px; line-height: 1.65; color: var(--st-muted); }
+.st-form__row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.st-field { display: flex; flex-direction: column; gap: 8px; margin-bottom: 18px; }
+.st-field label { font-size: 11px; font-weight: 600; letter-spacing: 1.5px; text-transform: uppercase; color: var(--st-muted); }
+.st-field__control {
+  width: 100%; padding: 13px 16px; border-radius: var(--bl-radius-sm); outline: none; resize: none;
+  appearance: none; -webkit-appearance: none;
+  background: var(--st-field); border: 1px solid var(--st-field-border);
+  font-family: var(--bl-font); font-size: 15px; color: var(--st-text);
+  transition: border-color 0.25s, box-shadow 0.25s;
+}
+.st-field__control::placeholder { color: var(--st-muted); opacity: 0.8; }
+.st-field__control:focus { border-color: var(--bl-cta); box-shadow: 0 0 0 3px rgba(23, 104, 250, 0.18); }
+.st-field__control--error { border-color: rgba(220, 60, 60, 0.8); }
+select.st-field__control {
+  cursor: pointer; padding-right: 40px;
+  background-image: linear-gradient(45deg, transparent 50%, var(--st-accent) 50%), linear-gradient(135deg, var(--st-accent) 50%, transparent 50%);
+  background-position: calc(100% - 20px) 55%, calc(100% - 15px) 55%; background-size: 5px 5px, 5px 5px; background-repeat: no-repeat;
+}
+select.st-field__control option { background: var(--st-bg); color: var(--st-text); }
+.st-form__submit { margin-top: 6px; width: 100%; }
+.st-form__submit:disabled { opacity: 0.6; cursor: wait; }
+.st-form__msg { margin: 18px 0 0; padding: 14px 18px; border-radius: var(--bl-radius-sm); font-size: 14px; line-height: 1.6; font-weight: 600; }
+.st-form__msg--ok { border: 1px solid rgba(23, 104, 250, 0.35); background: rgba(23, 104, 250, 0.08); color: var(--st-accent); }
+.st-form__msg--error { border: 1px solid rgba(220, 60, 60, 0.4); background: rgba(220, 60, 60, 0.06); color: #c0392b; }
+html .st-form__msg--error { color: #a02a1f; }
+
+/* ─── Footer ────────────────────────────────────────────────────────────── */
+
+.st-footer { position: relative; overflow: hidden; background: var(--bl-navy-deep); padding: 96px 24px 0; }
+.st-footer__cols { max-width: 1120px; margin: 0 auto; display: grid; grid-template-columns: 1.3fr 1fr 1fr 1fr 0.8fr; gap: 40px; position: relative; z-index: 1; }
+.st-footer h4 { margin: 0 0 18px; font-size: 11px; font-weight: 600; letter-spacing: 1.5px; text-transform: uppercase; color: var(--bl-sky-soft); }
+.st-footer__sub { margin-top: 28px !important; }
+.st-footer a, .st-footer address { display: block; padding: 6px 0; font-style: normal; font-size: 14px; font-weight: 400; line-height: 1.6; color: rgba(255, 255, 255, 0.78); transition: color 0.2s; }
+.st-footer a:hover { color: #fff; }
+.st-footer__mark {
+  position: relative; z-index: 0; text-align: center; user-select: none; pointer-events: none;
+  font-weight: 600; line-height: 0.8; letter-spacing: -0.03em; font-size: clamp(72px, 19vw, 260px);
+  color: rgba(255, 255, 255, 0.05); margin: 72px 0 -0.08em;
+}
+.st-footer__legal { position: relative; z-index: 1; max-width: 1120px; margin: 0 auto; padding: 22px 0 28px; border-top: 1px solid rgba(255, 255, 255, 0.1); display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; font-size: 12px; color: rgba(255, 255, 255, 0.62); }
+
+/* ─── Light-theme fixes for text on photos ──────────────────────────────────
+   globals.css forces every .on-photo block cream with !important in light
+   mode; put the bluuu accents and the white button text back. The extra
+   The doubled .st-root is needed to outrank that rule's :is(...):not(...) selector. */
+html[data-theme] .st-root.st-root .on-photo .st-btn--primary { color: #fff !important; }
+html[data-theme] .st-root.st-root .on-photo .st-hero__lead,
+html[data-theme] .st-root.st-root .on-photo .st-card p { color: rgba(255, 255, 255, 0.75) !important; }
+html[data-theme] .st-root.st-root .on-photo h1,
+html[data-theme] .st-root.st-root .on-photo h2,
+html[data-theme] .st-root.st-root .on-photo h3 { color: #fff !important; }
+html[data-theme] .st-root.st-root .on-photo h1 em { color: var(--bl-sky) !important; }
+html[data-theme] .st-root.st-root .on-photo em,
+html[data-theme] .st-root.st-root .on-photo .st-eyebrow { color: var(--bl-sky-soft) !important; }
+html[data-theme] .st-root.st-root .on-photo .st-stars { color: var(--bl-sky-soft) !important; }
+html[data-theme] .st-root.st-root .on-photo .st-review .st-stars,
+html[data-theme] .st-root.st-root .on-photo .st-rate .st-stars { color: var(--st-star) !important; }
+html[data-theme] .st-root.st-root .on-photo small,
+html[data-theme] .st-root.st-root .on-photo .st-card__foot,
+html[data-theme] .st-root.st-root .on-photo .st-sub { color: rgba(255, 255, 255, 0.55) !important; }
+
+/* ─── Responsive ────────────────────────────────────────────────────────── */
+
+@media (max-width: 1024px) {
+  .st-grid3 { grid-template-columns: repeat(2, 1fr); }
+  .st-exp-grid { grid-template-columns: 1fr; }
+  .st-exp-grid .st-card { height: 420px; }
+  .st-footer__cols { grid-template-columns: 1fr 1fr 1fr; }
+  .st-faq-grid { grid-template-columns: 1fr; gap: 56px; }
+}
+@media (max-width: 720px) {
+  .st-section { padding: 80px 20px; }
+  .st-head { margin-bottom: 40px; }
+  .st-grid3, .st-grid2 { grid-template-columns: 1fr; }
+  .st-grid2 .st-card { height: 400px; }
+  .st-hero h1 { letter-spacing: -2px; }
+  .st-hero__stats { gap: 22px; margin-top: 40px; }
+  .st-stat b { font-size: 26px; }
+  .st-card__body { padding: 24px; }
+  .st-card h3 { font-size: 26px; }
+  .st-gallery { height: auto; grid-template-columns: 1fr 1fr; grid-template-rows: 240px 140px 140px; }
+  .st-gallery figure:first-child { grid-column: 1 / 3; grid-row: 1; }
+  .st-footer__cols { grid-template-columns: 1fr; }
+  .st-form { padding: 28px 20px; }
+  .st-form__row { grid-template-columns: 1fr; gap: 0; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .st-hero__bg, .st-hero__inner, .st-hero__cue i { animation: none; }
+  .st-hero__bg video { display: none; }
+}
+
+/* ─── Dark blocks ─── */
+/* ─── Dark blocks: the dark sections of the zig-zag, the hero, photo cards and the
+   footer. They keep light text and the navy tokens in BOTH themes. The legacy
+   tokens are redefined too, so existing components (Fleet) read correctly inside. */
+.st-dark, .st-hero, .st-card, .st-footer, .st-gallery__all,
+.st-zigzag > :nth-child(even) {
+  --gold: var(--bl-sky-soft);
+  --st-text: #ffffff;
+  --st-body: rgba(255, 255, 255, 0.7);
+  --st-muted: rgba(255, 255, 255, 0.5);
+  --st-accent: var(--bl-sky-soft);
+  --st-card: rgba(255, 255, 255, 0.05);
+  --st-card-border: rgba(255, 255, 255, 0.12);
+  --st-card-shadow: none;
+  --st-card-shadow-hover: 0 12px 32px rgba(0, 0, 0, 0.35);
+  --st-line: rgba(255, 255, 255, 0.12);
+  --st-field: rgba(255, 255, 255, 0.05);
+  --st-field-border: rgba(255, 255, 255, 0.16);
+  --st-num: rgba(96, 165, 250, 0.12);
+  --st-avatar-bg: rgba(96, 165, 250, 0.16);
+  --st-star: #fbbf24;
+  --st-surface: rgba(255, 255, 255, 0.05);
+  --st-hover: rgba(255, 255, 255, 0.08);
+
+  --navy: var(--bl-navy);
+  --navy-mid: #10264a;
+  --cream: #ffffff;
+  --text-muted: rgba(255, 255, 255, 0.62);
+  --border-subtle: rgba(255, 255, 255, 0.1);
+  --border-hover: rgba(255, 255, 255, 0.22);
+  --gold-ink: var(--bl-sky-soft);
+  --gold-light: var(--bl-sky-soft);
+}
+.st-dark,
+.st-section.st-dark,
+.st-zigzag > :nth-child(even) { background: var(--st-bg-dark); } /* second selector outranks .st-section's white */
+
+/* Accent words in the dark bands (the old light-mode rules paint <em> dark blue) */
+html[data-theme] .st-zigzag > :nth-child(even) em,
+html[data-theme] .st-dark em { color: var(--bl-sky-soft) !important; }
+html[data-theme] .st-zigzag > :nth-child(even) :is(h1, h2, h3, h4),
+html[data-theme] .st-dark :is(h1, h2, h3, h4) { color: #fff !important; }
+
+/* ═══ Inner-page building blocks ═══════════════════════════════════════════ */
+
+.st-head--left { text-align: left; }
+.st-head--left .st-sub { margin-left: 0; }
+
+/* Long text. Old pages wrote their copy with inline styles; the !important
+   rules make that copy follow the site type scale in both band colours. */
+.st-prose { font-size: 16px; line-height: 1.8; color: var(--st-body); }
+.st-prose :is(p, li, div) { color: var(--st-body) !important; }
+.st-prose p { margin: 0 0 18px !important; font-size: 16px !important; line-height: 1.8 !important; font-family: var(--bl-font) !important; }
+.st-prose strong { color: var(--st-text) !important; font-weight: 600 !important; }
+.st-prose h3 { margin: 36px 0 12px !important; font-family: var(--bl-font) !important; font-size: 22px !important; font-weight: 600 !important; letter-spacing: -0.5px !important; line-height: 1.2 !important; color: var(--st-text) !important; }
+.st-prose h3:first-child { margin-top: 0 !important; }
+.st-prose ul { margin: 0 0 18px !important; padding: 0 !important; list-style: none; }
+.st-prose li { display: flex !important; align-items: baseline; gap: 12px !important; padding: 8px 0 !important; border-bottom: 1px solid var(--st-line) !important; font-size: 15px; line-height: 1.6; }
+.st-prose li:last-child { border-bottom: 0 !important; }
+.st-prose li > span { flex: none; width: 6px !important; height: 6px !important; margin-top: 2px; background: var(--st-accent) !important; border-radius: 50% !important; }
+.st-prose a { color: var(--st-accent); text-decoration: underline; text-underline-offset: 3px; }
+.st-prose span[style*='float'] { float: none !important; font-size: inherit !important; font-style: normal !important; line-height: inherit !important; margin: 0 !important; color: inherit !important; font-family: inherit !important; }
+.st-prose p[style*='clear'] { clear: none !important; }
+
+/* Two columns: long text + a sticky side card */
+.st-split { display: grid; grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr); gap: 64px; align-items: start; }
+.st-aside {
+  position: sticky; top: 104px; padding: 32px; border-radius: var(--bl-radius-lg);
+  background: var(--st-surface); border: 1px solid var(--st-card-border); box-shadow: var(--st-card-shadow);
+}
+.st-aside h3 { margin: 0 0 6px; font-size: 22px; font-weight: 600; letter-spacing: -0.5px; color: var(--st-text); }
+.st-aside > p { margin: 0 0 20px; font-size: 14px; line-height: 1.6; color: var(--st-muted); }
+.st-aside__facts { margin: 0 0 24px; padding: 0; list-style: none; }
+.st-aside__facts li { display: flex; justify-content: space-between; gap: 16px; padding: 12px 0; border-bottom: 1px solid var(--st-line); font-size: 14px; color: var(--st-body); }
+.st-aside__facts li:last-child { border-bottom: 0; }
+.st-aside__facts b { font-weight: 600; color: var(--st-text); text-align: right; }
+.st-aside .st-btn { width: 100%; margin-top: 10px; }
+.st-aside .st-btn:not(.st-btn--primary) { background: transparent; color: var(--st-text); border-color: var(--st-card-border); backdrop-filter: none; -webkit-backdrop-filter: none; }
+.st-aside .st-btn:not(.st-btn--primary):hover { background: var(--st-hover); }
+
+/* Cards that hold a titled block of text or a list */
+.st-detail-grid { display: grid; gap: 20px; }
+.st-detail {
+  padding: 32px; border-radius: var(--bl-radius-md);
+  background: var(--st-card); border: 1px solid var(--st-card-border); box-shadow: var(--st-card-shadow);
+}
+.st-detail > h3 { margin: 0 0 16px; font-size: 20px; font-weight: 600; letter-spacing: -0.5px; color: var(--st-text); }
+.st-detail .st-prose p, .st-detail .st-prose li { font-size: 15px !important; }
+
+/* Centred call-to-action band */
+.st-cta { max-width: 760px; margin: 0 auto; text-align: center; }
+.st-cta .st-prose { text-align: center; margin-top: 20px; }
+.st-cta__buttons { display: flex; justify-content: center; gap: 12px; flex-wrap: wrap; margin-top: 28px; }
+
+/* Photo strip */
+.st-strip-wrap { position: relative; }
+.st-strip {
+  display: flex; gap: 12px; overflow-x: auto; scroll-snap-type: x mandatory; padding-bottom: 16px;
+  scrollbar-width: thin; scrollbar-color: var(--st-accent) transparent;
+}
+.st-strip--empty { height: 360px; border-radius: var(--bl-radius-lg); background: var(--st-card); }
+.st-strip__item {
+  flex: 0 0 min(440px, 78vw); height: 340px; padding: 0; border: 0; cursor: zoom-in; overflow: hidden;
+  border-radius: var(--bl-radius-lg); scroll-snap-align: start; background: var(--st-card);
+}
+.st-strip__item img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.8s var(--ease-brand); }
+.st-strip__item:hover img { transform: scale(1.05); }
+.st-strip__nav { display: flex; align-items: center; justify-content: center; gap: 18px; margin-top: 8px; font-size: 13px; color: var(--st-muted); }
+.st-strip__nav button {
+  width: 42px; height: 42px; border-radius: 50%; cursor: pointer; font-size: 18px; line-height: 1;
+  color: var(--st-text); background: transparent; border: 1px solid var(--st-card-border);
+  transition: background 0.25s, border-color 0.25s;
+}
+.st-strip__nav button:hover { background: var(--st-hover); border-color: var(--st-accent); }
+.st-lightbox { position: fixed; inset: 0; z-index: 500; display: grid; place-items: center; background: rgba(7, 15, 31, 0.94); padding: 24px; }
+.st-lightbox img { max-width: min(1200px, 94vw); max-height: 86vh; border-radius: var(--bl-radius-md); object-fit: contain; }
+.st-lightbox button { position: absolute; width: 48px; height: 48px; border-radius: 50%; cursor: pointer; font-size: 22px; color: #fff; background: rgba(255, 255, 255, 0.12); border: 1px solid rgba(255, 255, 255, 0.25); }
+.st-lightbox__close { top: 20px; right: 20px; }
+.st-lightbox__prev { left: 20px; top: 50%; transform: translateY(-50%); }
+.st-lightbox__next { right: 20px; top: 50%; transform: translateY(-50%); }
+
+@media (max-width: 1024px) {
+  .st-split { grid-template-columns: 1fr; gap: 40px; }
+  .st-aside { position: static; }
+  .st-detail-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+@media (max-width: 720px) {
+  .st-detail, .st-aside { padding: 24px 20px; }
+  .st-strip__item { height: 260px; }
+}
+
+/* Buttons that old copy wrote as inline-styled links */
+.st-prose a[style*='uppercase'] {
+  display: inline-flex !important; align-items: center; padding: 14px 28px !important; border-radius: var(--bl-radius-pill) !important;
+  font-family: var(--bl-font) !important; font-size: 15px !important; font-weight: 600 !important; letter-spacing: 0 !important;
+  text-transform: none !important; text-decoration: none !important; color: #fff !important; background: var(--bl-cta) !important;
+  box-shadow: 0 6px 20px rgba(23, 104, 250, 0.32);
+}
+
+.st-wrap--narrow { max-width: 760px; }
+.st-flipbook { padding: 24px; border-radius: var(--bl-radius-lg); background: var(--bl-navy); box-shadow: 0 8px 32px rgba(15, 23, 42, 0.18); overflow: hidden; }
+
+/* ═══ Pages whose body still uses the older bespoke sections ══════════════════
+   Their sections keep their content and inner layout, but sit in the same
+   rhythm as the kit: alternating white / navy bands, one padding scale, and no
+   hairlines on the outer edges. */
+.st-h1-sub { display: block; margin-top: 14px; font-size: 0.34em; font-style: italic; font-weight: 400; letter-spacing: 0; line-height: 1.3; color: rgba(255, 255, 255, 0.82); }
+
+.st-legacy > * {
+  margin: 0 !important;
+  border-top: 0 !important;
+  border-bottom: 0 !important;
+  background-color: var(--st-bg) !important;
+}
+.st-legacy > :nth-child(even):not(.st-compact) { background-color: var(--st-bg-dark) !important; }
+.st-legacy > section {
+  padding-top: 96px !important;
+  padding-bottom: 96px !important;
+  padding-left: max(24px, calc((100vw - 1120px) / 2)) !important;
+  padding-right: max(24px, calc((100vw - 1120px) / 2)) !important;
+}
+/* text in the navy bands (the old light-mode rules paint section text navy) */
+html[data-theme] .st-legacy > :nth-child(even):not(.st-compact) * { color: rgba(255, 255, 255, 0.78) !important; }
+html[data-theme] .st-legacy > :nth-child(even):not(.st-compact) :is(h1, h2, h3, h4, strong, b) { color: #fff !important; }
+html[data-theme] .st-legacy > :nth-child(even):not(.st-compact) em { color: var(--bl-sky-soft) !important; }
+html[data-theme] .st-legacy > :nth-child(even):not(.st-compact) [style*='var(--gold)']:not([style*='background']) { color: var(--bl-sky-soft) !important; }
+@media (max-width: 720px) {
+  .st-legacy > section { padding-top: 64px !important; padding-bottom: 64px !important; }
+}
+
+/* Third-party booking widgets (Rezdy) sit on a white rounded card */
+.st-widget { overflow: hidden; border-radius: var(--bl-radius-lg); background: #fff; border: 1px solid var(--st-card-border); box-shadow: 0 8px 32px rgba(15, 23, 42, 0.1); }
+
+/* Blue fills inside the navy legacy bands keep full white text (beats the .78 rule above) */
+html[data-theme] .st-legacy > :nth-child(even):not(.st-compact) :is(.st-btn--primary, .btn-primary, .filter-pill--active, .news-cat-label, .hero-search__submit, [style*='background:var(--gold)'], [style*='background: var(--gold)'], [style*='background:#C9A84C'], [style*='background: #C9A84C']),
+html[data-theme] .st-legacy > :nth-child(even):not(.st-compact) :is(.st-btn--primary, .btn-primary, .filter-pill--active, .news-cat-label, .hero-search__submit, [style*='background:var(--gold)'], [style*='background: var(--gold)'], [style*='background:#C9A84C'], [style*='background: #C9A84C']) * { color: #fff !important; }
+
+/* Placeholders: the old global rule paints them navy, which vanishes on the navy bands */
+html[data-theme] .st-field__control::placeholder { color: var(--st-muted) !important; opacity: 1 !important; }
+html[data-theme] .st-field__control { color: var(--st-text) !important; }
+
+/* Detail cards: a 6-column grid so every row is complete and every card in a row is the same height */
+.st-detail-grid { grid-template-columns: repeat(6, 1fr); align-items: stretch; }
+.st-detail { grid-column: span 2; }
+.st-detail--w4 { grid-column: span 4; }
+.st-detail--w3 { grid-column: span 3; }
+.st-detail--w6 { grid-column: span 6; }
+.st-detail--w6 .st-prose { columns: 2; column-gap: 48px; }
+.st-detail--w6 .st-prose p { break-inside: avoid; }
+@media (max-width: 1024px) {
+  .st-detail-grid { grid-template-columns: repeat(2, 1fr); }
+  .st-detail, .st-detail--w4, .st-detail--w3 { grid-column: span 1; }
+  .st-detail--w6 { grid-column: span 2; }
+  .st-detail--w6 .st-prose { columns: 1; }
+}
+@media (max-width: 720px) {
+  .st-detail-grid { grid-template-columns: 1fr; }
+  .st-detail, .st-detail--w4, .st-detail--w3, .st-detail--w6 { grid-column: span 1; }
+}
+
+/* Short information bands on old pages (ratings, session times): a thin light strip,
+   outside the white / navy alternation, with dark text. */
+.st-legacy > .st-compact { padding: 28px 24px !important; background-color: var(--st-surface) !important; }
+html[data-theme] .st-legacy > .st-compact * { color: var(--st-body) !important; }
+html[data-theme] .st-legacy > .st-compact :is(strong, b, [style*='font-weight: 600'], [style*='fontWeight']) { color: var(--st-text) !important; }
+
+/* A thin band can land on an even (navy) position; it is always light, so it keeps the light tokens. */
+.st-legacy > .st-compact {
+  --st-surface: var(--bl-gray);
+  --st-text: var(--bl-ink);
+  --st-body: var(--bl-slate-600);
+  --st-muted: var(--bl-muted-text);
+  --st-accent: var(--bl-accent-text);
+  --st-line: rgba(15, 23, 42, 0.1);
+  --cream: var(--bl-ink);
+  --text-muted: var(--bl-muted-text);
+  --gold: var(--bl-cta);
+  --gold-ink: var(--bl-accent-text);
+  --gold-light: var(--bl-accent-text);
+}
+
+/* A whole legacy band that is itself a blue fill (About ratings strip): full white text on it. */
+html[data-theme] .st-legacy > :is([style*='background:var(--gold)'], [style*='background: var(--gold)']) * { color: #fff !important; }
+
+/* The Kai launcher must not sit on top of a page's own sticky booking bar */
+body:has(.skysea-stickybar) .kai-launcher { bottom: 92px !important; }
+
+@media (max-width: 720px) {
+  .st-hero__actions { grid-auto-flow: row; width: min(100%, 320px); }
+}

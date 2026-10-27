@@ -122,7 +122,7 @@ function withLinks(text: string) {
 
 // Pages where the Kai chat is switched off for now. To bring it back on one of
 // them, delete its path from this list. To hide it everywhere, add '*'.
-const HIDE_KAI_ON = ['/homepage-preview'];
+const HIDE_KAI_ON = ['*'];
 
 export default function KaiWidget() {
   const pathname = usePathname();

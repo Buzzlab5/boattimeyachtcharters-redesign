@@ -2,8 +2,8 @@
 
 import Script from "next/script";
 import Link from "next/link";
-import Nav from "./Nav";
-import Footer from "./Footer";
+import SiteShell from './site/SiteShell';
+import FaqEnquiry from './site/FaqEnquiry';
 import {
   CruiseHero,
   CruiseGallery,
@@ -485,8 +485,7 @@ export default function WhalePage() {
         src="https://boattimeyachtcharters.rezdy.com/pluginJs"
         strategy="lazyOnload"
       />
-      <Nav />
-      <main>
+      <SiteShell>
         {/* 1 ── HERO */}
         <CruiseHero
           eyebrow="Cruise Tickets · Whale Watching"
@@ -500,10 +499,11 @@ export default function WhalePage() {
           ]}
           bookingUrl="#book"
         />
+        <div className="st-zigzag st-legacy">
 
         {/* 2 ── SOCIAL PROOF */}
         <div
-          className="light-adapt-section cruise-section"
+          className="light-adapt-section cruise-section st-compact"
           style={{
             background: "var(--navy-mid)",
             padding: "28px 48px",
@@ -590,7 +590,7 @@ export default function WhalePage() {
         </div>
 
         {/* 3 ── SESSION INFO BAR */}
-        <div className="light-adapt-section cruise-section whale-infobar-wrap">
+        <div className="light-adapt-section cruise-section whale-infobar-wrap st-compact">
           <div className="whale-infobar-inner">
             <div className="whale-infobar-location">
               <svg
@@ -1305,8 +1305,9 @@ export default function WhalePage() {
             </div>
           </div>
         </section>
-      </main>
-      <Footer />
+      <FaqEnquiry faqs={[]} />
+        </div>
+      </SiteShell>
     </>
   );
 }

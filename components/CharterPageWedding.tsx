@@ -1,14 +1,6 @@
 'use client';
 
-import Nav from './Nav';
-import Footer from './Footer';
-import {
-  CharterHero,
-  CharterInfoBox,
-  CharterGallery,
-  CharterSplitSection,
-  type AccordionSection,
-} from './CharterSections';
+import CharterTemplate, { type AccordionSection } from './site/CharterTemplate';
 import { WEDDING_FAQS } from '@/lib/faqs';
 
 // ── Accordion content (no Yacht Layout Features — it's in the left column) ────
@@ -334,34 +326,10 @@ const LEFT_VESSELS = (
 
 // ── Page ──────────────────────────────────────────────────────────────────────
 
-export default function CharterPageWedding() {
-  return (
-    <>
-      <Nav />
-      <main>
-        {/* 1. Hero */}
-        <CharterHero
-          eyebrow="Boattime YC Luxury"
-          headline={
-            <>
-              Wedding Yacht Charter
-              <br />
-              Gold Coast
-            </>
-          }
-          subtext="Say 'I Do' on a Boattime Luxury Yacht Charter, the idyllic venue for your wedding ceremonies and reception. Celebrate your love as you cruise through the crystal blue waters of Gold Coast."
-          image="/wedding-charter-images/25-DSC2845.webp"
-          ctas={[
-            { label: 'Booking Enquiry', href: '/#inquiry', variant: 'primary' },
-          ]}
-        />
+// ── Page ──────────────────────────────────────────────────────────────────────
 
-        {/* 2. Overview box */}
-        <CharterInfoBox
-          heading="Wedding Yacht Charter Gold Coast"
-          vesselOrder={['sun-goddess', 'mermaid-spirit']}
-        >
-          <div
+const OVERVIEW = (
+<div
             style={{
               fontFamily: 'var(--font-body)',
               fontSize: 14,
@@ -468,25 +436,22 @@ export default function CharterPageWedding() {
               ))}
             </ul>
           </div>
-        </CharterInfoBox>
+);
 
-        {/* 3. Photo gallery */}
-        <CharterGallery folder="wedding-charter-images" />
-
-        {/* 4. Vessel layout left + Accordion right */}
-        <CharterSplitSection
-          leftContent={LEFT_VESSELS}
-          accordionSections={ACCORDION}
-        />
-
-        {/* 5. Bottom CTA box */}
-        <CharterInfoBox
-          heading="Wedding Yacht Charter Gold Coast"
-          compact
-          vesselOrder={['mermaid-spirit', 'sun-goddess']}
-        />
-      </main>
-      <Footer />
-    </>
+export default function CharterPageWedding() {
+  return (
+    <CharterTemplate
+      kind="Wedding"
+      heroImage="/wedding-charter-images/25-DSC2845.webp"
+      heroLead="Say 'I Do' on a Boattime Luxury Yacht Charter, the idyllic venue for your wedding ceremonies and reception. Celebrate your love as you cruise through the crystal blue waters of Gold Coast."
+      overviewTitle="Wedding Yacht Charter Gold Coast"
+      overview={OVERVIEW}
+      galleryFolder="wedding-charter-images"
+      packagesTitle={<>Your <em>wedding</em> on the water</>}
+      packages={LEFT_VESSELS}
+      accordion={ACCORDION}
+      faqs={WEDDING_FAQS}
+      vesselOrder={['sun-goddess', 'mermaid-spirit']}
+    />
   );
 }

@@ -36,3 +36,5 @@ Thumbs.db
 
 # temporary/debug files
 *.log
+# large source/compressed media, hosted on bunny.net instead
+bunny-assets/

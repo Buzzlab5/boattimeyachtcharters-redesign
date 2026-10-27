@@ -1,42 +1,14 @@
 'use client';
 
-import { useEffect, useRef } from 'react';
-import { useGSAP } from '@gsap/react';
-import gsap from 'gsap';
-import Nav from './Nav';
-import Footer from './Footer';
-
-gsap.registerPlugin(useGSAP);
-
-function GoldRope() {
-  return (
-    <div
-      style={{
-        height: 2,
-        background:
-          'repeating-linear-gradient(90deg, var(--gold) 0px, var(--gold) 8px, transparent 8px, transparent 14px)',
-        opacity: 0.5,
-      }}
-    />
-  );
-}
+import { useEffect } from 'react';
+import SiteShell from './site/SiteShell';
+import PageHero from './site/PageHero';
+import Section from './site/Section';
+import SectionHead from './site/SectionHead';
+import FaqEnquiry from './site/FaqEnquiry';
 
 export default function TicketsPage() {
-  const heroRef = useRef<HTMLDivElement>(null);
-  const eyebrowRef = useRef<HTMLDivElement>(null);
-  const titleRef = useRef<HTMLHeadingElement>(null);
-  const subRef = useRef<HTMLParagraphElement>(null);
-
-  useGSAP(
-    () => {
-      const tl = gsap.timeline({ delay: 0.1 });
-      tl.from(eyebrowRef.current, { y: 16, opacity: 0, duration: 0.6, ease: 'power2.out' })
-        .from(titleRef.current, { y: 24, opacity: 0, duration: 0.8, ease: 'power2.out' }, '-=0.3')
-        .from(subRef.current, { y: 16, opacity: 0, duration: 0.6, ease: 'power2.out' }, '-=0.4');
-    },
-    { scope: heroRef },
-  );
-
+  // Rezdy's booking plugin script (loads once)
   useEffect(() => {
     const existing = document.querySelector('script[src*="rezdy.com/pluginJs"]');
     if (!existing) {
@@ -48,100 +20,46 @@ export default function TicketsPage() {
   }, []);
 
   return (
-    <>
-      <Nav />
+    <SiteShell>
+      <PageHero
+        image="/sunset-boat.jpg"
+        imageAlt="Sunset over the Gold Coast from a Boattime deck"
+        eyebrow="Boattime Yacht Charters · Gold Coast & Brisbane"
+        title={
+          <>
+            Book your <em>experience</em>
+          </>
+        }
+        lead="Select from our full range of cruises, whale watching tours, and private charter experiences, all bookable instantly online."
+        primary={{ label: 'See all tickets', href: '#book' }}
+      />
 
-      <main>
-      {/* Hero */}
-      <section
-        ref={heroRef}
-        style={{
-          background: 'var(--navy)',
-          paddingTop: 140,
-          paddingBottom: 80,
-          paddingLeft: 48,
-          paddingRight: 48,
-          borderBottom: '1px solid rgba(201,168,76,0.15)',
-        }}
-      >
-        <div style={{ maxWidth: 900, margin: '0 auto', textAlign: 'center' }}>
-          <div
-            ref={eyebrowRef}
-            className="section-eyebrow"
-            style={{ marginBottom: 24, justifyContent: 'center' }}
-          >
-            Boattime Yacht Charters — Gold Coast &amp; Brisbane
-          </div>
-
-          <h1
-            ref={titleRef}
-            style={{
-              fontFamily: 'var(--font-display)',
-              fontWeight: 300,
-              fontSize: 'clamp(40px, 5vw, 80px)',
-              lineHeight: 1.05,
-              letterSpacing: '-0.02em',
-              color: 'var(--cream)',
-              margin: '0 0 24px',
-            }}
-          >
-            Book Your{' '}
-            <em style={{ color: 'var(--gold-light)', fontStyle: 'italic' }}>
-              Experience
-            </em>
-          </h1>
-
-          <p
-            ref={subRef}
-            style={{
-              fontFamily: 'var(--font-body)',
-              fontSize: 15,
-              fontWeight: 300,
-              color: 'rgba(245,240,232,0.7)',
-              lineHeight: 1.8,
-              maxWidth: 560,
-              margin: '0 auto',
-            }}
-          >
-            Select from our full range of cruises, whale watching tours, and
-            private charter experiences — all bookable instantly online.
-          </p>
-        </div>
-      </section>
-
-      <GoldRope />
-
-      {/* Rezdy catalog */}
-      <section
-        style={{
-          background: 'var(--navy)',
-          padding: '64px 0 80px',
-        }}
-      >
-        <div
-          style={{
-            maxWidth: 1200,
-            margin: '0 auto',
-            paddingLeft: 24,
-            paddingRight: 24,
-          }}
-        >
-          <iframe
-            seamless
-            width="100%"
-            height="1200px"
-            frameBorder={0}
-            className="rezdy"
-            src="https://boattimeyachtcharters.rezdy.com/catalog/312834/tours?iframe=true"
-            style={{ display: 'block' }}
+      <div className="st-zigzag">
+        <Section id="book" labelledBy="st-tickets">
+          <SectionHead
+            eyebrow="Cruise tickets"
+            title={
+              <span id="st-tickets">
+                Choose your <em>cruise</em>
+              </span>
+            }
+            sub="Instant confirmation. Pick a date, pick your tickets, and you are booked."
           />
-        </div>
-      </section>
+          <div className="st-widget">
+            <iframe
+              width="100%"
+              height="1200px"
+              frameBorder="0"
+              className="rezdy"
+              title="Boattime cruise tickets"
+              src="https://boattimeyachtcharters.rezdy.com/catalog/312834/tours?iframe=true"
+              style={{ display: 'block' }}
+            />
+          </div>
+        </Section>
 
-      <GoldRope />
-      </main>
-
-      <Footer />
-    </>
+        <FaqEnquiry faqs={[]} />
+      </div>
+    </SiteShell>
   );
 }

@@ -6,8 +6,9 @@ import { useRef } from "react";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import Nav from "./Nav";
-import Footer from "./Footer";
+import SiteShell from './site/SiteShell';
+import PageHero from './site/PageHero';
+import FaqEnquiry from './site/FaqEnquiry';
 
 gsap.registerPlugin(ScrollTrigger, useGSAP);
 
@@ -277,7 +278,7 @@ function SocialProof() {
 
   return (
     <section
-      className="cruise-section"
+      className="cruise-section st-compact"
       style={{
         background: "var(--navy)",
         padding: "60px 40px",
@@ -629,7 +630,7 @@ function VesselCard() {
 
             <div style={{ textAlign: "center" }}>
               <a
-                href="#book"
+                href="#inquiry"
                 style={{
                   display: "inline-flex",
                   alignItems: "center",
@@ -813,38 +814,8 @@ function RiverfireDetailsSection() {
 // ── Main page ─────────────────────────────────────────────────────────────────
 
 export default function RiverPage() {
-  const heroRef = useRef<HTMLElement>(null);
-  const bgRef = useRef<HTMLDivElement>(null);
-  const textRef = useRef<HTMLDivElement>(null);
 
-  useGSAP(
-    () => {
-      gsap.fromTo(
-        bgRef.current,
-        { scale: 1.08 },
-        { scale: 1, duration: 14, ease: "none" },
-      );
-      gsap.from(textRef.current!.querySelectorAll(".hr"), {
-        y: 30,
-        opacity: 0,
-        duration: 0.85,
-        stagger: 0.1,
-        ease: "power2.out",
-        delay: 0.15,
-      });
-      gsap.to(bgRef.current, {
-        yPercent: 25,
-        ease: "none",
-        scrollTrigger: {
-          trigger: heroRef.current,
-          start: "top top",
-          end: "bottom top",
-          scrub: true,
-        },
-      });
-    },
-    { scope: heroRef },
-  );
+  
 
   return (
     <>
@@ -852,146 +823,25 @@ export default function RiverPage() {
         src="https://boattimeyachtcharters.rezdy.com/pluginJs"
         strategy="lazyOnload"
       />
-      <Nav />
-      <main>
+      <SiteShell>
         {/* ── Hero ── */}
-        <section
-          ref={heroRef}
-          className="relative overflow-hidden"
-          style={{
-            minHeight: "100vh",
-            background: "var(--navy)",
-            display: "flex",
-            alignItems: "flex-end",
-          }}
-        >
-          <div
-            ref={bgRef}
-            className="absolute inset-0 will-change-transform"
-            style={{
-              backgroundImage: "url(/Riverfire.jpg)",
-              backgroundSize: "cover",
-              backgroundPosition: "center",
-            }}
-          />
-          <div
-            className="absolute inset-0"
-            style={{
-              background:
-                "linear-gradient(to right, rgba(10,22,40,0.92) 0%, rgba(10,22,40,0.6) 55%, rgba(10,22,40,0.22) 100%), linear-gradient(to top, rgba(10,22,40,0.94) 0%, rgba(10,22,40,0.08) 50%)",
-            }}
-          />
-
-          <div
-            ref={textRef}
-            className="relative z-10 w-full cruise-hero-content"
-            style={{
-              paddingLeft: 80,
-              paddingRight: 48,
-              paddingTop: 100,
-              paddingBottom: 88,
-              maxWidth: 1200,
-            }}
-          >
-            <div className="hr section-eyebrow" style={{ marginBottom: 24 }}>
-              BOATTIME YC LUXURY
-            </div>
-            <h1
-              className="hr"
-              style={{
-                fontFamily: "var(--font-display)",
-                fontWeight: 300,
-                fontSize: "clamp(48px, 7vw, 92px)",
-                lineHeight: 0.95,
-                letterSpacing: "-0.02em",
-                color: "var(--cream)",
-                marginBottom: 28,
-              }}
-            >
-              Riverfire 2026 Brisbane Fireworks Yacht Cruise
-            </h1>
-            {/* Event tags */}
-            <div
-              className="hr"
-              style={{
-                display: "flex",
-                gap: 10,
-                marginBottom: 36,
-                flexWrap: "wrap",
-              }}
-            >
-              <span
-                className="hero-gold-tag"
-                style={{
-                  fontFamily: "var(--font-body)",
-                  fontSize: 10,
-                  letterSpacing: "0.18em",
-                  textTransform: "uppercase",
-                  padding: "6px 16px",
-                  fontWeight: 700,
-                }}
-              >
-                2026 TICKETS WERE $249
-              </span>
-              <span
-                style={{
-                  fontFamily: "var(--font-body)",
-                  fontSize: 10,
-                  letterSpacing: "0.18em",
-                  textTransform: "uppercase",
-                  color: "var(--gold)",
-                  border: "1px solid rgba(201,168,76,0.5)",
-                  padding: "6px 16px",
-                  fontWeight: 600,
-                }}
-              >
-                EVENT 18+
-              </span>
-            </div>
-            <div className="hr">
-              <a
-                href="#book"
-                className="hero-gold-tag"
-                style={{
-                  display: "inline-flex",
-                  alignItems: "center",
-                  gap: 10,
-                  padding: "14px 36px",
-                  textDecoration: "none",
-                  fontFamily: "var(--font-body)",
-                  fontSize: 10,
-                  letterSpacing: "0.22em",
-                  textTransform: "uppercase",
-                  fontWeight: 700,
-                  transition: "opacity 0.2s",
-                }}
-                onMouseEnter={(e) => {
-                  (e.currentTarget as HTMLElement).style.opacity = "0.85";
-                }}
-                onMouseLeave={(e) => {
-                  (e.currentTarget as HTMLElement).style.opacity = "1";
-                }}
-              >
-                Buy Tickets &rarr;
-              </a>
-            </div>
-          </div>
-
-          {/* QLD Badge */}
-          <div
-            className="absolute right-20 top-1/2 -translate-y-1/2 hidden lg:block"
-            style={{ zIndex: 10 }}
-          >
-            <QldBadge />
-          </div>
-        </section>
+        <PageHero
+          image="/Riverfire.jpg"
+          imageAlt="Riverfire fireworks over the Brisbane River"
+          eyebrow="Boattime Yacht Charters · Event 18+"
+          title={<>Riverfire 2026 <em>Brisbane Fireworks Yacht Cruise</em></>}
+          note="2026 tickets were $249"
+        />
+        <div className="st-zigzag st-legacy">
 
         {/* ── ABOUT THE EVENT CTA box ── */}
-        <RiverCTABox
-          title="ABOUT THE EVENT"
-          description="Experience the Grandeur of Brisbane's most awaited night, Riverfire 2026, from the luxurious decks of Mermaid Spirit. As the cityscape of Brisbane lights up with a mesmerizing display of fireworks and scheduled flyovers, find yourself at the heart of the spectacle, surrounded by elegance, comfort, and an electric atmosphere. The official 2026 flyover period is confirmed, but the specific ADF aircraft have not yet been announced."
-          footnote={
-            <>
+        <section className="cruise-section">
+          <div className="st-cta">
+            <div className="st-eyebrow">About the event</div>
+            <h2 className="st-h2">Brisbane&rsquo;s biggest night, from the <em>water</em></h2>
+            <p className="st-sub">Experience the Grandeur of Brisbane's most awaited night, Riverfire 2026, from the luxurious decks of Mermaid Spirit. As the cityscape of Brisbane lights up with a mesmerizing display of fireworks and scheduled flyovers, find yourself at the heart of the spectacle, surrounded by elegance, comfort, and an electric atmosphere. The official 2026 flyover period is confirmed, but the specific ADF aircraft have not yet been announced.</p>
+            <p className="st-sub" style={{ marginTop: 14 }}>
+              
               Planning your Riverfire day? Read our{" "}
               <Link
                 href="/boattime-news/riverfire-brisbane-2026-everything-you-need-to-know"
@@ -1005,10 +855,10 @@ export default function RiverPage() {
               </Link>{" "}
               for event times, viewing information, transport advice and
               practical planning.
-            </>
-          }
-          bookHref="#book"
-        />
+            
+            </p>
+          </div>
+        </section>
 
         {/* ── Social proof ── */}
         <SocialProof />
@@ -1035,119 +885,12 @@ export default function RiverPage() {
         {/* ── Details & Itinerary ── */}
         <RiverfireDetailsSection />
 
-        {/* ── GET YOUR TICKETS NOW CTA box ── */}
-        <RiverCTABox
-          title="GET YOUR TICKETS NOW."
-          description="Experience the Grandeur of Brisbane's most awaited night, Riverfire 2026, from the luxurious decks of Mermaid Spirit. As the cityscape of Brisbane lights up with a mesmerizing display of fireworks and scheduled flyovers, find yourself at the heart of the spectacle, surrounded by elegance, comfort, and an electric atmosphere. The official 2026 flyover period is confirmed, but the specific ADF aircraft have not yet been announced."
-          bookHref="#book"
-        />
+        
 
-        {/* ── Booking widget ── */}
-        <section
-          id="book"
-          className="cruise-section"
-          style={{
-            background: "var(--navy-mid, #0d1f38)",
-            borderTop: "1px solid rgba(201,168,76,0.1)",
-            padding: "80px 48px 100px",
-          }}
-        >
-          <div style={{ maxWidth: 1000, margin: "0 auto" }}>
-            <div style={{ textAlign: "center", marginBottom: 48 }}>
-              <div
-                style={{
-                  fontFamily: "var(--font-body)",
-                  fontSize: 9,
-                  letterSpacing: "0.28em",
-                  textTransform: "uppercase",
-                  color: "var(--gold)",
-                  fontWeight: 600,
-                  marginBottom: 16,
-                }}
-              >
-                Register Your Interest
-              </div>
-              <h2
-                style={{
-                  fontFamily: "var(--font-display)",
-                  fontWeight: 300,
-                  fontSize: "clamp(32px, 4.5vw, 56px)",
-                  lineHeight: 1.0,
-                  letterSpacing: "-0.02em",
-                  color: "var(--cream)",
-                  marginBottom: 16,
-                }}
-              >
-                Register your{" "}
-                <em style={{ fontStyle: "italic", color: "var(--gold)" }}>
-                  interest
-                </em>
-                .
-              </h2>
-              <p
-                style={{
-                  fontFamily: "var(--font-body)",
-                  fontSize: 14,
-                  color: "rgba(245,240,232,0.62)",
-                  lineHeight: 1.75,
-                  maxWidth: 520,
-                  margin: "0 auto",
-                  fontWeight: 300,
-                }}
-              >
-                Riverfire 2026 has sailed. Register your interest and we will
-                come back to you with next year’s date and pricing when the
-                fireworks programme is announced.
-              </p>
-            </div>
-            {/* The Rezdy widget here pointed at
-                mermaid-spirit-brisbane-riverfire-2026 (product P8TPLS). That
-                product still exists and is not retired, but it has no sessions
-                and the 2026 event has passed, so the widget rendered a checkout
-                that could not take a booking. Restore it when next year's
-                sessions are loaded. */}
-            <div
-              style={{
-                border: "1px solid rgba(201,168,76,0.15)",
-                background: "rgba(255,255,255,0.02)",
-                padding: "48px 24px",
-                textAlign: "center",
-              }}
-            >
-              <a
-                href="/#inquiry"
-                style={{
-                  fontFamily: "var(--font-body)",
-                  fontSize: 10,
-                  letterSpacing: "0.2em",
-                  textTransform: "uppercase",
-                  fontWeight: 700,
-                  color: "#0A1628",
-                  background: "#C9A84C",
-                  padding: "14px 28px",
-                  textDecoration: "none",
-                  display: "inline-block",
-                }}
-              >
-                Register for next Riverfire
-              </a>
-              <p
-                style={{
-                  fontFamily: "var(--font-body)",
-                  fontSize: 13,
-                  color: "rgba(245,240,232,0.6)",
-                  lineHeight: 1.8,
-                  marginTop: 24,
-                }}
-              >
-                Mermaid Spirit is also available for private charter on the
-                Brisbane River, and our Gold Coast cruises sail year round.
-              </p>
-            </div>
-          </div>
-        </section>
-      </main>
-      <Footer />
+        
+      <FaqEnquiry faqs={[]} formLead="Riverfire 2026 has sailed. Register your interest and we will come back to you with next year’s date and pricing when the fireworks programme is announced." />
+        </div>
+      </SiteShell>
     </>
   );
 }

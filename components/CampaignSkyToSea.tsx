@@ -5,8 +5,7 @@ import { useRef, useState, useEffect } from 'react';
 import { useGSAP } from '@gsap/react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import Nav from './Nav';
-import Footer from './Footer';
+import SiteShell from './site/SiteShell';
 
 gsap.registerPlugin(ScrollTrigger, useGSAP);
 
@@ -405,8 +404,7 @@ export default function CampaignSkyToSea() {
         src="https://boattimeyachtcharters.rezdy.com/pluginJs"
         strategy="lazyOnload"
       />
-      <Nav />
-      <main>
+      <SiteShell>
         {/* ── Hero (helicopter video) ── */}
         <section
           ref={heroRef}
@@ -1818,9 +1816,8 @@ export default function CampaignSkyToSea() {
             </div>
           </div>
         </section>
-      </main>
+      </SiteShell>
       <StickyBookBar />
-      <Footer />
     </>
   );
 }

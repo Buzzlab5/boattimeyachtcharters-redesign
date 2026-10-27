@@ -1,4 +1,4 @@
-import SectionHead from './SectionHead';
+import SectionHead from '../SectionHead';
 
 // Three of the guest reviews already shown on the live homepage
 // (components/Reviews.tsx). Initials replace the stock avatar photos.
@@ -22,34 +22,34 @@ const REVIEWS = [
 
 export default function ReviewsSection() {
   return (
-    <div role="region" className="hp-section" aria-labelledby="hp-reviews">
-      <div className="hp-wrap">
+    <div role="region" className="st-section st-dark on-photo" aria-labelledby="st-reviews">
+      <div className="st-wrap">
         <SectionHead
           eyebrow="Trusted by guests"
           title={
-            <span id="hp-reviews">
+            <span id="st-reviews">
               A premium cruise with <em>seamless flow</em>
             </span>
           }
         />
-        <div className="hp-rate">
+        <div className="st-rate">
           <div>
             <b>4.7</b>
-            <span className="hp-stars" aria-hidden="true">★★★★★</span>
+            <span className="st-stars" aria-hidden="true">★★★★★</span>
             <small>3,910+ reviews</small>
           </div>
         </div>
-        <div className="hp-grid3">
+        <div className="st-grid3">
           {REVIEWS.map((r) => (
-            <article key={r.name} className="hp-review">
-              <div className="hp-review__who">
-                <span className="hp-avatar" aria-hidden="true">{r.name[0]}</span>
+            <article key={r.name} className="st-review">
+              <div className="st-review__who">
+                <span className="st-avatar" aria-hidden="true">{r.name[0]}</span>
                 <div>
                   <strong>{r.name}</strong>
                   <small>{r.when}</small>
                 </div>
               </div>
-              <span className="hp-stars" role="img" aria-label="5 out of 5 stars">★★★★★</span>
+              <span className="st-stars" role="img" aria-label="5 out of 5 stars">★★★★★</span>
               <p>{r.text}</p>
             </article>
           ))}

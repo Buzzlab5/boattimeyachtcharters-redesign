@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import SectionHead from './SectionHead';
+import SectionHead from '../SectionHead';
 
 // Prices are the ones already published on each product page.
 const EXPERIENCES = [
@@ -37,28 +37,28 @@ const EXPERIENCES = [
 
 export default function ExperiencesSection() {
   return (
-    <div role="region" id="experiences" className="hp-section" aria-labelledby="hp-experiences">
-      <div className="hp-wrap">
+    <div role="region" id="experiences" className="st-section" aria-labelledby="st-experiences">
+      <div className="st-wrap">
         <SectionHead
           eyebrow="Experiences"
           title={
-            <span id="hp-experiences">
+            <span id="st-experiences">
               Three ways to see <em>the coast</em>
             </span>
           }
           sub="Our featured cruises, ready to book."
         />
-        <div className="hp-exp-grid">
+        <div className="st-exp-grid">
           {EXPERIENCES.map((e) => (
-            <a key={e.title} href={e.href} className="hp-card on-photo">
+            <a key={e.title} href={e.href} className="st-card on-photo">
               <Image src={e.img} alt={e.alt} fill sizes="(max-width: 1024px) 100vw, 360px" />
-              <div className="hp-card__body">
-                <span className="hp-card__tag">{e.tag}</span>
+              <div className="st-card__body">
+                <span className="st-card__tag">{e.tag}</span>
                 <h3>{e.title}</h3>
                 <p>{e.text}</p>
-                <div className="hp-card__foot">
+                <div className="st-card__foot">
                   <span>View cruise</span>
-                  <span className="hp-card__price">
+                  <span className="st-card__price">
                     {e.price}
                     <small>{e.unit}</small>
                   </span>

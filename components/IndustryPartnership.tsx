@@ -4,8 +4,8 @@ import { useRef, useState } from 'react';
 import { useGSAP } from '@gsap/react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import Nav from './Nav';
-import Footer from './Footer';
+import SiteShell from './site/SiteShell';
+import PageHero from './site/PageHero';
 
 gsap.registerPlugin(ScrollTrigger, useGSAP);
 
@@ -156,15 +156,8 @@ function ContactForm() {
 // ── Main ──────────────────────────────────────────────────────────────────────
 
 export default function IndustryPartnership() {
-  const heroRef = useRef<HTMLElement>(null);
-  const bgRef = useRef<HTMLDivElement>(null);
-  const textRef = useRef<HTMLDivElement>(null);
 
-  useGSAP(() => {
-    gsap.fromTo(bgRef.current, { scale: 1.08 }, { scale: 1, duration: 14, ease: 'none' });
-    gsap.from(textRef.current!.querySelectorAll('.hr'), { y: 24, opacity: 0, duration: 0.8, stagger: 0.08, ease: 'power2.out', delay: 0.15 });
-    gsap.to(bgRef.current, { yPercent: 16, ease: 'none', scrollTrigger: { trigger: heroRef.current, start: 'top top', end: 'bottom top', scrub: true } });
-  }, { scope: heroRef });
+  
 
   const STEPS = [
     { n: '01', body: 'Partner provides discounted accommodation, experiences, or services.' },
@@ -191,56 +184,22 @@ export default function IndustryPartnership() {
 
   return (
     <>
-      <Nav />
-      <main>
+      <SiteShell>
 
         {/* ── Hero ── */}
-        <section
-          ref={heroRef}
-          className="relative overflow-hidden on-photo"
-          style={{ minHeight: '100vh', background: 'var(--navy)', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}
-        >
-          <div ref={bgRef} className="absolute inset-0 will-change-transform">
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src="/twilight-drift.jpeg" alt="" aria-hidden="true"
-              style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center 40%' }} />
-          </div>
-          <div className="absolute inset-0"
-            style={{ background: 'radial-gradient(ellipse at center, rgba(10,22,40,0.5) 0%, rgba(10,22,40,0.85) 70%), linear-gradient(to top, rgba(10,22,40,1) 0%, rgba(10,22,40,0) 40%)' }} />
-
-          <div ref={textRef} className="relative z-10 w-full"
-            style={{ padding: '160px 40px', textAlign: 'center', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-            <div className="hr section-eyebrow" style={{ marginBottom: 22, justifyContent: 'center' }}>
-              BOATTIME YACHT CHARTERS · GOLD COAST
-            </div>
-            <h1 className="hr"
-              style={{ fontFamily: 'var(--font-display)', fontWeight: 300, fontSize: 'clamp(44px, 6.5vw, 92px)', lineHeight: 0.97, letterSpacing: '-0.025em', color: 'var(--cream)', marginBottom: 26, maxWidth: 800 }}>
-              Partner With{' '}
-              <em style={{ fontStyle: 'italic', color: 'var(--gold-light)', display: 'block' }}>Boattime Yacht Charters.</em>
-            </h1>
-            <p className="hr"
-              style={{ fontFamily: 'var(--font-body)', fontSize: 'clamp(15px, 1.7vw, 17px)', color: 'rgba(245,240,232,0.72)', lineHeight: 1.8, fontWeight: 300, maxWidth: 440, marginBottom: 38 }}>
-              Access our creator network and collaborate on mutually beneficial marketing campaigns.
-            </p>
-            <div className="hr">
-              <a href="#contact" className="btn btn-primary">Become a Partner</a>
-            </div>
-          </div>
-
-          <div className="hero-infobar" style={{ width: '100%' }}>
-            {[
-              { label: 'Based in', value: 'Gold Coast' },
-              { label: 'Fleet', value: '2 Vessels' },
-              { label: 'Rating', value: '5.0 Stars', em: '2,000+ reviews' },
-              { label: 'Open to', value: 'Industry Partners' },
-            ].map((c) => (
-              <div key={c.label} className="hero-infobar-cell">
-                <div className="hero-infobar-label">{c.label}</div>
-                <div className="hero-infobar-value">{c.value}{c.em && <em> · {c.em}</em>}</div>
-              </div>
-            ))}
-          </div>
-        </section>
+        <PageHero
+          image="/twilight-drift.jpeg"
+          imageAlt="Sun Goddess at twilight on the Gold Coast"
+          eyebrow="Boattime Yacht Charters · Gold Coast"
+          title={<>Partner with <em>Boattime Yacht Charters.</em></>}
+          lead="Access our creator network and collaborate on mutually beneficial marketing campaigns."
+          primary={{ label: 'Become a partner', href: '#contact' }}
+          stats={[
+            { value: '2 vessels', label: 'Fleet' },
+            { value: '5.0 stars', label: '2,000+ reviews' },
+          ]}
+        />
+        <div className="st-zigzag st-legacy">
 
         {/* ── How It Works ── */}
         <section style={{ background: 'var(--navy)', padding: '96px 80px', borderTop: '1px solid rgba(201,168,76,0.08)' }}>
@@ -343,8 +302,8 @@ export default function IndustryPartnership() {
           </div>
         </section>
 
-      </main>
-      <Footer />
+              </div>
+      </SiteShell>
     </>
   );
 }

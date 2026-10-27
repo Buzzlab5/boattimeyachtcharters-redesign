@@ -1018,3 +1018,358 @@ Permintaan: tombol Enquiry harus menuju form kita, dan form ditaruh di sebelah F
 - **Penting:** form ini mengirim email sungguhan ke `info@boattimeyachtcharters.com.au` dan ke pengisinya (Resend), di preview maupun production.
 - Terverifikasi: tombol hero membawa ke form (URL tetap `/homepage-preview`); kirim kosong menandai 6 kolom wajib; kirim terisi dengan `fetch` palsu menghasilkan payload yang sama dengan form live (name, email, phone, date, guests, vessel, charter, note), pesan sukses, dan form kosong lagi; **tidak ada email sungguhan yang dikirim saat tes**. Audit kontras 38 elemen di terang dan gelap: 0 gagal. HP 390px: tidak ada scroll horizontal. `tsc --noEmit` bersih, tanpa error console.
 - Section "Inquiry" lama (dengan alamat, jam, nomor) tidak ikut dipakai; nomor telepon di preview tetap +61 474 735 395.
+
+## Feature: preview meniru FONT dan WARNA bluuu.tours, 27 Oktober 2026
+
+**Status: MENUNGGU PERSETUJUAN. Belum ada kode yang ditulis.**
+
+**Permintaan (Tony):** layout sudah oke. Sekarang gaya huruf dan skema warna halaman `/homepage-preview` juga disamakan dengan https://bluuu.tours/. Ini **membatalkan keputusan 1** di spec preview sebelumnya ("warna dan font tetap Boattime"). Layout, teks, form, dan semua yang sudah jadi tidak berubah; yang berubah hanya tampilan.
+
+### Hasil pembacaan langsung dari bluuu.tours (bukan tebakan dari screenshot)
+
+**Huruf**
+| Bagian | Nilai di bluuu |
+|---|---|
+| Font | **Petrov Sans**, hanya berat 400 dan 600 yang dimuat |
+| Judul hero (H1) | 96px, berat 600, letter-spacing -3px, line-height ~0.98 |
+| Judul section (H2) | 40px, berat 600, letter-spacing -1px, line-height 44px |
+| Kata aksen di judul | font sama, miring (*italic*), berat 600, berwarna biru. Miringnya **buatan browser** (sengaja tidak ada file italic) |
+| Eyebrow ("INCLUDED") | 13px, berat 700, huruf kapital, letter-spacing 2.4px |
+| Subjudul | 17px, berat 400 |
+| Judul kartu / pertanyaan FAQ | 15px berat 700 / 16px berat 600 |
+| Teks kartu foto | 14px, putih 70% |
+| Angka rating / total ulasan | 32px / 40px, berat 700 |
+| Label kecil (GOOGLE, dll.) | 11px, berat 600, kapital, letter-spacing 1.5px |
+
+**Warna**
+| Fungsi | Nilai |
+|---|---|
+| Biru utama (skala) | 500 `#007FFF`, 600 `#0073E0`, 700 `#005CB3` |
+| Eyebrow dan kata aksen di latar terang | `#0073E0` |
+| Kata aksen di hero | `#66BDFF` |
+| Eyebrow dan kata aksen di latar navy | `#60A5FA` |
+| Tombol utama | latar `#1A6FFF`, teks putih, bentuk pil (radius 999px), cahaya biru `rgba(26,111,255,.55)` di sekelilingnya |
+| Teks judul / isi / redup | `#0F172A` / `#475569` / `#64748B` |
+| Latar section | abu `#F4F5F6` (Included, Galeri, Ulasan), putih `#FFFFFF` (FAQ), navy `#0D1F3C` (Choose your tour type), footer `#070F1F` |
+| Kartu | putih, border `#EDF0F2`, bayangan sangat tipis; radius **16px** (included), **12px** (ulasan), **24px** (kartu foto) |
+| Angka 01-06 di kartu | `rgba(0,115,224,.07)`, 32px berat 900 |
+| Badge di foto | pil, latar `rgba(15,23,42,.75)`, 11px berat 700 |
+
+Urutan section bluuu: foto (hero) → abu → **navy** → abu → abu → putih → **navy tua** (footer). Jadi bluuu **terang dengan dua blok gelap**; sekarang preview kita gelap total.
+
+### ⚠️ Font: Petrov Sans itu font berbayar
+Petrov Sans buatan **Fontfabric**, dijual komersial (daftar Fontspring: mulai $35 per gaya, keluarga lengkap dari $194; lisensi web perlu dibaca sebelum membeli). bluuu memuat file font-nya dari server mereka sendiri. **Kita tidak boleh menyalin file itu** dari situs mereka. Dua jalan:
+
+- **A. Beli lisensi web Petrov Sans** (kemungkinan hanya 2 gaya: Regular dan SemiBold), taruh di proyek. Hasilnya persis sama dengan bluuu. Yang membeli: kamu/Tony; saya tidak bisa membeli.
+- **B. Pakai font gratis yang paling mirip dari Google Fonts** untuk presentasi sekarang. Saya akan membandingkan 3-4 kandidat (Outfit, Sora, Lexend, Urbanist) berdampingan dengan screenshot bluuu dan memilih yang terdekat. Kalau Tony mau persis, ganti ke A cukup satu baris.
+
+**Saran saya: B dulu** (bisa langsung dipresentasikan, tanpa biaya, tanpa risiko lisensi), lalu A kalau Tony tetap mau huruf yang identik.
+
+### Rencana perubahan (hanya tampilan)
+1. **`preview.css`**: token warna dan huruf diganti dengan nilai bluuu di atas. Tema **terang = persis bluuu**. Tema **gelap** (tombol terang/gelap di navbar tetap ada) **saya turunkan sendiri** dari dua warna navy bluuu (`#0D1F3C`, `#070F1F`), karena bluuu tidak punya mode gelap.
+2. **Bentuk**: kartu dan form membulat (12 / 16 / 24px), semua tombol berbentuk pil, tombol utama memakai cahaya biru. Bayangan kartu tipis seperti bluuu.
+3. **Huruf**: H1/H2/eyebrow/subjudul/kartu memakai ukuran, berat, dan letter-spacing di tabel. Kata aksen miring berwarna biru.
+4. **Navbar dan "Two vessels. One horizon."** tetap komponen yang sama (tidak diedit). Warna dan hurufnya diganti lewat token yang dibaca keduanya, ditimpa hanya di dalam halaman preview. Warna emas yang tertulis mati di komponen itu (kalau ada) saya timpa dengan CSS khusus preview. Kalau ada yang bandel, saya laporkan.
+5. **Logo Boattime tidak diubah** (putih/navy, tanpa emas, jadi cocok di latar biru).
+6. **Tidak ada teks, foto, atau logo bluuu yang disalin.** Hanya gaya.
+
+### Keputusan yang saya ambil sendiri
+- Preview **dibuka dalam tema terang** (seperti bluuu), supaya perbandingan dengan bluuu langsung terlihat. Pengunjung yang sudah pernah memilih gelap tetap melihat gelap.
+- Klaim bluuu yang tidak bisa kita buktikan tetap tidak disalin ("Best Price Guarantee", "Best Value", "Most Popular").
+
+### Pertanyaan terbuka
+1. **Font: A atau B?** (saran saya B dulu).
+2. **Kalau nanti preview ini jadi homepage:** halaman lain (cruise, charter, kapal, blog) masih navy + emas + Cormorant. Homepage biru dan halaman lain emas akan terlihat seperti dua situs berbeda. Apakah seluruh situs nanti ikut diganti, atau hanya homepage? (Hanya perlu diputuskan sebelum live; tidak mengubah pekerjaan sekarang.)
+
+### Tidak dikerjakan
+Mengubah homepage live atau halaman lain, menyalin konten bluuu, membeli font, video bunny.net, menyentuh form/Kai/tracking.
+
+### Selesai jika
+- `tsc --noEmit` bersih, `/homepage-preview` terbuka tanpa error console.
+- Dibandingkan berdampingan dengan bluuu.tours di lebar desktop: font, ukuran/berat judul, warna latar tiap section, warna eyebrow dan kata aksen, bentuk tombol (pil + cahaya biru), radius kartu cocok dengan tabel di atas.
+- Mode terang dan gelap sama-sama lolos audit kontras otomatis (teks 4.5:1, teks besar 3:1); dikecualikan hanya angka dekoratif 01-06.
+- Navbar dan section Fleet ikut berubah gaya dan tidak ada sisa emas yang mencolok.
+- Tampilan HP 390px tidak ada scroll horizontal; form, tombol hero, dan menu HP tetap berfungsi.
+- Homepage `/` dan halaman lain terbuka seperti sebelumnya (tidak ikut berubah warna/huruf).
+
+### Status: font dan warna bluuu SELESAI, 27 Oktober 2026 (belum di-commit)
+
+Keputusan yang disetujui: font **B** (font gratis pengganti), dan tema ini nanti dipakai untuk **seluruh situs**, bukan hanya homepage. Karena itu dirancang agar mudah dipindah: kartu dan foto **membulat** (12 / 16 / 24px), tombol berbentuk pil.
+
+**Font:** Exo 2 (Google Fonts, bobot 400 dan 600, hanya tegak). Dipilih dari 8 kandidat yang dibandingkan berdampingan dengan bluuu pada 96px (Sora, Lexend, Exo 2, Saira, Outfit, Space Grotesk, Unbounded, Urbanist). Exo 2 paling mirip bentuknya (huruf kotak membulat) dan lebarnya hanya sekitar 5% di atas Petrov Sans. Miring (italic) dibuat browser, sama seperti bluuu. Satu file: `app/homepage-preview/fonts.ts`; untuk beralih ke Petrov Sans berlisensi, ganti isinya dengan `next/font/local`.
+
+**File baru / berubah (semua di `app/homepage-preview/`, kecuali dicatat):**
+- `theme.css` (baru): token bluuu pada `.hp-theme` + peta ke token lama (`--navy`, `--cream`, `--gold`, `--font-*`) supaya `Nav` dan `Fleet` ikut berubah tanpa diedit; gaya navbar (transparan di atas foto, bar navy saat di-scroll, tombol Tickets berbentuk pil bercahaya biru, dropdown membulat); gaya "Two vessels" (foto membulat, chip pil, tautan biru). **Jalur pindah ke seluruh situs:** blok `--bl-*` dan peta token lama dipindah ke `:root`, tema terang/gelap ke `:root` / `[data-theme]`; komponen tidak perlu diubah.
+- `preview.css` (ditulis ulang): ukuran dan berat huruf, jarak, kartu, tombol pil, form membulat, latar section bergantian (abu, navy, putih) seperti bluuu.
+- `fonts.ts`, `DefaultLight.tsx` (baru): preview terbuka **terang** bila pengunjung belum pernah memilih tema; pilihan lewat tombol tema tersimpan dan menang.
+- `CruiseTypeSection`, `ExperiencesSection`, `HeroActions`, `EnquiryForm`, `page.tsx`: hanya nama kelas dan pembungkus tema.
+- `components/*` tidak diubah pada langkah ini.
+
+**Dua penyimpangan kecil dari bluuu, sengaja, demi aksesibilitas:**
+1. Warna **teks** biru dan abu bluuu (`#0073E0`, `#64748B`) diukur 4.25 dan 4.36 terhadap latar abu bluuu sendiri, sedikit di bawah standar 4.5:1. Untuk teks dipakai `#0067D1` dan `#5B6B81` (rona sama, sedikit lebih gelap).
+2. Isian tombol utama `#1A6FFF` (putih di atasnya 4.41:1) diubah menjadi `#1768FA` (4.78:1). Selisihnya tidak terlihat mata.
+
+**Terverifikasi:**
+- `tsc --noEmit` bersih; tidak ada error console.
+- Audit kontras otomatis (153 elemen teks, mode terang dan gelap): **0 gagal**. Dikecualikan: tulisan raksasa dekoratif "BOATTIME", angka 01-06, dan bintang rating (dekoratif, sudah ada teks dan label alternatif).
+- Dibandingkan dengan bluuu: font dan ukuran H1 96px/600/-3px, H2 40px/600/-1px, eyebrow 13px/600/2.4px kapital, kata aksen miring biru (`#66BDFF` di atas foto, `#60A5FA` di atas navy), tombol utama pil berwarna biru dengan cahaya, kartu 16/12/24px, urutan latar abu → navy → putih → abu → putih → abu → putih → footer `#070F1F`.
+- Terang dan gelap diperiksa visual di semua section; HP 390px tidak ada scroll horizontal, menu HP berfungsi.
+- Homepage `/` tidak berubah (Cormorant, gelap, navbar lengkap, tombol Tickets bersudut tajam, tanpa `.hp-theme`).
+
+**Perbedaan bluuu yang diketahui:** bluuu tidak punya mode gelap (mode gelap di sini turunan dari dua navy bluuu); tidak ada ilustrasi ikon bluuu (kita pakai ikon garis); tulisan "BOATTIME" raksasa mengikuti font baru; menu HP bawaan masih menampilkan nomor lama +61 477 667 644.
+
+### Revisi preview, 27 Oktober 2026 (malam): zig-zag, foto kapal melebar, FAQ penuh, font diganti
+
+1. **Latar zig-zag putih / gelap** setelah hero: Included (putih) → Cruise type (navy) → Experiences (putih) → Two vessels (navy) → Galeri (putih) → Ulasan (navy) → FAQ + form (putih) → footer (navy). Menggantikan abu-abu. Kelas `.hp-dark` (di `theme.css`) menandai blok gelap dan menukar semua token ke nilai gelap, termasuk token lama yang dibaca `Fleet`, di kedua tema. Mode gelap: putih menjadi navy `#0D1F3C`, blok gelap menjadi `#070F1F`.
+2. **Two vessels:** foto kembali melebar sampai tepi layar (seperti desain asli), dengan sudut dalam membulat 24px (sudut yang menempel ke tepi layar tetap lurus). Di HP foto membulat penuh dengan margin. Kolom teks tetap sejajar dengan judul dan galeri interior.
+3. **FAQ:** tombol "See all questions" dihapus; keenam pertanyaan langsung tampil (tetap berupa akordeon).
+4. **Font diganti dari Exo 2 ke Urbanist.** Exo 2 terasa seperti "gaya AI". Pemilihan kali ini diukur: lebar 12 teks dan 5 proporsi huruf (tinggi huruf kecil, tinggi kapital, o, O, i) diukur pada Petrov Sans langsung di bluuu.tours, lalu dibandingkan dengan ±60 font Google yang punya bobot 400 dan 600. Urbanist terdekat (selisih rata-rata ±3%, peringkat 2 sekitar 4.5%; Exo 2 tidak masuk 18 besar) dan punya bobot 600 asli. Questrial secara angka mirip tetapi hanya punya satu bobot.
+- Terverifikasi: `tsc --noEmit` bersih; audit kontras 158 elemen di terang dan gelap, 0 gagal; HP 390px tanpa scroll horizontal; tidak ada error console.
+
+## Rencana: tema bluuu untuk SELURUH situs, 27 Oktober 2026
+
+**Status: MENUNGGU PERSETUJUAN. Belum ada kode yang ditulis.**
+
+**Permintaan:** setiap halaman memakai tema (font, warna, sudut membulat) dan **navbar yang sama dengan `/homepage-preview`**, bukan hanya homepage.
+
+**Kenapa halaman lain belum berubah:** itu disengaja. Sesuai spec yang disetujui, tema hanya dipasang di dalam `/homepage-preview` (pembungkus `.hp-theme`) supaya situs live tidak berubah sebelum Tony melihat dulu. Pertanyaan "apakah seluruh situs ikut?" sudah dicatat sebagai pertanyaan terbuka; jawabannya sekarang: ya.
+
+### Ukuran pekerjaan (diukur langsung dari kode)
+| Hal | Jumlah |
+|---|---|
+| Halaman publik | 22 (semuanya memakai `Nav`; 21 memakai `Footer`) |
+| File komponen halaman | 51 di `components/` |
+| Warna emas tertulis di kode (hex, rgba, `var(--gold)`) | 824 kemunculan di 42 file |
+| Pemakaian token lama (`--navy`, `--cream`, `--font-display`) | 605 kemunculan |
+| Aturan khusus mode terang di `globals.css` | 149 aturan (file 5.055 baris) |
+
+Artinya: **token lama (605) otomatis ikut berubah** begitu tema dipindah ke `:root` (cara yang sudah terbukti pada Navbar dan Fleet). Yang **tidak otomatis**: emas yang tertulis mati sebagai hex/rgba, sudut tajam pada kartu/foto/tombol, dan beberapa aturan mode terang yang menimpa. Itu dikerjakan per halaman.
+
+### Cara kerja yang diusulkan (aman, bisa dibalik)
+1. **Sakelar tema (`data-skin="bluuu"` pada `<html>`).** Seluruh gaya baru hanya aktif kalau sakelar menyala, dikendalikan satu variabel lingkungan. Jadi kode bisa di-deploy ke production dalam keadaan **mati** (situs tidak berubah), dicek di link preview Vercel, lalu dinyalakan dengan satu perubahan. Menyalakan dan mematikan tidak butuh kode.
+2. **Navbar:** `Nav` memakai versi preview sebagai bawaan untuk semua halaman (Experiences, Yacht Charter, Blogs, Tickets, tombol tema). Link Fleet, Whale, FAQ hilang dari semua halaman (dulu mengarah ke section homepage).
+3. **Tema global:** blok token `--bl-*` dan peta token lama dipindah dari `.hp-theme` ke `html[data-skin='bluuu']`; Urbanist dimuat di `layout.tsx`.
+4. **Bentuk:** aturan pembulatan (kartu 12/16/24px, foto, chip, tombol pil, form) ditulis sekali untuk pola yang berulang, lalu disesuaikan per halaman.
+5. **Per halaman:** perbaiki sisa emas yang tertulis mati dan cek mode terang + gelap: Charter (4), Cruise (±10), Yacht (2), About, Tickets, News + artikel, Industry, Campaign. Urutan: halaman yang dipakai iklan dulu (private/corporate/wedding charter, whale, sunset).
+6. **Footer:** satu footer (gaya footer preview) untuk semua halaman, bila disetujui.
+7. **Yang tidak ikut diubah:** isi/teks halaman, struktur section halaman lain, form, Kai, tracking, SEO, admin.
+
+### Hal yang perlu kamu tahu / putuskan
+1. **Halaman iklan.** Halaman charter dan cruise adalah tujuan iklan Google dan Meta yang sedang jalan. Tampilan yang berubah total di tengah kampanye bisa mengubah konversi dan skor Landing Page di Google Ads. Usul: nyalakan sakelar setelah Tony setuju dan pantau konversi beberapa hari.
+2. **Homepage `/`.** Rencana ini hanya menyentuh tema dan navbar. Mengganti isi `/` dengan desain preview adalah langkah terpisah (menyalin `/homepage-preview` ke `/`). Mau digabung atau terpisah?
+3. **Tema bawaan situs.** Sekarang pengunjung baru melihat **gelap**. bluuu itu terang. Mau bawaan situs jadi terang (seperti preview), atau tetap gelap?
+4. **Bertahap atau sekaligus?** Usul: tahap 1 = sakelar + navbar + font + warna global + pembulatan umum (efek di 22 halaman, kasar tapi konsisten); tahap 2 = poles per halaman. Tahap 1 saja sudah membuat semua halaman terlihat satu keluarga.
+5. **Footer baru** untuk semua halaman, atau footer lama tetap dengan warna baru?
+
+### Selesai jika (tahap 1)
+- `tsc --noEmit` bersih; `npm run build` lolos.
+- Sakelar mati: ke-22 halaman identik dengan sebelumnya. Sakelar menyala: navbar sama dengan preview di semua halaman, font Urbanist, warna biru, tidak ada kartu atau foto bersudut tajam yang mencolok, terang dan gelap sama-sama terbaca (audit kontras otomatis per halaman).
+- Tidak ada scroll horizontal di 390px; form, widget Kai, tracking telepon/email, dan JSON-LD tetap bekerja.
+
+### Perbaikan: preview selalu terbuka putih, 27 Oktober 2026
+Gejala: pemilik melihat preview serba navy (tanpa section putih). Penyebab: saat pengujian, tombol tema diklik dan mode gelap tersimpan di localStorage browser pemilik; preview menghormati pilihan tersimpan itu, dan di mode gelap section "putih" memang berwarna navy. Perbaikan: preview **selalu terbuka terang** (putih bergantian dengan navy) apa pun tema yang tersimpan di halaman lain. Hanya pilihan yang dibuat dengan tombol tema **di dalam preview pada tab itu** (sessionStorage `hp-theme`) yang dipertahankan saat reload. Skrip kecil di `page.tsx` menyetel tema sebelum cat pertama (tanpa kedipan gelap), `DefaultLight.tsx` menjaganya. Terverifikasi: dengan `localStorage.theme='dark'` preview tetap terbuka putih; tombol tema berfungsi; tanpa error console pada pemuatan bersih.
+
+## Pelaksanaan: tema bluuu untuk SELURUH situs, tahap 1, 27 Oktober 2026
+
+**Disetujui pemilik** ("kita aplikasikan design system baru ke semua pages yang ada sekarang"). Lima pertanyaan di rencana sebelumnya tidak dijawab satu per satu, jadi dipakai **saran saya** (semuanya bisa diubah):
+1. **Sakelar:** tema aktif secara bawaan. Variabel lingkungan `NEXT_PUBLIC_SKIN=classic` mematikannya dan mengembalikan tampilan lama persis (tombol darurat). Tanpa variabel itu: tema baru.
+2. **Homepage `/`:** hanya mendapat tema + navbar baru. Isinya tidak diganti dengan desain preview (langkah terpisah).
+3. **Tema bawaan:** **terang** (seperti bluuu dan preview) untuk pengunjung baru; pilihan tersimpan tetap dihormati. Sebelumnya bawaan situs gelap.
+4. **Bertahap:** tahap 1 = infrastruktur (token, font, navbar, footer, bentuk umum) lalu poles per halaman bila perlu.
+5. **Footer:** footer lama dipertahankan (isinya membawa tautan internal untuk SEO) dan hanya diganti warna/hurufnya lewat token.
+
+**Peringatan:** mendorong ke `master` membuat SELURUH situs live berubah (termasuk halaman tujuan iklan). Untuk melihat dulu: push ke branch terpisah (`git push origin master:nama-branch`) dan buka link preview Vercel.
+
+### Status: tahap 1 SELESAI, 27 Oktober 2026 (belum di-commit)
+
+**Yang dibuat**
+- `app/skin-bluuu.css` (baru, diimpor di `app/layout.tsx`): token bluuu + peta ke token lama, navbar, footer, dan tambalan seluruh situs. **Seluruh gayanya hanya aktif bila `<html data-skin="bluuu">`.**
+- `lib/skin.ts` (sakelar `SKIN_ON`; `NEXT_PUBLIC_SKIN=classic` mematikannya), `lib/skin-font.ts` (Urbanist; dipindah dari folder preview).
+- `app/layout.tsx`: memasang `data-skin`, font, dan tema bawaan **terang** (gelap bila `classic`).
+- `components/Nav.tsx`: navbar preview (Experiences, Yacht Charter, Blogs, Tickets, tombol tema; tanpa Fleet/Whale/FAQ) kini bawaan di semua halaman. Tombol enquiry di menu HP menggulir ke form bila halaman punya form; kalau tidak (semua halaman selain beranda dan preview) menuju form di beranda seperti sebelumnya.
+- `app/homepage-preview/*`: `theme.css` dan `fonts.ts` dihapus (pindah ke file global); halaman memastikan `data-skin` menyala sendiri.
+
+**Tambalan seluruh situs (di `skin-bluuu.css`)**: judul 600, eyebrow tanpa garis, tombol `.btn` berbentuk pil, footer selalu navy gelap, emas yang tertulis mati (hex/rgba/inline) dipetakan ke biru, emas di atas foto menjadi biru muda, foto/kartu/wadah foto/galeri bersudut membulat (12/16/24px), pita statistik dan chip emas menjadi biru dengan teks putih, teks krem redup di mode gelap dinaikkan.
+
+**Terverifikasi**
+- `tsc --noEmit` bersih; `npm run build` lolos (tema aktif). Build `NEXT_PUBLIC_SKIN=classic` juga lolos dan menghasilkan HTML tanpa `data-skin` dengan tema bawaan gelap. Dengan `data-skin` dicopot, beranda kembali memakai Cormorant dan emas `#c9a84c`.
+- Semua 21 halaman: HTTP 200, memuat tema, tepat satu `<h1>` (SEO tidak berubah).
+- HP 390px: tidak ada scroll horizontal di 10 halaman yang diuji (beranda, charter, whale, kapal, tickets, berita, about, heli, NYE, menu).
+- Audit kontras otomatis (teks di luar foto, terang + gelap) pada 17 halaman: 0 gagal di semua halaman kecuali 2 elemen (jam matahari terbenam 3.1:1 di pita info beranda mode terang; penghitung halaman flipbook menu 2.5:1 mode gelap, perbaikan diterapkan setelah audit terakhir dan belum diukur ulang).
+- Dilihat langsung (tampilan 3 kolom diperkecil) pada beranda, charter privat, whale, sunset, kapal Sun Goddess, About, kampanye heli.
+
+**Keterbatasan yang diketahui**
+- Widget pemesanan **Rezdy** (iframe pihak ketiga) memakai warnanya sendiri; tidak bisa diubah dari sisi kita.
+- Isi dan susunan section halaman lain **tidak** diubah (hanya tema); desain ulang tata letak seperti `/homepage-preview` hanya ada di preview.
+- Ratusan gaya dibuat lewat pola (atribut inline), bukan satu per satu per file: bisa tersisa elemen kecil yang masih bernuansa lama pada bagian halaman yang tidak sempat dilihat satu per satu (daftar: Riverfire, Valentine's, NYE, menu, industry, dining; hanya diaudit kontras, belum dilihat visual).
+- Menu HP masih menampilkan nomor lama +61 477 667 644.
+- Mendorong ke `master` membuat seluruh situs live berubah; untuk mencoba dulu push ke branch terpisah.
+
+## Rencana: rekonstruksi layout SELURUH situs mengikuti homepage-preview, 27 Oktober 2026
+
+**Status: MENUNGGU PERSETUJUAN. Belum ada kode yang ditulis.**
+
+**Permintaan (pemilik):** (1) anggap `/homepage-preview` sebagai homepage utama; (2) semua halaman memakai layout dan gaya yang sama, bukan hanya warna/font; (3) footer sama seperti preview; (4) hapus mode terang/gelap; (5) rapikan UI/UX: bagian yang mepet garis, ruang tidak jelas, dan sebagainya.
+
+**Penilaian jujur atas tahap 1:** tahap 1 hanya memindahkan *tema* (token, font, warna, sudut). Struktur section tiap halaman tetap susunan lama (kolom + sidebar akordeon + garis tipis berhimpit), sehingga hasilnya terlihat "cuma ganti CSS". Itu kekurangan, bukan keputusan. Tahap 2 ini merombak *susunan*.
+
+### Prinsip desain (dari preview)
+1. **Satu tema**: putih dan navy `#0D1F3C` bergantian (zig-zag), tidak ada mode gelap/terang. Tombol tema dihapus dari navbar.
+2. **Ritme section tetap**: tiap section punya padding 112px (80px di HP), kolom isi maksimal 1120px, judul tengah (eyebrow, judul 40px dengan kata aksen biru miring, subjudul). **Tidak ada garis pemisah yang menempel ke tepi**; pemisahan dilakukan oleh pergantian warna latar dan ruang.
+3. **Zig-zag otomatis**: pembungkus halaman memberi latar putih/navy bergantian pada section-section anaknya, jadi dua section bersebelahan tidak pernah sewarna dan susunan tidak bisa "lupa" selang-seling.
+4. **Kartu** membulat (12/16/24px), tombol pil, foto membulat, galeri mosaik, FAQ akordeon di kiri + form enquiry di kanan.
+5. **Hero** foto penuh, judul besar 600 dengan kata aksen biru muda, tombol Enquiry + Call, deret fakta/rating.
+6. **Footer** sama dengan preview (navy gelap, kolom, tulisan raksasa samar), **ditambah semua tautan footer lama** (halaman SEO: Riverfire, Valentine's, NYE, Wedding, Corporate, Catering, About, News, kapal) supaya tautan internal tidak hilang.
+
+### Cara kerja teknis
+- **Kit komponen baru** di `components/site/` (subfolder, bukan folder top-level): `Section` (varian putih/navy, padding, kontainer), `ZigZag` (pembungkus selang-seling), `SectionHead`, `PageHero`, `FeatureGrid`, `PhotoCard`, `SplitSection` (teks + foto/aside), `Gallery`, `Reviews`, `FaqEnquiry`, `CtaBand`, `SiteFooter`. Dipindah dari komponen `app/homepage-preview/*` yang sudah teruji, bukan ditulis ulang dari nol.
+- **Halaman dipetakan ke kit itu per template** (isi teks, harga, foto, dan tautan **dipertahankan**; yang berubah adalah susunan):
+  - **Cruise (8 halaman)**: Hero + fakta → Overview + Included (kartu) → Galeri → Itinerary/detail (split) → Booking (widget Rezdy dalam kartu putih) → Ulasan → FAQ + enquiry. Dikerjakan lewat `CruiseSections.tsx` (dipakai bersama) lalu bagian khusus tiap halaman.
+  - **Charter (4)**: Hero → Overview (split) → Paket (3 kartu) → Kapal (2 kartu foto) → Inklusi/Extras → Destinasi → Galeri → FAQ + enquiry. Lewat `CharterSections.tsx`.
+  - **Kapal (2)**: Hero → pita spesifikasi → Overview → Galeri → Tabel spesifikasi + fitur → FAQ → tautan silang.
+  - **About, Tickets, News (daftar + artikel), Industry Partnership, Menu, Kampanye Heli**: masing-masing dipetakan ke kit yang sama.
+- **Satu tema**: `ThemeProvider` menjadi konstan, tombol tema dan `themeScript` dihapus, `<html data-theme>` tetap satu nilai; seluruh aturan khusus gelap/terang dan token ganda di `skin-bluuu.css` dihapus. 149 aturan `[data-theme='light']` di `globals.css` dibersihkan **di akhir** setelah halaman terakhir pindah (supaya tidak merusak halaman yang belum dirombak).
+- **Beranda `/`** = susunan preview. `/homepage-preview` dialihkan ke `/` (307). Metadata, canonical, JSON-LD FAQ, dan tag Google Ads beranda lama dipindahkan. Komponen beranda lama dibiarkan di repo (tidak terpakai) sampai pemilik setuju menghapus.
+- **Sakelar `NEXT_PUBLIC_SKIN=classic`** tetap ada sampai semua halaman selesai, lalu dihapus bersama kode lamanya.
+
+### Urutan kerja (dengan titik periksa)
+| Tahap | Isi | Titik periksa |
+|---|---|---|
+| A | Kit komponen, satu tema, footer baru, beranda = preview | lihat beranda + satu halaman contoh |
+| B | Charter (4) | halaman iklan utama, dicek dulu |
+| C | Cruise (8) | |
+| D | Kapal (2), About, Tickets | |
+| E | News + artikel, Industry, Menu, Kampanye Heli | |
+| F | Pembersihan CSS mati, audit kontras, uji HP, build, tautan | laporan akhir |
+Tiap tahap diverifikasi di browser (terang-saja kini): tata letak desktop + HP 390px, kontras otomatis, tidak ada scroll horizontal, tautan, satu H1.
+
+### Risiko dan catatan
+1. **SEO beranda.** Beranda preview punya lebih sedikit teks dan tautan internal daripada beranda lama (tidak ada section Whale, Charters, Destinations, About). Mitigasi bawaan: footer baru memuat semua tautan lama. Teks hero preview ("Discover the Gold Coast") berbeda dari H1 yang baru diatur tim SEO ("Luxury on the water, unforgettable."). **Pertanyaan 1** di bawah.
+2. **Halaman tujuan iklan** (charter, whale, sunset) ikut berubah total. Saran: dorong ke branch dulu, lihat link preview Vercel, baru ke `master`, lalu pantau konversi.
+3. **Ukuran:** ±17.000 baris kode halaman. Dikerjakan bertahap seperti di atas; hasil tiap tahap bisa dilihat sebelum lanjut.
+4. **Pihak ketiga** (widget Rezdy, peta, Kai) tidak bisa diubah gayanya.
+5. **Hapus mode gelap/terang** menghilangkan pilihan itu untuk semua pengunjung. Ini keputusan pemilik; tidak bisa dibalik tanpa memulihkan kode.
+
+### Pertanyaan (jawaban bawaan saya bila tidak dijawab)
+1. **Teks hero beranda untuk SEO:** pakai persis preview ("Discover the Gold Coast"), atau gabungkan: judul preview + eyebrow dari tim SEO ("Superyacht Charters · Gold Coast & Brisbane")? *Bawaan: gabungkan.*
+2. **Section tambahan di beranda** untuk menjaga tautan ke charter privat/korporat/wedding/catering (4 kartu kecil setelah "cruise type"), atau persis preview? *Bawaan: persis preview, kekurangan tautan ditutup footer.*
+3. **Urutan:** mulai dari charter (halaman iklan)? *Bawaan: ya (A lalu B).*
+4. **Komponen beranda lama** dibiarkan sampai akhir lalu ditanyakan sebelum dihapus? *Bawaan: ya.*
+
+### Selesai jika
+- `tsc --noEmit` bersih, `npm run build` lolos, ke-21 halaman 200 dengan satu H1.
+- Tidak ada tombol tema, tidak ada kode `data-theme`/`useTheme` yang tersisa.
+- Setiap halaman memakai kit yang sama: zig-zag putih/navy, tanpa garis yang menempel ke tepi, footer sama dengan beranda.
+- Audit kontras otomatis 0 gagal; HP 390px tanpa scroll horizontal; widget Rezdy, form, Kai, tracking telepon/email, JSON-LD masih berfungsi.
+
+## Status: rekonstruksi layout seluruh situs, tahap A-E, 27 Oktober 2026 (belum di-commit)
+
+Keputusan pemilik: hero beranda persis preview; beranda persis preview; mulai dari charter; komponen beranda lama dibiarkan.
+
+**Yang dikerjakan**
+- **Satu tema.** Tombol tema (navbar dan admin), `themeScript`, dan sakelar `NEXT_PUBLIC_SKIN` dihapus. `<html data-skin="bluuu" data-theme="light">` tetap. Seluruh blok `[data-theme='dark']` di `skin-bluuu.css` dihapus. `ThemeProvider` menjadi pembungkus konstan (masih dipanggil oleh komponen beranda lama yang tidak terpakai).
+- **Kit komponen** `components/site/`: `SiteShell` (navbar + isi + footer), `PageHero`, `HeroActions`, `Section`, `SectionHead`, `FaqEnquiry` (FAQ kiri + form kanan, id `inquiry`), `EnquiryForm`, `PhotoCardGrid`, `GalleryStrip` (galeri geser + tampilan penuh), `SiteFooter`, `CharterTemplate`, `site.css` (kelas `st-*`), `home/*` (section beranda). Zig-zag otomatis lewat `<div className="st-zigzag">` (putih/navy bergantian menurut urutan).
+- **Beranda `/`** = susunan preview. `/homepage-preview` dialihkan ke `/` (307). Kai tetap tersembunyi di beranda (daftar `HIDE_KAI_ON = ['/']` di `KaiWidget.tsx`).
+- **Footer baru** di semua halaman: gaya preview + semua tautan footer lama (cruise, charter, kapal, About, News, Enquiry). Tautan "Privacy / Terms / Cookies" lama tidak punya tujuan (tidak ada halamannya) sehingga tidak dibawa.
+- **Charter (privat, korporat, wedding):** `CharterTemplate`: hero, overview + kartu samping lengket, galeri, paket, kartu detail (menggantikan akordeon), kartu kapal, ajakan ketersediaan, FAQ + form. Teks asli dipertahankan (dibungkus `.st-prose`). **Catering/Menu:** hero, flipbook menu dalam kartu, ajakan, form.
+- **Cruise (8 halaman):** hero kit dengan chip fakta (lewat `CruiseHero` yang kini membungkus `PageHero`; NYE, Riverfire, Valentine's memakai `PageHero` langsung); bagian tengah memakai ritme kit (`st-legacy`: zig-zag, padding seragam, tanpa garis di tepi); widget Rezdy tetap; form enquiry di akhir.
+- **Kapal (2), About, News (daftar + artikel), Tickets, Industry, Kampanye Heli:** bingkai baru (navbar, footer), hero kit di semua kecuali Artikel (hero artikelnya sendiri) dan Kampanye Heli (hero video sendiri, dipertahankan); Tickets ditulis ulang; FAQ kapal dipindah ke bagian FAQ + form.
+
+**Terverifikasi**
+- `tsc --noEmit` bersih; `npm run build` lolos (75 halaman).
+- 20 halaman publik: HTTP 200, satu `<h1>`, footer baru. Audit kontras (di luar teks di atas foto dan navbar): 0 gagal di semua halaman kecuali statistik hero About (false positive, di atas foto) dan tautan "Buy Tickets" di halaman lunch (diperbaiki, belum diukur ulang).
+- HP 390px: tanpa scroll horizontal di 10 halaman (beranda, charter, whale, kapal, tickets, berita, about, menu, NYE, heli); beranda dan charter dilihat visual.
+- Beranda, charter, whale, NYE, Sun Goddess, menu, dan kampanye heli dilihat langsung.
+
+**Keterbatasan jujur**
+1. **Bagian tengah halaman cruise, kapal, About, News, Industry, dan Heli belum disusun ulang kartu demi kartu.** Mereka memakai ritme dan hero kit, tetapi isi bagian bespoke (grid statistik, banner, kartu upgrade, dll.) masih rancangan lama yang sudah berwarna dan bersudut baru. Menyusun ulang seluruhnya (±8.000 baris) adalah pekerjaan lanjutan; urutan prioritas yang disarankan: Whale, Sunset, kapal, About.
+2. **Aturan CSS lama `[data-theme='light']` (149 aturan di `globals.css`) masih ada** dan kini menjadi tema tunggal; bagian bespoke bergantung padanya, jadi belum dihapus. Dihapus setelah bagian bespoke selesai disusun ulang.
+3. **Nomor telepon** di kit dan footer: +61 474 735 395 (sesuai permintaan awal). Nomor lama +61 477 667 644 masih dipakai tag penggantian nomor Google Ads (`GoogleAdsTag`), jadi pelacakan panggilan dari iklan tidak aktif sampai pemilik memutuskan nomor mana yang dipakai.
+4. **Kai** tersembunyi di beranda (sesuai permintaan sebelumnya di preview).
+5. **SEO beranda:** beranda baru memuat lebih sedikit teks dan tautan internal daripada beranda lama (keputusan pemilik: persis preview); footer baru menutup tautan internal.
+6. Komponen beranda lama (`Hero`, `StatsBar`, `Cruises`, dll.) dan komponen charter/cruise lama yang tidak terpakai dibiarkan di repo.
+7. Mendorong ke `master` membuat seluruh situs live berubah; untuk melihat dulu, push ke branch terpisah.
+
+## Perbaikan setelah tinjauan visual pemilik, 27 Oktober 2026 (malam)
+
+Pemilik menemukan 8 cacat yang lolos dari pengujian sebelumnya. Penyebab dan perbaikannya:
+
+| Cacat | Penyebab | Perbaikan |
+|---|---|---|
+| Judul hero menabrak tombol (NYE, Wedding) | tombol langsung menempel di bawah judul/teks, tanpa jarak | `.st-hero__actions { margin-top: 36px }` |
+| Pita ulasan/jadwal sesi di halaman cruise setebal satu section | normalisasi `st-legacy` memaksa padding 96px pada setiap blok, termasuk pita 2 baris | hanya `<section>` mendapat padding besar; pita ditandai `st-compact` (strip tipis 28px, abu muda, di luar selang-seling) |
+| Teks form tidak terlihat di pita navy | aturan placeholder lama di `globals.css` mewarnai placeholder navy | `::placeholder` dipaksa memakai token teks pita |
+| Kartu detail charter tidak simetris, satu kartu sendirian | grid 3 kolom dengan lebar tetap dan tinggi mengikuti isi | grid 6 kolom; lebar dihitung (4+2, lalu 2+2+2; sisa 1 jadi 6, sisa 2 jadi 3+3); tinggi satu baris disamakan; kartu penuh memakai teks 2 kolom |
+| Tombol menabrak deskripsi (Wedding) | sama dengan jarak hero di atas | sama |
+| Kartu berita menjadi lonjong + teks tak terlihat | aturan "tombol navy" yang saya tambahkan terlalu luas dan mengenai kartu | dibatasi pada tombol `inline-flex` saja |
+| Tombol/kartu masih kotak | puluhan komponen lama menggambar kotak sendiri | tombol CTA inline: huruf biasa, 15px, sudut 12px; **`components/site/RoundBoxes.tsx`**: setelah halaman tampil, setiap kotak kartu/foto yang masih bersudut tajam dibulatkan (24px foto, 16px lainnya; sel dalam grid yang sudah membulat dan band penuh dilewati) |
+| Tombol "Buy Tickets" putih di atas putih (lunch) | tombol berlatar `--navy` yang kini putih | tombol `inline-flex` berlatar `--navy` diberi navy asli |
+
+**Kenapa pengujian sebelumnya melewatkan semua ini:** audit kontras lama melewati teks yang elemennya punya anak `absolute` (dianggap "di atas foto"), dan tidak ada pemeriksaan tabrakan, tinggi kartu, atau sudut. Foto ringkas 3 kolom terlalu kecil untuk memperlihatkan tabrakan.
+
+**Pemeriksa baru** (dijalankan di browser pada semua 20 halaman; kini 0 temuan di semua kecuali kampanye heli yang temuannya diselesaikan terpisah):
+1. **Tabrakan**: dua teks/tombol yang saling menimpa (akordeon tertutup dikecualikan).
+2. **Baris kartu tak sama tinggi** di dalam satu grid/flex.
+3. **Kotak bersudut tajam** (kartu, panel, foto berukuran 120px ke atas, bukan band penuh dan bukan sel grid yang sudah membulat).
+4. **Teks sulit dibaca**, memakai latar yang benar-benar ada di bawah titik teks (`elementsFromPoint`), bukan tebakan dari nama kelas; teks di atas foto dilewati.
+
+Tambahan: peluncur Kai tidak lagi menimpa bar pemesanan lengket halaman kampanye heli (`body:has(.skysea-stickybar) .kai-launcher`); pita statistik biru di About memakai teks putih penuh.
+
+Terverifikasi: `tsc --noEmit` bersih; `npm run build` lolos (75 halaman); halaman yang dikeluhkan dilihat langsung dalam ukuran asli (NYE, Wedding, Charter privat, Charter korporat, Whale, Sunset, News, Heli).
+
+## Perbaikan tahap berikutnya (4 permintaan pemilik)
+
+| Permintaan | Perbaikan |
+|---|---|
+| Tombol Enquiry lebih pendek dari Call di hero | `.st-hero__actions` kini grid kolom sama lebar (desktop) dan tumpuk selebar sama (mobile, maks 320px) di semua halaman |
+| Tombol "Booking Enquiry" harus rata tengah | `.st-cta .st-prose` rata tengah |
+| NYE dan halaman acara: 2 section untuk info sedikit | Kotak CTA dan section `#book` di NYE, Riverfire, Valentines dihapus dan digabung ke formulir di samping FAQ (prop baru `formLead` di `FaqEnquiry`). Riverfire menyisakan satu band ringkas "About the event". NYE kini 3 section (detail, itinerary, formulir) |
+| Widget Ask Kai muncul di halaman lain | `HIDE_KAI_ON = ['*']` di `components/kai/KaiWidget.tsx` menyembunyikan Kai di semua halaman. Untuk memunculkan lagi: kosongkan daftar itu atau isi daftar halaman |
+
+Tambahan: judul hero Riverfire terpotong di HP (teks `nowrap` pada `<em>`) sudah diperbaiki dengan `text-wrap: balance`.
+
+Terverifikasi: pemeriksa teks terpotong di lebar 393px (setelah di-scroll agar animasi selesai) bersih di 20 halaman; `tsc --noEmit` bersih; `npm run build` lolos.
+
+---
+
+## Video hero homepage dari bunny.net — 27 Oktober 2026 (MENUNGGU PERSETUJUAN)
+
+### Apa ini
+Hero homepage memutar video loop (tanpa suara) dari bunny.net. Foto hero (`/new-hero-img.jpg`) tetap jadi poster dan cadangan: selama video belum siap, gagal dimuat, atau pengunjung memilih "kurangi animasi", yang tampil foto seperti sekarang.
+
+### Kondisi sekarang (sudah dicek di kode)
+`components/site/PageHero.tsx` sudah punya `<video>` dan konstanta `HERO_VIDEO_URL = ''`. Dua kekurangan:
+1. Kalau konstanta itu diisi, **semua halaman** yang memakai `PageHero` (cruise, charter, kapal, dll.) ikut memutar video yang sama. Yang diinginkan hanya homepage.
+2. Pengunjung dengan setelan "reduce motion" tetap akan melihat video berputar.
+
+### Perubahan (3 file kecil, tanpa folder baru)
+| File | Perubahan |
+|------|-----------|
+| `components/site/PageHero.tsx` | Default `videoUrl` jadi kosong (hapus `HERO_VIDEO_URL`), supaya halaman lain tetap foto. |
+| `app/page.tsx` | Homepage mengirim `videoUrl={process.env.NEXT_PUBLIC_HERO_VIDEO_URL}`. Env kosong = foto saja. |
+| `components/site/site.css` | Di blok `prefers-reduced-motion`, sembunyikan `<video>` hero. |
+| `.env.local` (+ Vercel) | Satu key baru `NEXT_PUBLIC_HERO_VIDEO_URL` berisi URL MP4 dari bunny. Ini bukan rahasia (URL video publik), jadi aman ber-prefix `NEXT_PUBLIC_`. |
+
+Ganti video nanti = ganti satu nilai env, tanpa ubah kode.
+
+### Layanan pihak ketiga
+bunny.net Storage + CDN (Pull Zone). Tidak ada tabel Supabase baru. `next.config.ts` tidak perlu diubah (tag `<video>` tidak lewat `next/image`).
+
+### Spesifikasi file video (disarankan)
+MP4 H.264, 1920 px lebar, 10–20 detik loop, **tanpa audio**, `faststart`, target ≤ 8 MB.
+
+### Selesai kalau
+- `npm run build` lolos tanpa error TypeScript.
+- Env kosong: homepage tampil foto seperti sekarang, halaman lain tidak berubah.
+- Env berisi URL bunny: homepage memutar video di belakang teks hero, halaman lain tetap foto.
+- "Reduce motion" aktif: hanya foto.
+- Tidak ada error console.
+
+### Disetujui 27 Oktober 2026 — dengan satu perubahan
+Pemilik situs menyetujui rencana di atas, dengan tambahan: **foto hero lama (`/new-hero-img.jpg`) tidak dipakai lagi di homepage.** Cadangan sebelum video termuat (dan untuk pengunjung "reduce motion" atau yang video-nya gagal) adalah **thumbnail dari video itu sendiri**.
+- File baru `public/hero-poster.jpg` = frame pertama `boattime-hero.mp4` (1920 px). Frame pertama dipilih supaya saat video mulai main tidak ada lompatan gambar.
+- `app/page.tsx` memakai `/hero-poster.jpg` sebagai `image`, dan `imageAlt` diganti supaya menjelaskan isi frame itu (foto udara dek kapal), bukan paus.
+- Alamat video: `https://boattime-assets.b-cdn.net/boattime-hero.mp4` (sudah dicek: HTTP 200, `video/mp4`, 9.088.954 byte).
+
+### Bug ditemukan saat uji lokal — video berjalan tapi tidak terlihat (27 Oktober 2026)
+`<video>` terputar (waktu putar maju, `paused: false`), tetapi layar tetap menampilkan thumbnail. Penyebab: `next/image` dengan `fill` bersifat `position: absolute`, sedangkan `<video>` tidak diberi `position`, sehingga elemen absolut selalu dilukis di atas elemen statis dan thumbnail menutupi video. Perbaikan: `.st-hero__bg video { position: absolute; inset: 0; }` di `components/site/site.css`. Terverifikasi di Chrome: lapisan paling atas kini `VIDEO`, dan adegan berganti saat video berjalan.

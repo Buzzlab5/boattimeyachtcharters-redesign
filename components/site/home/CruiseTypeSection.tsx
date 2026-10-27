@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import SectionHead from './SectionHead';
+import SectionHead from '../SectionHead';
 
 const TYPES = [
   {
@@ -28,28 +28,28 @@ const TYPES = [
 
 export default function CruiseTypeSection() {
   return (
-    <div role="region" id="cruise-type" className="hp-section hp-section--alt" aria-labelledby="hp-cruise-type">
-      <div className="hp-wrap">
+    <div role="region" id="cruise-type" className="st-section st-dark on-photo" aria-labelledby="st-cruise-type">
+      <div className="st-wrap">
         <SectionHead
           eyebrow="Two ways to sail"
           title={
-            <span id="hp-cruise-type">
+            <span id="st-cruise-type">
               Choose your <em>cruise type</em>
             </span>
           }
           sub="Same coastline, different experience. Pick the format that fits your group."
         />
-        <div className="hp-grid2">
+        <div className="st-grid2">
           {TYPES.map((t) => (
-            <a key={t.title} href={t.href} className="hp-card on-photo">
+            <a key={t.title} href={t.href} className="st-card on-photo">
               <Image src={t.img} alt={t.alt} fill sizes="(max-width: 720px) 100vw, 560px" />
-              <div className="hp-card__body">
-                <span className="hp-card__tag">{t.tag}</span>
+              <div className="st-card__body">
+                <span className="st-card__tag">{t.tag}</span>
                 <h3>{t.title}</h3>
                 <p>{t.text}</p>
-                <div className="hp-card__foot">
+                <div className="st-card__foot">
                   <span>{t.left}</span>
-                  <span className="hp-card__price">
+                  <span className="st-card__price">
                     {t.price}
                     {t.unit && <small>{t.unit}</small>}
                   </span>

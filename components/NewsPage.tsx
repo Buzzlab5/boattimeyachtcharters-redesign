@@ -4,8 +4,8 @@ import { useEffect, useRef, useState } from 'react';
 import { useGSAP } from '@gsap/react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import Nav from './Nav';
-import Footer from './Footer';
+import SiteShell from './site/SiteShell';
+import PageHero from './site/PageHero';
 import { Icon } from './Shared';
 
 gsap.registerPlugin(ScrollTrigger, useGSAP);
@@ -808,9 +808,15 @@ export default function NewsPage({ posts }: { posts: Post[] }) {
 
   return (
     <>
-      <Nav />
-      <main>
-        <NewsHero />
+      <SiteShell>
+        <PageHero
+          image="/sunset-boat.jpg"
+          imageAlt="Sunset over the Gold Coast from a Boattime deck"
+          eyebrow="Boattime News"
+          title={<>Stories from the <em>water</em></>}
+          lead="Guides, inspiration, and local knowledge from Gold Coast's premier yacht charter company."
+        />
+        <div className="st-zigzag st-legacy">
         {featured.length > 0 && <FeaturedPosts posts={featured} />}
         <CategoryFilter active={activeCategory} onSelect={handleCategorySelect} />
         <PostGrid
@@ -819,8 +825,8 @@ export default function NewsPage({ posts }: { posts: Post[] }) {
           total={filteredPosts.length}
           onPageChange={setPage}
         />
-      </main>
-      <Footer />
+      </div>
+      </SiteShell>
     </>
   );
 }

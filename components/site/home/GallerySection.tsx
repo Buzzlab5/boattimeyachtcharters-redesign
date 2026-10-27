@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import SectionHead from './SectionHead';
+import SectionHead from '../SectionHead';
 
 // No guest photos on file yet, so these are Boattime's own. Swap in guest
 // photos later and the heading can go back to "Captured by our guests".
@@ -13,23 +13,23 @@ const PHOTOS = [
 
 export default function GallerySection() {
   return (
-    <div role="region" className="hp-section hp-section--alt" aria-labelledby="hp-gallery">
-      <div className="hp-wrap">
+    <div role="region" className="st-section" aria-labelledby="st-gallery">
+      <div className="st-wrap">
         <SectionHead
           eyebrow="Gallery"
           title={
-            <span id="hp-gallery">
+            <span id="st-gallery">
               Moments <em>on the water</em>
             </span>
           }
         />
-        <div className="hp-gallery">
+        <div className="st-gallery">
           {PHOTOS.map((p) => (
             <figure key={p.src}>
               <Image src={p.src} alt={p.alt} fill sizes={p.sizes} />
             </figure>
           ))}
-          <a href="/sun-goddess-gold-coast" className="hp-gallery__all">
+          <a href="/sun-goddess-gold-coast" className="st-gallery__all">
             Show all photos
           </a>
         </div>
