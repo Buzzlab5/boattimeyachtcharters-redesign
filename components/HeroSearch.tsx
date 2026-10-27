@@ -22,7 +22,7 @@ const KEYWORDS: Record<string, string> = {
   'chefs-table-lunch': 'lunch chef dining food',
   'twilight-dining': 'dinner chef dining food',
   'riverfire-2026': 'riverfire brisbane fireworks river',
-  'nye-2026': 'new year nye eve fireworks celebration',
+  'nye-2027': 'new year nye eve fireworks celebration',
   'valentines-day': 'valentine valentines romantic romance love couple',
   helitours: 'heli helicopter sky',
   'private-charter': 'private yacht charter hire boat',

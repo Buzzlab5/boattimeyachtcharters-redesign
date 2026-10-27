@@ -14,11 +14,11 @@ const EXPERIENCES = [
     unit: '/ adult',
   },
   {
-    href: '/nye-2026',
+    href: '/nye-2027',
     img: '/nye2026.webp',
     alt: 'Fireworks over the river on New Year’s Eve',
     tag: 'Celebration cruise',
-    title: 'New Year’s Eve 2026',
+    title: 'New Year’s Eve 2027',
     text: 'See the year out from the water, with the fireworks on show from your own deck.',
     price: '$169',
     unit: '/ person',

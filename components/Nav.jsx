@@ -62,7 +62,7 @@ const NAV = [
   { label: 'Cruise Tickets', sub: [
     'Luxury Whale Watching',
     'Broadwater Sunset Cruise',
-    'New Year’s Eve 2026',
+    'New Year’s Eve 2027',
     'Valentine’s Cruise',
     'Riverfire 2026',
     'Relaxed Lunch Cruise',

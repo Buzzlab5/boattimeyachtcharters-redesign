@@ -25,7 +25,7 @@ const ALL_EXPERIENCE_PRODUCTS: Product[] = [
   { id: 'chefs-table-lunch', label: "Chef's Table – Flavours of Australia",        sub: 'Lunch Cruise',            href: '/relaxed-lunch-cruise-flavours-of-australia-aboard-the-mermaid-spirit', dining: true },
   { id: 'twilight-dining',   label: "Chef's Table Dinner – Flavours of Australia", sub: 'Dinner Cruise',           href: '/sunset-twilight-buffet-flavours-of-australia-aboard-the-mermaid-spirit', dining: true },
   { id: 'riverfire-2026',    label: 'Riverfire 2026',                             sub: 'Brisbane Event',          href: '/riverfire-2026' },
-  { id: 'nye-2026',          label: "New Year's Eve 2026",                        sub: 'Celebration Cruise',      href: '/nye-2026' },
+  { id: 'nye-2027',          label: "New Year's Eve 2027",                        sub: 'Celebration Cruise',      href: '/nye-2027' },
   { id: 'valentines-day',    label: "Valentine's Day",                            sub: 'Romance Evening',         href: '/valentines-day' },
   { id: 'helitours',         label: 'Gold Coast Helitours',                       sub: 'Sky to Sea Partnership',  href: '/humpbackhelitours' },
 ];
@@ -70,7 +70,7 @@ const TOPIC_RULES: { id: string; match: RegExp }[] = [
   { id: 'whale-watching', match: /whale|humpback|calf|dolphin|migration/i },
   { id: 'twilight-drift', match: /sunset|twilight|golden hour|broadwater|scenic/i },
   { id: 'valentines-day', match: /valentine|romance|romantic/i },
-  { id: 'nye-2026',       match: /new year|nye/i },
+  { id: 'nye-2027',       match: /new year|nye/i },
   { id: 'catering',       match: /menu|catering|food|dining|chef|canape|buffet|lunch|dinner/i },
   { id: 'helitours',      match: /helicopter|heli|scenic flight/i },
 ];

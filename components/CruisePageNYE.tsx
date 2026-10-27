@@ -470,7 +470,7 @@ function NYEDetailsSection() {
             than just a cruise — it&rsquo;s an immersive experience. With
             unmatched views of the city&rsquo;s iconic fireworks, impeccable
             service, and a luxurious ambiance, this promises to be an evening
-            that will etch itself into your memories. Join us as we welcome 2026
+            that will etch itself into your memories. Join us as we welcome 2027
             in style and elegance.
           </p>
         </div>
@@ -497,8 +497,8 @@ export default function NyePage() {
           image="/nye2026.webp"
           imageAlt="Fireworks over the river on New Year's Eve"
           eyebrow="Boattime Yacht Charters · Event"
-          title={<>Happy New Year <em>2026</em></>}
-          lead="Ring in 2026 aboard the Mermaid Spirit!"
+          title={<>Happy New Year <em>2027</em></>}
+          lead="Ring in 2027 aboard the Mermaid Spirit!"
         />
         <div className="st-zigzag st-legacy">
 

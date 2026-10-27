@@ -217,7 +217,7 @@ export default function Footer() {
             <FootLink href="/luxury-broadwater-cruise">
               Luxury Scenic Sunset Cruise
             </FootLink>
-            <FootLink href="/nye-2026">New Year&rsquo;s Eve 2026</FootLink>
+            <FootLink href="/nye-2027">New Year&rsquo;s Eve 2027</FootLink>
             <FootLink href="/valentines-day">Valentine&rsquo;s Cruise</FootLink>
             <FootLink href="/riverfire-2026">Riverfire 2026</FootLink>
             {DINING_CRUISES_AVAILABLE && (

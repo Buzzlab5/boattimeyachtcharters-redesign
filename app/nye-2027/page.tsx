@@ -3,7 +3,7 @@ import NyePage from '@/components/CruisePageNYE';
 import JsonLd from '@/components/JsonLd';
 import { boatTripSchema, breadcrumbSchema } from '@/lib/schema';
 
-const PATH = '/nye-2026';
+const PATH = '/nye-2027';
 
 export const metadata: Metadata = {
   title: "New Year's Eve Cruise Gold Coast",

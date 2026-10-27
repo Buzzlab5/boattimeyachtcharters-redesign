@@ -86,7 +86,8 @@ const OLD_SITE_REDIRECTS: { source: string; destination: string }[] = [
     destination: '/valentines-day',
   },
   { source: '/riverfire-2024', destination: '/riverfire-2026' },
-  { source: '/celebrate-new-years-eve-luxury-yacht-charter', destination: '/nye-2026' },
+  { source: '/celebrate-new-years-eve-luxury-yacht-charter', destination: '/nye-2027' },
+  { source: '/nye-2026', destination: '/nye-2027' },
   { source: '/christmas-chart', destination: '/private-yacht-charter' },
 
   // ── Contact ──────────────────────────────────────────────────────────────

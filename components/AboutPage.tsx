@@ -482,9 +482,9 @@ function ServicesGrid() {
       href: '/riverfire-2026',
     },
     {
-      label: 'NYE Cruise 2026',
+      label: 'NYE Cruise 2027',
       desc: 'New Year\'s Eve · 18+ · Canapés & fireworks',
-      href: '/nye-2026',
+      href: '/nye-2027',
     },
     {
       label: 'Valentine\'s Cruise',

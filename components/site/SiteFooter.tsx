@@ -23,7 +23,7 @@ export default function SiteFooter() {
           <a href="/tickets">All cruise tickets</a>
           <a href="/cruise-tickets-luxury-whale-watching">Luxury Whale Watching</a>
           <a href="/luxury-broadwater-cruise">Luxury Sunset Cruise</a>
-          <a href="/nye-2026">New Year&rsquo;s Eve 2026</a>
+          <a href="/nye-2027">New Year&rsquo;s Eve 2027</a>
           <a href="/valentines-day">Valentine&rsquo;s Cruise</a>
           <a href="/riverfire-2026">Riverfire 2026</a>
           {DINING_CRUISES_AVAILABLE && (

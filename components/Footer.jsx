@@ -45,7 +45,7 @@ const Footer = () => (
           <div style={footStyles.colHead}>Cruise Tickets</div>
           <FootLink>Luxury Whale Watching</FootLink>
           <FootLink>Broadwater Sunset</FootLink>
-          <FootLink>New Year&rsquo;s Eve 2026</FootLink>
+          <FootLink>New Year&rsquo;s Eve 2027</FootLink>
           <FootLink>Valentine&rsquo;s Cruise</FootLink>
           <FootLink>Riverfire 2026</FootLink>
           <FootLink>Relaxed Lunch</FootLink>

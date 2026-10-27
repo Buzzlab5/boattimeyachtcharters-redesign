@@ -98,14 +98,14 @@ const CRUISES: CruiseData[] = [
   {
     cat: 'Celebration',
     title: "New Year's",
-    em: 'Eve 2026',
+    em: 'Eve 2027',
     body: null,
     dur: '5 hrs',
     vessel: 'Mermaid Spirit',
     col: 'span 3',
     row: 'span 2',
     img: '/nye2026.webp',
-    href: '/nye-2026',
+    href: '/nye-2027',
   },
   {
     cat: 'Romance',
