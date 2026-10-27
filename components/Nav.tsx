@@ -231,7 +231,7 @@ export default function Nav() {
           </li>
 
           <li style={{ '--i': 4 } as React.CSSProperties}>
-            <a href="/boattime-news" data-num="05" onClick={() => setMobileOpen(false)}>
+            <a href="/boattime-news" onClick={() => setMobileOpen(false)}>
               <span><em>Blogs</em></span>
             </a>
           </li>

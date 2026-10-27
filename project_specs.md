@@ -1373,3 +1373,49 @@ Pemilik situs menyetujui rencana di atas, dengan tambahan: **foto hero lama (`/n
 
 ### Bug ditemukan saat uji lokal — video berjalan tapi tidak terlihat (27 Oktober 2026)
 `<video>` terputar (waktu putar maju, `paused: false`), tetapi layar tetap menampilkan thumbnail. Penyebab: `next/image` dengan `fill` bersifat `position: absolute`, sedangkan `<video>` tidak diberi `position`, sehingga elemen absolut selalu dilukis di atas elemen statis dan thumbnail menutupi video. Perbaikan: `.st-hero__bg video { position: absolute; inset: 0; }` di `components/site/site.css`. Terverifikasi di Chrome: lapisan paling atas kini `VIDEO`, dan adegan berganti saat video berjalan.
+
+---
+
+## Perbaikan — deploy Vercel gagal karena font Urbanist (27 Oktober 2026, DIBATALKAN)
+
+> Pemilik situs me-redeploy dan deploy berhasil tanpa perubahan kode (gagal-sesekali dari sisi Vercel). Rencana di bawah tidak dikerjakan.
+
+### Apa yang terjadi
+Commit `14faf5c` ("redesign updates") di-push, tetapi build di Vercel gagal (`dpl_6g2ipMPJKk2b6PKH9r3PZadrn9SM`). Log Vercel (Next.js 16.2.4, Turbopack):
+
+```
+Module not found: Can't resolve '@vercel/turbopack-next/internal/font/google/font'
+next/font/google queries have exactly one entry
+Import trace: urbanist_92dba360.module.css → ./app/layout.tsx
+```
+
+Hanya font **Urbanist** (dipakai skin bluuu lewat `lib/skin-font.ts`) yang gagal; Cormorant dan Montserrat di `app/layout.tsx` baik-baik saja. Ini pertama kalinya Urbanist sampai ke Vercel.
+
+### Yang sudah dicek
+- `npm run build` di laptop lolos, termasuk build bersih (`.next` dihapus) dan dengan `VERCEL=1 CI=1`. Jadi bukan salah ketikan kode; masalahnya ada di cara Vercel mengambil font Google saat build.
+- Semua perubahan sudah ter-commit (`git status` bersih), tidak ada file yang tertinggal.
+- Deploy produksi sebelumnya tetap melayani situs; build yang gagal tidak menggantikannya.
+
+### Perbaikan yang diusulkan
+Jangan ambil Urbanist dari Google saat build. Simpan file fontnya di repo dan muat dengan `next/font/local`:
+| File | Perubahan |
+|------|-----------|
+| `lib/fonts/Urbanist-400.woff2`, `Urbanist-600.woff2` | **baru** — subset latin, diunduh dari Google Fonts (lisensi SIL OFL, boleh dipakai dan disimpan di repo) |
+| `lib/skin-font.ts` | Ganti `next/font/google` jadi `next/font/local`, variabel CSS tetap `--font-bluuu` |
+
+Tidak ada perubahan CSS atau tampilan. Subfolder `lib/fonts/` ada di dalam folder `lib` yang sudah ada (bukan folder tingkat atas baru). Komentar di `skin-font.ts` sudah menyebut `next/font/local` sebagai jalur ke font berlisensi nanti, jadi arah ini sesuai rencana.
+
+### Selesai kalau
+- `npm run build` lolos (build bersih).
+- Font bluuu tampil sama seperti sebelumnya di browser.
+- Push ulang → deploy Vercel berstatus Ready.
+
+
+---
+
+## Rapikan hero & menu mobile — 27 Oktober 2026
+
+Permintaan pemilik situs (dari screenshot iPhone 16, 393 px):
+1. **Tombol hero di HP:** Enquiry dan Call tidak lagi selebar layar; keduanya selebar tombol terpanjang (Call). `components/site/site.css`: `.st-hero__actions` di `max-width: 720px` dari `width: min(100%, 320px)` jadi `width: max-content; max-width: 100%`.
+2. **Tombol menu hamburger:** "Reserve a Cruise" dan "Custom Enquiry" masih bersudut tajam. `app/skin-bluuu.css`: `.mobile-drawer__cta` diberi `border-radius: var(--bl-radius-pill)` (sama dengan tombol lain di skin bluuu).
+3. **Angka "05" di samping "Blogs":** sisa penomoran menu lama (5 item). Menu kini 3 item sehingga angkanya tak bermakna. `components/Nav.tsx`: atribut `data-num="05"` dihapus.

@@ -551,5 +551,6 @@ html[data-theme] .st-legacy > :is([style*='background:var(--gold)'], [style*='ba
 body:has(.skysea-stickybar) .kai-launcher { bottom: 92px !important; }
 
 @media (max-width: 720px) {
-  .st-hero__actions { grid-auto-flow: row; width: min(100%, 320px); }
+  /* stacked buttons all take the width of the widest one (Call), not the screen */
+  .st-hero__actions { grid-auto-flow: row; width: max-content; max-width: 100%; }
 }

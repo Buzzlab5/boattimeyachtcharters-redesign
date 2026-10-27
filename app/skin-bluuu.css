@@ -165,6 +165,7 @@ html[data-skin='bluuu'] .mobile-drawer {
   --gold-ink: var(--bl-sky-soft);
   --gold-light: var(--bl-sky-soft);
 }
+html[data-skin='bluuu'] .mobile-drawer__cta { border-radius: var(--bl-radius-pill); }
 
 /* ─── "Two vessels. One horizon." (components/Fleet.tsx, unchanged) ──────────
    Same section, same content; only the look follows bluuu: rounded photos and
