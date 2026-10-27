@@ -4,10 +4,10 @@ import { useState, useEffect, useRef } from 'react';
 import { useTheme } from './ThemeProvider';
 import { EXPERIENCE_PRODUCTS as EXPERIENCE_ITEMS, CHARTER_PRODUCTS as CHARTER_ITEMS } from '@/lib/products';
 
-function handleHashNav(e: React.MouseEvent<HTMLAnchorElement>, href: string) {
+function handleHashNav(e: React.MouseEvent<HTMLAnchorElement>, href: string, onThisPage = false) {
   if (!href.startsWith('/#')) return;
   const hash = href.slice(1);
-  if (window.location.pathname === '/') {
+  if (onThisPage || window.location.pathname === '/') {
     e.preventDefault();
     const el = document.querySelector(hash);
     if (!el) return;
@@ -21,7 +21,11 @@ function handleHashNav(e: React.MouseEvent<HTMLAnchorElement>, href: string) {
   }
 }
 
-export default function Nav() {
+// `preview` is used only by /homepage-preview: the section links (Fleet, Whale,
+// FAQ) point at homepage sections that page does not have, so they are left
+// out, the two dropdown labels open their menu instead of jumping to a
+// section, and the enquiry buttons scroll to the form on the same page.
+export default function Nav({ preview = false }: { preview?: boolean } = {}) {
   const { theme, toggle } = useTheme();
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -49,6 +53,26 @@ export default function Nav() {
     closeTimer.current = setTimeout(() => setActiveDropdown(null), 120);
   }
 
+  // Props for the "Experiences" / "Yacht Charter" labels. Normally they jump to
+  // a homepage section; in preview mode they only open their dropdown.
+  function ddLabelProps(key: string, hash: string) {
+    if (!preview) {
+      return { href: `/${hash}`, onClick: (e: React.MouseEvent<HTMLAnchorElement>) => handleHashNav(e, `/${hash}`) };
+    }
+    return {
+      role: 'button' as const,
+      tabIndex: 0,
+      style: { cursor: 'pointer' },
+      onClick: () => openDD(key),
+      onKeyDown: (e: React.KeyboardEvent<HTMLAnchorElement>) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          openDD(key);
+        }
+      },
+    };
+  }
+
   return (
     <>
       <header className={`site-header${scrolled ? ' site-header--scrolled' : ''}`}>
@@ -67,12 +91,16 @@ export default function Nav() {
 
         {/* Desktop nav */}
         <nav className="site-header__nav">
-          <a href="/#fleet" className="site-header__nav-link" onClick={(e) => handleHashNav(e, '/#fleet')}>
-            Fleet
-          </a>
-          <a href="/#whale" className="site-header__nav-link" onClick={(e) => handleHashNav(e, '/#whale')}>
-            Whale
-          </a>
+          {!preview && (
+            <>
+              <a href="/#fleet" className="site-header__nav-link" onClick={(e) => handleHashNav(e, '/#fleet')}>
+                Fleet
+              </a>
+              <a href="/#whale" className="site-header__nav-link" onClick={(e) => handleHashNav(e, '/#whale')}>
+                Whale
+              </a>
+            </>
+          )}
 
           {/* Experiences dropdown */}
           <div
@@ -81,9 +109,8 @@ export default function Nav() {
             onMouseLeave={closeDD}
           >
             <a
-              href="/#experiences"
               className={`site-header__nav-link site-header__nav-link--dd${activeDropdown === 'experiences' ? ' site-header__nav-link--dd-open' : ''}`}
-              onClick={(e) => handleHashNav(e, '/#experiences')}
+              {...ddLabelProps('experiences', '#experiences')}
             >
               Experiences
               <svg width="8" height="5" viewBox="0 0 8 5" fill="none" aria-hidden="true" className="nav-dd-chevron">
@@ -113,9 +140,8 @@ export default function Nav() {
             onMouseLeave={closeDD}
           >
             <a
-              href="/#horizons"
               className={`site-header__nav-link site-header__nav-link--dd${activeDropdown === 'charter' ? ' site-header__nav-link--dd-open' : ''}`}
-              onClick={(e) => handleHashNav(e, '/#horizons')}
+              {...ddLabelProps('charter', '#horizons')}
             >
               Yacht Charter
               <svg width="8" height="5" viewBox="0 0 8 5" fill="none" aria-hidden="true" className="nav-dd-chevron">
@@ -136,9 +162,11 @@ export default function Nav() {
             </div>
           </div>
 
-          <a href="/#faq" className="site-header__nav-link" onClick={(e) => handleHashNav(e, '/#faq')}>
-            FAQ
-          </a>
+          {!preview && (
+            <a href="/#faq" className="site-header__nav-link" onClick={(e) => handleHashNav(e, '/#faq')}>
+              FAQ
+            </a>
+          )}
           <a href="/boattime-news" className="site-header__nav-link">
             Blogs
           </a>
@@ -191,17 +219,21 @@ export default function Nav() {
         aria-hidden={!mobileOpen}
       >
         <ul className="mobile-drawer__nav">
-          <li style={{ '--i': 0 } as React.CSSProperties}>
-            <a href="/#fleet" data-num="01" onClick={(e) => { handleHashNav(e, '/#fleet'); setMobileOpen(false); }}>
-              <span><em>Fleet</em></span>
-            </a>
-          </li>
+          {!preview && (
+            <>
+              <li style={{ '--i': 0 } as React.CSSProperties}>
+                <a href="/#fleet" data-num="01" onClick={(e) => { handleHashNav(e, '/#fleet'); setMobileOpen(false); }}>
+                  <span><em>Fleet</em></span>
+                </a>
+              </li>
 
-          <li style={{ '--i': 1 } as React.CSSProperties}>
-            <a href="/#whale" data-num="02" onClick={(e) => { handleHashNav(e, '/#whale'); setMobileOpen(false); }}>
-              <span><em>Whale</em></span>
-            </a>
-          </li>
+              <li style={{ '--i': 1 } as React.CSSProperties}>
+                <a href="/#whale" data-num="02" onClick={(e) => { handleHashNav(e, '/#whale'); setMobileOpen(false); }}>
+                  <span><em>Whale</em></span>
+                </a>
+              </li>
+            </>
+          )}
 
           {/* Experiences accordion */}
           <li style={{ '--i': 2 } as React.CSSProperties} className="mobile-drawer__nav-section">
@@ -260,11 +292,13 @@ export default function Nav() {
               <span><em>Blogs</em></span>
             </a>
           </li>
-          <li style={{ '--i': 5 } as React.CSSProperties}>
-            <a href="/#faq" data-num="06" onClick={(e) => { handleHashNav(e, '/#faq'); setMobileOpen(false); }}>
-              <span><em>FAQ</em></span>
-            </a>
-          </li>
+          {!preview && (
+            <li style={{ '--i': 5 } as React.CSSProperties}>
+              <a href="/#faq" data-num="06" onClick={(e) => { handleHashNav(e, '/#faq'); setMobileOpen(false); }}>
+                <span><em>FAQ</em></span>
+              </a>
+            </li>
+          )}
         </ul>
 
         <div className="mobile-drawer__footer">
@@ -281,13 +315,13 @@ export default function Nav() {
             </div>
           </div>
           <div className="mobile-drawer__footer-ctas">
-            <a href="/#inquiry" className="mobile-drawer__cta" onClick={(e) => { handleHashNav(e, '/#inquiry'); setMobileOpen(false); }}>
+            <a href="/#inquiry" className="mobile-drawer__cta" onClick={(e) => { handleHashNav(e, '/#inquiry', preview); setMobileOpen(false); }}>
               Reserve a Cruise →
             </a>
             <a
               href="/#inquiry"
               className="mobile-drawer__cta mobile-drawer__cta--secondary"
-              onClick={(e) => { handleHashNav(e, '/#inquiry'); setMobileOpen(false); }}
+              onClick={(e) => { handleHashNav(e, '/#inquiry', preview); setMobileOpen(false); }}
             >
               Custom Enquiry →
             </a>

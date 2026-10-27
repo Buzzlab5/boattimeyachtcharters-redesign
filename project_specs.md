@@ -911,3 +911,110 @@ Atas permintaan pemilik situs, search bar dipindah dari bawah tombol hero ke **p
 **Di luar cakupan:** judul ulasan "3,910 guests can't be wrong" (angka itu jumlah ulasan, bukan tamu; perlu konfirmasi pemilik), dan teks "premier" di halaman berita dan About.
 
 **Selesai jika:** homepage, /corporate-yacht-charter, /private-yacht-charter dan /sun-goddess-gold-coast tidak lagi memuat "largest vessel", "most spacious", "unmatched", "best in the industry", "most reviews", "larger than competitors" atau "premiere".
+
+## Feature: halaman PREVIEW redesign homepage (meniru layout bluuu.tours), 27 Oktober 2026
+
+**Status: MENUNGGU PERSETUJUAN. Belum ada kode yang ditulis.**
+
+**Permintaan (Tony via tim):** redesign homepage dengan layout dan susunan teks seperti https://bluuu.tours/ (khusus homepage). Hasilnya dibuat sebagai halaman preview terpisah supaya homepage live tidak berubah, untuk dipresentasikan ke Tony.
+
+### Apa ini & siapa yang pakai
+Satu halaman baru **`/homepage-preview`**. Dipakai tim untuk presentasi internal, bukan untuk pengunjung. Tidak dilink dari menu manapun, tidak masuk sitemap, ditandai `noindex` supaya Google tidak mengindeksnya. Homepage `/` tidak disentuh sama sekali.
+
+### Tech
+Next.js App Router + Tailwind, sama seperti situs. Tidak ada database, API, atau Supabase. Semua file baru ada di `app/homepage-preview/` (komponen disimpan satu folder dengan halamannya, sesuai aturan proyek). Tidak ada file komponen lama yang diubah, tidak ada folder top-level baru. Gaya CSS khusus preview memakai awalan `.hp-` dan diimpor dari halaman itu sendiri, jadi tidak menyentuh `globals.css`.
+
+### Susunan halaman (atas ke bawah, mengikuti urutan bluuu.tours)
+
+| # | Section bluuu.tours | Versi Boattime di preview |
+|---|---|---|
+| 1 | Header: logo kiri, link tengah, tombol Menu | Logo kiri, link tengah (Fleet, Experiences, FAQ), **2 tombol saja di kanan**: **Enquiry** (menuju form enquiry yang sekarang, `/#inquiry`) dan **Call** (`tel:+61474735395`). Menu hamburger di HP. |
+| 2 | Hero foto penuh: "Discover *Nusa Penida*", 1 kalimat, harga, tombol "Explore Tours", deretan rating, "Explore" di bawah | Foto hero **yang sama dengan homepage sekarang** (sementara). "Discover *the Gold Coast*", 1 kalimat, "Cruise tickets from $79 per person", tombol "Explore Cruises" (scroll ke bawah), rating 4.7 + 3,910+ reviews. Komponen background dibuat siap diganti video bunny.net nanti (cukup isi satu URL). |
+| 3 | "Everything you want is already *covered*": 6 kartu inklusi bernomor 01-06 + ikon | "Everything you want is already *covered*": 6 kartu dengan ikon garis (SVG, tanpa emoji). |
+| 4 | "Choose your *tour type*": 2 kartu foto besar | "Choose your *cruise type*": **Cruise Tickets** (ke `/tickets`, "from $79 / person") dan **Private Charter** (ke `/private-yacht-charter`). |
+| 5 | (tidak ada di bluuu, permintaan khusus) | **Experiences**: 3 kartu saja: **Luxury Sunset** (`/luxury-broadwater-cruise`), **NYE 2026** (`/nye-2026`), **Luxury Whale Watching** (`/cruise-tickets-luxury-whale-watching`). Gaya kartu sama dengan section 4. |
+| 6 | (tidak ada di bluuu, **dipertahankan atas permintaan**) | **"Two vessels. One horizon."** dipakai dari komponen `Fleet` yang sudah ada, tanpa diubah. |
+| 7 | "Captured by *our guests*": galeri mosaik 5 foto | Galeri mosaik 5 foto dari foto milik sendiri di `/public` + tombol "Show all photos". |
+| 8 | "A premium tour with *seamless flow*": angka 4.9, badge platform, 3 kartu ulasan | "A premium cruise with *seamless flow*": angka 4.7, 3,910+ reviews, 3 kartu ulasan yang diambil dari ulasan asli di `components/Reviews.tsx`. |
+| 9 | FAQ: 3 pertanyaan + "See all questions" | FAQ: 3 pertanyaan pertama dari `lib/faqs.ts` (sumber yang sama dengan homepage), "See all questions" membuka semuanya. |
+| 10 | Footer gelap: 4 kolom link + tulisan raksasa "BLUUU" samar | Footer gelap: kontak, alamat, link (Fleet, Sun Goddess, Mermaid Spirit, Tickets, Private Charter, FAQ, Blog), sosial, tulisan raksasa samar "BOATTIME". |
+
+### Section homepage sekarang yang TIDAK dipakai di preview
+StatsBar, WhaleSection, Cruises, YachtChartersSection, Reviews (versi lama), CtaBand, Destinations, AboutOwners, FinalCta, Inquiry (form), TickerBar, search bar hero, infobar (sunset/sea state). Semuanya tetap ada di homepage live; hanya tidak ditampilkan di preview.
+
+### Keputusan yang saya ambil sendiri (bilang kalau mau diubah)
+1. **Layout dan teks mengikuti bluuu, warna dan font tetap Boattime** (navy + gold, Cormorant + Montserrat). Meniru warna biru bluuu akan membuat situs tidak terlihat seperti Boattime lagi.
+2. **Preview hanya tema gelap**, tidak ikut tombol light/dark.
+3. **Angka rating hanya yang sudah terbit di situs**: 4.7 dan 3,910+ reviews. Tidak ada rincian per platform (bluuu punya Google/TripAdvisor/Airbnb 4.9) karena kita tidak punya angka itu.
+4. **Harga hanya dari halaman yang sudah ada**: Sunset dari $79, Whale Watching dari $79.50, NYE $169 per orang. Harga Private Charter tidak ada di situs, jadi kartunya tulis "Tailored to your group" tanpa angka.
+5. **Tidak menyalin klaim bluuu yang tidak bisa kita buktikan**: label "Best Price Guaranteed", badge "Best Value" / "Most Popular", dan FAQ "Why are we more expensive". Alasannya: baru 26 Oktober kita menghapus klaim superlatif dari homepage karena Google dan Australian Consumer Law.
+6. **Kartu "Everything is covered" (6 kartu)**: isi saya ambil dari fitur kapal yang sudah ada di situs (Bose audio, dua bar, galley, dek atas, dll.). Ini draf, perlu dicek tim apakah benar termasuk di tiket.
+7. **Galeri "Captured by our guests"**: kita belum punya foto tamu, jadi pakai foto kapal/cruise milik sendiri. Judul diganti jadi "Moments *on the water*" supaya tidak berbohong.
+8. **Tombol WhatsApp "Chat with us" di pojok bluuu tidak ditiru**, karena pojok kanan bawah sudah dipakai widget Kai.
+9. **Tracking**: GA4 dan tracking klik telepon dari layout utama tetap aktif otomatis. Tag Google Ads **tidak** dipasang di preview supaya tidak mengacaukan data iklan.
+
+### Pertanyaan terbuka (butuh jawaban kamu / Tony)
+1. **Nomor telepon**: kamu minta +61 474 735 395, tapi seluruh situs sekarang memakai **+61 477 667 644** (dan Google Ads call tracking terpasang untuk nomor itu). Di preview saya pakai nomor yang kamu kasih. Kalau nanti live, apakah nomor ini menggantikan yang lama? Kalau ya, tracking panggilan Google Ads perlu disesuaikan.
+2. **Form enquiry**: bluuu tidak punya form di homepage, tapi kita punya. Di preview tombol Enquiry menuju `/#inquiry` di homepage lama. Kalau redesign ini nanti jadi homepage, form-nya ditaruh di mana (section di bawah FAQ, atau halaman terpisah)?
+3. **Cara menunjukkan ke Tony**: `localhost:3000` hanya bisa dilihat dari laptop kamu. Supaya Tony bisa buka sendiri, perlu di-push ke branch dan Vercel membuat link preview. Saya **tidak** akan push apapun sebelum kamu bilang.
+
+### Tidak dikerjakan
+Mengganti homepage live, video bunny.net (pakai foto dulu), mengubah Nav/Footer yang ada, menambah ke sitemap, versi mobile pixel-perfect untuk setiap breakpoint (tetap responsif, tapi fokus utama desktop untuk presentasi).
+
+### Selesai jika
+- `npm run build` lolos tanpa error TypeScript.
+- `/homepage-preview` terbuka di browser tanpa error console, 10 section tampil berurutan seperti tabel di atas.
+- Header hanya punya 2 tombol (Enquiry, Call) dan link Call benar `tel:+61474735395`.
+- Ketiga link experience, dua link tipe cruise, dan link kapal di section "Two vessels" membuka halaman yang benar.
+- Tampilan di lebar HP (375px) tidak ada scroll horizontal.
+- Halaman memuat `noindex`, tidak ada di `sitemap.ts`.
+- Homepage `/` dicek ulang: tampilan identik dengan sebelumnya.
+
+### Status: preview SELESAI dibangun, 27 Oktober 2026 (belum di-commit / di-push)
+
+Halaman: **`/homepage-preview`**. Semua file di `app/homepage-preview/` (13 file: `page.tsx`, `preview.css`, 9 komponen section, `contact.ts`, `ForceDark.tsx`). Tidak ada file lama yang diubah; satu-satunya komponen lama yang dipakai ulang adalah `Fleet` ("Two vessels. One horizon.", tanpa diubah) dan `lib/faqs.ts`.
+
+Terverifikasi:
+- `npm run build` lolos (route `/homepage-preview` terbentuk, statis).
+- Di browser (dev server): 10 section tampil berurutan, tema gelap, `<meta robots="noindex, nofollow">`, tidak ada error console, tidak ada scroll horizontal di lebar 390px.
+- Link: Call = `tel:+61474735395`; Enquiry menuju form di homepage (`/#inquiry`); Cruise Tickets `/tickets`; Private Charter `/private-yacht-charter`; tiga experience ke halaman masing-masing; dua link kapal dari section Fleet; footer.
+- Homepage `/` dibuka ulang: tampil seperti sebelumnya. `sitemap.ts` tidak menyebut preview.
+
+Hal yang berbeda dari rencana / perlu diketahui:
+- Hamburger HP dibuat (menu 3 link). Di HP tombol Call menjadi ikon telepon saja agar muat.
+- Slot video: `HERO_VIDEO_URL` di `PreviewHero.tsx` dikosongkan; isi dengan URL MP4 bunny.net, foto otomatis jadi poster.
+- Draf yang perlu dicek tim: 6 kartu "covered", teks pendek di tiap kartu cruise/experience.
+- Foto "Moments on the water" memakai foto milik sendiri (belum ada foto tamu).
+- Tombol Enquiry di preview menuju `/#inquiry` homepage lama; nasibnya setelah redesign jadi homepage masih jadi pertanyaan terbuka (nomor 2 di atas).
+
+### Revisi preview, 27 Oktober 2026: navbar asli + tombol di hero
+
+Permintaan: navbar dibuat sama seperti homepage sekarang; tombol Enquiry dan Call dipindah dari header ke hero.
+
+- **Navbar:** preview memakai komponen `Nav` yang sama dengan situs live (logo, dropdown, tombol Tickets, menu HP). `components/Nav.tsx` mendapat satu opsi `preview` (bawaan `false`, jadi semua halaman lain tidak berubah). Dengan `preview`: link **Fleet, Whale, FAQ** dihilangkan (desktop dan menu HP), **Experiences** dan **Yacht Charter** tetap ada tetapi label-nya hanya membuka dropdown (tidak lagi lompat ke section homepage), **Blogs** tetap menuju `/boattime-news`, tombol tema terang/gelap disembunyikan karena preview hanya gelap. Header buatan saya sebelumnya (`PreviewHeader.tsx`) dihapus.
+- **Hero:** tombol **Enquiry** (emas, menuju form di homepage `/#inquiry`) dan **Call +61 474 735 395** (`tel:+61474735395`) menggantikan tombol "Explore Cruises". Komponen: `HeroActions.tsx`.
+- Menu HP bawaan `Nav` masih menampilkan nomor lama `+61 477 667 644` di bagian bawah; belum diubah (bagian pertanyaan terbuka nomor 1).
+
+Terverifikasi di browser: navbar preview = Experiences, Yacht Charter, Blogs, Tickets; kedua dropdown terbuka saat hover; menu HP berisi Experiences, Yacht Charter, Blogs; tidak ada error console; navbar homepage `/` tetap lengkap (Fleet, Whale, Experiences, Yacht Charter, FAQ, Blogs + tombol tema); `tsc --noEmit` bersih.
+
+### Widget Kai disembunyikan di preview, 27 Oktober 2026
+Atas permintaan: widget chat Kai tidak tampil di `/homepage-preview` untuk sementara. Di `components/kai/KaiWidget.tsx` ditambah daftar `HIDE_KAI_ON = ['/homepage-preview']`; widget tidak dirender di path yang ada di daftar itu. Halaman lain tidak berubah (Kai tetap tampil di homepage dan semua halaman lain). Untuk memunculkan lagi di preview: hapus path itu dari daftar. Untuk menyembunyikan di seluruh situs: tambah `'*'` ke daftar. Terverifikasi: preview 0 elemen Kai; homepage `/` tetap menampilkan "Ask Kai"; `tsc --noEmit` bersih.
+
+### Preview mendukung mode terang, 27 Oktober 2026
+Permintaan: tombol terang/gelap harus ada lagi di navbar preview. Sebelumnya disembunyikan karena preview dikunci ke gelap (`ForceDark`).
+
+- Tombol tema di `Nav` ditampilkan lagi (opsi `preview` kini hanya menghilangkan Fleet/Whale/FAQ dan mengubah label dropdown). `ForceDark.tsx` dihapus.
+- `preview.css`: warna kini token yang ikut tema (`[data-theme='light'] .hp-root`): latar krem, teks navy, emas untuk teks memakai emas gelap `#725811` (setara `--gold-ink`), emas untuk isian tombol `#b8943e`. Hero, kartu foto, tombol galeri dan footer memakai token gelap di kedua tema (teks di atas foto / pita gelap).
+- Section buatan preview kini memakai `<div role="region">`, bukan `<section>`: aturan global mode terang `main section *` memaksa warna teks dengan `!important` dan akan menimpa gaya preview. Teks di atas foto memakai kelas `on-photo` yang sudah ada.
+- Bug ditemukan lewat audit: teks ulasan tamu berwarna krem tetap sehingga tak terlihat di mode terang. Diganti token `--hp-body`.
+- Terverifikasi: audit kontras otomatis pada 57 elemen teks per tema, 0 gagal di terang dan gelap (angka dekoratif 01-06 dikecualikan); semua section dilihat langsung di mode terang; `tsc --noEmit` bersih.
+
+### Form enquiry di sebelah FAQ, 27 Oktober 2026
+Permintaan: tombol Enquiry harus menuju form kita, dan form ditaruh di sebelah FAQ.
+
+- Section FAQ preview kini dua kolom: FAQ di kiri, form enquiry di kanan (`id="inquiry"`). Di HP form turun di bawah FAQ, satu kolom.
+- **Tombol Enquiry di hero** scroll halus ke form di halaman yang sama (tidak lagi pindah ke homepage lama). Dua tombol "Reserve a Cruise / Custom Enquiry" di menu HP juga begitu (`handleHashNav` di `Nav.tsx` mendapat parameter `onThisPage`, bawaan `false`, hanya dipakai saat `preview`).
+- Form baru `app/homepage-preview/EnquiryForm.tsx`: kolom, kolom wajib, validasi, tujuan (`POST /api/inquiry`) dan pelacakan konversi (`trackEnquiryConversion`) **sama dengan** `components/Inquiry.tsx`. Dibuat salinan terpisah supaya komponen live tidak disentuh dan gaya mengikuti tema preview. Satu perbedaan: pilihan "Cathering" di form lama (salah eja, ikut terkirim ke email) ditulis "Catering".
+- **Penting:** form ini mengirim email sungguhan ke `info@boattimeyachtcharters.com.au` dan ke pengisinya (Resend), di preview maupun production.
+- Terverifikasi: tombol hero membawa ke form (URL tetap `/homepage-preview`); kirim kosong menandai 6 kolom wajib; kirim terisi dengan `fetch` palsu menghasilkan payload yang sama dengan form live (name, email, phone, date, guests, vessel, charter, note), pesan sukses, dan form kosong lagi; **tidak ada email sungguhan yang dikirim saat tes**. Audit kontras 38 elemen di terang dan gelap: 0 gagal. HP 390px: tidak ada scroll horizontal. `tsc --noEmit` bersih, tanpa error console.
+- Section "Inquiry" lama (dengan alamat, jam, nomor) tidak ikut dipakai; nomor telepon di preview tetap +61 474 735 395.

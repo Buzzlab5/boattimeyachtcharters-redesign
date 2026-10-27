@@ -1,6 +1,7 @@
 'use client';
 
 import { useCallback, useEffect, useRef, useState } from 'react';
+import { usePathname } from 'next/navigation';
 import type {
   KaiChatTurn,
   KaiContactRequest,
@@ -119,7 +120,17 @@ function withLinks(text: string) {
   );
 }
 
+// Pages where the Kai chat is switched off for now. To bring it back on one of
+// them, delete its path from this list. To hide it everywhere, add '*'.
+const HIDE_KAI_ON = ['/homepage-preview'];
+
 export default function KaiWidget() {
+  const pathname = usePathname();
+  if (HIDE_KAI_ON.includes('*') || HIDE_KAI_ON.includes(pathname)) return null;
+  return <KaiWidgetInner />;
+}
+
+function KaiWidgetInner() {
   const [open, setOpen] = useState(false);
   const [starting, setStarting] = useState(false);
   const [conversationId, setConversationId] = useState<string | null>(null);
