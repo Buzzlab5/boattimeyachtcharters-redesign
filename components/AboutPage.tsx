@@ -360,17 +360,19 @@ function OurSuperyachts() {
           {VESSELS.map((v, vi) => (
             <div
               key={v.name}
-              className="sy"
+              className="sy about-vessel"
               style={{
                 background: 'var(--navy-mid)',
                 display: 'grid',
-                gridTemplateColumns: vi % 2 === 0 ? '1fr 1fr' : '1fr 1fr',
+                // minmax(0, 1fr): a plain 1fr lets the photo's own size widen its column and squeeze the text
+                gridTemplateColumns: 'minmax(0, 1fr) minmax(0, 1fr)',
                 gap: 0,
               }}
             >
               <div
+                className="about-vessel-photo"
                 style={{
-                  aspectRatio: '4/3',
+                  minHeight: 420,
                   backgroundImage: `url(${v.img})`,
                   backgroundSize: 'cover',
                   backgroundPosition: 'center',
@@ -378,6 +380,7 @@ function OurSuperyachts() {
                 }}
               />
               <div
+                className="about-vessel-text"
                 style={{
                   padding: '64px 56px',
                   display: 'flex', flexDirection: 'column', justifyContent: 'center',

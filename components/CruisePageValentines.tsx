@@ -1,13 +1,16 @@
 'use client';
 
-import { useRef, useState } from 'react';
+import { useRef } from 'react';
 import { useGSAP } from '@gsap/react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import SiteShell from './site/SiteShell';
 import PageHero from './site/PageHero';
 import FaqEnquiry from './site/FaqEnquiry';
-import { CharterGallery } from './CharterSections';
+import Section from './site/Section';
+import SectionHead from './site/SectionHead';
+import GalleryGrid from './site/GalleryGrid';
+import { Eyebrow, ItalicEm } from './Shared';
 
 gsap.registerPlugin(ScrollTrigger, useGSAP);
 
@@ -189,109 +192,66 @@ function ValCTABox({ title, bookHref }: { title: string; bookHref: string }) {
   );
 }
 
-// ── Inline accordion (single itinerary item) ──────────────────────────────────
+const GALLERY = [1, 2, 3].map((n) => `/valentines-day-images/valentine${n}.webp`);
 
-function ItineraryAccordion() {
-  const [open, setOpen] = useState(false);
+// ── Itinerary ─────────────────────────────────────────────────────────────────
 
-  const ITEMS = [
-    { time: '5:30 PM', label: 'Boarding — Welcome aboard with sparkling wine or premium beer' },
-    { time: '6:00 PM', label: 'Departure from Marine Stadium Jetty & Pontoon, Main Beach' },
-    { time: '6:30 PM', label: 'Canapés served on deck as you cruise the Broadwater' },
-    { time: '7:00 PM', label: 'Gourmet dinner served in the dining room or al fresco on deck' },
-    { time: '8:00 PM', label: 'Return journey as you enjoy the Gold Coast city lights' },
-    { time: '8:30 PM', label: 'Arrival back at Marine Stadium Jetty & Pontoon, Main Beach' },
-  ];
+const ITINERARY = [
+  { time: '5:30 PM', label: 'Boarding — Welcome aboard with sparkling wine or premium beer' },
+  { time: '6:00 PM', label: 'Departure from Marine Stadium Jetty & Pontoon, Main Beach' },
+  { time: '6:30 PM', label: 'Canapés served on deck as you cruise the Broadwater' },
+  { time: '7:00 PM', label: 'Gourmet dinner served in the dining room or al fresco on deck' },
+  { time: '8:00 PM', label: 'Return journey as you enjoy the Gold Coast city lights' },
+  { time: '8:30 PM', label: 'Arrival back at Marine Stadium Jetty & Pontoon, Main Beach' },
+];
 
+/** The evening, hour by hour. Always open: it is the only schedule on the page. */
+function Itinerary() {
   return (
-    <section
-      className="cruise-section"
-      style={{
-        background: 'var(--navy)',
-        borderTop: '1px solid rgba(201,168,76,0.1)',
-        padding: '0 48px',
-      }}
-    >
-      <div style={{ maxWidth: 1200, margin: '0 auto' }}>
-        <button
-          onClick={() => setOpen((o) => !o)}
-          style={{
-            width: '100%',
-            padding: '28px 0',
-            display: 'flex',
-            justifyContent: 'space-between',
-            alignItems: 'center',
-            background: 'none',
-            border: 'none',
-            cursor: 'pointer',
-            textAlign: 'left',
-            borderBottom: open ? '1px solid rgba(201,168,76,0.12)' : 'none',
-          }}
-        >
-          <span
+    <section className="cruise-section" style={{ background: 'var(--navy)', padding: '100px 48px' }}>
+      <div style={{ maxWidth: 820, margin: '0 auto' }}>
+        <div style={{ textAlign: 'center', marginBottom: 56 }}>
+          <div style={{ display: 'flex', justifyContent: 'center' }}>
+            <Eyebrow>Itinerary</Eyebrow>
+          </div>
+          <h2
             style={{
-              fontFamily: 'var(--font-body)',
-              fontSize: 10,
-              letterSpacing: '0.22em',
-              textTransform: 'uppercase',
-              color: 'var(--cream)',
-              fontWeight: 600,
-            }}
-          >
-            Itinerary
-          </span>
-          <span
-            style={{
-              color: 'var(--gold)',
-              fontSize: 26,
+              fontFamily: 'var(--font-display)',
               fontWeight: 300,
-              lineHeight: 1,
-              transition: 'transform 0.25s',
-              transform: open ? 'rotate(45deg)' : 'rotate(0deg)',
-              display: 'inline-block',
+              fontSize: 'clamp(32px, 4vw, 52px)',
+              lineHeight: 1.05,
             }}
           >
-            +
-          </span>
-        </button>
-
-        {open && (
-          <div style={{ padding: '24px 0 40px' }}>
-            {ITEMS.map((item) => (
-              <div
-                key={item.time}
+            Your evening, <ItalicEm>hour by hour</ItalicEm>.
+          </h2>
+        </div>
+        <div style={{ borderTop: '1px solid rgba(201,168,76,0.18)' }}>
+          {ITINERARY.map((item) => (
+            <div
+              key={item.time}
+              style={{
+                display: 'flex',
+                gap: 32,
+                padding: '20px 0',
+                borderBottom: '1px solid rgba(201,168,76,0.18)',
+                alignItems: 'baseline',
+              }}
+            >
+              <span style={{ ...GL, flexShrink: 0, minWidth: 72, fontSize: 11 }}>{item.time}</span>
+              <span
                 style={{
-                  display: 'flex',
-                  gap: 32,
-                  padding: '14px 0',
-                  borderBottom: '1px solid rgba(201,168,76,0.08)',
-                  alignItems: 'flex-start',
+                  fontFamily: 'var(--font-body)',
+                  fontSize: 15,
+                  fontWeight: 300,
+                  color: 'rgba(245,240,232,0.8)',
+                  lineHeight: 1.7,
                 }}
               >
-                <span
-                  style={{
-                    ...GL,
-                    flexShrink: 0,
-                    minWidth: 64,
-                    fontSize: 10,
-                  }}
-                >
-                  {item.time}
-                </span>
-                <span
-                  style={{
-                    fontFamily: 'var(--font-body)',
-                    fontSize: 13,
-                    color: 'rgba(245,240,232,0.72)',
-                    lineHeight: 1.7,
-                  }}
-                >
-                  {item.label}
-                </span>
-              </div>
-            ))}
-          </div>
-        )}
+                {item.label}
+              </span>
+            </div>
+          ))}
+        </div>
       </div>
     </section>
   );
@@ -491,9 +451,6 @@ export default function ValentinesPage() {
 
         
 
-        {/* ── Photo gallery ── */}
-        <CharterGallery folder="valentines-day-images" />
-
         {/* ── Split: description left · menu card right ── */}
         <section className="cruise-section" style={{ background: 'var(--navy)', borderTop: '1px solid rgba(201,168,76,0.08)', padding: '0 0' }}>
           <div
@@ -567,8 +524,21 @@ export default function ValentinesPage() {
           </div>
         </section>
 
-        {/* ── Itinerary accordion ── */}
-        <ItineraryAccordion />
+        {/* ── Itinerary ── */}
+        <Itinerary />
+
+        {/* ── Photo gallery ── */}
+        <Section labelledBy="valentines-gallery">
+          <SectionHead
+            eyebrow="Gallery"
+            title={
+              <span id="valentines-gallery">
+                On board, <em>up close</em>
+              </span>
+            }
+          />
+          <GalleryGrid photos={GALLERY} threeAcross />
+        </Section>
 
         
 

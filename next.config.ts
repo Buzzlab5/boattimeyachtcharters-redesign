@@ -193,6 +193,10 @@ const OLD_SITE_REDIRECTS: { source: string; destination: string }[] = [
 
 const nextConfig: NextConfig = {
   images: {
+    // The default list goes up to 3840px. A full-width hero on a retina screen
+    // then asked for a 3840px copy, which is slow to make the first time a page
+    // is opened after a deploy. 2560px is sharp enough for a hero.
+    deviceSizes: [640, 750, 828, 1080, 1200, 1920, 2560],
     remotePatterns: [
       { protocol: 'https', hostname: 'images.unsplash.com' },
     ],

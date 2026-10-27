@@ -4772,15 +4772,45 @@
 }
 
 /* ── Vessel pages: gallery, specs, cross-links ──────────── */
+/* About page fleet cards: photo and text side by side, stacked on a phone. */
+@media (max-width: 768px) {
+  .about-vessel {
+    grid-template-columns: minmax(0, 1fr) !important;
+  }
+  .about-vessel-photo {
+    order: 0 !important;
+    min-height: 240px !important;
+    aspect-ratio: 4 / 3;
+  }
+  .about-vessel-text {
+    order: 1 !important;
+    padding: 36px 24px !important;
+  }
+}
+
 /* Six thumbnails side by side collapse to slivers on a phone, so wrap them
    into rows instead. The spec table and cross-link grid stack the same way as
    the other two-column sections on these pages. */
+@media (min-width: 769px) {
+  .yacht-spec-grid .ys-head { grid-area: 1 / 1; }
+  .yacht-spec-grid .ys-label { grid-area: 1 / 2; align-self: end; padding-bottom: 16px; }
+  .yacht-spec-grid .ys-table { grid-area: 2 / 1; }
+  .yacht-spec-grid .ys-list { grid-area: 2 / 2; }
+}
 @media (max-width: 768px) {
   .yacht-gallery-thumbs {
     grid-template-columns: repeat(3, 1fr) !important;
   }
-  .yacht-crosslink-grid {
-    grid-template-columns: 1fr !important;
+  .yacht-crosslink-grid > a {
+    flex-basis: 100% !important;
+  }
+  /* Stacked: the 40px gap would sit on top of the heading's own bottom margin */
+  .yacht-spec-grid {
+    gap: 0 !important;
+  }
+  .yacht-spec-grid .ys-label {
+    margin-top: 56px;
+    margin-bottom: 24px;
   }
 }
 @media (max-width: 420px) {

@@ -3,6 +3,7 @@
 import Script from "next/script";
 import Link from "next/link";
 import SiteShell from './site/SiteShell';
+import RatingStars from './site/RatingStars';
 import FaqEnquiry from './site/FaqEnquiry';
 import {
   CruiseHero,
@@ -559,9 +560,7 @@ export default function WhalePage() {
                   <div
                     style={{ display: "flex", alignItems: "center", gap: 8 }}
                   >
-                    <span style={{ color: "var(--gold)", fontSize: 13 }}>
-                      {"★".repeat(r.stars)}
-                    </span>
+                    <RatingStars score={parseFloat(r.score)} />
                     <span
                       style={{
                         fontFamily: "var(--font-display)",
@@ -647,7 +646,7 @@ export default function WhalePage() {
           }}
         >
           <div
-            style={{ maxWidth: 1200, margin: "0 auto", padding: "0 48px 40px" }}
+            style={{ maxWidth: 1200, margin: "0 auto", padding: "40px 48px" }}
           >
             <div
               style={{

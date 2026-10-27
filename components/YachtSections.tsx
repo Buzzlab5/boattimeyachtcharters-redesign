@@ -245,6 +245,18 @@ function arrowStyle(side: 'left' | 'right'): React.CSSProperties {
 
 export type Spec = { label: string; value: string };
 
+// The table rows and the "On Board" list rows share these, so their lines match.
+const ROW_BORDER: React.CSSProperties = {
+  borderBottom: '1px solid rgba(201,168,76,0.12)',
+};
+const ROW_TEXT: React.CSSProperties = {
+  fontFamily: 'var(--font-body)',
+  fontSize: 15,
+  fontWeight: 300,
+  lineHeight: '24px',
+  color: 'var(--cream)',
+};
+
 /**
  * The full spec sheet as a real table. Plain text rows so search engines — and
  * anyone comparing two boats — can read the numbers without parsing a graphic.
@@ -267,89 +279,75 @@ export function VesselSpecTable({
       className="cruise-section"
       style={{ padding: '100px 48px', background: 'var(--navy-mid, var(--navy))' }}
     >
+      {/* Four grid cells, placed by .yacht-spec-grid: heading and "On Board" label share
+          row 1, the table and the list share row 2, so both start on the same line. */}
       <div
-        className="cruise-overview-grid"
+        className="cruise-overview-grid yacht-spec-grid"
         style={{
           maxWidth: 1200,
           margin: '0 auto',
           display: 'grid',
           gridTemplateColumns: '1fr 1fr',
-          gap: 80,
+          columnGap: 80,
+          rowGap: 0,
           alignItems: 'start',
         }}
       >
-        <div>
+        <div className="ys-head">
           <SectionHeading eyebrow="Specifications">
             {vesselName} <ItalicEm>at a glance</ItalicEm>.
           </SectionHeading>
+        </div>
 
-          <table
-            className="yr"
-            style={{ width: '100%', borderCollapse: 'collapse' }}
-          >
-            <tbody>
-              {specs.map((s) => (
-                <tr
-                  key={s.label}
-                  style={{ borderBottom: '1px solid rgba(201,168,76,0.12)' }}
+        <table
+          className="yr ys-table"
+          style={{ width: '100%', borderCollapse: 'collapse' }}
+        >
+          <tbody>
+            {specs.map((s) => (
+              <tr key={s.label} style={ROW_BORDER}>
+                <th
+                  scope="row"
+                  style={{
+                    ...LABEL,
+                    textAlign: 'left',
+                    padding: '16px 0',
+                    width: '45%',
+                  }}
                 >
-                  <th
-                    scope="row"
-                    style={{
-                      ...LABEL,
-                      textAlign: 'left',
-                      padding: '16px 0',
-                      width: '45%',
-                    }}
-                  >
-                    {s.label}
-                  </th>
-                  <td
-                    style={{
-                      fontFamily: 'var(--font-body)',
-                      fontSize: 15,
-                      fontWeight: 300,
-                      color: 'var(--cream)',
-                      padding: '16px 0',
-                    }}
-                  >
-                    {s.value}
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
+                  {s.label}
+                </th>
+                <td style={{ ...ROW_TEXT, padding: '16px 0' }}>{s.value}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+
+        <div className="yr ys-label">
+          <Eyebrow>On Board</Eyebrow>
         </div>
 
-        <div>
-          <div className="yr" style={{ marginBottom: 24 }}>
-            <Eyebrow>On Board</Eyebrow>
-          </div>
-          <ul
-            className="yr"
-            style={{ listStyle: 'none', padding: 0, margin: 0 }}
-          >
-            {features.map((f) => (
-              <li
-                key={f}
-                style={{
-                  display: 'flex',
-                  gap: 14,
-                  alignItems: 'baseline',
-                  padding: '14px 0',
-                  borderBottom: '1px solid rgba(201,168,76,0.08)',
-                  fontFamily: 'var(--font-body)',
-                  fontSize: 15,
-                  fontWeight: 300,
-                  color: 'rgba(245,240,232,0.82)',
-                }}
-              >
-                <span style={{ color: 'var(--gold)', fontSize: 11 }}>—</span>
-                {f}
-              </li>
-            ))}
-          </ul>
-        </div>
+        <ul
+          className="yr ys-list"
+          style={{ listStyle: 'none', padding: 0, margin: 0 }}
+        >
+          {features.map((f) => (
+            <li
+              key={f}
+              style={{
+                ...ROW_BORDER,
+                display: 'flex',
+                gap: 14,
+                alignItems: 'baseline',
+                padding: '16px 0',
+                ...ROW_TEXT,
+              }}
+            >
+              <span style={{ color: 'var(--gold)', fontSize: 11 }}>—</span>
+              {f}
+            </li>
+          ))}
+        </ul>
       </div>
     </section>
   );
@@ -454,6 +452,10 @@ export function VesselCrossLinks({
   const ref = useRef<HTMLElement>(null);
   useReveal(ref);
 
+  // Cards per row: up to four on one row, otherwise split in two near-equal rows
+  // (5 -> 3 + 2). Cards grow to fill their row, so there is never an empty cell.
+  const perRow = links.length <= 4 ? links.length : Math.ceil(links.length / 2);
+
   return (
     <section
       ref={ref}
@@ -468,8 +470,8 @@ export function VesselCrossLinks({
         <div
           className="yacht-crosslink-grid"
           style={{
-            display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))',
+            display: 'flex',
+            flexWrap: 'wrap',
             gap: 1,
             background: 'rgba(201,168,76,0.15)',
             border: '1px solid rgba(201,168,76,0.15)',
@@ -482,6 +484,8 @@ export function VesselCrossLinks({
               className="yr"
               style={{
                 display: 'block',
+                flex: `1 1 calc((100% - ${perRow - 1}px) / ${perRow})`,
+                boxSizing: 'border-box',
                 padding: '36px 30px',
                 background: 'var(--navy)',
                 textDecoration: 'none',

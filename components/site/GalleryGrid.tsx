@@ -4,7 +4,7 @@ import Image from 'next/image';
 import { useCallback, useEffect, useState } from 'react';
 
 /** Square photo grid. A click opens a full-size view with arrows and keyboard support. */
-export default function GalleryGrid({ photos }: { photos: string[] }) {
+export default function GalleryGrid({ photos, threeAcross = false }: { photos: string[]; threeAcross?: boolean }) {
   const [open, setOpen] = useState<number | null>(null);
 
   const move = useCallback(
@@ -30,7 +30,7 @@ export default function GalleryGrid({ photos }: { photos: string[] }) {
 
   return (
     <>
-      <div className="st-gal">
+      <div className={`st-gal${threeAcross ? ' st-gal--3' : ''}`}>
         {photos.map((src, i) => (
           <button key={src} type="button" className="st-gal__item" onClick={() => setOpen(i)} aria-label={`Open photo ${i + 1} of ${photos.length}`}>
             <Image src={src} alt="" fill sizes="(max-width: 600px) 50vw, (max-width: 960px) 33vw, 25vw" />

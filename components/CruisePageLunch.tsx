@@ -2,6 +2,7 @@
 
 import Script from "next/script";
 import SiteShell from './site/SiteShell';
+import RatingStars from './site/RatingStars';
 import FaqEnquiry from './site/FaqEnquiry';
 import DiningUnavailableNotice from "./DiningUnavailableNotice";
 import { DINING_CRUISES_AVAILABLE } from "@/lib/products";
@@ -873,9 +874,7 @@ export default function LunchPage() {
                   <div
                     style={{ display: "flex", alignItems: "center", gap: 8 }}
                   >
-                    <span style={{ color: "var(--gold)", fontSize: 13 }}>
-                      {"★".repeat(r.stars)}
-                    </span>
+                    <RatingStars score={parseFloat(r.score)} />
                     <span
                       style={{
                         fontFamily: "var(--font-display)",

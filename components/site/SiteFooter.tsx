@@ -7,15 +7,20 @@ export default function SiteFooter() {
   return (
     <footer className="st-footer">
       <div className="st-footer__cols">
-        <div>
-          <h4>Contact</h4>
-          <address>
-            Marine Stadium Jetty &amp; Pontoon
-            <br />
-            Main Beach, Gold Coast QLD 4217
-          </address>
-          <a href={PHONE_HREF}>{PHONE_LABEL}</a>
-          <a href="mailto:info@boattimeyachtcharters.com.au">info@boattimeyachtcharters.com.au</a>
+        <div className="st-footer__brand">
+          <a href="/" className="st-footer__logo" aria-label="Boattime Yacht Charters home">
+            <img src="/boattime-logo.png" alt="Boattime Yacht Charters" width={166} height={104} />
+          </a>
+          <div>
+            <h4>Contact</h4>
+            <address>
+              Marine Stadium Jetty &amp; Pontoon
+              <br />
+              Main Beach, Gold Coast QLD 4217
+            </address>
+            <a href={PHONE_HREF}>{PHONE_LABEL}</a>
+            <a href="mailto:info@boattimeyachtcharters.com.au">info@boattimeyachtcharters.com.au</a>
+          </div>
         </div>
 
         <div>
@@ -64,7 +69,7 @@ export default function SiteFooter() {
       </div>
 
       <div className="st-footer__mark" aria-hidden="true">
-        BOATTIME
+        BOATTIME YACHT CHARTERS
       </div>
 
       <div className="st-footer__legal">

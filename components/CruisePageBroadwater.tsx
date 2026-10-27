@@ -2,7 +2,11 @@
 
 import Script from 'next/script';
 import SiteShell from './site/SiteShell';
+import RatingStars from './site/RatingStars';
 import FaqEnquiry from './site/FaqEnquiry';
+import Section from './site/Section';
+import SectionHead from './site/SectionHead';
+import GalleryGrid from './site/GalleryGrid';
 import { CruiseHero, CruiseYachts, CruiseItinerary } from './CruiseSections';
 import { VesselFaq } from './YachtSections';
 import { SUNSET_FAQS } from '@/lib/cruise-faqs';
@@ -37,6 +41,8 @@ const VESSELS = [
     href: '/sun-goddess-gold-coast',
   },
 ];
+
+const GALLERY = [1, 2, 3, 4, 5, 6].map((n) => `/luxury-scenic-sunset-cruise/sunset-cruise-${n}.jpeg`);
 
 const ITINERARY_INTRO: ReactNode = (
   <div
@@ -574,9 +580,7 @@ export default function BroadwaterPage() {
                   <div
                     style={{ display: 'flex', alignItems: 'center', gap: 8 }}
                   >
-                    <span style={{ color: 'var(--gold)', fontSize: 13 }}>
-                      {'★'.repeat(r.stars)}
-                    </span>
+                    <RatingStars score={parseFloat(r.score)} />
                     <span
                       style={{
                         fontFamily: 'var(--font-display)',
@@ -606,6 +610,19 @@ export default function BroadwaterPage() {
 
         {/* 6 ── DETAILS & ITINERARY */}
         <CruiseItinerary items={ITINERARY} intro={ITINERARY_INTRO} />
+
+        {/* 7 ── GALLERY */}
+        <Section labelledBy="sunset-gallery">
+          <SectionHead
+            eyebrow="Gallery"
+            title={
+              <span id="sunset-gallery">
+                The sunset cruise <em>in photos</em>
+              </span>
+            }
+          />
+          <GalleryGrid photos={GALLERY} threeAcross />
+        </Section>
 
         {/* 8 ── INLINE BOOKING WIDGET */}
         <section
