@@ -168,7 +168,7 @@ function ValCTABox({ title, bookHref }: { title: string; bookHref: string }) {
             el.style.color = 'var(--gold)';
           }}
         >
-          Book Now &rarr;
+          Enquire &rarr;
         </a>
 
         <AnchorSvg />
@@ -452,8 +452,8 @@ export default function ValentinesPage() {
 
   const SPECS = [
     'Marine Stadium Jetty & Pontoon, Main Beach, Gold Coast',
-    '2 for $269',
-    '14th of February, 2026',
+    'Two guests',
+    'Enquire for this year',
     '2.5 Hours',
     'Sparkling or Beer on Arrival',
     'Canapés',
@@ -560,7 +560,7 @@ export default function ValentinesPage() {
                   onMouseEnter={(e) => { (e.currentTarget as HTMLElement).style.opacity = '0.85'; }}
                   onMouseLeave={(e) => { (e.currentTarget as HTMLElement).style.opacity = '1'; }}
                 >
-                  Book Now &rarr;
+                  Enquire &rarr;
                 </a>
               </div>
             </div>
@@ -661,8 +661,8 @@ export default function ValentinesPage() {
               <p style={pStyle}>
                 When the night comes to a close, our experienced crew will ensure a smooth and safe
                 return to shore at 8.30pm. Don&rsquo;t miss out on this unforgettable opportunity to
-                celebrate Valentine&rsquo;s Day in the lap of luxury. Book your tickets now for the
-                Boattime Yacht Charters Valentine&rsquo;s Day Superyacht Cruise.
+                celebrate Valentine&rsquo;s Day in the lap of luxury. Enquire about this
+                year&rsquo;s Boattime Yacht Charters Valentine&rsquo;s Day Superyacht Cruise.
               </p>
             </div>
 
@@ -703,7 +703,7 @@ export default function ValentinesPage() {
         >
           <div style={{ maxWidth: 1000, margin: '0 auto' }}>
             <div style={{ textAlign: 'center', marginBottom: 48 }}>
-              <div style={{ ...GL, marginBottom: 16, display: 'block' }}>Book Your Tickets</div>
+              <div style={{ ...GL, marginBottom: 16, display: 'block' }}>Enquire</div>
               <h2
                 style={{
                   fontFamily: 'var(--font-display)',
@@ -715,7 +715,7 @@ export default function ValentinesPage() {
                   marginBottom: 16,
                 }}
               >
-                Reserve your <em style={{ fontStyle: 'italic', color: 'var(--gold)' }}>spot</em>.
+                Enquire about your <em style={{ fontStyle: 'italic', color: 'var(--gold)' }}>evening</em>.
               </h2>
               <p
                 style={{
@@ -728,19 +728,67 @@ export default function ValentinesPage() {
                   fontWeight: 300,
                 }}
               >
-                Saturday, 14 February 2026. Limited tickets available. Instant confirmation on booking.
+                Dates and tickets for this year are confirmed on enquiry. Sun
+                Goddess is also available as a private charter.
               </p>
             </div>
 
-            <div style={{ border: '1px solid rgba(201,168,76,0.15)', background: 'rgba(255,255,255,0.02)' }}>
-              <iframe
-                seamless
-                width="100%"
-                height="1000px"
-                frameBorder="0"
-                src="https://boattimeyachtcharters.rezdy.com/542529/zzz-luxury-valentines-sunset-cruise?iframe=true"
-                style={{ display: 'block' }}
-              />
+            {/* The Rezdy widget here pointed at zzz-luxury-valentines-sunset-cruise
+                (product PM0Q7Y). ZZZ is this account's own marker for a retired
+                product and it has no sessions, so the widget rendered a checkout
+                that could not sell anything. Enquiry route until a product is
+                loaded, with the two dining cruises that ARE bookable offered
+                beside it. */}
+            <div
+              style={{
+                border: '1px solid rgba(201,168,76,0.15)',
+                background: 'rgba(255,255,255,0.02)',
+                padding: '48px 24px',
+                textAlign: 'center',
+              }}
+            >
+              <a
+                href="/#inquiry"
+                style={{
+                  fontFamily: 'var(--font-body)',
+                  fontSize: 10,
+                  letterSpacing: '0.2em',
+                  textTransform: 'uppercase',
+                  fontWeight: 700,
+                  color: '#0A1628',
+                  background: '#C9A84C',
+                  padding: '14px 28px',
+                  textDecoration: 'none',
+                  display: 'inline-block',
+                }}
+              >
+                Enquire about Valentine&rsquo;s Day
+              </a>
+              <p
+                style={{
+                  fontFamily: 'var(--font-body)',
+                  fontSize: 13,
+                  color: 'rgba(245,240,232,0.6)',
+                  lineHeight: 1.8,
+                  marginTop: 24,
+                }}
+              >
+                Booking tonight instead? The{' '}
+                <a
+                  href="/luxury-broadwater-cruise"
+                  style={{ color: 'var(--gold)', textDecoration: 'none' }}
+                >
+                  sunset cruise
+                </a>{' '}
+                and the{' '}
+                <a
+                  href="/sunset-twilight-buffet-flavours-of-australia-aboard-the-mermaid-spirit"
+                  style={{ color: 'var(--gold)', textDecoration: 'none' }}
+                >
+                  twilight dining cruise
+                </a>{' '}
+                both sail regularly.
+              </p>
             </div>
           </div>
         </section>
