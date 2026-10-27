@@ -60,7 +60,7 @@ const CHARTERS: CharterCard[] = [
     cat: 'Dining',
     title: 'Catering',
     em: '& Menus',
-    body: 'Tailored menus from our award-winning executive chef — canapés, buffets, fine dining, and custom bar packages crafted around your event.',
+    body: 'Tailored menus from our executive chef — canapés, buffets, fine dining, and custom bar packages crafted around your event.',
     stat: 'Fully Customisable',
     col: 'span 7',
     row: 'span 2',
