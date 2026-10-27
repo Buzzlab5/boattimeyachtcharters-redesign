@@ -185,6 +185,26 @@
 }
 .st-gallery__all:hover { background: rgba(23, 104, 250, 0.9); }
 
+/* ─── Full gallery page (/gallery) ──────────────────────────────────────── */
+
+.st-gal-page { padding-top: 132px; }
+.st-gal-back {
+  display: inline-flex; align-items: center; gap: 8px; margin-bottom: 28px;
+  font-size: 13px; font-weight: 600; color: var(--st-muted); transition: color 0.3s;
+}
+.st-gal-back:hover { color: var(--st-accent); }
+.st-gal-page .st-head { margin-bottom: 40px; }
+.st-gal { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
+.st-gal__item {
+  position: relative; aspect-ratio: 1; padding: 0; overflow: hidden; cursor: pointer;
+  border: 0; border-radius: var(--bl-radius-md); background: var(--st-card);
+}
+.st-gal__item img { object-fit: cover; transition: transform 1.2s var(--ease-brand); }
+.st-gal__item:hover img, .st-gal__item:focus-visible img { transform: scale(1.06); }
+.st-gal__item:focus-visible { outline: 2px solid var(--st-accent); outline-offset: 2px; }
+@media (max-width: 960px) { .st-gal { grid-template-columns: repeat(3, 1fr); gap: 10px; } }
+@media (max-width: 600px) { .st-gal { grid-template-columns: repeat(2, 1fr); gap: 8px; } .st-gal-page { padding-top: 104px; } }
+
 /* ─── Reviews ───────────────────────────────────────────────────────────── */
 
 .st-rate { display: flex; align-items: center; gap: 28px; margin-bottom: 32px; flex-wrap: wrap; }

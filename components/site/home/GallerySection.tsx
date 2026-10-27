@@ -29,7 +29,7 @@ export default function GallerySection() {
               <Image src={p.src} alt={p.alt} fill sizes={p.sizes} />
             </figure>
           ))}
-          <a href="/sun-goddess-gold-coast" className="st-gallery__all">
+          <a href="/gallery" className="st-gallery__all">
             Show all photos
           </a>
         </div>

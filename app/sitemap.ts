@@ -47,6 +47,7 @@ const staticRoutes: Array<{
   { path: '/tickets', lastModified: '2026-10-13', changeFrequency: 'monthly', priority: 0.7 },
   { path: '/boattime-news', lastModified: '2026-10-13', changeFrequency: 'daily', priority: 0.7 },
   { path: '/humpbackhelitours', lastModified: '2026-10-23', changeFrequency: 'monthly', priority: 0.6 },
+  { path: '/gallery', lastModified: '2026-10-27', changeFrequency: 'monthly', priority: 0.5 },
   { path: '/nye-2027', lastModified: '2026-10-27', changeFrequency: 'monthly', priority: 0.6 },
   { path: '/riverfire-2026', lastModified: '2026-10-13', changeFrequency: 'monthly', priority: 0.6 },
   { path: '/valentines-day', lastModified: '2026-10-13', changeFrequency: 'monthly', priority: 0.6 },
