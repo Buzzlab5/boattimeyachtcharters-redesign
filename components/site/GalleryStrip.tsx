@@ -1,6 +1,7 @@
 'use client';
 
 import { useCallback, useEffect, useRef, useState } from 'react';
+import { ChevronLeftIcon, ChevronRightIcon, CloseIcon } from './GalleryIcons';
 
 /**
  * A row of rounded photos from a public/ folder (served by /api/gallery/[folder]).
@@ -62,11 +63,11 @@ export default function GalleryStrip({ folder, label = 'Photo' }: { folder: stri
       </div>
       <div className="st-strip__nav">
         <button type="button" onClick={() => step(-1)} aria-label="Previous photos">
-          ←
+          <ChevronLeftIcon />
         </button>
         <span>{images.length} photos</span>
         <button type="button" onClick={() => step(1)} aria-label="Next photos">
-          →
+          <ChevronRightIcon />
         </button>
       </div>
 
@@ -74,13 +75,13 @@ export default function GalleryStrip({ folder, label = 'Photo' }: { folder: stri
         <div className="st-lightbox" role="dialog" aria-modal="true" aria-label={`${label} ${open + 1} of ${images.length}`} onClick={() => setOpen(null)}>
           <img src={images[open]} alt={`${label} ${open + 1}`} onClick={(e) => e.stopPropagation()} />
           <button type="button" className="st-lightbox__close" onClick={() => setOpen(null)} aria-label="Close">
-            ×
+            <CloseIcon />
           </button>
           <button type="button" className="st-lightbox__prev" onClick={(e) => { e.stopPropagation(); move(-1); }} aria-label="Previous photo">
-            ←
+            <ChevronLeftIcon />
           </button>
           <button type="button" className="st-lightbox__next" onClick={(e) => { e.stopPropagation(); move(1); }} aria-label="Next photo">
-            →
+            <ChevronRightIcon />
           </button>
         </div>
       )}

@@ -2,6 +2,7 @@
 
 import Image from 'next/image';
 import { useCallback, useEffect, useState } from 'react';
+import { ChevronLeftIcon, ChevronRightIcon, CloseIcon } from './GalleryIcons';
 
 /** Square photo grid. A click opens a full-size view with arrows and keyboard support. */
 export default function GalleryGrid({ photos, threeAcross = false }: { photos: string[]; threeAcross?: boolean }) {
@@ -42,13 +43,13 @@ export default function GalleryGrid({ photos, threeAcross = false }: { photos: s
         <div className="st-lightbox" role="dialog" aria-modal="true" aria-label={`Photo ${open + 1} of ${photos.length}`} onClick={() => setOpen(null)}>
           <img src={photos[open]} alt={`Boattime photo ${open + 1}`} onClick={(e) => e.stopPropagation()} />
           <button type="button" className="st-lightbox__close" onClick={() => setOpen(null)} aria-label="Close">
-            ×
+            <CloseIcon />
           </button>
           <button type="button" className="st-lightbox__prev" onClick={(e) => { e.stopPropagation(); move(-1); }} aria-label="Previous photo">
-            ←
+            <ChevronLeftIcon />
           </button>
           <button type="button" className="st-lightbox__next" onClick={(e) => { e.stopPropagation(); move(1); }} aria-label="Next photo">
-            →
+            <ChevronRightIcon />
           </button>
         </div>
       )}

@@ -464,7 +464,8 @@ html[data-theme] .st-dark :is(h1, h2, h3, h4) { color: #fff !important; }
 .st-strip__item:hover img { transform: scale(1.05); }
 .st-strip__nav { display: flex; align-items: center; justify-content: center; gap: 18px; margin-top: 8px; font-size: 13px; color: var(--st-muted); }
 .st-strip__nav button {
-  width: 42px; height: 42px; border-radius: 50%; cursor: pointer; font-size: 18px; line-height: 1;
+  display: grid; place-items: center; padding: 0;
+  width: 42px; height: 42px; border-radius: 50%; cursor: pointer;
   color: var(--st-text); background: transparent; border: 1px solid var(--st-card-border);
   transition: background 0.25s, border-color 0.25s;
 }
@@ -474,7 +475,12 @@ html[data-theme] .st-dark :is(h1, h2, h3, h4) { color: #fff !important; }
   display: grid; grid-template: minmax(0, 1fr) / minmax(0, 1fr); place-items: center; /* the photo is boxed by the padding, never wider than the screen */
 }
 .st-lightbox img { max-width: min(1200px, 100%); max-height: 100%; width: auto; height: auto; border-radius: var(--bl-radius-md); object-fit: contain; }
-.st-lightbox button { position: absolute; width: 48px; height: 48px; border-radius: 50%; cursor: pointer; font-size: 22px; color: #fff; background: rgba(255, 255, 255, 0.12); border: 1px solid rgba(255, 255, 255, 0.25); }
+.st-lightbox button {
+  position: absolute; display: grid; place-items: center; padding: 0; width: 48px; height: 48px; border-radius: 50%; cursor: pointer;
+  color: #fff; background: rgba(255, 255, 255, 0.1); border: 1px solid rgba(255, 255, 255, 0.28);
+  -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px); transition: background 0.25s, border-color 0.25s;
+}
+.st-lightbox button:hover { background: rgba(255, 255, 255, 0.22); border-color: rgba(255, 255, 255, 0.5); }
 .st-lightbox__close { top: 20px; right: 20px; }
 .st-lightbox__prev { left: 20px; top: 50%; transform: translateY(-50%); }
 .st-lightbox__next { right: 20px; top: 50%; transform: translateY(-50%); }
