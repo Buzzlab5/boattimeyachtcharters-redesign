@@ -53,6 +53,11 @@ function roundSquareBoxes(root: HTMLElement) {
       return;
     }
 
+    // a sliding track (a slider that moves with translateX, or a row wider than itself):
+    // clipping it would cut off its own slides, so only the slides inside get rounded
+    // (not marked as done: a card that is only mid-entrance-animation gets rounded on a later pass)
+    if (cs.transform !== 'none' || el.scrollWidth > el.clientWidth + 2) return;
+
     // a cell of an already rounded, clipped parent: its corners are not visible
     const parent = el.parentElement;
     if (parent) {

@@ -442,11 +442,14 @@ export default function CharterPageWedding() {
   return (
     <CharterTemplate
       kind="Wedding"
-      heroImage="/wedding-charter-images/25-DSC2845.webp"
+      heroImage="/wedding-charter-hero.webp"
       heroLead="Say 'I Do' on a Boattime Luxury Yacht Charter, the idyllic venue for your wedding ceremonies and reception. Celebrate your love as you cruise through the crystal blue waters of Gold Coast."
       overviewTitle="Wedding Yacht Charter Gold Coast"
       overview={OVERVIEW}
-      galleryFolder="wedding-charter-images"
+      galleryGroups={[
+        { title: 'Wedding on Sun Goddess', folder: 'wedding-on-sun-goddess' },
+        { title: 'Wedding on Mermaid Spirit', folder: 'wedding-on-mermaid-spirit' },
+      ]}
       packagesTitle={<>Your <em>wedding</em> on the water</>}
       packages={LEFT_VESSELS}
       accordion={ACCORDION}

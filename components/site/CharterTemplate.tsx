@@ -23,7 +23,10 @@ interface CharterTemplateProps {
   overviewTitle: string;
   /** the long overview copy (the page's existing JSX) */
   overview: ReactNode;
-  galleryFolder: string;
+  /** one gallery for the whole page (a public/ folder) ... */
+  galleryFolder?: string;
+  /** ... or several, each under its own heading */
+  galleryGroups?: { title: string; folder: string }[];
   packagesTitle: ReactNode;
   /** the packages / vessel text (existing JSX) */
   packages: ReactNode;
@@ -82,6 +85,7 @@ export default function CharterTemplate({
   overviewTitle,
   overview,
   galleryFolder,
+  galleryGroups,
   packagesTitle,
   packages,
   accordion,
@@ -151,7 +155,16 @@ export default function CharterTemplate({
 
           <Section wide labelledBy="st-ch-gallery">
             <SectionHead eyebrow="Gallery" title={<span id="st-ch-gallery">On board, <em>up close</em></span>} />
-            <GalleryStrip folder={galleryFolder} label={`${kind} charter photo`} />
+            {galleryGroups ? (
+              galleryGroups.map((g) => (
+                <div key={g.folder} className="st-gallery-group">
+                  <h3 className="st-gallery-group__title">{g.title}</h3>
+                  <GalleryStrip folder={g.folder} label={g.title} />
+                </div>
+              ))
+            ) : (
+              galleryFolder && <GalleryStrip folder={galleryFolder} label={`${kind} charter photo`} />
+            )}
           </Section>
 
           <Section labelledBy="st-ch-packages">

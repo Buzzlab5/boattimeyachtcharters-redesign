@@ -14,6 +14,7 @@ import {
   VesselFaq,
   VesselCrossLinks,
 } from './YachtSections';
+import WatersportsSlideshow from './WatersportsSlideshow';
 import { SUN_GODDESS as V } from '@/lib/vessels';
 
 gsap.registerPlugin(ScrollTrigger, useGSAP);
@@ -586,16 +587,7 @@ function WatersportsSection() {
           </div>
         </div>
         <div className="ws" style={{ position: 'relative' }}>
-          <div
-            style={{
-              aspectRatio: '4/5',
-              backgroundImage:
-                'url(/broadwater.jpeg)',
-              backgroundSize: 'cover',
-              backgroundPosition: 'center',
-              border: '1px solid rgba(201,168,76,0.15)',
-            }}
-          />
+          <WatersportsSlideshow />
           <div
             style={{
               position: 'absolute',

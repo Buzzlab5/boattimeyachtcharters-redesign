@@ -443,6 +443,11 @@ html[data-theme] .st-dark :is(h1, h2, h3, h4) { color: #fff !important; }
 .st-cta__buttons { display: flex; justify-content: center; gap: 12px; flex-wrap: wrap; margin-top: 28px; }
 
 /* Photo strip */
+.st-gallery-group + .st-gallery-group { margin-top: 56px; }
+.st-gallery-group__title {
+  margin: 0 0 20px; font-weight: 600; font-size: clamp(20px, 2.4vw, 26px); letter-spacing: -0.4px;
+  color: var(--st-text);
+}
 .st-strip-wrap { position: relative; }
 .st-strip {
   display: flex; gap: 12px; overflow-x: auto; scroll-snap-type: x mandatory; padding-bottom: 16px;
