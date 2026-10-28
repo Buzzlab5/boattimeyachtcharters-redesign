@@ -4,6 +4,7 @@ import PageHero from './site/PageHero';
 import Section from './site/Section';
 import SectionHead from './site/SectionHead';
 import FaqEnquiry from './site/FaqEnquiry';
+import GalleryStrip from './site/GalleryStrip';
 import MenuFlipbook from './MenuFlipbook';
 import { PHONE_HREF, PHONE_LABEL } from './site/contact';
 
@@ -38,6 +39,19 @@ export default function CharterPageCatering() {
             <div className="st-flipbook">
               <MenuFlipbook pdfUrl="/boattime-menu-2026.pdf" />
             </div>
+          </Section>
+
+          <Section wide labelledBy="st-gallery">
+            <SectionHead
+              eyebrow="Gallery"
+              title={
+                <span id="st-gallery">
+                  Fresh from <em>our galley</em>
+                </span>
+              }
+              sub="Grazing boards, platters and dishes served on Boattime charters."
+            />
+            <GalleryStrip folder="catering" label="Catering photo" />
           </Section>
 
           <Section labelledBy="st-talk">

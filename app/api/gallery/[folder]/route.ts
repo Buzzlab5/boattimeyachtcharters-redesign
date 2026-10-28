@@ -5,6 +5,7 @@ import path from 'path';
 const ALLOWED = new Set([
   'private-charter-images',
   'corporate-charter-images',
+  'catering',
   'wedding-on-sun-goddess',
   'wedding-on-mermaid-spirit',
   'valentines-day-images',

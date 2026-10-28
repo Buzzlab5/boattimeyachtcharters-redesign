@@ -451,6 +451,7 @@ html[data-theme] .st-dark :is(h1, h2, h3, h4) { color: #fff !important; }
 .st-strip-wrap { position: relative; }
 .st-strip {
   display: flex; gap: 12px; overflow-x: auto; scroll-snap-type: x mandatory; padding-bottom: 16px;
+  overscroll-behavior-x: contain; -webkit-overflow-scrolling: touch;
   scrollbar-width: thin; scrollbar-color: var(--st-accent) transparent;
 }
 .st-strip--empty { height: 360px; border-radius: var(--bl-radius-lg); background: var(--st-card); }
@@ -458,6 +459,7 @@ html[data-theme] .st-dark :is(h1, h2, h3, h4) { color: #fff !important; }
   flex: 0 0 min(440px, 78vw); height: 340px; padding: 0; border: 0; cursor: zoom-in; overflow: hidden;
   border-radius: var(--bl-radius-lg); scroll-snap-align: start; background: var(--st-card);
 }
+.st-strip__item:last-child { scroll-snap-align: end; } /* the last photo can never reach the start edge, so it snaps to the end */
 .st-strip__item img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.8s var(--ease-brand); }
 .st-strip__item:hover img { transform: scale(1.05); }
 .st-strip__nav { display: flex; align-items: center; justify-content: center; gap: 18px; margin-top: 8px; font-size: 13px; color: var(--st-muted); }
@@ -467,8 +469,11 @@ html[data-theme] .st-dark :is(h1, h2, h3, h4) { color: #fff !important; }
   transition: background 0.25s, border-color 0.25s;
 }
 .st-strip__nav button:hover { background: var(--st-hover); border-color: var(--st-accent); }
-.st-lightbox { position: fixed; inset: 0; z-index: 500; display: grid; place-items: center; background: rgba(7, 15, 31, 0.94); padding: 24px; }
-.st-lightbox img { max-width: min(1200px, 94vw); max-height: 86vh; border-radius: var(--bl-radius-md); object-fit: contain; }
+.st-lightbox {
+  position: fixed; inset: 0; z-index: 500; background: rgba(7, 15, 31, 0.94); padding: 24px;
+  display: grid; grid-template: minmax(0, 1fr) / minmax(0, 1fr); place-items: center; /* the photo is boxed by the padding, never wider than the screen */
+}
+.st-lightbox img { max-width: min(1200px, 100%); max-height: 100%; width: auto; height: auto; border-radius: var(--bl-radius-md); object-fit: contain; }
 .st-lightbox button { position: absolute; width: 48px; height: 48px; border-radius: 50%; cursor: pointer; font-size: 22px; color: #fff; background: rgba(255, 255, 255, 0.12); border: 1px solid rgba(255, 255, 255, 0.25); }
 .st-lightbox__close { top: 20px; right: 20px; }
 .st-lightbox__prev { left: 20px; top: 50%; transform: translateY(-50%); }
@@ -482,6 +487,13 @@ html[data-theme] .st-dark :is(h1, h2, h3, h4) { color: #fff !important; }
 @media (max-width: 720px) {
   .st-detail, .st-aside { padding: 24px 20px; }
   .st-strip__item { height: 260px; }
+  /* phones: the arrows sit under the photo instead of on top of it */
+  .st-lightbox { padding: 72px 16px 88px; }
+  .st-lightbox button { width: 44px; height: 44px; }
+  .st-lightbox__close { top: 16px; right: 16px; }
+  .st-lightbox__prev, .st-lightbox__next { top: auto; bottom: 24px; transform: none; }
+  .st-lightbox__prev { left: calc(50% - 56px); right: auto; }
+  .st-lightbox__next { right: calc(50% - 56px); left: auto; }
 }
 
 /* Buttons that old copy wrote as inline-styled links */

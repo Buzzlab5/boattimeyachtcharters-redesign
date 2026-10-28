@@ -18,9 +18,19 @@ export default function GalleryStrip({ folder, label = 'Photo' }: { folder: stri
       .catch(() => {});
   }, [folder]);
 
+  // One photo per click. At the last photo, Next wraps to the first (and Previous at the first wraps to the last).
   const step = useCallback((dir: 1 | -1) => {
     const el = track.current;
-    if (el) el.scrollBy({ left: dir * el.clientWidth * 0.8, behavior: 'smooth' });
+    const first = el?.querySelector<HTMLElement>('.st-strip__item');
+    if (!el || !first) return;
+    const gap = parseFloat(getComputedStyle(el).columnGap) || 0;
+    const stride = first.offsetWidth + gap;
+    const max = el.scrollWidth - el.clientWidth;
+    let left: number;
+    if (dir === 1 && el.scrollLeft >= max - 2) left = 0;
+    else if (dir === -1 && el.scrollLeft <= 2) left = max;
+    else left = Math.min(max, Math.max(0, (Math.round(el.scrollLeft / stride) + dir) * stride));
+    el.scrollTo({ left, behavior: 'smooth' });
   }, []);
 
   const move = useCallback(
