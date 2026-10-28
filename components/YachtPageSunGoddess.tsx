@@ -173,7 +173,7 @@ function VesselOverview() {
             A superyacht built for <ItalicEm>extraordinary moments</ItalicEm>.
           </h2>
           {[
-            "Sun Goddess is Gold Coast's most celebrated luxury superyacht — 114 feet of sweeping teak decks, open-air entertainer's spaces, and a professional crew dedicated to making every charter unforgettable.",
+            "Sun Goddess is our flagship superyacht: 114 feet of sweeping teak decks, open-air entertainer's spaces, and a professional crew dedicated to making every charter unforgettable.",
             "Whether you're hosting a wedding on the foredeck, a corporate event for 135 guests, or a private sunset cruise for two, Sun Goddess adapts entirely to your vision. The Broadwater is her home.",
           ].map((p, i) => (
             <p
@@ -242,7 +242,7 @@ const FEATURES = [
   {
     label: 'Catering Galley',
     detail:
-      'Fully equipped galley serviced by award-winning executive chefs and catering staff.',
+      'Fully equipped galley serviced by executive chefs and catering staff.',
   },
   {
     label: 'Watersports Deck',

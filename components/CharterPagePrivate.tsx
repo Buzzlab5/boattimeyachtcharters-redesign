@@ -331,7 +331,7 @@ const OVERVIEW = (
             }}
           >
             <p style={{ marginBottom: 20 }}>
-              Experience the best private yacht charter in Gold Coast with
+              Private yacht charters on the Gold Coast with
               Boattime Yacht Charters. Whether it&rsquo;s an intimate gathering
               or a large event, we offer tailored luxury experiences that
               promise an unforgettable time on the water.
@@ -395,7 +395,7 @@ export default function CharterPagePrivate() {
     <CharterTemplate
       kind="Private"
       heroImage="/EDI_2899.jpg"
-      heroLead="Experience the best private yacht charter in Gold Coast with Boattime Yacht Charters. Whether it's an intimate gathering or a large event, we offer tailored luxury experiences that promise an unforgettable time on the water."
+      heroLead="Private yacht charters on the Gold Coast with Boattime Yacht Charters. Whether it's an intimate gathering or a large event, we offer tailored luxury experiences that promise an unforgettable time on the water."
       overviewTitle="Private Yacht Charter Gold Coast"
       overview={OVERVIEW}
       galleryFolder="private-charter-images"

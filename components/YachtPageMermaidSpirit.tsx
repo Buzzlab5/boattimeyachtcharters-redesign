@@ -142,7 +142,7 @@ const DECKS = [
     number: '03',
     name: 'Sky Deck',
     subtitle: 'Open air · sun lounges · 360° views',
-    description: 'The sky deck is the jewel of the vessel — fully open to the sky with wrap-around views in every direction. Sun lounges, high-top bars, and the best seat in Queensland for fireworks, sunsets, and whale watching. Completely unforgettable.',
+    description: 'The sky deck is the jewel of the vessel — fully open to the sky with wrap-around views in every direction. Sun lounges, high-top bars, and a front-row seat for fireworks, sunsets, and whale watching. Completely unforgettable.',
     image: '/mermaid-spirit-interior/mermaid4.jpg',
   },
 ];
