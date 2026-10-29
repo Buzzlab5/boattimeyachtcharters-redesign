@@ -29,7 +29,7 @@ const GL: React.CSSProperties = {
   marginBottom: 8,
 };
 
-const INQUIRY = '/#inquiry';
+const INQUIRY = '#inquiry';
 
 // ── Spec strip ────────────────────────────────────────────────────────────────
 
@@ -684,7 +684,7 @@ function CateringSection() {
                 lineHeight: 1.05,
               }}
             >
-              Award-winning <ItalicEm>executive chefs</ItalicEm>.
+              Tailored by our <ItalicEm>executive chefs</ItalicEm>.
             </h2>
           </div>
           <p

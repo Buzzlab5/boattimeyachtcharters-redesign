@@ -189,7 +189,7 @@ const AVAILABILITY = (
       enquiry form and we will be sure to get back to you as soon as possible.
     </p>
     <a
-      href="/#inquiry"
+      href="#inquiry"
       style={{
         fontFamily: 'var(--font-body)',
         fontSize: 10,
@@ -396,7 +396,7 @@ const OVERVIEW = (
             <p style={{ marginBottom: 20 }}>
               Both the Sun Goddess and Mermaid Spirit boast spacious decks, dual
               bars, flat-screen TVs, and state-of-the-art sound systems. We
-              provide customized catering from our award-winning Executive Chef,
+              provide customized catering from our Executive Chef,
               ensuring your menu is tailored to your tastes and preferences.
             </p>
             <p style={{ marginBottom: 6 }}>

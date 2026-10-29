@@ -62,7 +62,7 @@ const Inquiry = React.forwardRef((_, ref) => {
           </div>
           <div style={inqStyles.row}>
             <Field label="Phone" value={f.phone} onChange={u('phone')} placeholder="+61"/>
-            <Field label="Preferred Date" value={f.date} onChange={u('date')} placeholder="Saturday, 3 May"/>
+            <Field label="Preferred Date" value={f.date} onChange={u('date')} placeholder="Saturday, 12 December"/>
           </div>
           <div style={inqStyles.row}>
             <Field label="Charter Type" select options={['Private Charter','Corporate Charter','Wedding Charter','Sunset Cruise','Whale Watching','Custom']} value={f.charter} onChange={u('charter')}/>

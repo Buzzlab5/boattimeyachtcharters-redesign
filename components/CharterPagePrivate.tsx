@@ -206,7 +206,7 @@ const AVAILABILITY = (
       enquiry form and we will be sure to get back to you as soon as possible.
     </p>
     <a
-      href="/#inquiry"
+      href="#inquiry"
       style={{
         fontFamily: 'var(--font-body)',
         fontSize: 10,

@@ -136,7 +136,7 @@ export default function EnquiryForm({ lead }: { lead?: string }) {
       </div>
       <div className="st-form__row">
         <Field label="Phone" name="phone" value={form.phone} onChange={update} type="tel" placeholder="+61" error={missing('phone')} />
-        <Field label="Preferred date" name="date" value={form.date} onChange={update} placeholder="Saturday, 3 May" error={missing('date')} />
+        <Field label="Preferred date" name="date" value={form.date} onChange={update} placeholder="Saturday, 12 December" error={missing('date')} />
       </div>
       <div className="st-form__row">
         <Field label="Charter type" name="charter" value={form.charter} onChange={update} options={CHARTERS} />

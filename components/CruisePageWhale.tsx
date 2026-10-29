@@ -494,7 +494,7 @@ export default function WhalePage() {
           image="/luxury-whale.jpg"
           stats={[
             { label: "Duration", value: "2.5 hours" },
-            { label: "From", value: "$79.50 pp" },
+            { label: "Adult", value: "$89" },
             { label: "Season", value: "May – Nov" },
             { label: "Sessions", value: "2 Daily" },
           ]}

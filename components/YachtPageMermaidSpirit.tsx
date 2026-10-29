@@ -29,7 +29,7 @@ const GL: React.CSSProperties = {
   marginBottom: 8,
 };
 
-const INQUIRY = '/#inquiry';
+const INQUIRY = '#inquiry';
 
 // ── Spec strip ────────────────────────────────────────────────────────────────
 

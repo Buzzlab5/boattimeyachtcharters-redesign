@@ -309,7 +309,7 @@ function OurSuperyachts() {
         'Dual-level galley',
         'Speakers throughout',
         'Watersports deck',
-        'Award-winning catering available',
+        'Catering available',
       ],
       href: '/sun-goddess-gold-coast',
     },

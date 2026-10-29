@@ -394,7 +394,7 @@ export default function Inquiry() {
               name="date"
               value={form.date}
               onChange={update}
-              placeholder="Saturday, 3 May"
+              placeholder="Saturday, 12 December"
               isLight={isLight}
               hasError={showErrors && errors.date}
             />

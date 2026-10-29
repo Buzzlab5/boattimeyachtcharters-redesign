@@ -30,7 +30,7 @@ const EXPERIENCES = [
     tag: 'Gold Coast cruise',
     title: 'Luxury Whale Watching',
     text: 'Humpback season from the upper deck, with crew commentary and plenty of room to watch.',
-    price: 'from $79.50',
+    price: '$89',
     unit: '/ adult',
   },
 ];
