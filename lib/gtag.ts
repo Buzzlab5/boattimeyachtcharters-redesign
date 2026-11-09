@@ -4,11 +4,21 @@ type Gtag = (...args: unknown[]) => void;
 
 /**
  * Dipanggil sekali setelah enquiry berhasil terkirim.
- * Mengirim konversi ke Google Ads dan event generate_lead ke GA4.
- * Aman kalau gtag diblokir (ad blocker) — tidak melempar error.
+ * Mengirim konversi ke Google Ads, event generate_lead ke GA4,
+ * dan event standar Lead ke Meta Pixel (tanpa data pribadi, tanpa isi form).
+ * Aman kalau gtag atau fbq diblokir (ad blocker): tidak melempar error.
  */
 export function trackEnquiryConversion() {
-  const gtag = (window as unknown as { gtag?: Gtag }).gtag;
+  const w = window as unknown as { gtag?: Gtag; fbq?: Gtag };
+
+  // Meta dikirim sebelum cek gtag, supaya tetap terkirim kalau gtag diblokir.
+  try {
+    if (typeof w.fbq === 'function') w.fbq('track', 'Lead', { content_name: 'Enquiry form' });
+  } catch {
+    // Pixel gagal: enquiry tetap terkirim, jadi jangan sampai form menampilkan error.
+  }
+
+  const gtag = w.gtag;
   if (typeof gtag !== 'function') return;
 
   gtag('event', 'conversion', {
