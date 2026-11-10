@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import { trackEnquiryConversion } from '@/lib/gtag';
+import { PHONE_LABEL } from './contact';
 
 // Same fields, same validation and same endpoint (/api/inquiry) as the form
 // in components/Inquiry.tsx, so an enquiry sent from the preview reaches the
@@ -162,7 +163,7 @@ export default function EnquiryForm({ lead }: { lead?: string }) {
       )}
       {status === 'error' && (
         <p className="st-form__msg st-form__msg--error" role="alert">
-          We couldn’t send your enquiry. Your details are still in the form, so you can try again, or call +61 477 667 644 or email info@boattimeyachtcharters.com.au.
+          We couldn’t send your enquiry. Your details are still in the form, so you can try again, or call {PHONE_LABEL} or email info@boattimeyachtcharters.com.au.
         </p>
       )}
     </form>
