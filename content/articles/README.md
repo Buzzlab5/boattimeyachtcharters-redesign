@@ -35,3 +35,40 @@ system is the source of truth for this account and the website is not.
 
 No review count, no star rating and no award appears in either draft. There is
 no verified source for any of the figures this site has published for those.
+
+## The rule every future article follows, added 10 November 2026
+
+**An article may not carry a money page's head term at the front of its title
+tag.** This is not style. It is measured.
+
+Across 13 October to 9 November the sunset and Broadwater cluster held nine
+Boattime URLs. `/luxury-broadwater-cruise`, which takes the booking, had 2,210
+impressions and 45 clicks. The eight articles around it had 1,196 impressions
+and **4 clicks between them**, and the two that lead with the booking page's own
+head term took one click each while sitting directly above or below it in the
+results.
+
+The two best-performing articles in the same cluster are the two that answer a
+specific question and carry no head term:
+
+| Article | Position |
+|---|---|
+| `sunset-cruise-vs-dinner-cruise-gold-coast-which-is-right-for-you` | **5.4** |
+| `what-time-do-sunset-cruises-leave-on-the-gold-coast-best-times-explained` | **5.7** |
+| `gold-coast-sunset-cruise-the-complete-guide-to-cruising-the-broadwater` | 11.7 |
+| `how-to-choose-the-best-sunset-cruise-on-the-gold-coast` | 33.6 |
+
+A specific question ranks and does not compete. A "complete guide" carrying the
+head term competes and does neither well.
+
+So, before writing:
+
+1. Pull Search Console for the last 28 days by query and page.
+2. List the head commercial queries a money page already owns.
+3. The new article may not target any of them, or a close variant, in its
+   title, H1 or slug. Informational long tail only.
+4. Link to the money page for the topic, early, with an anchor that names the
+   product.
+
+`_retitle-sunset-cannibals.sql` is the repair for the two that broke this rule
+before it was written down.
