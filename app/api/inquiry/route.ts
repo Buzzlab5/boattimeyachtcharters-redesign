@@ -6,6 +6,41 @@ const FROM_EMAIL =
   process.env.FROM_EMAIL ??
   'Boattime Yacht Charters <noreply@boattimeyachtcharters.com>';
 
+// Resend's SDK has no timeout of its own, so a hung request would hold the
+// visitor on "Sending" until the function is killed. Together these keep the
+// request inside a 10-second function limit.
+const OWNER_TIMEOUT_MS = 6000;
+const GUEST_TIMEOUT_MS = 3000;
+
+function withTimeout<T>(promise: Promise<T>, ms: number): Promise<T> {
+  return new Promise<T>((resolve, reject) => {
+    const timer = setTimeout(() => reject(new Error(`timed out after ${ms} ms`)), ms);
+    promise.then(
+      (value) => {
+        clearTimeout(timer);
+        resolve(value);
+      },
+      (err) => {
+        clearTimeout(timer);
+        reject(err);
+      },
+    );
+  });
+}
+
+// What Resend said, without anything the visitor typed: the error's name,
+// status and message, with any email address in the message blanked out.
+function describe(err: unknown): string {
+  if (!err) return 'no email id returned';
+  const e = (typeof err === 'object' ? err : { message: err }) as {
+    name?: unknown;
+    statusCode?: unknown;
+    message?: unknown;
+  };
+  const message = String(e.message ?? '').replace(/\S+@\S+/g, '[email]');
+  return [e.name, e.statusCode, message].filter((v) => v != null && v !== '').join(' ');
+}
+
 export async function POST(req: Request) {
   console.log('[inquiry] POST received');
 
@@ -30,39 +65,62 @@ export async function POST(req: Request) {
   }
 
   try {
-    // 1. Notify the Boattime team
-    await resend.emails.send({
-      from: FROM_EMAIL,
-      to: OWNER_EMAIL,
-      replyTo: email,
-      subject: `New Enquiry — ${name} · ${charter}`,
-      html: ownerEmail({
-        name,
-        email,
-        phone,
-        date,
-        guests,
-        vessel,
-        charter,
-        note,
+    // 1. Notify the Boattime team. This email is the enquiry, so Resend's answer
+    //    decides the response: no accepted email id, no "sent", no lead counted.
+    //    The SDK returns { data, error } on a rejected send instead of throwing.
+    const owner = await withTimeout(
+      resend.emails.send({
+        from: FROM_EMAIL,
+        to: OWNER_EMAIL,
+        replyTo: email,
+        subject: `New Enquiry — ${name} · ${charter}`,
+        html: ownerEmail({
+          name,
+          email,
+          phone,
+          date,
+          guests,
+          vessel,
+          charter,
+          note,
+        }),
       }),
-    });
+      OWNER_TIMEOUT_MS,
+    );
+    if (owner.error || !owner.data?.id) {
+      console.error('[inquiry] owner email not accepted:', describe(owner.error));
+      return NextResponse.json(
+        { error: 'Your enquiry could not be sent.' },
+        { status: 502 },
+      );
+    }
 
-    // 2. Confirmation to the guest
-    await resend.emails.send({
-      from: FROM_EMAIL,
-      to: email,
-      subject: "Your Boattime Enquiry — We'll Be in Touch Shortly",
-      html: guestEmail({ name, charter, date, guests, vessel }),
-    });
+    // 2. Confirmation to the guest. The team already has the enquiry, so a
+    //    failure here is logged, not returned: a retry would send a duplicate.
+    try {
+      const guest = await withTimeout(
+        resend.emails.send({
+          from: FROM_EMAIL,
+          to: email,
+          subject: "Your Boattime Enquiry — We'll Be in Touch Shortly",
+          html: guestEmail({ name, charter, date, guests, vessel }),
+        }),
+        GUEST_TIMEOUT_MS,
+      );
+      if (guest.error) {
+        console.error('[inquiry] guest confirmation not accepted:', describe(guest.error));
+      }
+    } catch (err) {
+      console.error('[inquiry] guest confirmation failed:', describe(err));
+    }
 
-    console.log('[inquiry] emails sent OK');
+    console.log('[inquiry] owner email accepted, Resend id', owner.data.id);
     return NextResponse.json({ ok: true });
   } catch (err) {
-    console.error('[inquiry] send error', err);
+    console.error('[inquiry] owner email failed:', describe(err));
     return NextResponse.json(
-      { error: 'Failed to send email.' },
-      { status: 500 },
+      { error: 'Your enquiry could not be sent.' },
+      { status: 502 },
     );
   }
 }

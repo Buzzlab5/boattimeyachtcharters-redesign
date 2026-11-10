@@ -162,7 +162,7 @@ export default function EnquiryForm({ lead }: { lead?: string }) {
       )}
       {status === 'error' && (
         <p className="st-form__msg st-form__msg--error" role="alert">
-          Something went wrong. Please email us directly at info@boattimeyachtcharters.com.au
+          We couldn’t send your enquiry. Your details are still in the form, so you can try again, or call +61 477 667 644 or email info@boattimeyachtcharters.com.au.
         </p>
       )}
     </form>
