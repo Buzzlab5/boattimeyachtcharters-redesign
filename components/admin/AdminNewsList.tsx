@@ -52,6 +52,7 @@ export default function AdminNewsList() {
   }, []);
 
   async function togglePublished(post: Post) {
+    if (post.published && !confirm('Unpublish this article? It disappears from the site until you publish it again.')) return;
     const supabase = createClient();
     const nowPublished = !post.published;
     const { error } = await supabase
@@ -222,7 +223,7 @@ export default function AdminNewsList() {
             <div
               style={{
                 display: 'grid',
-                gridTemplateColumns: '1fr 180px 72px 120px 120px',
+                gridTemplateColumns: '1fr 180px 72px 100px 230px',
                 padding: '12px 24px',
                 borderBottom: '1px solid var(--border-subtle)',
                 background: 'rgba(201,168,76,0.04)',
@@ -250,7 +251,7 @@ export default function AdminNewsList() {
                 key={post.id}
                 style={{
                   display: 'grid',
-                  gridTemplateColumns: '1fr 180px 72px 120px 120px',
+                  gridTemplateColumns: '1fr 180px 72px 100px 230px',
                   padding: '18px 24px',
                   borderBottom:
                     i < posts.length - 1 ? '1px solid var(--border-subtle)' : 'none',
@@ -336,22 +337,21 @@ export default function AdminNewsList() {
                 </div>
 
                 <div>
-                  <button
-                    onClick={() => togglePublished(post)}
+                  <span
                     style={{
+                      display: 'inline-block',
                       padding: '5px 14px',
-                      border: `1px solid ${post.published ? 'rgba(100,200,130,0.4)' : 'rgba(201,168,76,0.2)'}`,
+                      border: `1px solid ${post.published ? 'rgba(100,200,130,0.4)' : 'var(--border-subtle)'}`,
                       background: post.published ? 'rgba(100,200,130,0.1)' : 'transparent',
-                      color: post.published ? '#80d4a0' : 'var(--text-muted)',
+                      color: post.published ? '#2f8a4e' : 'var(--text-muted)',
                       fontFamily: 'var(--font-body)',
                       fontSize: 9,
                       letterSpacing: '0.2em',
                       textTransform: 'uppercase',
-                      cursor: 'pointer',
                     }}
                   >
                     {post.published ? 'Live' : 'Draft'}
-                  </button>
+                  </span>
                 </div>
 
                 <div style={{ display: 'flex', gap: 12 }}>
@@ -360,6 +360,12 @@ export default function AdminNewsList() {
                     style={actionBtn}
                   >
                     Edit
+                  </button>
+                  <button
+                    onClick={() => togglePublished(post)}
+                    style={{ ...actionBtn, color: post.published ? 'var(--text-muted)' : 'var(--gold)', fontWeight: post.published ? 400 : 700 }}
+                  >
+                    {post.published ? 'Unpublish' : 'Publish'}
                   </button>
                   <button
                     onClick={() => deletePost(post.id)}

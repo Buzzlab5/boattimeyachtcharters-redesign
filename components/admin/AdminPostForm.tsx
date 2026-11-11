@@ -509,12 +509,20 @@ export default function AdminPostForm({ params }: { params?: Promise<{ id: strin
 
           {/* ── PUBLISH ── */}
           <Section title="Publish">
-            <div style={{ display: 'flex', alignItems: 'center', gap: 16 }}>
-              <button type="button" onClick={() => set('published', !form.published)} style={{ width: 48, height: 26, borderRadius: 13, background: form.published ? 'var(--gold)' : 'rgba(255,255,255,0.1)', border: 'none', cursor: 'pointer', position: 'relative', transition: 'background 0.2s', flexShrink: 0 }}>
-                <span style={{ position: 'absolute', top: 3, left: form.published ? 25 : 3, width: 20, height: 20, borderRadius: '50%', background: 'white', transition: 'left 0.2s' }} />
-              </button>
-              <div style={{ fontFamily: 'var(--font-body)', fontSize: 13, color: form.published ? 'var(--cream)' : 'var(--text-muted)' }}>
-                {form.published ? 'Published — visible on site' : 'Draft — not visible to visitors'}
+            <div>
+              <label style={labelStyle}>Status</label>
+              <div role="radiogroup" aria-label="Status" style={{ display: 'inline-flex', border: '1px solid var(--border-subtle)' }}>
+                {([[false, 'Draft'], [true, 'Live on site']] as const).map(([value, text]) => {
+                  const active = form.published === value;
+                  return (
+                    <button key={text} type="button" role="radio" aria-checked={active} onClick={() => set('published', value)} style={{ padding: '10px 22px', background: active ? 'var(--gold)' : 'transparent', color: active ? 'var(--navy)' : 'var(--text-muted)', border: 'none', fontFamily: 'var(--font-body)', fontSize: 10, letterSpacing: '0.2em', textTransform: 'uppercase', fontWeight: active ? 600 : 400, cursor: 'pointer', transition: 'all 0.15s' }}>
+                      {text}
+                    </button>
+                  );
+                })}
+              </div>
+              <div style={{ fontFamily: 'var(--font-body)', fontSize: 12, color: 'var(--text-muted)', marginTop: 8 }}>
+                {form.published ? 'Visible to visitors' : 'Not visible to visitors'} once you click {isEdit ? 'Save changes' : 'Create article'}.
               </div>
             </div>
             <div>
