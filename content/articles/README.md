@@ -72,3 +72,25 @@ So, before writing:
 
 `_retitle-sunset-cannibals.sql` is the repair for the two that broke this rule
 before it was written down.
+
+## Load queue, checked 11 November 2026
+
+Nothing in this folder is live yet. Each slug below was requested on the live
+site on 11 November 2026 and returned **404**, and the two titles the retitle
+was written to change are still the old titles.
+
+| File | Live state, 11 Nov | Why it matters now |
+|---|---|---|
+| `_retitle-sunset-cannibals.sql` | Not run. `/boattime-news/gold-coast-sunset-cruise-the-complete-guide-to-cruising-the-broadwater` still titles itself "Gold Coast Sunset Cruise: Complete Broadwater Guide" | Over the last 28 days that article sat at 9.8 and the booking page at 6.2 for "gold coast sunset cruise", and both articles still appear for "sunset cruise gold coast". **Run this first**: it is titles and meta only |
+| `christmas-end-of-year-boat-parties-gold-coast` | 404 | Seasonal. Every week it waits is a week of December demand it misses |
+| `what-happens-on-a-gold-coast-sunset-cruise` | 404 | Answers questions about the only product that can be booked today |
+| `gold-coast-yacht-wedding-planning-guide` | 404 | |
+| `how-much-does-it-cost-to-charter-a-yacht-on-the-gold-coast` | 404 | |
+
+No new article was added on 11 November. The rule above says an article that
+competes with a money page is repaired before a new one is written, and the
+sunset repair is still waiting to be run. A fifth unloaded draft would add to
+the queue without moving anything.
+
+**Before loading the four drafts**, re-read the prices and dates in each
+against Rezdy: they were read on 23 October.
