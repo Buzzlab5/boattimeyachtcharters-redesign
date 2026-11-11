@@ -8,6 +8,7 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import SiteShell from './site/SiteShell';
 import PageHero from './site/PageHero';
 import FaqEnquiry from './site/FaqEnquiry';
+import DepartureLocation from './site/DepartureLocation';
 
 gsap.registerPlugin(ScrollTrigger, useGSAP);
 
@@ -529,6 +530,8 @@ export default function NyePage() {
         
 
         
+        <DepartureLocation />
+
       <FaqEnquiry faqs={[]} formLead="Dates and tickets for this year are confirmed on enquiry. Mermaid Spirit is also available as a private charter." />
         </div>
       </SiteShell>

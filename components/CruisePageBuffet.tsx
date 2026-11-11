@@ -4,6 +4,7 @@ import Script from 'next/script';
 import SiteShell from './site/SiteShell';
 import RatingStars from './site/RatingStars';
 import FaqEnquiry from './site/FaqEnquiry';
+import DepartureLocation from './site/DepartureLocation';
 import DiningUnavailableNotice from './DiningUnavailableNotice';
 import { DINING_CRUISES_AVAILABLE } from '@/lib/products';
 import { CruiseHero, CruiseGallery, CruiseItinerary } from './CruiseSections';
@@ -1273,6 +1274,8 @@ export default function BuffetPage() {
 
         {/* 9 ── DETAILS & ITINERARY */}
         <CruiseItinerary items={ITINERARY} intro={ITINERARY_INTRO} />
+
+        <DepartureLocation />
 
         {/* 11 ── INLINE BOOKING WIDGET */}
         <section

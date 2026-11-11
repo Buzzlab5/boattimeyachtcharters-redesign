@@ -4,6 +4,7 @@ import Script from "next/script";
 import SiteShell from './site/SiteShell';
 import RatingStars from './site/RatingStars';
 import FaqEnquiry from './site/FaqEnquiry';
+import DepartureLocation from './site/DepartureLocation';
 import DiningUnavailableNotice from "./DiningUnavailableNotice";
 import { DINING_CRUISES_AVAILABLE } from "@/lib/products";
 import { CruiseHero, CruiseGallery, CruiseItinerary } from "./CruiseSections";
@@ -1380,6 +1381,8 @@ export default function LunchPage() {
             </div>
           </div>
         </section>
+
+        <DepartureLocation />
 
         {/* 11 ── INLINE BOOKING WIDGET */}
         <section

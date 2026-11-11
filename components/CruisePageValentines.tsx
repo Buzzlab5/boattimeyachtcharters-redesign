@@ -7,6 +7,7 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import SiteShell from './site/SiteShell';
 import PageHero from './site/PageHero';
 import FaqEnquiry from './site/FaqEnquiry';
+import DepartureLocation from './site/DepartureLocation';
 import Section from './site/Section';
 import SectionHead from './site/SectionHead';
 import GalleryGrid from './site/GalleryGrid';
@@ -543,6 +544,8 @@ export default function ValentinesPage() {
         
 
         
+
+        <DepartureLocation />
 
       <FaqEnquiry faqs={[]} formLead="Dates and tickets for this year are confirmed on enquiry. Sun Goddess is also available as a private charter." />
         </div>

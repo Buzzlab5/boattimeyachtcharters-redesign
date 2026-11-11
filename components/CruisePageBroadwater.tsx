@@ -4,6 +4,7 @@ import Script from 'next/script';
 import SiteShell from './site/SiteShell';
 import RatingStars from './site/RatingStars';
 import FaqEnquiry from './site/FaqEnquiry';
+import DepartureLocation from './site/DepartureLocation';
 import Section from './site/Section';
 import SectionHead from './site/SectionHead';
 import GalleryGrid from './site/GalleryGrid';
@@ -623,6 +624,8 @@ export default function BroadwaterPage() {
           />
           <GalleryGrid photos={GALLERY} threeAcross />
         </Section>
+
+        <DepartureLocation />
 
         {/* 8 ── INLINE BOOKING WIDGET */}
         <section
