@@ -14,8 +14,8 @@ const faqStyles = {
 };
 
 const FAQS = [
-  { q: 'Where do your boats depart from?', a: 'Our boats are berthed at Muriel Henchman Public Pontoon, Main Beach 4217 — about ten minutes from Surfers Paradise and fifteen from Broadbeach.' },
-  { q: 'Do you offer pre-made charter packages?', a: 'Three starting points. Beaches and BBQs — a midday run to the islands, watersports, and buffet. Sunset cocktails and canapés — five o&rsquo;clock out of Muriel Henchman Public Pontoon, a slow line past Surfers into golden hour. Or a fully custom charter — tell us the occasion and we write the afternoon.' },
+  { q: 'Where do your boats depart from?', a: 'Our boats are berthed at Marine Stadium Jetty & Pontoon at Doug Jennings Park, Main Beach — about ten minutes from Surfers Paradise and fifteen from Broadbeach.' },
+  { q: 'Do you offer pre-made charter packages?', a: 'Three starting points. Beaches and BBQs — a midday run to the islands, watersports, and buffet. Sunset cocktails and canapés — five o&rsquo;clock out of Marine Stadium Jetty & Pontoon at Doug Jennings Park, Main Beach, a slow line past Surfers into golden hour. Or a fully custom charter — tell us the occasion and we write the afternoon.' },
   { q: 'What about food and drinks?', a: 'Each vessel has two bars with bar-tab or consumption options. Our culinary partners — Private Chefs of Brisbane — handle everything from grazing boards and canapés to gourmet BBQ, buffet and fine dining.' },
   { q: 'What destinations can we visit?', a: 'Most charters run the calm Broadwater — Wave Break Island, Sanctuary Cove, Jumpinpin, the Scottish Prince wreck, the mansions at Sovereign Islands. When conditions invite, we push north into Moreton Bay for Tangalooma, Moreton Island and Stradbroke.' },
   { q: 'Will I get seasick?', a: 'We operate in the protected waters of the Gold Coast Broadwater, where swell is minimal. If we head offshore into open ocean there is a possibility of larger waves — your skipper will read the day and the route accordingly.' },

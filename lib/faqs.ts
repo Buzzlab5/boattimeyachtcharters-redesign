@@ -8,7 +8,7 @@
 export const FAQS = [
   {
     q: 'Where do your boats depart from?',
-    a: 'Our boats depart from Marine Stadium Jetty & Pontoon, Main Beach, Gold Coast — about ten minutes from Surfers Paradise and fifteen from Broadbeach.',
+    a: 'Our boats depart from Marine Stadium Jetty & Pontoon at Doug Jennings Park, Main Beach, Gold Coast — about ten minutes from Surfers Paradise and fifteen from Broadbeach.',
   },
   {
     q: 'Do you offer pre-made charter packages?',
@@ -44,7 +44,7 @@ export const CORPORATE_FAQS = [
   },
   {
     q: 'Where do your boats depart from?',
-    a: 'Our boats depart from Marine Stadium Jetty & Pontoon, Main Beach, Gold Coast, approximately 10 minutes from Surfers Paradise and 15 minutes from Broadbeach. Free parking is available.',
+    a: 'Our boats depart from Marine Stadium Jetty & Pontoon at Doug Jennings Park, Main Beach, Gold Coast, approximately 10 minutes from Surfers Paradise and 15 minutes from Broadbeach. Free parking is available.',
   },
   {
     q: 'Can we customise the catering and drinks?',
@@ -80,7 +80,7 @@ export const WEDDING_FAQS = [
     },
     {
       q: 'Where do we depart?',
-      a: 'Marine Stadium Jetty & Pontoon, Main Beach, Gold Coast — approximately 10 minutes from Surfers Paradise and 15 minutes from Broadbeach. Free parking is available.',
+      a: 'Marine Stadium Jetty & Pontoon at Doug Jennings Park, Main Beach, Gold Coast — approximately 10 minutes from Surfers Paradise and 15 minutes from Broadbeach. Free parking is available.',
     },
     {
       q: 'Can we have a ceremony on board?',
@@ -109,11 +109,11 @@ export const WEDDING_FAQS = [
 export const PRIVATE_FAQS = [
     {
       q: 'Where do your boats depart from?',
-      a: 'Our boats depart from Marine Stadium Jetty & Pontoon, Main Beach, Gold Coast — about 10 minutes from Surfers Paradise and 15 minutes from Broadbeach.',
+      a: 'Our boats depart from Marine Stadium Jetty & Pontoon at Doug Jennings Park, Main Beach, Gold Coast — about 10 minutes from Surfers Paradise and 15 minutes from Broadbeach.',
     },
     {
       q: 'Where can I park?',
-      a: 'There is plentiful free parking at Marine Stadium Jetty & Pontoon, Main Beach which you are permitted to use. Please check signage at time of parking and if parking overnight consider street parking to avoid towing.',
+      a: 'There is plentiful free parking at Marine Stadium Jetty & Pontoon at Doug Jennings Park, Main Beach which you are permitted to use. Please check signage at time of parking and if parking overnight consider street parking to avoid towing.',
     },
     {
       q: 'What about other transport options?',

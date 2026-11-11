@@ -55,6 +55,7 @@ export default function SiteFooter() {
           <a href="/about">About Boattime</a>
           <a href="/boattime-news">Boattime News</a>
           <a href="/#inquiry">Booking Enquiry</a>
+          <a href="/terms-and-conditions">Terms &amp; Conditions</a>
         </div>
 
         <div>

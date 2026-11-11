@@ -411,6 +411,8 @@ html[data-theme] .st-dark :is(h1, h2, h3, h4) { color: #fff !important; }
 .st-prose a { color: var(--st-accent); text-decoration: underline; text-underline-offset: 3px; }
 .st-prose span[style*='float'] { float: none !important; font-size: inherit !important; font-style: normal !important; line-height: inherit !important; margin: 0 !important; color: inherit !important; font-family: inherit !important; }
 .st-prose p[style*='clear'] { clear: none !important; }
+/* Highlighted clause (terms page) */
+.st-prose .st-terms__note { padding: 16px 20px; border-left: 3px solid var(--st-accent); border-radius: 0 8px 8px 0; background: var(--st-surface); }
 
 /* Two columns: long text + a sticky side card */
 .st-split { display: grid; grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr); gap: 64px; align-items: start; }

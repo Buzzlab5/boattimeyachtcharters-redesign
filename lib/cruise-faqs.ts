@@ -20,7 +20,7 @@ export const SUNSET_FAQS = [
   },
   {
     q: 'Where does the sunset cruise depart from?',
-    a: 'Marine Stadium Jetty & Pontoon, Main Beach on the Gold Coast. It is a return trip, setting out past the Main Beach Spit.',
+    a: 'Marine Stadium Jetty & Pontoon at Doug Jennings Park, Main Beach on the Gold Coast. It is a return trip, setting out past the Main Beach Spit.',
   },
   {
     q: 'How much is a Gold Coast sunset cruise?',

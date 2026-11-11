@@ -107,7 +107,7 @@ export const SUN_GODDESS: Vessel = {
     },
     {
       q: 'Where does Sun Goddess depart from?',
-      a: 'Sun Goddess departs from Marine Stadium Jetty & Pontoon, Main Beach on the Gold Coast — about ten minutes from Surfers Paradise and fifteen from Broadbeach.',
+      a: 'Sun Goddess departs from Marine Stadium Jetty & Pontoon at Doug Jennings Park, Main Beach on the Gold Coast — about ten minutes from Surfers Paradise and fifteen from Broadbeach.',
     },
     {
       q: 'Can you hold a wedding on Sun Goddess?',
