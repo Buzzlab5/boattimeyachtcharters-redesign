@@ -146,6 +146,15 @@ type PostData = {
 
 function extractFAQ(html: string): { q: string; a: string }[] {
   const pairs: { q: string; a: string }[] = [];
+  // When the article has its own "Frequently asked questions" section, the
+  // schema is that section and nothing else. Without this, the first ten
+  // headings of any kind were emitted as questions, so a guide with eight
+  // section headings above its FAQ published those as the FAQ and never
+  // reached the real ones. Articles with no such section behave as before.
+  const faqSection = html.match(
+    /<h2[^>]*>\s*(?:frequently asked questions|faqs?)\s*<\/h2>([\s\S]*?)(?=<h2[^>]*>|$)/i,
+  );
+  if (faqSection) html = faqSection[1];
   const parts = html.split(/(<h[23][^>]*>.*?<\/h[23]>)/i);
   for (let i = 0; i < parts.length - 1; i++) {
     const heading = parts[i].match(/^<h[23][^>]*>(.*?)<\/h[23]>$/i);

@@ -73,24 +73,52 @@ So, before writing:
 `_retitle-sunset-cannibals.sql` is the repair for the two that broke this rule
 before it was written down.
 
-## Load queue, checked 11 November 2026
+## State of this folder, checked 13 November 2026
 
-Nothing in this folder is live yet. Each slug below was requested on the live
-site on 11 November 2026 and returned **404**, and the two titles the retitle
-was written to change are still the old titles.
+**All four October drafts are live, and all four are live as raw Markdown.**
+Each slug returns 200. Each page has zero `<h2>`, zero `<h3>` and one `<p>`,
+with literal `##` and `**` in the text, because `components/ArticlePage.tsx`
+injects `posts.content` as HTML and the SQL Asri supplied held Markdown. The
+FAQ schema is missing on all four for the same reason. The fault is in the
+files, not in how they were loaded.
 
-| File | Live state, 11 Nov | Why it matters now |
+| File | What to do | State |
 |---|---|---|
-| `_retitle-sunset-cannibals.sql` | Not run. `/boattime-news/gold-coast-sunset-cruise-the-complete-guide-to-cruising-the-broadwater` still titles itself "Gold Coast Sunset Cruise: Complete Broadwater Guide" | Over the last 28 days that article sat at 9.8 and the booking page at 6.2 for "gold coast sunset cruise", and both articles still appear for "sunset cruise gold coast". **Run this first**: it is titles and meta only |
-| `christmas-end-of-year-boat-parties-gold-coast` | 404 | Seasonal. Every week it waits is a week of December demand it misses |
-| `what-happens-on-a-gold-coast-sunset-cruise` | 404 | Answers questions about the only product that can be booked today |
-| `gold-coast-yacht-wedding-planning-guide` | 404 | |
-| `how-much-does-it-cost-to-charter-a-yacht-on-the-gold-coast` | 404 | |
+| `_fix-markdown-content.sql` | **Run this first.** Replaces `content` on the four live rows with the same words as HTML. Touches only rows still holding Markdown, so it is safe to run twice | Not run |
+| `planning-a-work-event-on-the-water-organisers-checklist.sql` | New draft, already HTML, `published = false` | Not loaded |
+| `_retitle-sunset-cannibals.sql` | Nothing | Run: both live titles are the new ones |
+| The four October `.sql` files and `_load-all.sql` | Nothing. They are `on conflict (slug) do nothing`, so they are inert now the rows exist. **Do not reuse them as a pattern**: their `content` is Markdown | Superseded |
 
-No new article was added on 11 November. The rule above says an article that
-competes with a money page is repaired before a new one is written, and the
-sunset repair is still waiting to be run. A fifth unloaded draft would add to
-the queue without moving anything.
+## How a draft becomes SQL from now on
 
-**Before loading the four drafts**, re-read the prices and dates in each
-against Rezdy: they were read on 23 October.
+`python3 build_sql.py insert <slug>` reads `<slug>.md` and writes `<slug>.sql`
+with `content` as HTML: `<h2>`, `<h3>`, `<p>`, `<ul>`, `<ol>`, `<strong>` and
+`<a>`. It stops with an error on any Markdown it does not handle, rather than
+passing it through. `python3 build_sql.py fix <slug>` prints an `update` for a
+row that is already live.
+
+## The new draft, and the check it passed
+
+`planning-a-work-event-on-the-water-organisers-checklist` is for the person
+handed a team day or client evening. It links to `/corporate-yacht-charter` in
+its second paragraph with the anchor "corporate yacht charter on the Gold
+Coast".
+
+The head terms `/corporate-yacht-charter` holds in Search Console are
+"corporate yacht charter", "corporate cruise charter", "corporate yacht
+events", "yacht corporate events" and "corporate boat hire gold coast". None
+appears in the article's title, H1 or slug. That list is from the 28 days to
+11 November: Search Console could not be re-pulled on 13 November.
+
+Its figures: vessel capacities from `lib/vessels.ts`, the event details from
+`CORPORATE_FAQS` in `lib/faqs.ts`, and the sunset cruise's $79 adult price, 100
+seats and Saturday and Sunday sailings from Rezdy, read on 13 November 2026.
+
+## The FAQ schema reads the FAQ section
+
+`extractFAQ()` in `app/boattime-news/[slug]/page.tsx` used to emit the first ten
+headings of any kind as questions. An article with eight section headings above
+its FAQ published those as its FAQ schema and never reached the real questions.
+It now reads only the section under an `<h2>` reading "Frequently asked
+questions" when there is one, and behaves as before when there is not. So end
+every article with that heading and put each question in an `<h3>`.

@@ -69,8 +69,7 @@ whichever way the weather goes.
 ## When it sails, and what it costs
 
 Saturdays and Sundays, departing 5:00 PM, with one extra sailing on Friday 20
-November. Through to 3 January, with no sailing on 24, 25 or 31 December or on
-1 January.
+November. There is no sailing on 24, 25 or 31 December or on 1 January.
 
 Adult $79. Two adults together $149. Child aged 3 to 13 $55. Infant under 3 $11.
 
