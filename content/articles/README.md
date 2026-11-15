@@ -122,3 +122,43 @@ its FAQ published those as its FAQ schema and never reached the real questions.
 It now reads only the section under an `<h2>` reading "Frequently asked
 questions" when there is one, and behaves as before when there is not. So end
 every article with that heading and put each question in an `<h3>`.
+
+## State of this folder, checked 15 November 2026
+
+| File | State, read live today |
+|---|---|
+| `_fix-markdown-content.sql` | **Run.** The four October articles now render headings (7 `<h2>` on the sunset article, 5 on the Christmas one) and no literal `##` |
+| `planning-a-work-event-on-the-water-organisers-checklist.sql` | **Not loaded.** The slug returns 404 |
+| `planning-a-birthday-on-a-boat-a-hosts-guide.sql` | New today, HTML, `published = false`. Not loaded |
+
+## The new draft, and the check it passed
+
+`planning-a-birthday-on-a-boat-a-hosts-guide` is for the person hosting a
+milestone birthday. It links to `/private-yacht-charter` in its second paragraph
+with the anchor "private yacht charter on the Gold Coast", and again at the end.
+
+Why birthdays: Search Console (28 days to 11 November) shows a cluster of
+birthday queries landing on the homepage at positions 20 to 41 and on
+`/private-yacht-charter` at 60 to 84, with no article answering any of them
+("birthday yacht rental", "yacht hire gold coast birthday party", "yacht rentals
+for birthdays", "rent a yacht for birthday party"). None of those is a head term
+a money page ranks for.
+
+The head terms `/private-yacht-charter` holds are "private boat hire gold
+coast", "luxury yacht hire gold coast", "gold coast private charters or tours",
+"luxury yacht charter gold coast" and "yacht hire gold coast". None appears in
+the article's title, H1 or slug. Search Console could not be re-pulled on 15
+November (the Windsor account is over its plan limit), so that list is from the
+11 November pull.
+
+Its figures: vessel capacities, bars and sound from `lib/vessels.ts`; boarding,
+parking, maxi taxis, the swim stop, the evening route, catering and
+accessibility from `lib/faqs.ts`; the five o'clock sunset package from the
+homepage FAQ; and the sunset cruise's 150 minute duration
+from Rezdy (`P4APMF`), read on 15 November 2026. No price (the gate flagged an in-copy price with no source line, and a price in an article rots while Rezdy moves; the booking page carries it), no review count
+or rating appears.
+
+One inconsistency found in the site's own FAQs, not touched: `PRIVATE_FAQS` says
+there are fridges, eskies and ice on board, while the homepage FAQ says no
+external food or beverages are permitted. The article follows the homepage
+rule. Worth one line from the owner on which is current.
