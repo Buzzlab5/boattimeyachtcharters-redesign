@@ -162,3 +162,41 @@ One inconsistency found in the site's own FAQs, not touched: `PRIVATE_FAQS` says
 there are fridges, eskies and ice on board, while the homepage FAQ says no
 external food or beverages are permitted. The article follows the homepage
 rule. Worth one line from the owner on which is current.
+
+## State of this folder, checked 19 November 2026
+
+The 13, 15 and 17 November drafts are all live and all render as HTML: each
+slug returns 200, with 22, 16 and 18 `<h2>` and no literal `##` in the page.
+Nothing in this folder is waiting on a SQL run except the draft below.
+
+## The new draft, and the check it passed
+
+`taking-children-on-a-boat-trip-a-parents-planning-guide` is for a parent
+planning a family outing. It links to `/luxury-broadwater-cruise` in its second
+paragraph with the anchor "Luxury Scenic Sunset Cruise", to
+`/private-yacht-charter` in the same paragraph, and to both again at the end.
+
+Why families: no article on this site answers a parent's questions, and the
+only family query in Search Console ("family boat gold coast", homepage at
+51.5) has no page built for it. The sunset cruise is the product a family can
+actually buy: Rezdy's direct product `P4APMF` sells Child (3 - 13) and Infant
+(under 3) tickets, with 23 sessions loaded to 31 January when read on 19
+November 2026.
+
+Head terms the money pages hold in the 28 days to 11 November, at position 20
+or better: `/luxury-broadwater-cruise` "sunset cruise gold coast", "gold coast
+sunset cruise(s)"; the whale page "whale cruise gold coast", "gold coast whale
+watching cruise"; `/corporate-yacht-charter` "corporate yacht charter",
+"corporate cruise charter"; `/wedding-yacht-charter` "wedding charter boat",
+"luxury yacht weddings". None appears in the title, H1 or slug. Search Console
+could not be re-pulled on 19 November (Windsor over its plan limit), so the list
+is from the 11 November pull.
+
+Its figures: the indoor lounge, foredeck and upper sun deck on Sun Goddess from
+`lib/vessels.ts`; calm Broadwater waters, boarding and free parking from
+`lib/faqs.ts`; no outside food or drink from the Sun Goddess FAQ in
+`lib/vessels.ts`; the 150 minute duration and the child and infant ticket types
+from Rezdy (`P4APMF`). No price, no age band beyond "the ticket page lists the
+age bands" (the agency product `PUQKEN` uses 2 to 13 where the direct product
+uses 3 to 13, so the article does not commit to either), and no review count or
+rating.
